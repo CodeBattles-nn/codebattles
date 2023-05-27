@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>CodeBattles · Задача А</title>
+
+  <link rel="stylesheet" href="/static/css/utils.css">
+  <link rel="stylesheet" href="/static/css/bs-jumbotron.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <link rel="icon" type="image/png" href="/static/favicon.png">
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
+    integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="./static/js/script.js"></script>
+
+</head>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#" style="color: red">CodeBattles</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/problems">Задачи</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/stats">Положение</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+    </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+
+<main>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-lg-2 navbar-container bg-light">
+          <!-- Вертикальное меню -->
+          <nav class="navbar navbar-expand-md navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+              <!-- Пункты вертикального меню -->
+              <ul class="navbar-nav pt-5">
+                <li class="nav-item">
+                  <b></b>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link navbar active" href="#link-1">Задача А</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link navbar" href="#link-2">Задача B</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link navbar" href="#link-3">Задача C</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link navbar" href="#link-4">Задача D</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#link-5">Задача F</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="col-md-8 col-lg-10 content-container" style="background-color: #ffe0b2">
+          <!-- Основной контент страницы  -->
+
+          <div class="container py-4">
+
+
+            <div class="row align-items-md-stretch">
+              <div class="col-md-6">
+                <div class="h-60 p-3 text-white bg-dark rounded-3">
+                  <h2 style="color: #6c757d;">Задача {{problem_letter}}</h2>
+                  <h3>{{problem_name}}</h3>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="h-60 p-3 bg-light border rounded-3">
+                  <h2>Ограничения</h2>
+                  <p style="white-space:pre-line">
+                    Время выполнения: 1000мс
+                    Память: 256мб
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p></p>
+
+            <div class="p-5 mb-4 bg-light rounded-3">
+              <div class="container-fluid py-5">
+                <div class="col-md-12 fs-4">
+                  <h4>Задача</h4>
+                  <p style="white-space:pre-line">{{problem_description}}</p>
+                  <h4>Входные данные</h4>
+                  <p style="white-space:pre-line">{{in_data}}</p>
+                  <h4>Выходные данные</h4>
+                  <p style="white-space:pre-line">{{out_data}}</p>
+                </div>
+
+
+              </div>
+            </div>
+
+            <div class="jumbotron bg-light">
+              <h2>Примеры</h2>
+              
+              {% for example in examples %}
+              <div class="example">
+                <div class="width-wrap">
+                  <h6 class="m-1 width-inner">Входные данные</h6>
+                  <button href="url" class="copy-btn" onclick="copy('code1')">Скопировать</button>
+                </div>
+
+                <p class=" m-0 console" id="code1">{{example[0]}}</p>
+                <h6 class="m-1">Выходные данные</h6>
+                <p class="m-0 console">{{example[1]}}</p>
+              </div>
+
+              {% endfor %}
+            </div>
+          </div>
+          <p></p>
+
+          <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+              <div class="h-100 p-5 text-white bg-dark rounded-3">
+                <h2>Отправить решение</h2>
+                <p>Вставьте код здесь</p>
+                <form action="/" method="post">
+                  <div class="mb-3">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <p></p>
+                    <button class="btn btn-success">Отправить</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="h-100 p-5 bg-light border rounded-3">
+                <form action="/" method="post">
+                  <h2>Выбрать язык</h2>
+                  <select id="cars" name="cars" style="height: 15%;">
+                    <option value="volvo">Python 3.8</option>
+                    <option value="saab">Visual Studio C++ 20</option>
+                    <option value="fiat">КуМир</option>
+                    <option value="audi">Java 17</option>
+                  </select>
+                  <p></p>
+                  <button class="btn btn-outline-secondary" type="submit">Сохранить</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+
+
+          <footer class="pt-3 mt-4 text-muted border-top">
+            &copy; 2023, CodeBattles
+          </footer>
+        </div>
+
+      </div>
+    </div>
+    </div>
+  </body>
+
+</main>
+
+
+
+
+</html>
