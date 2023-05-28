@@ -37,16 +37,15 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/problems">Задачи</a>
+          <a class="nav-link" aria-current="page" href="/problems">Задачи</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/stats">Положение</a>
+          <a class="nav-link" href="/stats">Положение</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
-    </ul>
-
+      </ul>
     </div>
   </div>
 </nav>
@@ -133,7 +132,7 @@
 
             <div class="jumbotron bg-light">
               <h2>Примеры</h2>
-              
+
               {% for example in examples %}
               <div class="example">
                 <div class="width-wrap">
@@ -156,9 +155,17 @@
               <div class="h-100 p-5 text-white bg-dark rounded-3">
                 <h2>Отправить решение</h2>
                 <p>Вставьте код здесь</p>
-                <form action="/" method="post">
+                <form action="/send" method="post" id="sendform">
                   <div class="mb-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                    <input type="hidden" name="problem" value="{{problem_letter}}" />
+                    <select id="cars" name="cars" style="height: 15%;" name="lang">
+                      <option value="python">Python 3.8</option>
+                      <option value="c++">Visual Studio C++ 20</option>
+                      <option value="kum">КуМир</option>
+                      <option value="java">Java 17</option>
+                    </select>
+                    <textarea name="src" class="form-control" id="exampleFormControlTextarea1" rows="5"
+                      form="sendform"></textarea>
                     <p></p>
                     <button class="btn btn-success">Отправить</button>
                   </div>
@@ -168,8 +175,9 @@
             <div class="col-md-6">
               <div class="h-100 p-5 bg-light border rounded-3">
                 <form action="/" method="post">
+                  <input type="hidden" name="problem" value="{{problem_letter}}" form="" />
                   <h2>Выбрать язык</h2>
-                  <select id="cars" name="cars" style="height: 15%;">
+                  <select id="cars" name="cars" style="height: 15%;" name="lang">
                     <option value="volvo">Python 3.8</option>
                     <option value="saab">Visual Studio C++ 20</option>
                     <option value="fiat">КуМир</option>

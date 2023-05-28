@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/problems.html">Задачи</a>
+                    <a class="nav-link" aria-current="page" href="/problem">Задачи</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" href="#">Положение</a>
@@ -103,82 +103,34 @@
                                         <th scope="col">№</th>
                                         <th scope="col">Пользователь</th>
                                         <th scope="col">Всего</th>
-                                        <th scope="col">A</th>
-                                        <th scope="col">B</th>
-                                        <th scope="col">C</th>
-                                        <th scope="col">D</th>
-                                        <th scope="col">E</th>
+
+                                        {% for col in cols %}
+
+                                        <th scope="col">{{col}}</th>
+
+                                        {% endfor %}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+                                    {% for user in users %}
                                     <tr>
-                                        <th scope="row">2</th>
-                                        <td>Иванов Иван</td>
-                                        <td>248</td>
+                                        <th scope="row">{{user[0]}}</th>
+                                        <td>{{user[1]}}</td>
+                                        <td>{{user[2]}}</td>
+
+                                        {% for col in user[3] %}
+
                                         <td class="p-1">
                                             <div style="text-align: center;">
-                                                <p class="int p-0 m-0" >5</p>
-                                                <p style="font-size: small;" class="p-0">121:36</p>
+                                                <p class="int p-0 m-0" >{{col}}</p>
+                                                <p style="font-size: small;" class="p-0">{{col}}</p>
                                             </div>
                                         </td>
-                                        <td class="p-1">
-                                            <div style="text-align: center;">
-                                                <p class="int p-0 m-0" >3</p>
-                                                <p style="font-size: small;" class="p-0">18:31</p>
-                                            </div>
-                                        </td>
-                                        <td class="p-1"></td>
-                                        <td class="p-1"> <div style="text-align: center;">
-                                            <p class="int p-0 m-0" >100</p>
-                                            <p style="font-size: small;" class="p-0">01:50</p>
-                                        </div></td>
-                                        <td class="p-1"> <div style="text-align: center;">
-                                            <p class="int p-0 m-0" >45</p>
-                                            <p style="font-size: small;" class="p-0">01:50</p>
-                                        </div></td>
+
+                                        {% endfor %}
+
                                     </tr>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Суслов Ярослав</td>
-                                        <td>200</td>
-                                        <td class="int"></td>
-                                        <td class="p-1">
-                                            <div style="text-align: center;">
-                                                <p class="int p-0 m-0" >100</p>
-                                                <p style="font-size: small;" class="p-0">9:15</p>
-                                            </div>
-                                        </td>
-                                        <td class="int"></td>
-                                        <td class="p-1">
-                                            <div style="text-align: center;">
-                                                <p class="int p-0 m-0" >100</p>
-                                                <p style="font-size: small;" class="p-0">8:11</p>
-                                            </div>
-                                        </td>
-                                        <td class="int"></td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Куприн Федор</td>
-                                        <td>25</td>
-                                        <td class="p-1">
-                                            <div style="text-align: center;">
-                                                <p class="int p-0 m-0" >15</p>
-                                                <p style="font-size: small;" class="p-0">18:12</p>
-                                            </div>
-                                        </td>
-                                        <td class="int"></td>
-                                        <td class="int"></td>
-                                        <td class="int"></td>
-                                        <td class="p-1">
-                                            <div style="text-align: center;">
-                                                <p class="int p-0 m-0" >10</p>
-                                                <p style="font-size: small;" class="p-0">0:36</p>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

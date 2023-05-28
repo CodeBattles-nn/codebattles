@@ -12,3 +12,15 @@ def login_required(f):
         return redirect("/")
 
     return decorated_function
+
+
+def get_user_id(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not request.cookies.get("authed", None) is None:
+            user_id = int(request.cookies.get("user_id"))
+            return f(*args, **kwargs, uid=user_id)
+
+        return redirect("/")
+
+    return decorated_function
