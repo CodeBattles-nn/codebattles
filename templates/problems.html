@@ -41,7 +41,7 @@
                     <a class="nav-link" href="/stats">Положение</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    <a class="nav-link" href="/sends" tabindex="-1">Посылки</a>
                 </li>
             </ul>
 
@@ -73,8 +73,8 @@
                             <tbody>
                                 {% for problem in problems %}
                                 <tr>
-                                    <th scope="row">{{problem[0]}}</th>
-                                    <td><a href="/problem/{{problem[0]}}">{{problem[1]}}</a></td>
+                                    <th class="{{problem[2]}}" scope="row">{{problem[0]}}</th>
+                                    <td class="{{problem[2]}}" ><a href="/problem/{{problem[0]}}">{{problem[1]}}</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

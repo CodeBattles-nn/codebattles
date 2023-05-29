@@ -58,4 +58,14 @@ def login_post():
 @app.route("/wait")
 @login_required
 def wait(user_id):
-    return render_template("waiting.html")
+    connection = sqlite3.connect(".db")
+    cur = connection.cursor()
+
+    cur.execute("SELECT name FROM champs WHERE id == ?", (user_id,))
+
+    name = cur.fetchone()
+
+    if name is None:
+        return redirect("/logout")
+
+    return render_template("waiting.html", name=name[0])

@@ -1,6 +1,7 @@
 import json
 import sqlite3
 import string
+import datetime
 
 import requests as requests
 from flask import redirect, request
@@ -37,11 +38,12 @@ def send_prog(user_id, uid):
     x = list(cur.fetchall())
 
     problem_ = None
+    problem_letter_form = request.form['problem']
 
     for i in x:
         id = i[0]
         problem_letter = strs[problems_ids.index(id)]
-        if request.form['problem'] == problem_letter:
+        if problem_letter_form == problem_letter:
             problem_ = i
 
     tests = problem_[5]
@@ -50,27 +52,38 @@ def send_prog(user_id, uid):
 
     print(problem_)
 
+    cur.execute(
+        '''
+        INSERT INTO champSends__1
+        (problem_name, problem_id, user_id, send_time, state, program, problem_letter)
+        VALUES(?, ?, ?, ?, ?, ?, ?); 
+        ''',
+        (problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", request.form['src'], problem_letter_form)
+    )
+    cur.execute('SELECT last_insert_rowid()')
+
+    inserted_id = cur.fetchone()[0]
+
     meta = {
         "champ_id": user_id,
         "user_id": uid,
-        "problem": request.form['problem']
+        "problem": request.form['problem'],
+        "id": inserted_id,
     }
 
     data = {
         "meta": json.dumps(meta),
         "source": request.form['src'],
         "compiler": request.form['cars'],
-        "tests": tests
+        "tests": tests,
     }
 
-#     cur.executemany('''INSERT INTO champSends__1 (problem_name, problem_id, user_id, send_time, state)
-# VALUES("A. Dwwdwd", 1, 1, "2023-05-28 19:37:15", "waiting"); SELECT last_insert_rowid();''',
-#                     (problem_[1], problem_[0], uid, "_", "Тестируется")
-#
-#                     )
+    connection.commit()
+
+    print(cur.fetchone())
 
     requests.post("http://127.0.0.1:7070/api/v1/test", json=data)
-    return redirect("/problems")
+    return redirect("/sends")
 
 
 @app.route("/api/check_system_callback", methods=['POST'])
@@ -93,6 +106,15 @@ def check_system():
 
     cur.execute(f"UPDATE champUsers__{meta['champ_id']} SET {meta['problem'][0]} = ? WHERE id == ?;",
                 (round((correct_count / all_count) * 100), meta["user_id"]))
+
+    result_str = json.dumps(data['results'], indent=2)
+
+    print(result_str)
+
+    cur.execute(
+        f"UPDATE champSends__{meta['champ_id']} SET score = ?,state = 'Протестировано', description = ?  WHERE id == ?;",
+        (round((correct_count / all_count) * 100), result_str, meta['id']))
+
     con.commit()
 
     return "OK"

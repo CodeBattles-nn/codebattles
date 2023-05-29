@@ -5,13 +5,14 @@ import json
 from flask import render_template, abort
 
 from app import app
-from decorators import login_required
-from utils import fix_new_line
+from decorators import login_required, get_user_id
+from utils import fix_new_line, get_table_color_class_by_score
 
 
 @app.route("/problems")
 @login_required
-def problems(user_id):
+@get_user_id
+def problems(user_id, uid):
     connection = sqlite3.connect(".db")
     cur = connection.cursor()
 
@@ -25,9 +26,9 @@ def problems(user_id):
 
     strs = string.ascii_uppercase
 
-    for i in problems_ids_temp:
-        if i is not None:
-            problems_ids.append(i)
+    for task in problems_ids_temp:
+        if task is not None:
+            problems_ids.append(task)
             sql += "OR id == ? "
 
     cur.execute(sql, tuple(problems_ids))
@@ -36,18 +37,19 @@ def problems(user_id):
 
     x = list(cur.fetchall())
 
-    tasks = [
-        # ('A', "Искуственный Интелект"),
-        # ('B', "Футбол"),
-        # ('C', "Магазин"),
+    tasks = []
 
-    ]
+    cur.execute(f"SELECT * FROM champUsers__{user_id} WHERE id == ?", (uid,))
 
-    for i in x:
-        id = i[0]
-        name = i[1]
-        tasks_dict[id] = i
-        tasks.append((strs[problems_ids.index(id)], name))
+    fetch = cur.fetchone()  # Can be None
+
+    score = fetch[4:4 + len(problems_ids)]
+
+    for i, task in enumerate(x):
+        id = task[0]
+        name = task[1]
+        tasks_dict[id] = task
+        tasks.append((strs[problems_ids.index(id)], name, get_table_color_class_by_score(score[i])))
 
     tasks.sort()
 
@@ -118,7 +120,8 @@ def problem(letter, user_id):
 
 @app.route("/stats")
 @login_required
-def statistics(user_id):
+@get_user_id
+def statistics(user_id, uid):
     connection = sqlite3.connect(".db")
     cur = connection.cursor()
 
@@ -150,6 +153,6 @@ def statistics(user_id):
         problems_score = usr[4:problems_counts + 4]
         problems_score = map(lambda s: (s, "")[s is None], problems_score)
 
-        users.append((i + 1, nickname, score, problems_score))
+        users.append((i + 1, nickname, score, problems_score, ("", "table-primary")[uid == usr[0]]))
 
     return render_template("stats.html", cols=strs[:problems_counts], users=users)

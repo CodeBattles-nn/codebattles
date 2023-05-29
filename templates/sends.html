@@ -40,10 +40,10 @@
                     <a class="nav-link" aria-current="page" href="/problems">Задачи</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Положение</a>
+                    <a class="nav-link " href="/stats">Положение</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/sends" tabindex="-1">Посылки</a>
+                    <a class="nav-link active" href="/sends" tabindex="-1">Посылки</a>
                 </li>
             </ul>
 
@@ -95,41 +95,37 @@
 
                     <div class="container py-4">
                         <div class="jumbotron bg-light table-bordered table-hover p-3">
-                            <h4>Положение</h4>
+                            <h4>Посылки</h4>
                             <p></p>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th scope="col">№</th>
-                                        <th scope="col">Пользователь</th>
-                                        <th scope="col">Всего</th>
-
-                                        {% for col in cols %}
-
-                                        <th scope="col"><a href="/problem/{{col}}">{{col}}</a></th>
-
-                                        {% endfor %}
+                                        <th scope="col">Время посылки</th>
+                                        <th scope="col">Задача</th>
+                                        <th scope="col">Баллы</th>
+                                        <th scope="col">Статус</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for user in users %}
-                                    <tr class="{{user[4]}}">
-                                        <th scope="row">{{user[0]}}</th>
-                                        <td>{{user[1]}}</td>
-                                        <td>{{user[2]}}</td>
 
-                                        {% for col in user[3] %}
+                                    {% for send in sends %}
 
-                                        <td class="p-1">
-                                            <div style="text-align: center;" class="text-center">
-                                                <p class="int p-0 m-0" >{{col}}</p>
-                                                <p style="font-size: small;" class="p-0"></p>
-                                            </div>
+                                    <tr>
+                                        <th scope="row">{{send[0]}}</th>
+                                        <td>{{send[3]}}</td>
+                                        <td><a href="/problem/{{send[1]}}">{{send[1]}}. {{send[2]}}</a></td>
+                                        <td class="int text-center">{{send[5]}}</td>
+                                        <td>{{send[4]}}</td>
+                                        <td>
+                                            {% if send[6] %}
+                                                <a href="/send/{{send[0]}}">Вердикт</a>
+                                            {% endif %}
                                         </td>
 
-                                        {% endfor %}
-
                                     </tr>
+
                                     {% endfor %}
                                 </tbody>
                             </table>
