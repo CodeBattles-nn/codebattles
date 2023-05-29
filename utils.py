@@ -21,3 +21,12 @@ def get_table_color_class_by_score(score):
         return "table-danger"
 
     return "table-warning"
+
+
+def get_table_color_class_by_test_message(msg):
+    if msg == "OK" or msg == "SUCCESS":
+        return "table-success"
+    elif msg == "WRONG_ANSWER":
+        return "table-danger"
+
+    return "table-info"

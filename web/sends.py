@@ -5,6 +5,7 @@ from flask import render_template, make_response
 
 from app import app
 from decorators import login_required, get_user_id
+from utils import get_table_color_class_by_test_message
 
 
 @app.route("/sends")
@@ -38,15 +39,23 @@ def send_viewer(send_id, user_id):
 
     cur.execute(f"SELECT * FROM champSends__{user_id} WHERE id == ?", (send_id,))
 
+
     data = cur.fetchone()
 
-    tests = data[7].replace("\\n", "\n")
+    result = json.loads(data[7])
 
     to_render = []
 
-    response = make_response(tests, 200)
-    response.mimetype = "text/plain"
+    for i, test in enumerate(result):
+        message = test['msg']
+        out = test['out']
 
-    print(tests)
+        if message == "WRONG_ANSWER":
+            out = """ВЫВОД СКРЫТ"""
 
-    return response
+        to_add = (i + 1, test['time'], message, out, get_table_color_class_by_test_message(message))
+        to_render.append(to_add)
+
+    connection.close()
+
+    return render_template("send_view.html", tests=to_render)
