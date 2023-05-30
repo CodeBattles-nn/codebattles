@@ -19,6 +19,9 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
+    <link href="/static/css/pastie_code_theme.css" rel="stylesheet">
+    <script src="/static/js/rainbow-custom.min.js"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
         integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
@@ -94,8 +97,11 @@
 
                     <div class="container py-4">
                         <div class="jumbotron bg-light table-bordered table-hover p-3">
-                            <h4>Анализ посылки</h4>
-                            <p></p>
+                            <h3>Анализ посылки</h3>
+                            <p><b>Язык:</b> {{lang}}</p>
+                            <p><b>Исходный код:</b> </p>
+                            <pre><code data-language="{{lang}}">{{program}}</code></pre>
+                            <p><b>Тесты: </b></p>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>

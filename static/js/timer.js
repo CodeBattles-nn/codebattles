@@ -1,4 +1,4 @@
-let date = new Date("2023-05-27 10:14  GMT+0300");
+let date = new Date("2023-05-27 23:00  GMT+0300");
 // alert(date);
 
 function battle_not_started(h, m) {

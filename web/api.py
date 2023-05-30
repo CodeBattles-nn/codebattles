@@ -55,10 +55,10 @@ def send_prog(user_id, uid):
     cur.execute(
         '''
         INSERT INTO champSends__1
-        (problem_name, problem_id, user_id, send_time, state, program, problem_letter)
-        VALUES(?, ?, ?, ?, ?, ?, ?); 
+        (problem_name, problem_id, user_id, send_time, state, program, problem_letter, lang)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?); 
         ''',
-        (problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", request.form['src'], problem_letter_form)
+        (problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", request.form['src'], problem_letter_form,request.form['cars'] )
     )
     cur.execute('SELECT last_insert_rowid()')
 

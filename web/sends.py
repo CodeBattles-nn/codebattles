@@ -22,7 +22,7 @@ def sends(user_id, uid):
     to_render = []
 
     for send in db_sends:
-        id, letter, name, problem_id, pr_user_id, send_time, state, result, program, score = send
+        id, letter, name, problem_id, pr_user_id, send_time, state, result, program, score, lang = send
 
         to_render.append((id, letter, name, send_time, state, (score, "")[score is None], result is not None))
 
@@ -43,6 +43,8 @@ def send_viewer(send_id, user_id):
     data = cur.fetchone()
 
     result = json.loads(data[7])
+    lang = data[10]
+    prog = data[8]
 
     to_render = []
 
@@ -58,4 +60,4 @@ def send_viewer(send_id, user_id):
 
     connection.close()
 
-    return render_template("send_view.html", tests=to_render)
+    return render_template("send_view.html", tests=to_render, lang=lang, program=prog)
