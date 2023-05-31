@@ -10,7 +10,7 @@ def login_required(f):
             battle_id = int(request.cookies.get("battle_id"))
             user_id = int(request.cookies.get("user_id"))
 
-            connection = sqlite3.connect(".db")
+            connection = sqlite3.connect("db.db")
             cur = connection.cursor()
             cur.execute(f"SELECT * FROM champUsers__{battle_id} WHERE id == ?", (user_id,))
 

@@ -12,7 +12,7 @@ from utils import get_table_color_class_by_test_message
 @login_required
 @get_user_id
 def sends(user_id, uid):
-    connection = sqlite3.connect(".db")
+    connection = sqlite3.connect("db.db")
     cur = connection.cursor()
 
     cur.execute(f"SELECT * FROM champSends__{user_id} WHERE user_id == ? ORDER BY send_time DESC", (uid,))
@@ -34,7 +34,7 @@ def sends(user_id, uid):
 @app.route("/send/<send_id>")
 @login_required
 def send_viewer(send_id, user_id):
-    connection = sqlite3.connect(".db")
+    connection = sqlite3.connect("db.db")
     cur = connection.cursor()
 
     cur.execute(f"SELECT * FROM champSends__{user_id} WHERE id == ?", (send_id,))

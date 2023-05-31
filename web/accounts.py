@@ -34,7 +34,7 @@ def login_post():
     try:
         champ_id = int(champ_id)
 
-        con = sqlite3.connect(".db")
+        con = sqlite3.connect("db.db")
         cur = con.cursor()
         cur.execute(f"SELECT * FROM champUsers__{champ_id} WHERE login == ? AND password == ?", (login, password))
         user = cur.fetchone()
@@ -58,7 +58,7 @@ def login_post():
 @app.route("/wait")
 @login_required
 def wait(user_id):
-    connection = sqlite3.connect(".db")
+    connection = sqlite3.connect("db.db")
     cur = connection.cursor()
 
     cur.execute("SELECT name FROM champs WHERE id == ?", (user_id,))

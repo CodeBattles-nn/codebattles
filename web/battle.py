@@ -13,7 +13,7 @@ from utils import fix_new_line, get_table_color_class_by_score
 @login_required
 @get_user_id
 def problems(user_id, uid):
-    connection = sqlite3.connect(".db")
+    connection = sqlite3.connect("db.db")
     cur = connection.cursor()
 
     cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
@@ -61,7 +61,7 @@ def problems(user_id, uid):
 @app.route("/problem/<letter>")
 @login_required
 def problem(letter, user_id):
-    connection = sqlite3.connect(".db")
+    connection = sqlite3.connect("db.db")
     cur = connection.cursor()
 
     cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
@@ -122,7 +122,7 @@ def problem(letter, user_id):
 @login_required
 @get_user_id
 def statistics(user_id, uid):
-    connection = sqlite3.connect(".db")
+    connection = sqlite3.connect("db.db")
     cur = connection.cursor()
 
     cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))

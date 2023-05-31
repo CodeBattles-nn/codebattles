@@ -53,86 +53,56 @@
 
 
 
-<main>
+<main style="background-color: #ffe0b2;min-height: 94vh;">
 
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 col-lg-2 navbar-container bg-light">
-                    <!-- Вертикальное меню -->
-                    <nav class="navbar navbar-expand-md navbar-light">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
-                            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbar">
-                            <!-- Пункты вертикального меню -->
-                            <ul class="navbar-nav pt-5">
-                                <li class="nav-item">
-                                    <b></b>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link navbar " href="#link-1">Задача А</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link navbar" href="#link-2">Задача B</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link navbar" href="#link-3">Задача C</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link navbar" href="#link-4">Задача D</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#link-5">Задача F</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-                <div class="col-md-8 col-lg-10 content-container" style="background-color: #ffe0b2">
+                <div class="col-md-8 col-lg-12 content-container" style="background-color: #ffe0b2">
                     <!-- Основной контент страницы  -->
 
                     <div class="container py-4">
                         <div class="jumbotron bg-light table-bordered table-hover p-3">
                             <h4>Положение</h4>
                             <p></p>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">№</th>
-                                        <th scope="col">Пользователь</th>
-                                        <th scope="col">Всего</th>
-
-                                        {% for col in cols %}
-
-                                        <th scope="col"><a href="/problem/{{col}}">{{col}}</a></th>
-
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">№</th>
+                                            <th scope="col">Пользователь</th>
+                                            <th scope="col">Всего</th>
+    
+                                            {% for col in cols %}
+    
+                                            <th scope="col"><a href="/problem/{{col}}">{{col}}</a></th>
+    
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        <tr class="{{user[4]}}">
+                                            <th scope="row">{{user[0]}}</th>
+                                            <td>{{user[1]}}</td>
+                                            <td>{{user[2]}}</td>
+    
+                                            {% for col in user[3] %}
+    
+                                            <td class="p-1">
+                                                <div style="text-align: center;" class="text-center">
+                                                    <p class="int p-0 m-0" >{{col}}</p>
+                                                    <p style="font-size: small;" class="p-0"></p>
+                                                </div>
+                                            </td>
+    
+                                            {% endfor %}
+    
+                                        </tr>
                                         {% endfor %}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for user in users %}
-                                    <tr class="{{user[4]}}">
-                                        <th scope="row">{{user[0]}}</th>
-                                        <td>{{user[1]}}</td>
-                                        <td>{{user[2]}}</td>
-
-                                        {% for col in user[3] %}
-
-                                        <td class="p-1">
-                                            <div style="text-align: center;" class="text-center">
-                                                <p class="int p-0 m-0" >{{col}}</p>
-                                                <p style="font-size: small;" class="p-0"></p>
-                                            </div>
-                                        </td>
-
-                                        {% endfor %}
-
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <footer class="pt-3 mt-4 text-muted border-top">

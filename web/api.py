@@ -15,7 +15,7 @@ from utils import fix_new_line
 @login_required
 @get_user_id
 def send_prog(user_id, uid):
-    connection = sqlite3.connect(".db")
+    connection = sqlite3.connect("db.db")
     cur = connection.cursor()
 
     cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
@@ -101,7 +101,7 @@ def check_system():
 
     print(round((correct_count / all_count) * 100))
 
-    con = sqlite3.connect(".db")
+    con = sqlite3.connect("db.db")
     cur = con.cursor()
 
     cur.execute(f"UPDATE champUsers__{meta['champ_id']} SET {meta['problem'][0]} = ? WHERE id == ?;",
