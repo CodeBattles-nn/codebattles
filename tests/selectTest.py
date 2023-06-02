@@ -1,6 +1,6 @@
-import sqlite3
+from database import get_connection
 
-conn = sqlite3.connect("db.db")
+conn = get_connection()
 cur = conn.cursor()
 
 out = list(cur.execute("SELECT * FROM champs WHERE id LIKE 1"))

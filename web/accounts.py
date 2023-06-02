@@ -1,8 +1,7 @@
-import sqlite3
-
 from flask import render_template, request, redirect, make_response
 
 from app import app
+from database import get_connection
 from decorators import login_required
 
 
@@ -34,7 +33,7 @@ def login_post():
     try:
         champ_id = int(champ_id)
 
-        con = sqlite3.connect("db.db")
+        con = get_connection()
         cur = con.cursor()
         cur.execute(f"SELECT * FROM champUsers__{champ_id} WHERE login == ? AND password == ?", (login, password))
         user = cur.fetchone()
@@ -47,8 +46,6 @@ def login_post():
         resp.set_cookie('battle_id', str(champ_id))
 
         return resp
-
-        print()
     except:
         pass
 
@@ -58,7 +55,7 @@ def login_post():
 @app.route("/wait")
 @login_required
 def wait(user_id):
-    connection = sqlite3.connect("db.db")
+    connection = get_connection()
     cur = connection.cursor()
 
     cur.execute("SELECT name FROM champs WHERE id == ?", (user_id,))

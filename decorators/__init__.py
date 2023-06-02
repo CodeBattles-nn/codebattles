@@ -1,6 +1,6 @@
-import sqlite3
 from functools import wraps
-from flask import g, request, redirect, url_for
+from flask import g, request, redirect
+from database import get_connection
 
 
 def login_required(f):
@@ -10,7 +10,7 @@ def login_required(f):
             battle_id = int(request.cookies.get("battle_id"))
             user_id = int(request.cookies.get("user_id"))
 
-            connection = sqlite3.connect("db.db")
+            connection = get_connection()
             cur = connection.cursor()
             cur.execute(f"SELECT * FROM champUsers__{battle_id} WHERE id == ?", (user_id,))
 

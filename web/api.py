@@ -1,5 +1,4 @@
 import json
-import sqlite3
 import string
 import datetime
 
@@ -7,15 +6,15 @@ import requests as requests
 from flask import redirect, request
 
 from app import *
+from database import get_connection
 from decorators import login_required, get_user_id
-from utils import fix_new_line
 
 
 @app.route("/send", methods=['POST'])
 @login_required
 @get_user_id
 def send_prog(user_id, uid):
-    connection = sqlite3.connect("db.db")
+    connection = get_connection()
     cur = connection.cursor()
 
     cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
@@ -58,7 +57,10 @@ def send_prog(user_id, uid):
         (problem_name, problem_id, user_id, send_time, state, program, problem_letter, lang)
         VALUES(?, ?, ?, ?, ?, ?, ?, ?); 
         ''',
-        (problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", request.form['src'], problem_letter_form,request.form['cars'] )
+        (
+            problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", request.form['src'],
+            problem_letter_form,
+            request.form['cars'])
     )
     cur.execute('SELECT last_insert_rowid()')
 
@@ -101,7 +103,7 @@ def check_system():
 
     print(round((correct_count / all_count) * 100))
 
-    con = sqlite3.connect("db.db")
+    con = get_connection()
     cur = con.cursor()
 
     cur.execute(f"UPDATE champUsers__{meta['champ_id']} SET {meta['problem'][0]} = ? WHERE id == ?;",

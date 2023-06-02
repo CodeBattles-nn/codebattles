@@ -1,9 +1,9 @@
 import json
-import sqlite3
 
-from flask import render_template, make_response
+from flask import render_template
 
 from app import app
+from database import get_connection
 from decorators import login_required, get_user_id
 from utils import get_table_color_class_by_test_message
 
@@ -12,7 +12,7 @@ from utils import get_table_color_class_by_test_message
 @login_required
 @get_user_id
 def sends(user_id, uid):
-    connection = sqlite3.connect("db.db")
+    connection = get_connection()
     cur = connection.cursor()
 
     cur.execute(f"SELECT * FROM champSends__{user_id} WHERE user_id == ? ORDER BY send_time DESC", (uid,))
@@ -34,11 +34,10 @@ def sends(user_id, uid):
 @app.route("/send/<send_id>")
 @login_required
 def send_viewer(send_id, user_id):
-    connection = sqlite3.connect("db.db")
+    connection = get_connection()
     cur = connection.cursor()
 
     cur.execute(f"SELECT * FROM champSends__{user_id} WHERE id == ?", (send_id,))
-
 
     data = cur.fetchone()
 
