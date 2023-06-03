@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import g, request, redirect
+from flask import request, redirect
 from database import get_connection
 
 

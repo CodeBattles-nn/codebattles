@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .inline {
+        display: inline-block;
+    }
+</style>
+
+<body>
+    <div>
+        <h1 class="inline">Админ панель</h1>
+        <div style="padding-left: 10px;">
+            <h3>ID</h3>
+            <p>1</p>
+            <h3>Название</h3>
+            <p>Тестоовое супер нужное и важное название</p>
+        </div>
+    </div>
+
+    <a href="">Управление пользователями</a>
+
+    <div class="block" style="border: 1px solid;padding: 15px; margin: 50px;width: 25%;">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Буква</th>
+                    <th>id задачи</th>
+                    <th>Название задачи</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>None</td>
+                    <td>None</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>E</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>G</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>H</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>I</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>J</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+                <tr>
+                    <td>K</td>
+                    <td>1</td>
+                    <td>Имя</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="block" style="border: 1px solid;padding: 15px; margin: 50px;width: 25%;">
+
+        <form action="/admin/auth" method="post" style="display: flex;flex-flow: column wrap;">
+            <label for="problems_select">Задача</label>
+            <select id="problems_select" name="cars" style="height: 15%;" name="problems">
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+                <option>E</option>
+                <option>F</option>
+                <option>G</option>
+                <option>H</option>
+                <option>I</option>
+                <option>J</option>
+                <option>K</option>
+              </select>
+
+            <label for="flogin">ID задчи</label>
+            <input type="number" name="name" id="flogin">
+            <p>Поставьте id -1 чтобы удалить задачу</p>
+            <button type="submit">Изменить</button>
+        </form>
+    </div>
+</body>
+
+</html>

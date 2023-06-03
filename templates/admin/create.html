@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .inline {
+        display: inline-block;
+    }
+</style>
+
+<body>
+    <div>
+        <h1 class="inline">Админ панель</h1>
+    </div>
+
+    <div class="champ-block" style="border: 1px solid;padding: 15px; margin: 50px;width: 25%;">
+        <h3>Создать соревнование</h3>
+        <form action="/admin/auth" method="post" style="display: flex;flex-flow: column wrap;">
+            <label for="flogin">Name</label>
+            <input type="text" name="name" id="flogin">
+            <label for="fpass">Start time</label>
+            <input type="datetime-local" name="password" id="fpass">
+            <label for="fpass">End time</label>
+            <input type="datetime-local" name="password" id="fpass">
+            <br>
+            <button type="submit">Создать</button>
+        </form>
+    </div>
+</body>
+
+</html>
