@@ -19,22 +19,25 @@
         <a href="/create">Создать соревнование</a>
     </div>
 
+    {% for champ in champs %}
+
     <div class="champ-block" style="border: 1px solid;padding: 15px; margin: 50px;">
         <div>
-            <h3 class="inline">1</h3>
-            <h3 class="inline">Название</h3>
+            <h3 class="inline">{{champ[0]}}</h3>
+            <h3 class="inline">{{champ[1]}}</h3>
             <p class="inline">        </p>
-            <a href="">Настройки</a>
+            <a href="/admin/champ/{{champ[0]}}">Настройки</a>
             <a href="">Участники</a>
         </div>
         <div>
-            <p class="inline" style="padding-right: 25px;">5 человек</p>
-            <p class="inline" style="padding-right: 25px;">Старт в 13:55</p>
-            <p class="inline">Конец в 13:55</p>
+            <p class="inline" style="padding-right: 25px;">ХЗ человек</p>
+            <p class="inline" style="padding-right: 25px;">Старт в {{champ[2]}}</p>
+            <p class="inline">Конец в ХЗ</p>
         </div>
-
-
     </div>
+
+    {% endfor %}
+
 </body>
 
 </html>

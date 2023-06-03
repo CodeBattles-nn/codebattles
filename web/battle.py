@@ -49,7 +49,10 @@ def problems(user_id, uid):
         id = task[0]
         name = task[1]
         tasks_dict[id] = task
-        tasks.append((strs[problems_ids.index(id)], name, get_table_color_class_by_score(score[i])))
+
+        letter = strs[problems_ids.index(id)]
+
+        tasks.append((letter, name, get_table_color_class_by_score(score[strs.index(letter)])))
 
     tasks.sort()
 
