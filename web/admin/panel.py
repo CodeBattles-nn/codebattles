@@ -1,9 +1,13 @@
+import random
 import string
+from transliterate import translit
 
 from flask import render_template, redirect, request
 
 from app import app
 from database import get_connection
+from database.createTables import getQueryUsersTable, getQuerySendsTable
+from passwordTools import get_random_string
 
 
 @app.route("/admin")
@@ -76,6 +80,70 @@ def settings_post(champ_id):
     print(problem, problem_id)
 
     cur.execute(f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
+
     connection.commit()
 
     return redirect(f"/admin/champ/{champ_id}")
+
+
+@app.route("/admin/create/")
+def create_champ():
+    return render_template("admin/create.html")
+
+
+@app.route("/admin/create/", methods=['POST'])
+def create_champ_post():
+    name = request.form['name']
+
+    connection = get_connection()
+    cur = connection.cursor()
+
+    cur.execute("INSERT INTO champs (name) VALUES (?)", (name,))
+
+    connection.commit()
+
+    cur.execute("SELECT last_insert_rowid()")
+    champ_id = cur.fetchone()[0]
+
+    cur.execute(getQueryUsersTable(champ_id))
+    cur.execute(getQuerySendsTable(champ_id))
+
+    connection.commit()
+
+    return redirect("/admin")
+
+
+@app.route("/admin/champ/<champ_id>/add_users")
+def create_users_in_champ(champ_id):
+    return render_template("admin/add_users.html")
+
+
+@app.route("/admin/champ/<champ_id>/add_users", methods=['POST'])
+def create_users_in_champ_post(champ_id):
+    users = request.form['users'].split("\r\n")
+
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    for name in users:
+        login = f"{translit(name, 'ru', reversed=True)}{random.randint(10, 99)}"
+        password = get_random_string(8)
+
+        cursor.execute(f"INSERT INTO champUsers__{champ_id} (login, password, name) VALUES (?, ?, ?)",
+                       (login, password, name))
+
+    connection.commit()
+
+    return redirect(f"/admin/champ/{champ_id}/add_users")
+
+
+@app.route("/admin/champ/<champ_id>/users")
+def users(champ_id):
+    connection = get_connection()
+    cur = connection.cursor()
+
+    cur.execute(f"SELECT name, login, password FROM champUsers__{champ_id}")
+
+    users = cur.fetchall()
+
+    return render_template("admin/users.html", users=users, id=champ_id)
