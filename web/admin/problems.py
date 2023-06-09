@@ -2,9 +2,11 @@ from flask import render_template
 
 from app import app
 from database import get_connection
+from decorators import admin_required
 
 
 @app.route("/admin/problems")
+@admin_required
 def admin_list_problems():
     connection = get_connection()
     cursor = connection.cursor()

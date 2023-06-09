@@ -7,10 +7,12 @@ from flask import render_template, redirect, request
 from app import app
 from database import get_connection
 from database.createTables import getQueryUsersTable, getQuerySendsTable
+from decorators import admin_required
 from passwordTools import get_random_string
 
 
 @app.route("/admin")
+@admin_required
 def admin_panel():
     connection = get_connection()
     cursor = connection.cursor()
@@ -24,6 +26,7 @@ def admin_panel():
 
 
 @app.route("/admin/champ/<champ_id>")
+@admin_required
 def settings(champ_id):
     connection = get_connection()
     cur = connection.cursor()
@@ -65,6 +68,7 @@ def settings(champ_id):
 
 
 @app.route("/admin/champ/<champ_id>", methods=['POST'])
+@admin_required
 def settings_post(champ_id):
     connection = get_connection()
     cur = connection.cursor()
@@ -87,11 +91,13 @@ def settings_post(champ_id):
 
 
 @app.route("/admin/create/")
+@admin_required
 def create_champ():
     return render_template("admin/create.html")
 
 
 @app.route("/admin/create/", methods=['POST'])
+@admin_required
 def create_champ_post():
     name = request.form['name']
 
@@ -114,11 +120,13 @@ def create_champ_post():
 
 
 @app.route("/admin/champ/<champ_id>/add_users")
+@admin_required
 def create_users_in_champ(champ_id):
     return render_template("admin/add_users.html")
 
 
 @app.route("/admin/champ/<champ_id>/add_users", methods=['POST'])
+@admin_required
 def create_users_in_champ_post(champ_id):
     users = request.form['users'].split("\r\n")
 
@@ -138,6 +146,7 @@ def create_users_in_champ_post(champ_id):
 
 
 @app.route("/admin/champ/<champ_id>/users")
+@admin_required
 def users(champ_id):
     connection = get_connection()
     cur = connection.cursor()
