@@ -51,6 +51,9 @@ def send_prog(user_id, uid):
 
     print(problem_)
 
+    f_lang = request.form['cars']
+    f_code = request.form['src']
+
     cur.execute(
         '''
         INSERT INTO champSends__1
@@ -58,9 +61,9 @@ def send_prog(user_id, uid):
         VALUES(?, ?, ?, ?, ?, ?, ?, ?); 
         ''',
         (
-            problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", request.form['src'],
+            problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", f_code,
             problem_letter_form,
-            request.form['cars'])
+            f_lang)
     )
     cur.execute('SELECT last_insert_rowid()')
 
