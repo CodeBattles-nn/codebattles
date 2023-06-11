@@ -1,2 +1,3 @@
 requests~=2.31.0
 Flask~=2.3.2
+transliterate~=1.10.2
