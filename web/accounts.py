@@ -55,14 +55,14 @@ def login_post():
 @app.route("/wait")
 @login_required
 def wait(user_id):
-    connection = get_connection()
-    cur = connection.cursor()
+    # connection = get_connection()
+    # cur = connection.cursor()
+    #
+    # cur.execute("SELECT name FROM champs WHERE id == ?", (user_id,))
+    #
+    # name = cur.fetchone()
+    #
+    # if name is None:
+    #     return redirect("/logout")
 
-    cur.execute("SELECT name FROM champs WHERE id == ?", (user_id,))
-
-    name = cur.fetchone()
-
-    if name is None:
-        return redirect("/logout")
-
-    return render_template("waiting.html", name=name[0])
+    return redirect("/problems")

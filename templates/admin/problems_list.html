@@ -26,10 +26,23 @@
         <h1 class="inline">Админ панель</h1>
     </div>
 
+     <div>
+         <h4>Добавить соревнование</h4>
+         <a href="https://github.com/Windows-up/TestsGeneratorFramework">Из TestsGeneratorFramework</a>
+        <form action="add" method="post">
+
+            <p>build.json файл</p>
+            <textarea name="build" id="" cols="30" rows="2"></textarea>
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+
+
     <h4>Соревнования</h4>
 
+
     <div class="block" style="border: 1px solid;padding: 15px; margin: 50px;width: 50%;">
-        
+
         {% for problem in problems%}
 
         <div style="display: flex;flex-flow: column wrap;">
@@ -41,6 +54,8 @@
         </div>
 
         {% endfor %}
+
+    </div>
 </body>
 
 </html>
