@@ -26,7 +26,7 @@ def login_required(f):
 
             connection = get_connection()
             cur = connection.cursor()
-            cur.execute(f"SELECT * FROM champUsers__{battle_id} WHERE id == ?", (user_id,))
+            cur.execute(f"SELECT * FROM champUsers_{battle_id} WHERE id = {user_id}")
 
             if cur.fetchone() is None:
                 return redirect("/logout")

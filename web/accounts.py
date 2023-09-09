@@ -35,7 +35,7 @@ def login_post():
 
         con = get_connection()
         cur = con.cursor()
-        cur.execute(f"SELECT * FROM champUsers__{champ_id} WHERE login == ? AND password == ?", (login, password))
+        cur.execute(f"SELECT * FROM public.champUsers_{champ_id} WHERE login = '{login}' AND password = '{password}'")
         user = cur.fetchone()
 
         assert user is not None
@@ -46,7 +46,7 @@ def login_post():
         resp.set_cookie('battle_id', str(champ_id))
 
         return resp
-    except:
+    except Exception as e:
         pass
 
     return render_template("login.html", error="Неверные данные")
@@ -58,7 +58,7 @@ def wait(user_id):
     # connection = get_connection()
     # cur = connection.cursor()
     #
-    # cur.execute("SELECT name FROM champs WHERE id == ?", (user_id,))
+    # cur.execute("SELECT name FROM champs WHERE id = %s", (user_id,))
     #
     # name = cur.fetchone()
     #

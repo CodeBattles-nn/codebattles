@@ -1,10 +1,12 @@
 import sqlite3
+import psycopg2
+
 
 from database.createTables import CHAMPS_TABLE, PROBLEMS_TABLE
 
 
 def get_connection():
-    return sqlite3.connect("data/db.db")
+    return psycopg2.connect(dbname='cb', user='postgres', password='admin', host='localhost')
 
 
 def init_tables():

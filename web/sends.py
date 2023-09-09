@@ -15,7 +15,7 @@ def sends(user_id, uid):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute(f"SELECT * FROM champSends__{user_id} WHERE user_id == ? ORDER BY send_time DESC", (uid,))
+    cur.execute(f"SELECT * FROM champSends_{user_id} WHERE user_id = %s ORDER BY send_time DESC", (uid,))
 
     db_sends = cur.fetchall()
 
@@ -37,7 +37,7 @@ def send_viewer(send_id, user_id):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute(f"SELECT * FROM champSends__{user_id} WHERE id == ?", (send_id,))
+    cur.execute(f"SELECT * FROM champSends_{user_id} WHERE id = %s", (send_id,))
 
     data = cur.fetchone()
 

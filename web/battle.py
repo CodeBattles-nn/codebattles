@@ -16,20 +16,20 @@ def problems(user_id, uid):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
+    cur.execute("SELECT * FROM champs WHERE id = %s", (str(user_id),))
 
     fetch = cur.fetchone()  # Can be None
     problems_ids_temp = fetch[3:]
     problems_ids = []
 
-    sql = "SELECT * FROM problems WHERE id LIKE -1 "
+    sql = "SELECT * FROM problems WHERE id = -1 "
 
     strs = string.ascii_uppercase
 
     for task in problems_ids_temp:
         if task is not None:
             problems_ids.append(task)
-            sql += "OR id == ? "
+            sql += "OR id = %s "
 
     cur.execute(sql, tuple(problems_ids))
 
@@ -39,7 +39,7 @@ def problems(user_id, uid):
 
     tasks = []
 
-    cur.execute(f"SELECT * FROM champUsers__{user_id} WHERE id == ?", (uid,))
+    cur.execute(f"SELECT * FROM champUsers_{user_id} WHERE id = %s", (uid,))
 
     fetch = cur.fetchone()  # Can be None
 
@@ -67,20 +67,20 @@ def problem(letter, user_id):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
+    cur.execute("SELECT * FROM champs WHERE id = %s", (str(user_id),))
 
     fetch = cur.fetchone()  # Can be None
     problems_ids_temp = fetch[3:]
     problems_ids = []
 
-    sql = "SELECT * FROM problems WHERE id LIKE -1 "
+    sql = "SELECT * FROM problems WHERE id = -1 "
 
     strs = string.ascii_uppercase
 
     for i in problems_ids_temp:
         if i is not None:
             problems_ids.append(i)
-            sql += "OR id == ? "
+            sql += "OR id = %s "
 
     cur.execute(sql, tuple(problems_ids))
 
@@ -128,7 +128,7 @@ def statistics(user_id, uid):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
+    cur.execute("SELECT * FROM champs WHERE id = %s", (str(user_id),))
 
     fetch = cur.fetchone()  # Can be None
     problems_ids_temp = fetch[3:]
@@ -144,7 +144,7 @@ def statistics(user_id, uid):
 
     print(problems_counts)
 
-    cur.execute(f"SELECT * FROM champUsers__{user_id} ORDER BY score DESC")
+    cur.execute(f"SELECT * FROM champUsers_{user_id} ORDER BY score DESC")
 
     fetch = cur.fetchall()  # Can be None
 

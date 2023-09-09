@@ -31,20 +31,20 @@ def settings(champ_id):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute("SELECT * FROM champs WHERE id == ?", (str(champ_id),))
+    cur.execute("SELECT * FROM champs WHERE id = %s", (str(champ_id),))
 
     fetch = cur.fetchone()  # Can be None
     problems_ids_temp = fetch[3:]
     problems_ids = []
 
-    sql = "SELECT * FROM problems WHERE id LIKE -1 "
+    sql = "SELECT * FROM problems WHERE id = -1 "
 
     strs = string.ascii_uppercase
 
     for task in problems_ids_temp:
         if task is not None:
             problems_ids.append(task)
-            sql += "OR id == ? "
+            sql += "OR id = %s "
 
     cur.execute(sql, tuple(problems_ids))
 
@@ -104,11 +104,11 @@ def create_champ_post():
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute("INSERT INTO champs (name) VALUES (?)", (name,))
+    cur.execute("INSERT INTO champs (name) VALUES (%s)", (name,))
 
     connection.commit()
 
-    cur.execute("SELECT last_insert_rowid()")
+    cur.execute("SELECT currval(pg_get_serial_sequence('champs','id'));")
     champ_id = cur.fetchone()[0]
 
     cur.execute(getQueryUsersTable(champ_id))
@@ -137,7 +137,7 @@ def create_users_in_champ_post(champ_id):
         login = f"{translit(name, 'ru', reversed=True)}{random.randint(10, 99)}"
         password = get_random_string(8)
 
-        cursor.execute(f"INSERT INTO champUsers__{champ_id} (login, password, name) VALUES (?, ?, ?)",
+        cursor.execute(f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
                        (login, password, name))
 
     connection.commit()
@@ -151,7 +151,7 @@ def users(champ_id):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute(f"SELECT name, login, password FROM champUsers__{champ_id}")
+    cur.execute(f"SELECT name, login, password FROM champUsers_{champ_id}")
 
     users = cur.fetchall()
 

@@ -18,20 +18,20 @@ def send_prog(user_id, uid):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute("SELECT * FROM champs WHERE id == ?", (str(user_id),))
+    cur.execute("SELECT * FROM champs WHERE id = %s", (str(user_id),))
 
     fetch = cur.fetchone()  # Can be None
     problems_ids_temp = fetch[3:]
     problems_ids = []
 
-    sql = "SELECT * FROM problems WHERE id LIKE -1 "
+    sql = "SELECT * FROM problems WHERE id = -1 "
 
     strs = string.ascii_uppercase
 
     for i in problems_ids_temp:
         if i is not None:
             problems_ids.append(i)
-            sql += "OR id == ? "
+            sql += "OR id = %s "
 
     cur.execute(sql, tuple(problems_ids))
 
@@ -56,17 +56,17 @@ def send_prog(user_id, uid):
     f_code = request.form['src']
 
     cur.execute(
-        '''
-        INSERT INTO champSends__1
+        f'''
+        INSERT INTO champSends_{user_id}
         (problem_name, problem_id, user_id, send_time, state, program, problem_letter, lang)
-        VALUES(?, ?, ?, ?, ?, ?, ?, ?); 
+        VALUES(%s, %s, %s, %s, %s, %s, %s, %s); 
         ''',
         (
             problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", f_code,
             problem_letter_form,
             f_lang)
     )
-    cur.execute('SELECT last_insert_rowid()')
+    cur.execute(f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
 
     inserted_id = cur.fetchone()[0]
 
@@ -110,7 +110,7 @@ def check_system():
     con = get_connection()
     cur = con.cursor()
 
-    cur.execute(f"UPDATE champUsers__{meta['champ_id']} SET {meta['problem'][0]} = ? WHERE id == ?;",
+    cur.execute(f"UPDATE champUsers_{meta['champ_id']} SET {meta['problem'][0]} = %s WHERE id = %s;",
                 (round((correct_count / all_count) * 100), meta["user_id"]))
 
     result_str = json.dumps(data['results'], indent=2)
@@ -118,7 +118,7 @@ def check_system():
     print(result_str)
 
     cur.execute(
-        f"UPDATE champSends__{meta['champ_id']} SET score = ?,state = 'Протестировано', description = ?  WHERE id == ?;",
+        f"UPDATE champSends_{meta['champ_id']} SET score = %s,state = 'Протестировано', description = %s  WHERE id = %s;",
         (round((correct_count / all_count) * 100), result_str, meta['id']))
 
     con.commit()
