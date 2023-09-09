@@ -8,6 +8,7 @@ from flask import redirect, request
 from app import *
 from database import get_connection
 from decorators import login_required, get_user_id
+import env
 
 
 @app.route("/send", methods=['POST'])
@@ -87,7 +88,7 @@ def send_prog(user_id, uid):
 
     print(cur.fetchone())
 
-    requests.post("http://127.0.0.1:7070/api/v1/test", json=data)
+    requests.post(env.CHECK_SERVER_ENDPOINT, json=data)
     return redirect("/sends")
 
 
