@@ -135,6 +135,8 @@ def create_users_in_champ_post(champ_id):
 
     for name in users:
         login = f"{translit(name, 'ru', reversed=True)}{random.randint(10, 99)}"
+        login = login.replace(" ","")
+
         password = get_random_string(8)
 
         cursor.execute(f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
