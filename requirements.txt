@@ -2,3 +2,4 @@ requests~=2.31.0
 Flask~=2.1
 transliterate~=1.10.2
 python-dotenv~=1.0.0
+psycopg2-binary~=2.9.7
