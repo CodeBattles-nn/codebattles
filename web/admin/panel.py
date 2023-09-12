@@ -144,7 +144,7 @@ def create_users_in_champ_post(champ_id):
 
     connection.commit()
 
-    return redirect(f"/admin/champ/{champ_id}/add_users")
+    return redirect(f"/admin/champ/{champ_id}/users")
 
 
 @app.route("/admin/champ/<champ_id>/users")
