@@ -1,4 +1,6 @@
 from functools import wraps
+
+import psycopg2
 from flask import request, redirect
 
 from config import ADMIN_LOGIN, ADMIN_PASSWORD
@@ -26,7 +28,11 @@ def login_required(f):
 
             connection = get_connection()
             cur = connection.cursor()
-            cur.execute(f"SELECT * FROM champUsers_{battle_id} WHERE id = {user_id}")
+
+            try:
+                cur.execute(f"SELECT * FROM champUsers_{battle_id} WHERE id = {user_id}")
+            except psycopg2.errors.UndefinedTable:
+                return redirect("/logout")
 
             if cur.fetchone() is None:
                 return redirect("/logout")
