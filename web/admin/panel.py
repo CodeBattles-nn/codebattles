@@ -128,15 +128,19 @@ def create_users_in_champ(champ_id):
 @app.route("/admin/champ/<champ_id>/add_users", methods=['POST'])
 @admin_required
 def create_users_in_champ_post(champ_id):
-    users = request.form['users'].split("\r\n").replace("'", "")
-    users = map(lambda x: (x, x[:6])[len(x) > 7], users)
+    users = request.form['users'].split("\r\n")
 
     connection = get_connection()
     cursor = connection.cursor()
 
     for name in users:
-        login = f"{translit(name, 'ru', reversed=True)}{random.randint(10, 99)}"
+        login = translit(name, 'ru', reversed=True)
         login = login.replace(" ", "")
+        login = login.replace("'", "")
+        if len(login) > 7:
+            login = login[:6]
+
+        login = f"{login}{random.randint(10, 99)}"
 
         password = get_random_string(8)
 
