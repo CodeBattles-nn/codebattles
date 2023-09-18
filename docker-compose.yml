@@ -24,11 +24,11 @@ services:
     ports:
       - "25565:5432"
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready" ]
+      test: [ "CMD-SHELL", "pg_isready", "-U", "postgres", "-d", "cb" ]
       interval: 2s
       timeout: 2s
       retries: 10
   checker:
-    image: doctorixx/program_check_system:1.1.0
+    build: PROGRAM_CHECK_SYSTEM/.
     environment:
       SERVER_ENDPOINT: http://web:5000/api/check_system_callback
