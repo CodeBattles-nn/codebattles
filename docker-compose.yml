@@ -16,10 +16,11 @@ services:
     links:
       - postgres
   postgres:
-    image: postgres:13.3
+    image: postgres:13.3-alpine
     environment:
       POSTGRES_DB: "cb"
       POSTGRES_USER: "postgres"
+      PGUSER: "postgres"
       POSTGRES_PASSWORD: "admin"
     ports:
       - "25565:5432"
