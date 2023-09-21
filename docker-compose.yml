@@ -3,7 +3,6 @@ services:
   web:
     build: .
     environment:
-      CHECK_SERVER: checker
       CHECKER_PORT: 7070
       DB_HOST: postgres
       DB_USERNAME: "postgres"
