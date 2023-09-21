@@ -28,13 +28,6 @@ services:
       test: [ "CMD-SHELL", "pg_isready", "-U", "postgres", "-d", "cb" ]
       interval: 2s
       timeout: 2s
-      retries: 10
-  checker:
-    build: PROGRAM_CHECK_SYSTEM/.
-    environment:
-      SERVER_ENDPOINT: http://web:5000/api/check_system_callback
-      ENV_EXECUTOR_ENABLE: true
-      ENV_EXECUTOR_RUN_COMMAND: python3
   checker-java:
     build: PROGRAM_CHECK_SYSTEM/.
     environment:
@@ -46,4 +39,5 @@ services:
       SERVER_ENDPOINT: http://web:5000/api/check_system_callback
       ENV_EXECUTOR_ENABLE: true
       ENV_EXECUTOR_RUN_COMMAND: python3
+      ENV_EXECUTOR_FILENAME: main.py
 
