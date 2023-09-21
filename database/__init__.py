@@ -1,7 +1,7 @@
 import psycopg2
 import env
 
-from database.createTables import CHAMPS_TABLE, PROBLEMS_TABLE
+from database.createTables import CHAMPS_TABLE, PROBLEMS_TABLE, SERVERS_TABLE
 
 
 def get_connection():
@@ -19,5 +19,6 @@ def init_tables():
 
     cur.execute(CHAMPS_TABLE)
     cur.execute(PROBLEMS_TABLE)
+    cur.execute(SERVERS_TABLE)
 
     connection.commit()

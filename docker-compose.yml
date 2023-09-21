@@ -3,7 +3,8 @@ services:
   web:
     build: .
     environment:
-      CHECK_SERVER_ENDPOINT: http://checker:7070/api/v1/test
+      CHECK_SERVER: checker
+      CHECKER_PORT: 7070
       DB_HOST: postgres
       DB_USERNAME: "postgres"
       DB_PASSWORD: "admin"
@@ -33,3 +34,17 @@ services:
     build: PROGRAM_CHECK_SYSTEM/.
     environment:
       SERVER_ENDPOINT: http://web:5000/api/check_system_callback
+      ENV_EXECUTOR_ENABLE: true
+      ENV_EXECUTOR_RUN_COMMAND: python3
+  checker-java:
+    build: PROGRAM_CHECK_SYSTEM/.
+    environment:
+      SERVER_ENDPOINT: http://web:5000/api/check_system_callback
+      ENV_EXECUTOR_ENABLE: true
+  checker-python:
+    build: PROGRAM_CHECK_SYSTEM/.
+    environment:
+      SERVER_ENDPOINT: http://web:5000/api/check_system_callback
+      ENV_EXECUTOR_ENABLE: true
+      ENV_EXECUTOR_RUN_COMMAND: python3
+

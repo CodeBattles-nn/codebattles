@@ -113,12 +113,18 @@ def problem(letter, user_id):
     if problem_ is None:
         abort(404)
 
+    cur.execute("SELECT name, id FROM servers WHERE enabled=true")
+    servers = cur.fetchall()
+
+    print()
+
     _pr_id, _pr_name, _pr_desc, _pr_in, _pr_out, _pr_tests, _pr_examples = problem_
 
     _pr_examples = fix_new_line(json.loads(_pr_examples))
 
     return render_template("index.html", problem_name=_pr_name, problem_description=_pr_desc,
-                           problem_letter=letter, in_data=_pr_in, out_data=_pr_out, examples=_pr_examples)
+                           problem_letter=letter, in_data=_pr_in, out_data=_pr_out, examples=_pr_examples,
+                           servers=servers)
 
 
 @app.route("/stats")

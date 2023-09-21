@@ -77,6 +77,7 @@ def send_prog(user_id, uid):
         "id": inserted_id,
     }
 
+
     data = {
         "meta": json.dumps(meta),
         "source": request.form['src'],
@@ -88,7 +89,13 @@ def send_prog(user_id, uid):
 
     print(cur.fetchone())
 
-    requests.post(env.CHECK_SERVER_ENDPOINT, json=data)
+    cur.execute(f"SELECT address FROM servers WHERE id = {request.form['cars']}")
+
+    server_addr = cur.fetchone()[0]
+
+    print()
+
+    requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test", json=data)
     return redirect("/sends")
 
 

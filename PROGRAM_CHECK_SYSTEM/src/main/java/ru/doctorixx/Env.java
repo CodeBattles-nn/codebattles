@@ -7,7 +7,13 @@ public class Env {
 
     public enum EnvVars{
 
-        SERVER_ENDPOINT("SERVER_ENDPOINT")
+        SERVER_ENDPOINT("SERVER_ENDPOINT"),
+
+        ENV_EXECUTOR_ENABLE("ENV_EXECUTOR_ENABLE"),
+        ENV_EXECUTOR_FILENAME("ENV_EXECUTOR_FILENAME"),
+        ENV_EXECUTOR_COMPILER_COMMAND("ENV_EXECUTOR_COMPILER_COMMAND"),
+        ENV_EXECUTOR_COMPILER_NEED("ENV_EXECUTOR_COMPILER_NEED"),
+        ENV_EXECUTOR_RUN_COMMAND("ENV_EXECUTOR_RUN_COMMAND"),
 
         ;
         private final String value;
@@ -26,6 +32,12 @@ public class Env {
 
     static {
         defaultEnv.put(EnvVars.SERVER_ENDPOINT.value, "http://127.0.0.1:5000/api/check_system_callback");
+
+        defaultEnv.put(EnvVars.ENV_EXECUTOR_COMPILER_COMMAND.value, "--");
+        defaultEnv.put(EnvVars.ENV_EXECUTOR_COMPILER_NEED.value, "false");
+        defaultEnv.put(EnvVars.ENV_EXECUTOR_RUN_COMMAND.value, "java");
+        defaultEnv.put(EnvVars.ENV_EXECUTOR_ENABLE.value, "false");
+        defaultEnv.put(EnvVars.ENV_EXECUTOR_FILENAME.value, "Main.java");
     }
 
     public static String get(String key) {

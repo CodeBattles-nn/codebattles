@@ -125,9 +125,12 @@
                   <form action="/send" method="post" id="sendform">
                     <div class="mb-3">
                       <input type="hidden" name="problem" value="{{problem_letter}}" />
-                      <select id="cars" name="cars" style="height: 15%;" name="lang">
-                        <option value="python">Python 3.8</option>
-                        <option value="java">Java 16</option>
+                      <select id="cars" name="cars" style="height: 15%;">
+                        {% for server in servers%}
+
+                        <option value="{{server[1]}}">{{server[0]}}</option>
+
+                        {% endfor %}
                       </select>
                       <textarea name="src" class="form-control" id="exampleFormControlTextarea1" rows="5"
                         form="sendform"></textarea>

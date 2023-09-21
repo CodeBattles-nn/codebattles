@@ -30,6 +30,16 @@ PROBLEMS_TABLE = '''
 '''
 
 
+SERVERS_TABLE = '''
+CREATE TABLE IF NOT EXISTS servers
+(
+    id SERIAL PRIMARY KEY,
+    name TEXT,
+    address TEXT,
+    enabled boolean DEFAULT true
+)
+'''
+
 def getQueryUsersTable(champId):
     return f"""
 CREATE TABLE champUsers_{champId} (
