@@ -1,95 +1,44 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>CodeBattles · Задачи</title>
-
-    <link rel="stylesheet" href="/static/css/utils.css">
-    <link rel="stylesheet" href="/static/css/bs-jumbotron.css">
-
-    <link rel="icon" type="image/svg+xml" href="./static/favicon.svg">
-    <link rel="icon" type="image/png" href="./static/favicon.png">
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
-        integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-</head>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="color: red">CodeBattles</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/problems">Задачи</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/stats">Положение</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/sends" tabindex="-1">Посылки</a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-</nav>
-
-
-
+{% extends "base/authored.html" %}
+{% block head%}
+<link rel="stylesheet" href="/static/css/utils.css">
+<link rel="stylesheet" href="/static/css/bs-jumbotron.css">
+{% endblock head%}
+{% block title %}
+CodeBattles · Задачи
+{% endblock title %}
+{% block content %}
 <main style="background-color: #ffe0b2; min-height: 94vh;">
-
-    <body>
-        <div class="container ">
-            <div class="row">
-                <div class="col" style="min-height: 50px;"></div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="jumbotron bg-light table-bordered table-hover p-3">
-                        <h4>Задачи</h4>
-                        <p></p>
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col"></th>
-                                        <th scope="col">Название</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for problem in problems %}
-                                    <tr>
-                                        <th class="{{problem[2]}}" scope="row">{{problem[0]}}</th>
-                                        <td class="{{problem[2]}}" ><a href="/problem/{{problem[0]}}">{{problem[1]}}</a></td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="container ">
+        <div class="row">
+            <div class="col" style="min-height: 50px;"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron bg-light table-bordered table-hover p-3">
+                    <h4>Задачи</h4>
+                    <p></p>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Название</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for problem in problems %}
+                            <tr>
+                                <th class="{{problem[2]}}" scope="row">{{problem[0]}}</th>
+                                <td class="{{problem[2]}}"><a href="/problem/{{problem[0]}}">{{problem[1]}}</a></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
             </div>
         </div>
-    </body>
+    </div>
+
 </main>
-
-
-
-
-</html>
+{% endblock content %}

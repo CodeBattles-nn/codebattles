@@ -1,58 +1,17 @@
-<!doctype html>
-<html lang="en">
+{% extends "base/authored.html" %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/utils.css">
+<link rel="stylesheet" href="/static/css/bs-jumbotron.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/static/css/stats.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+{% endblock head %}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>CodeBattles · Положение</title>
+{% block title %}
+CodeBattles · Положение
+{% endblock title %}
 
-    <link rel="stylesheet" href="./static/css/utils.css">
-    <link rel="stylesheet" href="./static/css/bs-jumbotron.css">
-    <link rel="stylesheet" href="./static/css/stats.css">
-
-    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
-    <link rel="icon" type="image/png" href="/static/favicon.png">
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
-        integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="script.js"></script>
-
-</head>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="color: red">CodeBattles</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/problems">Задачи</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Положение</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/sends" tabindex="-1">Посылки</a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-</nav>
-
-
-
+{% block content %}
 <main style="background-color: #ffe0b2;min-height: 94vh;">
 
     <body>
@@ -116,8 +75,4 @@
     </body>
 
 </main>
-
-
-
-
-</html>
+{% endblock content %}

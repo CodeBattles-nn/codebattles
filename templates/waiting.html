@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base/authored.html" %}
+{% block head %}
+<link rel="stylesheet" href="/static/css/utils.css">
+<link rel="stylesheet" href="/static/css/bs-jumbotron.css">
+<link rel="stylesheet" href="/static/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+{% endblock head %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeBattles · Ожидание</title>
+{% block title %}
+CodeBattles · Ожидание
+{% endblock title %}
 
-    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
-    <link rel="icon" type="image/png" href="/static/favicon.png">
-
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/jumbotron/">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
-    <script src="./static/js/timer.js"></script>
-</head>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#" style="color: red">CodeBattles</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            </ul>
-        </div>
-    </div>
-</nav>
-
-
+{% block content %}
 <body style="background-color: #ffe0b2;">
     <div class="container">
         <div class="row" style="margin-top: 15%;">
@@ -53,5 +33,4 @@
     </div>
 
 </body>
-
-</html>
+{% endblock content %}
