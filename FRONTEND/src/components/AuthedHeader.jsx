@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const AuthedHeader = (props) => {
     return <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -11,13 +12,13 @@ const AuthedHeader = (props) => {
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <ul className="navbar-nav me-auto mb-2 mb-md-0">
                     <li className="nav-item">
-                        <a className="nav-link" aria-current="page" href="/problems">Задачи</a>
+                        <Link className="nav-link" to="/problems">Задачи</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/stats">Положение</a>
+                        <Link className="nav-link" to="/stats">Положение</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/sends" tabIndex="-1">Посылки</a>
+                        <Link className="nav-link" to="/sends">Посылки</Link>
                     </li>
                 </ul>
             </div>

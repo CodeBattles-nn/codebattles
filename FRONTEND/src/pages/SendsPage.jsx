@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const SendsPage = (props) => {
     return <main style={{"min-height": "93vh","background-color": "#ffe0b2"}}>
@@ -28,11 +29,11 @@ const SendsPage = (props) => {
                                     <tr>
                                         <th scope="row">send[0]</th>
                                         <td>send[3]</td>
-                                        <td><a href="/problem/{{send[1]}}">send[1]. send[2]</a></td>
+                                        <td><Link to="/problem/{{send[1]}}">send[1]. send[2]</Link></td>
                                         <td class="int text-center">send[5]</td>
                                         <td>send[4]</td>
                                         <td>
-                                            <a href="/send/{{send[0]}}">Вердикт</a>
+                                            <Link to="/send/{{send[0]}}">Вердикт</Link>
                                         </td>
 
                                     </tr>

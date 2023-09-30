@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const StatsPage = (props) => {
     return <main style={{"background-color": "#ffe0b2", "min-height": '94vh'}}>
@@ -19,7 +20,7 @@ const StatsPage = (props) => {
                                         <th scope="col">Всего</th>
 
 
-                                        <th scope="col"><a href="/problem/{{col}}">col</a></th>
+                                        <th scope="col"><Link to="/problem/{{col}}">col</Link></th>
 
                                     </tr>
                                     </thead>

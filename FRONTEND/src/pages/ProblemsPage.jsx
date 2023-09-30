@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 const ProblemsPage = (props) => {
     return (
@@ -24,8 +25,8 @@ const ProblemsPage = (props) => {
 
                                     <tr>
                                         <th className="{{problem[2]}}" scope="row">problem[0]</th>
-                                        <td className="{{problem[2]}}"><a
-                                            href="/problem/{{problem[0]}}">problem[1]</a></td>
+                                        <td className="{{problem[2]}}"><Link
+                                            to="/problem/{{problem[0]}}">problem[1]</Link></td>
                                     </tr>
 
                                     </tbody>
