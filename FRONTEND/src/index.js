@@ -10,6 +10,8 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import ProblemsPage from "./pages/ProblemsPage";
 import StatsPage from "./pages/StatsPage";
+import SeeSendPage from "./pages/SeeSendPage";
+import SendsPage from "./pages/SendsPage";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,6 +23,8 @@ root.render(
                 <Route path="/stats" element={<StatsPage/>}/>
                 <Route path="/problem/:letter" element={<SeeProblemPage/>}/>
                 <Route path="/problems" element={<ProblemsPage/>}/>
+                <Route path="/sends" element={<SendsPage/>}/>
+                <Route path="/send/:id" element={<SeeSendPage/>}/>
                 <Route path="*" element={<div>Иди отсюда</div>}/>
             </Routes>
         </BrowserRouter>

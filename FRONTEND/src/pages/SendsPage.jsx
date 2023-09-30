@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SendsPage = (props) => {
-    return <main style="min-height: 93vh;background-color: #ffe0b2">
+    return <main style={{"min-height": "93vh","background-color": "#ffe0b2"}}>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-8 col-lg-12 content-container">
@@ -26,10 +26,10 @@ const SendsPage = (props) => {
 
 
                                     <tr>
-                                        <th scope="row">{{send[0]}}</th>
+                                        <th scope="row">send[0]</th>
                                         <td>send[3]</td>
-                                        <td><a href="/problem/{{send[1]}}">{{send[1]}}. {{send[2]}}</a></td>
-                                        <td class="int text-center">{{send[5]}}</td>
+                                        <td><a href="/problem/{{send[1]}}">send[1]. send[2]</a></td>
+                                        <td class="int text-center">send[5]</td>
                                         <td>send[4]</td>
                                         <td>
                                             <a href="/send/{{send[0]}}">Вердикт</a>
