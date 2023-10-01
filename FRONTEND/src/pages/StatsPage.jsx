@@ -49,9 +49,6 @@ const StatsPage = (props) => {
 
             </div>
         </div>
-        <footer className="pt-3 mt-4 text-muted border-top">
-            &copy; 2023, CodeBattles
-        </footer>
     </main>
 
 };

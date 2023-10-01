@@ -2,7 +2,7 @@ import React from 'react';
 
 const SeeSendPage = (props) => {
     return (
-        <main style={{"background-color": "#ffe0b2", "min-height":" 94vh"}}>
+        <main style={{"background-color": "#ffe0b2", "min-height": " 94vh"}}>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-8 col-lg-12 content-container">
@@ -32,7 +32,7 @@ const SeeSendPage = (props) => {
                                             <td>test[1]</td>
                                             <td>test[2]</td>
                                             <td>
-                                                <p style={{"white-space":"pre-line"}}>test[3]</p>
+                                                <p style={{"white-space": "pre-line"}}>test[3]</p>
                                             </td>
                                         </tr>
 
@@ -43,9 +43,7 @@ const SeeSendPage = (props) => {
 
                             </div>
                         </div>
-                        <footer class="pt-3 mt-4 text-muted border-top">
-                            &copy; 2023, CodeBattles
-                        </footer>
+
                     </div>
 
                 </div>
