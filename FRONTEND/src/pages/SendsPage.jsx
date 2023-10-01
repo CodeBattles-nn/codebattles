@@ -3,16 +3,16 @@ import {Link} from "react-router-dom";
 
 const SendsPage = (props) => {
     return <main style={{"min-height": "93vh","background-color": "#ffe0b2"}}>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8 col-lg-12 content-container">
+        <div className="container-fluid">
+            <div className="row">
+                <div className="col-md-8 col-lg-12 content-container">
 
-                    <div class="container py-4">
-                        <div class="jumbotron bg-light table-bordered table-hover p-3">
+                    <div className="container py-4">
+                        <div className="jumbotron bg-light table-bordered table-hover p-3">
                             <h4>Посылки</h4>
                             <p></p>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
+                            <div className="table-responsive">
+                                <table className="table table-striped">
                                     <thead>
                                     <tr>
                                         <th scope="col">№</th>
@@ -30,7 +30,7 @@ const SendsPage = (props) => {
                                         <th scope="row">send[0]</th>
                                         <td>send[3]</td>
                                         <td><Link to="/problem/{{send[1]}}">send[1]. send[2]</Link></td>
-                                        <td class="int text-center">send[5]</td>
+                                        <td className="int text-center">send[5]</td>
                                         <td>send[4]</td>
                                         <td>
                                             <Link to="/send/{{send[0]}}">Вердикт</Link>
