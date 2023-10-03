@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import getApiAddress from "../utils/api";
 
 const SendsPage = (props) => {
     const [sends, setSends] = useState({sends: []});
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/sends").then(
+        axios.get(getApiAddress() + "/api/sends").then(
             (r) => {
                 console.log(r.data)
                 setSends(r.data)

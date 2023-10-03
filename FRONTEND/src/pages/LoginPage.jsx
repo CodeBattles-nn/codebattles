@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import getApiAddress from "../utils/api";
 
 const LoginPage = (props) => {
     const [id, setId] = useState(0);
@@ -10,12 +11,12 @@ const LoginPage = (props) => {
 
 
     const onSend = async () => {
-        await axios.post('http://localhost:5000/api/login',
+        await axios.post(getApiAddress() + '/api/login',
             {id: id, login: login, password: passsword}).then(
             (r) => {
                 setErrorMsg("Успешный вход")
 
-                axios.get("http://localhost:5000/api/problems").then(
+                axios.get(getApiAddress() + "/api/problems").then(
                     (r) => console.log(r.data)
                 )
 

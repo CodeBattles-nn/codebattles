@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import getApiAddress from "../utils/api";
 
 const StatsPage = (props) => {
     const [data, setData] = useState({cols: "", users: []});
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/stats").then(
+        axios.get(getApiAddress() +"/api/stats").then(
             (r) => {
                 console.log(r.data)
                 setData(r.data)

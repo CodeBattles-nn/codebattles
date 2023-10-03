@@ -6,14 +6,15 @@ import "./utils.css"
 import "./bs-jumbotron.css"
 import "./style.css"
 import {Link, useParams} from "react-router-dom";
+import getApiAddress from "../../utils/api";
 
 const SeeProblemPage = (props) => {
-    const [info, setInfo] = useState({langs:{}, examples:[]});
+    const [info, setInfo] = useState({langs: {}, examples: []});
 
     const {letter} = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/problem/${letter}`).then(
+        axios.get(getApiAddress() + `/api/problem/${letter}`).then(
             (r) => {
                 console.log(r.data)
                 setInfo(r.data)
