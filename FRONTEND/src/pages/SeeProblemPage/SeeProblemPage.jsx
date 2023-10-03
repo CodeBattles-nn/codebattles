@@ -1,10 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+
+import axios from "axios";
 
 import "./utils.css"
 import "./bs-jumbotron.css"
 import "./style.css"
+import {Link, useParams} from "react-router-dom";
 
 const SeeProblemPage = (props) => {
+    const [info, setInfo] = useState({langs:{}});
+
+    const {letter} = useParams();
+
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/problem/${letter}`).then(
+            (r) => {
+                console.log(r.data)
+                setInfo(r.data)
+            }
+        ).catch(() => console.log("ЧТо-то пошло не так"))
+    }, []);
+
+    console.log(info)
+
     return <>
         <div className="container-fluid">
             <div className="row">
@@ -17,8 +35,8 @@ const SeeProblemPage = (props) => {
                         <div className="row align-items-md-stretch">
                             <div className="col-md-6">
                                 <div className="h-60 p-3 text-white bg-dark rounded-3">
-                                    <h2 style={{"color": "#6c757d;"}}>Задача problem_letter</h2>
-                                    <h3>problem_name</h3>
+                                    <h2 style={{"color": "#6c757d;"}}>Задача {info.letter}</h2>
+                                    <h3>{info.name}</h3>
                                 </div>
                             </div>
                             <div className="col-md-6">
@@ -38,11 +56,11 @@ const SeeProblemPage = (props) => {
                             <div className="container-fluid py-5">
                                 <div className="col-md-12 fs-4">
                                     <h4>Задача</h4>
-                                    <p style={{"white-space": "pre-line"}}>problem_description</p>
+                                    <p style={{"white-space": "pre-line"}}>{info.description}</p>
                                     <h4>Входные данные</h4>
-                                    <p style={{"white-space": "pre-line"}}>in_data</p>
+                                    <p style={{"white-space": "pre-line"}}>{info.in_data}</p>
                                     <h4>Выходные данные</h4>
-                                    <p style={{"white-space": "pre-line"}}>out_data</p>
+                                    <p style={{"white-space": "pre-line"}}>{info.out_data}</p>
                                 </div>
 
 
@@ -77,10 +95,19 @@ const SeeProblemPage = (props) => {
                                             <input type="hidden" name="problem" value="{{problem_letter}}"/>
                                             <select id="cars" name="cars" style={{"height": "15%;"}}>
 
-                                                <option value="{{server[1]}}">server[0]</option>
+                                                {
+                                                    Object.keys(info.langs).map((name) => {
+                                                        const key = info?.langs[name]
+                                                        return (
+                                                            <option key={key} value={key}>{name}</option>
+                                                        )
+                                                    }, info?.langs)
+                                                }
+
 
                                             </select>
-                                            <textarea name="src" className="form-control" id="exampleFormControlTextarea1"
+                                            <textarea name="src" className="form-control"
+                                                      id="exampleFormControlTextarea1"
                                                       rows="5"
                                                       form="sendform"></textarea>
                                             <p></p>
@@ -93,7 +120,6 @@ const SeeProblemPage = (props) => {
 
                     </div>
                     <p></p>
-
 
 
                 </div>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
 const LoginPage = (props) => {
@@ -16,7 +16,7 @@ const LoginPage = (props) => {
                 setErrorMsg("Успешный вход")
 
                 axios.get("http://localhost:5000/api/problems").then(
-                    (r) => console.log(r.data.response)
+                    (r) => console.log(r.data)
                 )
 
             }
@@ -53,7 +53,8 @@ const LoginPage = (props) => {
                         </div>
 
 
-                        <button type="button" onClick={() => onSend()} className="btn btn-primary text-white">Войти</button>
+                        <button type="button" onClick={() => onSend()} className="btn btn-primary text-white">Войти
+                        </button>
                     </form>
                 </div>
                 <div className="col-2"></div>

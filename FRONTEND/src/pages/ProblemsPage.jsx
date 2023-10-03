@@ -1,7 +1,21 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const ProblemsPage = (props) => {
+
+    const [problems, setProblems] = useState({});
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/problems").then(
+            (r) => {
+                console.log(r.data)
+                setProblems(r.data.problems)
+            }
+        ).catch(() => console.log("ЧТо-то пошло не так"))
+    }, []);
+
+
     return (
         <main style={{"background-color": "#ffe0b2", "min-height": " 94vh"}}>
             <div className="container ">
@@ -23,12 +37,17 @@ const ProblemsPage = (props) => {
                                     </thead>
                                     <tbody>
 
-                                    <tr>
-                                        <th className="{{problem[2]}}" scope="row">problem[0]</th>
-                                        <td className="{{problem[2]}}"><Link
-                                            to="/problem/{{problem[0]}}">problem[1]</Link></td>
-                                    </tr>
-
+                                    {
+                                        Object.keys(problems).map((letter) => {
+                                            return (
+                                                <tr key={letter}>
+                                                    <th className="{{problem[2]}}" scope="row">{letter}</th>
+                                                    <td className="{{problem[2]}}"><Link
+                                                        to={`/problem/${letter}`}>{problems[letter]}</Link></td>
+                                                </tr>
+                                            )
+                                        }, problems)
+                                    }
                                     </tbody>
                                 </table>
                             </div>
