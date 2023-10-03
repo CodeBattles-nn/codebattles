@@ -1,8 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const SendsPage = (props) => {
-    return <main style={{"min-height": "93vh","background-color": "#ffe0b2"}}>
+    const [sends, setSends] = useState({sends: []});
+
+    useEffect(() => {
+        axios.get("http://localhost:5000/api/sends").then(
+            (r) => {
+                console.log(r.data)
+                setSends(r.data)
+            }
+        ).catch(() => console.log("ЧТо-то пошло не так"))
+    }, []);
+
+    return <main style={{"min-height": "93vh", "background-color": "#ffe0b2"}}>
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-8 col-lg-12 content-container">
@@ -26,17 +38,30 @@ const SendsPage = (props) => {
                                     <tbody>
 
 
-                                    <tr>
-                                        <th scope="row">send[0]</th>
-                                        <td>send[3]</td>
-                                        <td><Link to="/problem/{{send[1]}}">send[1]. send[2]</Link></td>
-                                        <td className="int text-center">send[5]</td>
-                                        <td>send[4]</td>
-                                        <td>
-                                            <Link to="/send/{{send[0]}}">Вердикт</Link>
-                                        </td>
+                                    {
+                                        [...sends.sends].map((send) => {
+                                            return (
 
-                                    </tr>
+                                                <tr>
+                                                    <th scope="row">{send.id}</th>
+                                                    <td>{send.send_time}</td>
+                                                    <td><Link
+                                                        to="/problem/{{send[1]}}">{send.letter}. {send.name}</Link></td>
+                                                    <td className="int text-center">{send.score}</td>
+                                                    <td>{send.state}</td>
+                                                    <td>
+                                                        {
+                                                            send.program_checked ? (
+                                                                <Link to={`/send/${send.id}`}>Вердикт</Link>) : (<></>)
+                                                        }
+
+                                                    </td>
+
+                                                </tr>
+
+                                            )
+                                        })
+                                    }
 
                                     </tbody>
                                 </table>

@@ -8,7 +8,7 @@ import "./style.css"
 import {Link, useParams} from "react-router-dom";
 
 const SeeProblemPage = (props) => {
-    const [info, setInfo] = useState({langs:{}});
+    const [info, setInfo] = useState({langs:{}, examples:[]});
 
     const {letter} = useParams();
 
@@ -70,6 +70,23 @@ const SeeProblemPage = (props) => {
                         <div className="jumbotron bg-light">
                             <h2>Примеры</h2>
 
+                            {
+                                info.examples.map((data) => {
+                                    const [input_data, output_data] = data
+                                    return (
+                                        <div className="example">
+                                            <div className="width-wrap">
+                                                <h6 className="m-1 width-inner">Входные данные</h6>
+                                                <button className="copy-btn">Скопировать</button>
+                                            </div>
+
+                                            <p className=" m-0 console" id="code1">{input_data}</p>
+                                            <h6 className="m-1">Выходные данные</h6>
+                                            <p className="m-0 console">{output_data}</p>
+                                        </div>
+                                    )
+                                })
+                            }
 
                             <div className="example">
                                 <div className="width-wrap">
