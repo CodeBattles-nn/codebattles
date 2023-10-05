@@ -21,7 +21,7 @@ function App() {
                 <Route path="/problems" element={<ProblemsPage/>}/>
                 <Route path="/sends" element={<SendsPage/>}/>
                 <Route path="/send/:id" element={<SeeSendPage/>}/>
-                <Route path="*" element={<div>Иди отсюда</div>}/>
+                <Route path="*" element={<ProblemsPage />} />
             </Routes>
         </BrowserRouter>
     )

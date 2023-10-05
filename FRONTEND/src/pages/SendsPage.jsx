@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import getApiAddress from "../utils/api";
 
 const SendsPage = (props) => {
     const [sends, setSends] = useState({sends: []});
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(getApiAddress() + "/api/sends").then(
@@ -12,7 +14,7 @@ const SendsPage = (props) => {
                 console.log(r.data)
                 setSends(r.data)
             }
-        ).catch(() => console.log("ЧТо-то пошло не так"))
+        ).catch(() => navigate("/login"))
     }, []);
 
     return <main style={{"min-height": "93vh", "background-color": "#ffe0b2"}}>
@@ -47,7 +49,8 @@ const SendsPage = (props) => {
                                                     <th scope="row">{send.id}</th>
                                                     <td>{send.send_time}</td>
                                                     <td><Link
-                                                        to="/problem/{{send[1]}}">{send.letter}. {send.name}</Link></td>
+                                                        to={`/problem/${send.letter}`}>{send.letter}. {send.name}</Link>
+                                                    </td>
                                                     <td className="int text-center">{send.score}</td>
                                                     <td>{send.state}</td>
                                                     <td>

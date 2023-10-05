@@ -5,7 +5,7 @@ import axios from "axios";
 import "./utils.css"
 import "./bs-jumbotron.css"
 import "./style.css"
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 
 const SeeProblemPage = (props) => {
@@ -13,13 +13,15 @@ const SeeProblemPage = (props) => {
 
     const {letter} = useParams();
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         axios.get(getApiAddress() + `/api/problem/${letter}`).then(
             (r) => {
                 console.log(r.data)
                 setInfo(r.data)
             }
-        ).catch(() => console.log("ЧТо-то пошло не так"))
+        ).catch(() => navigate("/login"))
     }, []);
 
     console.log(info)

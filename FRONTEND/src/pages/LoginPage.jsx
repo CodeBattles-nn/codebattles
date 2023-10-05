@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import getApiAddress from "../utils/api";
+import {useNavigate} from "react-router-dom";
 
 const LoginPage = (props) => {
     const [id, setId] = useState(0);
@@ -9,17 +10,14 @@ const LoginPage = (props) => {
 
     const [errorMsg, setErrorMsg] = useState("");
 
+    const navigate = useNavigate();
 
     const onSend = async () => {
         await axios.post(getApiAddress() + '/api/login',
             {id: id, login: login, password: passsword}).then(
             (r) => {
                 setErrorMsg("Успешный вход")
-
-                axios.get(getApiAddress() + "/api/problems").then(
-                    (r) => console.log(r.data)
-                )
-
+                navigate("/problems")
             }
         ).catch(r => setErrorMsg("Неверные данные"));
     };

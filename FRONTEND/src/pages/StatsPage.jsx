@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import getApiAddress from "../utils/api";
 
 const StatsPage = (props) => {
+
+    const navigate = useNavigate();
+
     const [data, setData] = useState({cols: "", users: []});
 
     useEffect(() => {
@@ -12,7 +15,7 @@ const StatsPage = (props) => {
                 console.log(r.data)
                 setData(r.data)
             }
-        ).catch(() => console.log("ЧТо-то пошло не так"))
+        ).catch(() => navigate("/login"))
     }, []);
 
 
