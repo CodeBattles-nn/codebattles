@@ -15,6 +15,7 @@ services:
         condition: service_healthy
     links:
       - postgres
+    restart: unless-stopped
   postgres:
     image: postgres:13.3-alpine
     environment:
@@ -28,11 +29,13 @@ services:
       test: [ "CMD-SHELL", "pg_isready", "-U", "postgres", "-d", "cb" ]
       interval: 2s
       timeout: 2s
+    restart: unless-stopped
   checker-java:
     build: PROGRAM_CHECK_SYSTEM/.
     environment:
       SERVER_ENDPOINT: http://web:5000/api/check_system_callback
       ENV_EXECUTOR_ENABLE: true
+    restart: unless-stopped
   checker-python:
     build: PROGRAM_CHECK_SYSTEM/.
     environment:
@@ -40,4 +43,4 @@ services:
       ENV_EXECUTOR_ENABLE: true
       ENV_EXECUTOR_RUN_COMMAND: python3
       ENV_EXECUTOR_FILENAME: main.py
-
+    restart: unless-stopped
