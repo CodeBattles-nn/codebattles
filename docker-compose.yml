@@ -1,6 +1,11 @@
 version: "3.9"
 services:
-  web:
+  frontend:
+    build: FRONTEND/.
+    ports:
+      - "80:3000"
+    restart: unless-stopped
+  backend:
     build: BACKEND/.
     environment:
       CHECKER_PORT: 7070
