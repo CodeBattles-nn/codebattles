@@ -38,13 +38,13 @@ services:
   checker-java:
     build: PROGRAM_CHECK_SYSTEM/.
     environment:
-      SERVER_ENDPOINT: http://web:5000/api/check_system_callback
+      SERVER_ENDPOINT: http://backend:5000/api/check_system_callback
       ENV_EXECUTOR_ENABLE: true
     restart: unless-stopped
   checker-python:
     build: PROGRAM_CHECK_SYSTEM/.
     environment:
-      SERVER_ENDPOINT: http://web:5000/api/check_system_callback
+      SERVER_ENDPOINT: http://backend:5000/api/check_system_callback
       ENV_EXECUTOR_ENABLE: true
       ENV_EXECUTOR_RUN_COMMAND: python3
       ENV_EXECUTOR_FILENAME: main.py
