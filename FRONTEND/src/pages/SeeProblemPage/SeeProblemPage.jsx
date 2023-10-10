@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import axios from "axios";
 
@@ -12,6 +12,7 @@ const SeeProblemPage = (props) => {
     const [info, setInfo] = useState({langs: {}, examples: []});
 
     const {letter} = useParams();
+
 
     const navigate = useNavigate();
 
@@ -74,18 +75,29 @@ const SeeProblemPage = (props) => {
                             <h2>Примеры</h2>
 
                             {
-                                info.examples.map((data) => {
+                                info.examples.map((data, index) => {
                                     const [input_data, output_data] = data
+
+                                    const example_id = `example_${index}`
+
+                                    const copyFunction = () => {
+                                        const copyText = document.getElementById(example_id);
+
+                                        console.log(copyText)
+                                        navigator.clipboard.writeText(copyText.innerText);
+                                    }
+
                                     return (
-                                        <div className="example">
+                                        <div className="example" key={example_id}>
                                             <div className="width-wrap">
                                                 <h6 className="m-1 width-inner">Входные данные</h6>
-                                                <button className="copy-btn">Скопировать</button>
+                                                <button className="copy-btn" onClick={copyFunction}>Скопировать</button>
                                             </div>
 
-                                            <p className=" m-0 console" id="code1">{input_data}</p>
+                                            <p className=" m-0 console" id={example_id}>{input_data}</p>
                                             <h6 className="m-1">Выходные данные</h6>
                                             <p className="m-0 console">{output_data}</p>
+
                                         </div>
                                     )
                                 })
