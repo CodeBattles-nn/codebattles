@@ -1,20 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import getApiAddress from "../utils/api";
 
 const SeeSendPage = (props) => {
 
     const [data, setData] = useState({tests:[]});
 
     const {id} = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/send/${id}`).then(
+        axios.get(getApiAddress() + `/api/send/${id}`).then(
             (r) => {
                 console.log(r.data)
                 setData(r.data)
             }
-        ).catch(() => console.log("ЧТо-то пошло не так"))
+        ).catch(() => navigate("/login"))
     }, []);
 
 

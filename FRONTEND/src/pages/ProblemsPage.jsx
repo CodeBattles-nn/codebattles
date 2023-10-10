@@ -1,18 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
+import getApiAddress from "../utils/api";
 
 const ProblemsPage = (props) => {
 
     const [problems, setProblems] = useState({});
 
+    const navigate = useNavigate();
+
     useEffect(() => {
-        axios.get("http://localhost:5000/api/problems").then(
+        axios.get(getApiAddress() + "/api/problems").then(
             (r) => {
                 console.log(r.data)
                 setProblems(r.data.problems)
             }
-        ).catch(() => console.log("ЧТо-то пошло не так"))
+        ).catch(() => navigate("/login"))
     }, []);
 
 

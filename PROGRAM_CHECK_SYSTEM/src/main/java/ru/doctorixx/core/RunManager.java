@@ -21,10 +21,20 @@ public class RunManager {
             throw new RuntimeException("Secondary test run");
         }
 
+        boolean timeLimitExceeded = false;
+
         for (Test test : tests) {
+            if (timeLimitExceeded) {
+                programResults.add(new ProgramResult(false, "", ProcessEndStatus.NOT_EXECUTED, 0));
+                continue;
+            }
+
             executionManager.setInputData(test.in());
             ProgramResult result = executionManager.executeOne();
 
+            if (result.msg().equals(ProcessEndStatus.TIME_LIMIT)) {
+                timeLimitExceeded = true;
+            }
 
             if (!result.success()) {
                 programResults.add(result);

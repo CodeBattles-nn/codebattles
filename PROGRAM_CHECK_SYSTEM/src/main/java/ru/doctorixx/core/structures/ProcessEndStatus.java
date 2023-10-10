@@ -6,6 +6,7 @@ public enum ProcessEndStatus {
     COMPILE_ERROR("CE"),
     TIME_LIMIT("TL"),
     WRONG_ANSWER("WA"),
+    NOT_EXECUTED("NE"),
     ;
 
     private final String msg;
