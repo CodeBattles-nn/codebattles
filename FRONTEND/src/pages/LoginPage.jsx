@@ -9,17 +9,21 @@ const LoginPage = (props) => {
     const [passsword, setPasssword] = useState();
 
     const [errorMsg, setErrorMsg] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const onSend = async () => {
+        setIsLoading(true)
+
         await axios.post(getApiAddress() + '/api/login',
             {id: id, login: login, password: passsword}).then(
             (r) => {
                 setErrorMsg("Успешный вход")
                 navigate("/problems")
-            }
-        ).catch(r => setErrorMsg("Неверные данные"));
+            })
+            .catch(r => setErrorMsg("Неверные данные"))
+            .finally(r => setIsLoading(false));
     };
 
     return (
@@ -27,7 +31,9 @@ const LoginPage = (props) => {
             <div className="row" style={{"margin-top": "25%"}}>
                 <div className="col-2"></div>
                 <div className="col-8 bg-light p-5" style={{"border-radius": "15px"}}>
-                    <h4 className="text-danger">{errorMsg}</h4>
+                    <h4 className="text-danger">
+                        {isLoading ? (<p>Загрузка....</p>) : (<p>{errorMsg}</p>)}
+                    </h4>
                     <form>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">ID соревнования</label>
@@ -52,7 +58,13 @@ const LoginPage = (props) => {
                         </div>
 
 
-                        <button type="button" onClick={() => onSend()} className="btn btn-primary text-white">Войти
+                        <button
+                            type="button"
+                            onClick={() => onSend()}
+                            className="btn btn-primary text-white"
+                            disabled={isLoading}
+                        >
+                            Войти
                         </button>
                     </form>
                 </div>
