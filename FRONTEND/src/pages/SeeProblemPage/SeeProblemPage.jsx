@@ -87,19 +87,6 @@ const SeeProblemPage = (props) => {
                                     )
                                 })
                             }
-
-                            <div className="example">
-                                <div className="width-wrap">
-                                    <h6 className="m-1 width-inner">Входные данные</h6>
-                                    <button className="copy-btn">Скопировать</button>
-                                </div>
-
-                                <p className=" m-0 console" id="code1">example[0]</p>
-                                <h6 className="m-1">Выходные данные</h6>
-                                <p className="m-0 console">example[1]</p>
-                            </div>
-
-
                         </div>
 
                         <div className="row align-items-md-stretch">
