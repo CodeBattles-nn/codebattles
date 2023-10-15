@@ -6,7 +6,7 @@ from flask import render_template, abort
 from app import app
 from database import get_connection
 from decorators import get_user_id, api_login_required
-from utils import fix_new_line
+from utils import fix_new_line, get_table_color_class_by_score
 
 
 @app.route("/api/problems")
@@ -45,6 +45,8 @@ def api_problems(user_id, uid):
 
     score = fetch[4:4 + len(problems_ids)]
 
+    css_colors = {}
+
     for i, task in enumerate(x):
         id = task[0]
         name = task[1]
@@ -54,9 +56,11 @@ def api_problems(user_id, uid):
 
         tasks[letter] = name
 
+        css_colors[letter] = get_table_color_class_by_score(score[strs.index(letter)])
+
     print()
 
-    return {"success": "true", "problems": tasks}
+    return {"success": "true", "problems": tasks, "colors": css_colors}
 
 
 @app.route("/api/problem/<letter>")
