@@ -7,6 +7,7 @@ import "./bs-jumbotron.css"
 import "./style.css"
 import {Link, useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
+import {toast} from "react-toastify";
 
 const SeeProblemPage = (props) => {
     const [info, setInfo] = useState({langs: {}, examples: []});
@@ -103,6 +104,8 @@ const SeeProblemPage = (props) => {
 
                                     const copyFunction = () => {
                                         const copyText = document.getElementById(example_id);
+
+                                        toast.success('Успешно скопировано');
 
                                         console.log(copyText)
                                         navigator.clipboard.writeText(copyText.innerText);
