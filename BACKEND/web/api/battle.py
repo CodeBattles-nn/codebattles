@@ -160,6 +160,7 @@ def api_statistics(user_id, uid):
     users = []
 
     for i, usr in enumerate(fetch):
+        user_id = usr[0]
         score = usr[-1]
         nickname = usr[3]
         problems_score = usr[4:problems_counts + 4]
@@ -168,6 +169,7 @@ def api_statistics(user_id, uid):
 
         users.append(dict(position=i + 1,
                           name=nickname,
+                          user_id=user_id,
                           score=score,
                           problems_score=problems_score
                           ))
