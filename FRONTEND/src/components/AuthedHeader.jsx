@@ -10,7 +10,7 @@ const AuthedHeader = (props) => {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
-                <ul className="navbar-nav me-auto mb-2 mb-md-0">
+                <ul className="navbar-nav mr-auto">
                     <li className="nav-item">
                         <Link className="nav-link" to="/problems">Задачи</Link>
                     </li>
@@ -20,6 +20,12 @@ const AuthedHeader = (props) => {
                     <li className="nav-item">
                         <Link className="nav-link" to="/sends">Посылки</Link>
                     </li>
+                </ul>
+                <ul className="navbar-nav  my-2 my-md-0">
+                    <li className="nav-item">
+                        <Link className="nav-link" to="/statuses">Помощь</Link>
+                    </li>
+                    <button className="btn btn-danger ml-2">Выход</button>
                 </ul>
             </div>
         </div>
