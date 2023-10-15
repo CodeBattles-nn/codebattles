@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../utils/api";
+import {cssClassByStatus} from "../utils/colors";
 
 const SeeSendPage = (props) => {
 
@@ -18,15 +19,6 @@ const SeeSendPage = (props) => {
             }
         ).catch(() => navigate("/login"))
     }, []);
-
-    const cssClassByStatus = {
-        RUNTIME_ERROR: "table-info",
-        COMPILATION_ERROR: "table-info",
-        WRONG_ANSWER: "table-danger",
-        SUCCESS: "table-success",
-        TIME_LIMIT:"table-warning",
-        NOT_EXECUTED: "table-active"
-    }
 
 
     return (

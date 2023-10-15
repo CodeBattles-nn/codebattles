@@ -8,6 +8,7 @@ import SeeProblemPage from "./pages/SeeProblemPage/SeeProblemPage";
 import ProblemsPage from "./pages/ProblemsPage";
 import SendsPage from "./pages/SendsPage";
 import SeeSendPage from "./pages/SeeSendPage";
+import ProgramStatusInfo from "./pages/ProgramStatusInfo";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/problems" element={<ProblemsPage/>}/>
                 <Route path="/sends" element={<SendsPage/>}/>
                 <Route path="/send/:id" element={<SeeSendPage/>}/>
+                <Route path="/statuses" element={<ProgramStatusInfo />} />
                 <Route path="*" element={<ProblemsPage />} />
             </Routes>
         </BrowserRouter>
