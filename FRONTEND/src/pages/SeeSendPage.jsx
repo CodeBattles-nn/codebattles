@@ -19,6 +19,15 @@ const SeeSendPage = (props) => {
         ).catch(() => navigate("/login"))
     }, []);
 
+    const cssClassByStatus = {
+        RUNTIME_ERROR: "table-info",
+        COMPILATION_ERROR: "table-info",
+        WRONG_ANSWER: "table-danger",
+        SUCCESS: "table-success",
+        TIME_LIMIT:"table-warning",
+        NOT_EXECUTED: "table-active"
+    }
+
 
     return (
         <main style={{"background-color": "#ffe0b2", "min-height": " 94vh"}}>
@@ -48,14 +57,14 @@ const SeeSendPage = (props) => {
                                         {
                                             data.tests.map( test => {
                                                 return (
-                                                    <tr className="{{test[4]}}">
-                                                    <th scope="row">{test.id}</th>
-                                                    <td>{test.time}</td>
-                                                    <td>{test.msg}</td>
-                                                    <td>
-                                                        <p style={{"white-space": "pre-line"}}>{test.out}</p>
-                                                    </td>
-                                                </tr>
+                                                    <tr className={cssClassByStatus[test.msg]}>
+                                                        <th scope="row">{test.id}</th>
+                                                        <td>{test.time}</td>
+                                                        <td>{test.msg}</td>
+                                                        <td>
+                                                            <p style={{"white-space": "pre-line"}}>{test.out}</p>
+                                                        </td>
+                                                    </tr>
                                                 )
                                             })
                                         }
