@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import getApiAddress from "../utils/api";
+import {getCookie} from "../utils/cookie";
 
 const StatsPage = (props) => {
 
@@ -10,13 +11,15 @@ const StatsPage = (props) => {
     const [data, setData] = useState({cols: "", users: []});
 
     useEffect(() => {
-        axios.get(getApiAddress() +"/api/stats").then(
+        axios.get(getApiAddress() + "/api/stats").then(
             (r) => {
                 console.log(r.data)
                 setData(r.data)
             }
         ).catch(() => navigate("/login"))
     }, []);
+
+    const myUserId = getCookie("user_id");
 
 
     return <main style={{"background-color": "#ffe0b2", "min-height": '94vh'}}>
@@ -50,8 +53,13 @@ const StatsPage = (props) => {
 
                                     {
                                         [...data.users].map((user) => {
+                                            let tableClassName = ""
+                                            if (user.user_id == myUserId) {
+                                                tableClassName = "table-primary"
+                                            }
+
                                             return (
-                                                <tr className="{{user[4]}}">
+                                                <tr className="{{user[4]}}" className={tableClassName}>
                                                     <th scope="row">{user.position}</th>
                                                     <td>{user.name}</td>
                                                     <td>{user.score}</td>
