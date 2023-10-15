@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import axios from "axios";
 
@@ -13,8 +13,21 @@ const SeeProblemPage = (props) => {
 
     const {letter} = useParams();
 
-
     const navigate = useNavigate();
+
+    const [lang, setLang] = useState(1);
+    const [code, setCode] = useState();
+
+
+
+    const onSend = async () => {
+        await axios.post(getApiAddress() + '/api/send',
+            {src: code, cars: lang, problem: letter}).then(
+            (r) => {
+                navigate("/sends")
+            }
+        )
+    };
 
     useEffect(() => {
         axios.get(getApiAddress() + `/api/problem/${letter}`).then(
@@ -24,6 +37,14 @@ const SeeProblemPage = (props) => {
             }
         ).catch(() => navigate("/login"))
     }, []);
+
+    useEffect(() => {
+        if (info.langs.length > 0) {
+            setLang(info.langs[0])
+        }
+        console.log(info.langs)
+    }, [info]);
+
 
     console.log(info)
 
@@ -109,17 +130,30 @@ const SeeProblemPage = (props) => {
                                 <div className="h-100 p-5 text-white bg-dark rounded-3">
                                     <h2>Отправить решение</h2>
                                     <p>Вставьте код здесь</p>
-                                    <form action="/send" method="post" id="sendform">
+                                    <form id="sendform">
                                         <div className="mb-3">
                                             <input type="hidden" name="problem" value="{{problem_letter}}"/>
-                                            <select id="cars" name="cars" style={{"height": "15%;"}}>
+                                            <select
+                                                id="cars"
+                                                name="cars"
+                                                className="mb-2"
+                                                style={{"height": "15%;"}}
+                                                onSelect={e => {
+                                                    console.log("Hi")
+                                                    setLang(e.target.value)
+                                                }}
+                                            >
 
                                                 {
                                                     Object.keys(info.langs).map((name) => {
                                                         const key = info?.langs[name]
+
+
                                                         return (
                                                             <option key={key} value={key}>{name}</option>
                                                         )
+
+
                                                     }, info?.langs)
                                                 }
 
@@ -128,9 +162,15 @@ const SeeProblemPage = (props) => {
                                             <textarea name="src" className="form-control"
                                                       id="exampleFormControlTextarea1"
                                                       rows="5"
-                                                      form="sendform"></textarea>
+                                                      form="sendform"
+                                                      onChange={e => setCode(e.target.value)}
+                                            >
+
+                                            </textarea>
                                             <p></p>
-                                            <button className="btn btn-success">Отправить</button>
+                                            <button onClick={onSend} type="button"
+                                                    className="btn btn-success">Отправить
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
