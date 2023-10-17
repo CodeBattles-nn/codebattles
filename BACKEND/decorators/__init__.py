@@ -5,6 +5,7 @@ from flask import request, redirect, make_response
 
 from config import ADMIN_LOGIN, ADMIN_PASSWORD
 from database import get_connection
+from utils import salt_crypt
 
 
 def admin_required(f):
@@ -25,6 +26,12 @@ def login_required(f):
         if not request.cookies.get("authed", None) is None:
             battle_id = int(request.cookies.get("battle_id"))
             user_id = int(request.cookies.get("user_id"))
+            validation_token = request.cookies.get("__validation")
+
+            is_valid = salt_crypt(battle_id, user_id) == validation_token
+
+            if not is_valid:
+                return redirect("/")
 
             connection = get_connection()
             cur = connection.cursor()
@@ -50,6 +57,7 @@ def reset_cookie_and_return_bad_cred():
     resp.set_cookie('user_id', expires=0)
     resp.set_cookie('authed', expires=0)
     resp.set_cookie('battle_id', expires=0)
+    resp.set_cookie('__validation', expires=0)
 
     return resp
 
@@ -60,6 +68,12 @@ def api_login_required(f):
         if not request.cookies.get("authed", None) is None:
             battle_id = int(request.cookies.get("battle_id"))
             user_id = int(request.cookies.get("user_id"))
+            validation_token = request.cookies.get("__validation")
+
+            is_valid = salt_crypt(battle_id, user_id) == validation_token
+
+            if not is_valid:
+                return reset_cookie_and_return_bad_cred()
 
             connection = get_connection()
             cur = connection.cursor()

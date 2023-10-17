@@ -3,6 +3,7 @@ from flask import render_template, request, redirect, make_response
 from app import app
 from database import get_connection
 from decorators import login_required
+from utils import salt_crypt
 
 
 @app.route("/")
@@ -40,10 +41,13 @@ def login_post():
 
         assert user is not None
 
+        user_id = str(user[0])
+
         resp = make_response(redirect("/wait"))
-        resp.set_cookie('user_id', str(user[0]))
+        resp.set_cookie('user_id', user_id)
         resp.set_cookie('authed', str(True))
         resp.set_cookie('battle_id', str(champ_id))
+        resp.set_cookie('__validation', salt_crypt(champ_id, user_id))
 
         return resp
     except Exception as e:

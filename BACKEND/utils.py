@@ -1,3 +1,13 @@
+from hashlib import sha256
+import env
+
+
+def salt_crypt(*args):
+    args = list(map(str, args))
+    payload = f"{env.HASH_SALT}+++{str(args)}"
+    return sha256(payload.encode('utf-8')).hexdigest()
+
+
 def fix_new_line(data):
     print(data)
     if isinstance(data, list):
