@@ -2,12 +2,20 @@ import React, {useEffect, useState} from 'react';
 
 import axios from "axios";
 
+import AceEditor from "react-ace";
+
 import "./utils.css"
 import "./bs-jumbotron.css"
 import "./style.css"
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import {toast} from "react-toastify";
+
+import "ace-builds/src-noconflict/mode-python";
+import "ace-builds/src-noconflict/snippets/python";
+import "ace-builds/src-noconflict/theme-tomorrow";
+import "ace-builds/src-noconflict/ext-language_tools";
+
 
 const SeeProblemPage = (props) => {
     const [info, setInfo] = useState({langs: {}, examples: []});
@@ -17,13 +25,12 @@ const SeeProblemPage = (props) => {
     const navigate = useNavigate();
 
     const [lang, setLang] = useState(1);
-    const [code, setCode] = useState();
 
-
+    let editorCode;
 
     const onSend = async () => {
         await axios.post(getApiAddress() + '/api/send',
-            {src: code, cars: lang, problem: letter}).then(
+            {src: editorCode, cars: lang, problem: letter}).then(
             (r) => {
                 navigate("/sends")
             }
@@ -162,14 +169,30 @@ const SeeProblemPage = (props) => {
 
 
                                             </select>
-                                            <textarea name="src" className="form-control"
-                                                      id="exampleFormControlTextarea1"
-                                                      rows="5"
-                                                      form="sendform"
-                                                      onChange={e => setCode(e.target.value)}
-                                            >
 
-                                            </textarea>
+
+                                            <AceEditor
+                                                style={{width: "100%"}}
+                                                mode="python"
+                                                theme="tomorrow"
+                                                name="blah2"
+                                                fontSize={14}
+                                                onChange={(val) => editorCode = val}
+                                                showPrintMargin={false}
+                                                showGutter={true}
+                                                highlightActiveLine={true}
+                                                value={``}
+                                                editorProps={{$blockScrolling: true}}
+                                                setOptions={{
+                                                    enableBasicAutocompletion: true,
+                                                    enableLiveAutocompletion: true,
+                                                    enableSnippets: true,
+                                                    showLineNumbers: true,
+                                                    tabSize: 2,
+                                                }}
+                                            ></AceEditor>
+
+
                                             <p></p>
                                             <button onClick={onSend} type="button"
                                                     className="btn btn-success">Отправить
