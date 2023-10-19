@@ -8,7 +8,7 @@ EXPOSE 5000:8000
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
-RUN pip3 install gunicorn
+RUN pip3 install gunicorn==21.2.0
 
 COPY . /app
 
