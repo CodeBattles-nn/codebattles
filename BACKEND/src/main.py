@@ -28,8 +28,11 @@ def init_env():
     env.init()
 
 
-if __name__ == '__main__':
+def webapp():
     init_env()
-
     init_tables()
-    app.run(host="0.0.0.0")
+    return app
+
+
+if __name__ == '__main__':
+    webapp().run(host="0.0.0.0")

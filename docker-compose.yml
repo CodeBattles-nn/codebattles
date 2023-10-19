@@ -15,7 +15,7 @@ services:
       DB_NAME: "cb"
       HASH_SALT: 4a5ecb2c236d1c4c3e670fcc76b8d1566c94d096bcf5f700511bb039507ad518
     ports:
-      - "5000:5000"
+      - "5000:8000"
     depends_on:
       postgres:
         condition: service_healthy

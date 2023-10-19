@@ -4,11 +4,12 @@ FROM python:3.8-alpine
 
 WORKDIR /app
 
-EXPOSE 5000:5000
+EXPOSE 5000:8000
 
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
+RUN pip3 install gunicorn
 
-COPY .. .
+COPY . /app
 
-CMD ["python3","main.py"]
+CMD cd src && gunicorn --workers=4 -b=0.0.0.0:8000 wsgi:app
