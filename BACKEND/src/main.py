@@ -20,12 +20,8 @@ from web.api.sends import *
 from web.api.send_prog import *
 
 
-def create_data_directory():
-    os.makedirs("data", exist_ok=True)
-
-
 def init_env():
-    dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+    dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
     if os.path.exists(dotenv_path):
         load_dotenv(dotenv_path)
 
@@ -35,6 +31,5 @@ def init_env():
 if __name__ == '__main__':
     init_env()
 
-    create_data_directory()
     init_tables()
     app.run(host="0.0.0.0")

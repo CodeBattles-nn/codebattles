@@ -3,7 +3,6 @@ import json
 import string
 
 import requests as requests
-from flask import request
 
 import env
 from app import *

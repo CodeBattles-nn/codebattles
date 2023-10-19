@@ -3,7 +3,7 @@ import string
 import datetime
 
 import requests as requests
-from flask import redirect, request
+from flask import redirect
 
 from app import *
 from database import get_connection
