@@ -37,16 +37,10 @@ services:
       timeout: 2s
     restart: unless-stopped
   checker-java:
-    build: PROGRAM_CHECK_SYSTEM/.
-    environment:
-      SERVER_ENDPOINT: http://backend:5000/api/check_system_callback
-      ENV_EXECUTOR_ENABLE: true
+    build:
+      dockerfile: ./Java.Dockerfile
     restart: unless-stopped
   checker-python:
-    build: PROGRAM_CHECK_SYSTEM/.
-    environment:
-      SERVER_ENDPOINT: http://backend:5000/api/check_system_callback
-      ENV_EXECUTOR_ENABLE: true
-      ENV_EXECUTOR_RUN_COMMAND: python3
-      ENV_EXECUTOR_FILENAME: main.py
+    build:
+      dockerfile: ./Python.Dockerfile
     restart: unless-stopped
