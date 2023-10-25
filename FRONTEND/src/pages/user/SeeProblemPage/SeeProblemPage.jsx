@@ -15,6 +15,7 @@ import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/snippets/python";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/ext-language_tools";
+import Markdown from "../../../components/Markdown";
 
 
 const SeeProblemPage = (props) => {
@@ -89,11 +90,11 @@ const SeeProblemPage = (props) => {
                             <div className="container-fluid py-5">
                                 <div className="col-md-12 fs-4">
                                     <h4>Задача</h4>
-                                    <p style={{"white-space": "pre-line"}}>{info.description}</p>
+                                    <Markdown text={info.description}/>
                                     <h4>Входные данные</h4>
-                                    <p style={{"white-space": "pre-line"}}>{info.in_data}</p>
+                                    <Markdown text={info.in_data}/>
                                     <h4>Выходные данные</h4>
-                                    <p style={{"white-space": "pre-line"}}>{info.out_data}</p>
+                                    <Markdown text={info.out_data}/>
                                 </div>
 
 
