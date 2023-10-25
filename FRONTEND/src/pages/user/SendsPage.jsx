@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import getApiAddress from "../utils/api";
+import getApiAddress from "../../utils/api";
 
 const SendsPage = (props) => {
     const [sends, setSends] = useState({sends: []});

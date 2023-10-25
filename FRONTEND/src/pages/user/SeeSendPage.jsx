@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
-import getApiAddress from "../utils/api";
-import {cssClassByStatus} from "../utils/colors";
+import getApiAddress from "../../utils/api";
+import {cssClassByStatus} from "../../utils/colors";
 
 const SeeSendPage = (props) => {
 

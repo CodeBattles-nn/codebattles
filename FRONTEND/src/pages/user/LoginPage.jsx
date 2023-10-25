@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import getApiAddress from "../utils/api";
+import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
 
 const LoginPage = (props) => {

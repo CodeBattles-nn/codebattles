@@ -2,13 +2,13 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 import AuthedHeader from "./components/AuthedHeader";
-import LoginPage from "./pages/LoginPage";
-import StatsPage from "./pages/StatsPage";
-import SeeProblemPage from "./pages/SeeProblemPage/SeeProblemPage";
-import ProblemsPage from "./pages/ProblemsPage";
-import SendsPage from "./pages/SendsPage";
-import SeeSendPage from "./pages/SeeSendPage";
-import ProgramStatusInfo from "./pages/ProgramStatusInfo";
+import LoginPage from "./pages/user/LoginPage";
+import StatsPage from "./pages/user/StatsPage";
+import SeeProblemPage from "./pages/user/SeeProblemPage/SeeProblemPage";
+import ProblemsPage from "./pages/user/ProblemsPage";
+import SendsPage from "./pages/user/SendsPage";
+import SeeSendPage from "./pages/user/SeeSendPage";
+import ProgramStatusInfo from "./pages/user/ProgramStatusInfo";
 import {ToastContainer} from "react-toastify";
 
 import 'react-toastify/dist/ReactToastify.css';

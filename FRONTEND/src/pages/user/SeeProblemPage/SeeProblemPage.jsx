@@ -8,7 +8,7 @@ import "./utils.css"
 import "./bs-jumbotron.css"
 import "./style.css"
 import {useNavigate, useParams} from "react-router-dom";
-import getApiAddress from "../../utils/api";
+import getApiAddress from "../../../utils/api";
 import {toast} from "react-toastify";
 
 import "ace-builds/src-noconflict/mode-python";
