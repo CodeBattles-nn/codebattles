@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 
-import axios from "axios";
-
 import AceEditor from "react-ace";
 
 import "./utils.css"
 import "./style.css"
 import {useNavigate, useParams} from "react-router-dom";
-import getApiAddress, {noInternetToast, serverErrorToast} from "../../../utils/api";
+import getApiAddress from "../../../utils/api";
 import {toast} from "react-toastify";
 
 import "ace-builds/src-noconflict/mode-python";
@@ -18,7 +16,7 @@ import Markdown from "../../../components/Markdown";
 import apiAxios from "../../../apiAxios";
 
 
-const SeeProblemPage = (props) => {
+const SeeProblemPage = () => {
     const [info, setInfo] = useState({langs: {}, examples: []});
 
     const {letter} = useParams();
@@ -32,7 +30,7 @@ const SeeProblemPage = (props) => {
     const onSend = async () => {
         await apiAxios.post(getApiAddress() + '/api/send',
             {src: editorCode, cars: lang, problem: letter}).then(
-            (r) => {
+            () => {
                 navigate("/sends")
             }
         )

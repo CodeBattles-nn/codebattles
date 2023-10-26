@@ -1,6 +1,6 @@
 import React from 'react';
 
-const UnAuthedHeader = (props) => {
+const UnAuthedHeader = () => {
     return <nav className="navbar navbar-expand-md navbar-dark bg-dark" style={{height:"56px"}}>
         <div className="container-fluid">
             <a href="/" className="navbar-brand" style={{"color": "red"}}>CodeBattles</a>

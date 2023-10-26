@@ -2,9 +2,8 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import apiAxios from "../apiAxios";
 import {noInternetToast, serverErrorToast} from "../utils/api";
-import axios from "axios";
 
-const AxiosConfigurer = (props) => {
+const AxiosConfigurer = () => {
     const navigate = useNavigate();
     apiAxios.interceptors.response.use((response) => response, (error) => {
         // whatever you want to do with the error

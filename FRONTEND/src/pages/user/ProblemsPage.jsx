@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
+import {Link} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import apiAxios from "../../apiAxios";
 
-const ProblemsPage = (props) => {
+const ProblemsPage = () => {
 
     const [problems, setProblems] = useState({});
     const [css, setCss] = useState({});
 
-    const navigate = useNavigate();
 
     useEffect(() => {
         apiAxios.get(getApiAddress() + "/api/problems").then(

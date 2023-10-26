@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import getApiAddress from "../utils/api";
 
-const AuthedHeader = (props) => {
+const AuthedHeader = () => {
 
 
     const nav = useNavigate();

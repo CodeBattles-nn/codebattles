@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
 import getApiAddress from "../../utils/api";
 import apiAxios from "../../apiAxios";
 
-const SendsPage = (props) => {
+const SendsPage = () => {
     const [sends, setSends] = useState({sends: []});
 
-    const navigate = useNavigate();
 
     useEffect(() => {
         apiAxios.get(getApiAddress() + "/api/sends").then(

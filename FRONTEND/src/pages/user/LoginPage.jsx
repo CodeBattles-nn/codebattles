@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import axios from "axios";
+import React, {useState} from 'react';
 import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
 import apiAxios from "../../apiAxios";
 
-const LoginPage = (props) => {
+const LoginPage = () => {
     const [id, setId] = useState(0);
     const [login, setLogin] = useState();
     const [passsword, setPasssword] = useState();
@@ -19,12 +18,12 @@ const LoginPage = (props) => {
 
         await apiAxios.post(getApiAddress() + '/api/login',
             {id: id, login: login, password: passsword}).then(
-            (r) => {
+            () => {
                 setErrorMsg("Успешный вход")
                 navigate("/problems")
             })
-            .catch(r => setErrorMsg("Неверные данные"))
-            .finally(r => setIsLoading(false));
+            .catch(() => setErrorMsg("Неверные данные"))
+            .finally(() => setIsLoading(false));
     };
 
     return (

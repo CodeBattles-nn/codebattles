@@ -8,7 +8,7 @@ import SyntaxHighlight from "./SyntaxHightlight";
 const Markdown = ({text = ""}) => {
 
     const components = {
-        table({node, inline, className = "", children, ...props}) {
+        table({node, inline, className = "", children}) {
             return (
                 <table className={className + " table table-bordered"}>{children}</table>);
         },

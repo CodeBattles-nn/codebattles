@@ -1,16 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
 import getApiAddress from "../../../utils/api";
 import {getCookie} from "../../../utils/cookie";
 
 import "./stats.css"
 import apiAxios from "../../../apiAxios";
 
-const StatsPage = (props) => {
-
-    const navigate = useNavigate();
-
+const StatsPage = () => {
     const [data, setData] = useState({cols: "", users: []});
 
     useEffect(() => {
@@ -62,7 +58,7 @@ const StatsPage = (props) => {
                                             }
 
                                             return (
-                                                <tr className="{{user[4]}}" className={tableClassName}>
+                                                <tr className={tableClassName}>
                                                     <th scope="row">{user.position}</th>
                                                     <td>{user.name}</td>
                                                     <td>{user.score}</td>

@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import {cssClassByStatus} from "../../utils/colors";
 import SyntaxHighlight from "../../components/SyntaxHightlight";
 import apiAxios from "../../apiAxios";
 
-const SeeSendPage = (props) => {
+const SeeSendPage = () => {
 
     const [data, setData] = useState({tests:[]});
 
     const {id} = useParams();
-    const navigate = useNavigate();
 
     useEffect(() => {
         apiAxios.get(getApiAddress() + `/api/send/${id}`).then(
