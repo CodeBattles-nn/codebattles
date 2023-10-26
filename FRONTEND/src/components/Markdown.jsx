@@ -8,12 +8,15 @@ import SyntaxHighlight from "./SyntaxHightlight";
 const Markdown = ({text = ""}) => {
 
     const components = {
-        table({node, inline, className = "", children}) {
+        table({node, inline, className = "", children, ...props}) {
             return (
-                <table className={className + " table table-bordered"}>{children}</table>);
+                <table className={className + " table table-bordered"} {...props}>{children}</table>);
         },
-        code({ node, inline, children, className, ...props }) {
+        code({node, inline, children, className, ...props}) {
             return <SyntaxHighlight children={children} lang={className}  {...props} />;
+        },
+        img({node, inline, children, className = "", ...props}) {
+            return <img className={className + " w-100 img-fluid"} {...props} />;
         },
     };
 
