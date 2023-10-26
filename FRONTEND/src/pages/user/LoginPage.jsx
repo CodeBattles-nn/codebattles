@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
+import apiAxios from "../../apiAxios";
 
 const LoginPage = (props) => {
     const [id, setId] = useState(0);
@@ -16,7 +17,7 @@ const LoginPage = (props) => {
     const onSend = async () => {
         setIsLoading(true)
 
-        await axios.post(getApiAddress() + '/api/login',
+        await apiAxios.post(getApiAddress() + '/api/login',
             {id: id, login: login, password: passsword}).then(
             (r) => {
                 setErrorMsg("Успешный вход")

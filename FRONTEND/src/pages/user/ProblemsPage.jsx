@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import getApiAddress from "../../utils/api";
+import apiAxios from "../../apiAxios";
 
 const ProblemsPage = (props) => {
 
@@ -11,13 +12,13 @@ const ProblemsPage = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(getApiAddress() + "/api/problems").then(
+        apiAxios.get(getApiAddress() + "/api/problems").then(
             (r) => {
                 console.log(r.data)
                 setProblems(r.data.problems)
                 setCss(r.data.colors)
             }
-        ).catch(() => navigate("/login"))
+        )
     }, []);
 
 

@@ -4,6 +4,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import {cssClassByStatus} from "../../utils/colors";
 import SyntaxHighlight from "../../components/SyntaxHightlight";
+import apiAxios from "../../apiAxios";
 
 const SeeSendPage = (props) => {
 
@@ -13,12 +14,12 @@ const SeeSendPage = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(getApiAddress() + `/api/send/${id}`).then(
+        apiAxios.get(getApiAddress() + `/api/send/${id}`).then(
             (r) => {
                 console.log(r.data)
                 setData(r.data)
             }
-        ).catch(() => navigate("/login"))
+        )
     }, []);
 
 

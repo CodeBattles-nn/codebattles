@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import getApiAddress from "../../utils/api";
+import apiAxios from "../../apiAxios";
 
 const SendsPage = (props) => {
     const [sends, setSends] = useState({sends: []});
@@ -9,12 +10,12 @@ const SendsPage = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(getApiAddress() + "/api/sends").then(
+        apiAxios.get(getApiAddress() + "/api/sends").then(
             (r) => {
                 console.log(r.data)
                 setSends(r.data)
             }
-        ).catch(() => navigate("/login"))
+        )
     }, []);
 
     return <main style={{"min-height": "93vh", "background-color": "#ffe0b2"}}>
