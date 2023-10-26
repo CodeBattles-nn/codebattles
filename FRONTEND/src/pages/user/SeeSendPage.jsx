@@ -3,6 +3,7 @@ import axios from "axios";
 import {useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import {cssClassByStatus} from "../../utils/colors";
+import SyntaxHighlight from "../../components/SyntaxHightlight";
 
 const SeeSendPage = (props) => {
 
@@ -32,7 +33,10 @@ const SeeSendPage = (props) => {
                                 <h3>Анализ посылки</h3>
                                 <p><b>Язык:</b> {data.lang}</p>
                                 <p><b>Исходный код:</b></p>
-                                <pre><code data-language="{{lang}}">{data.program}</code></pre>
+                                <SyntaxHighlight lang={data.lang_id}>
+                                    {data.program}
+                                </SyntaxHighlight>
+
                                 <p><b>Тесты: </b></p>
                                 <div className="table-responsive">
                                     <table className="table table-striped">
