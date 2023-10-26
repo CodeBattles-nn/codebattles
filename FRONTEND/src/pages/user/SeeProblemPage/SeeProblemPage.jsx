@@ -5,10 +5,9 @@ import axios from "axios";
 import AceEditor from "react-ace";
 
 import "./utils.css"
-import "./bs-jumbotron.css"
 import "./style.css"
 import {useNavigate, useParams} from "react-router-dom";
-import getApiAddress from "../../../utils/api";
+import getApiAddress, {noInternetToast, serverErrorToast} from "../../../utils/api";
 import {toast} from "react-toastify";
 
 import "ace-builds/src-noconflict/mode-python";
@@ -16,6 +15,7 @@ import "ace-builds/src-noconflict/snippets/python";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/ext-language_tools";
 import Markdown from "../../../components/Markdown";
+import apiAxios from "../../../apiAxios";
 
 
 const SeeProblemPage = (props) => {
@@ -30,7 +30,7 @@ const SeeProblemPage = (props) => {
     let editorCode;
 
     const onSend = async () => {
-        await axios.post(getApiAddress() + '/api/send',
+        await apiAxios.post(getApiAddress() + '/api/send',
             {src: editorCode, cars: lang, problem: letter}).then(
             (r) => {
                 navigate("/sends")
@@ -39,12 +39,12 @@ const SeeProblemPage = (props) => {
     };
 
     useEffect(() => {
-        axios.get(getApiAddress() + `/api/problem/${letter}`).then(
+        apiAxios.get(getApiAddress() + `/api/problem/${letter}`).then(
             (r) => {
-                console.log(r.data)
+                console.log(r)
+                console.log("[+] + " + r.data)
                 setInfo(r.data)
-            }
-        ).catch(() => navigate("/login"))
+            })
     }, []);
 
     useEffect(() => {

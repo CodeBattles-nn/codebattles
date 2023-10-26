@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
-import getApiAddress from "../../utils/api";
-import {getCookie} from "../../utils/cookie";
+import getApiAddress from "../../../utils/api";
+import {getCookie} from "../../../utils/cookie";
+
+import "./stats.css"
+import apiAxios from "../../../apiAxios";
 
 const StatsPage = (props) => {
 
@@ -11,12 +14,12 @@ const StatsPage = (props) => {
     const [data, setData] = useState({cols: "", users: []});
 
     useEffect(() => {
-        axios.get(getApiAddress() + "/api/stats").then(
+        apiAxios.get(getApiAddress() + "/api/stats").then(
             (r) => {
                 console.log(r.data)
                 setData(r.data)
             }
-        ).catch(() => navigate("/login"))
+        )
     }, []);
 
     const myUserId = getCookie("user_id");
