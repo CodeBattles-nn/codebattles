@@ -13,7 +13,7 @@ const Markdown = ({text = ""}) => {
                 <table className={className + " table table-bordered"}>{children}</table>);
         },
         code({ node, inline, children, className, ...props }) {
-            return <SyntaxHighlight children={children}  {...props} />;
+            return <SyntaxHighlight children={children} lang={className}  {...props} />;
         },
     };
 
