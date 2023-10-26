@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS servers
 (
     id SERIAL PRIMARY KEY,
     name TEXT,
+    lang_name TEXT,
     address TEXT,
     enabled boolean DEFAULT true
 )

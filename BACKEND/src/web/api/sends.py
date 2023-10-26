@@ -21,8 +21,11 @@ def api_sends(user_id, uid):
     for send in db_sends:
         id, letter, name, problem_id, pr_user_id, send_time, state, result, program, score, lang = send
 
+        human_send_time = send_time.strftime("%m/%d/%Y, %H:%M:%S")
+
         to_render.append(
-            dict(id=id, letter=letter, name=name, send_time=send_time, state=state, score=(score, "")[score is None],
+            dict(id=id, letter=letter, name=name, send_time=human_send_time, state=state,
+                 score=(score, "")[score is None],
                  program_checked=result is not None))
 
     print()
@@ -36,13 +39,22 @@ def api_send_viewer(send_id, user_id):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute(f"SELECT * FROM champSends_{user_id} WHERE id = %s", (send_id,))
+    cur.execute(f'''
+      SELECT t1.*, t2.name as lang_name, t2.lang_name as lang_id
+      FROM public.champSends_{user_id} as t1
+      INNER JOIN public.servers as t2
+                  on CAST(t1.lang as INTEGER) = t2.id
+                  
+      WHERE t1.id = %s
+    ''', (send_id,))
 
     data = cur.fetchone()
 
     result = json.loads(data[7])
-    lang = data[10]
+
     prog = data[8]
+    lang = data[11]
+    lang_id = data[12]
 
     to_render = []
 
@@ -60,4 +72,4 @@ def api_send_viewer(send_id, user_id):
 
     print()
 
-    return dict(success=True, tests=to_render, lang=lang, program=prog)
+    return dict(success=True, tests=to_render, lang=lang, program=prog, lang_id=lang_id)
