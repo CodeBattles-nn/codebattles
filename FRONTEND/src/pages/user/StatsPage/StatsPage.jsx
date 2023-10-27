@@ -45,6 +45,7 @@ const StatsPage = () => {
                                                 )
                                             })
                                         }
+                                        <th scope="col">Посл. Посылка</th>
 
                                     </tr>
                                     </thead>
@@ -76,7 +77,7 @@ const StatsPage = () => {
                                                             )
                                                         })
                                                     }
-
+                                                    <td>{user.last_send}</td>
 
                                                 </tr>
                                             )
