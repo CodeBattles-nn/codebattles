@@ -157,7 +157,13 @@ def api_statistics(user_id, uid):
 
     print(problems_counts)
 
-    cur.execute(f"SELECT * FROM champUsers_{user_id} ORDER BY score DESC")
+    cur.execute(f"""
+        SELECT u.*, MAX(s.send_time) AS send_time
+        FROM champusers_{user_id} u
+        LEFT JOIN champsends_{user_id} s ON u.id = s.user_id
+        GROUP BY u.id
+        ORDER BY score DESC, send_time ASC;
+    """)
 
     fetch = cur.fetchall()  # Can be None
 
@@ -165,7 +171,10 @@ def api_statistics(user_id, uid):
 
     for i, usr in enumerate(fetch):
         user_id = usr[0]
-        score = usr[-1]
+        score = usr[15]
+        last_send = usr[16]
+        last_send = None if last_send is None else last_send.strftime("%m/%d/%Y, %H:%M:%S")
+
         nickname = usr[3]
         problems_score = usr[4:problems_counts + 4]
 
@@ -175,7 +184,8 @@ def api_statistics(user_id, uid):
                           name=nickname,
                           user_id=user_id,
                           score=score,
-                          problems_score=problems_score
+                          problems_score=problems_score,
+                          last_send=last_send
                           ))
 
         print()
