@@ -1,7 +1,7 @@
 import json
 import string
 
-from flask import render_template, abort
+from flask import  abort
 
 from app import app
 from database import get_connection
@@ -190,5 +190,4 @@ def api_statistics(user_id, uid):
 
         print()
 
-    render_template("stats.html", cols=strs[:problems_counts], users=users)
     return dict(success=True, cols=strs[:problems_counts], users=users)
