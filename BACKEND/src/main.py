@@ -5,10 +5,6 @@ import env
 from app import *
 from database import init_tables
 
-from web.accounts import *
-from web.battle import *
-from web.checker_api import *
-from web.sends import *
 
 from web.admin.auth import *
 from web.admin.panel import *
