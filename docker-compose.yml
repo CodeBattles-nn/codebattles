@@ -36,6 +36,16 @@ services:
       interval: 2s
       timeout: 2s
     restart: unless-stopped
+  init_configurer:
+    build: INIT_CONFIGURER/.
+    environment:
+      DB_HOST: postgres
+      DB_USERNAME: "postgres"
+      DB_PASSWORD: "admin"
+      DB_NAME: "cb"
+    links:
+      - backend
+    restart: unless-stopped
   checker-java:
     build:
       dockerfile: ./Java.Dockerfile

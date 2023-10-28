@@ -28,11 +28,18 @@ with psycopg2.connect(
     cursor = connection.cursor()
 
     cursor.execute("""
-        SELECT key FROM storage
-        WHERE key LIKE 'INIT: %'
+        SELECT key FROM public.storage
     """)
 
-    keys = cursor.fetchall()[0]
+    keys = cursor.fetchall()
+
+    keys = list(map(lambda x: x[0], keys))
+
+    if keys is None:
+        print("NO KEYS?")
+        keys = ()
+    print(Fore.MAGENTA + f"FOUND DB KEYS: {len(keys)}")
+    print(Fore.BLUE + str(keys))
     print(Fore.MAGENTA +  "FOUND FILES: ")
     print(Fore.BLUE + " ".join(fileByValue.keys()))
     print("\n\n")
