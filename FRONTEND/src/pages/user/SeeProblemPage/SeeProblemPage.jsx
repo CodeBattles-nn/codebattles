@@ -57,7 +57,7 @@ const SeeProblemPage = () => {
     console.log(info)
 
     return <>
-        <div className="row align-items-md-stretch">
+        <div className="row align-items-md-stretch" style={{rowGap:"1em"}}>
             <div className="col-md-6">
                 <div className="h-60 p-3 text-white bg-dark rounded-3">
                     <h2 style={{"color": "#6c757d;"}}>Задача {info.letter}</h2>

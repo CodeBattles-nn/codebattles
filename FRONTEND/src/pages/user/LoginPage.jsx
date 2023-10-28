@@ -29,9 +29,8 @@ const LoginPage = () => {
 
     return (
         <div className="container" style={{"background-color": "#ffe0b2"}}>
-            <div className="row" style={{"margin-top": "25%"}}>
-                <div className="col-2"></div>
-                <div className="col-8 bg-light p-5" style={{"border-radius": "15px"}}>
+            <div className="row" style={{"margin-top": "25%", justifyContent: "center"}}>
+                <div className="col-md-8 col-sm-11 bg-light p-5" style={{"border-radius": "15px"}}>
                     <h4 className="text-danger">
                         <If
                             condition={isLoading}
@@ -73,7 +72,6 @@ const LoginPage = () => {
                         </button>
                     </form>
                 </div>
-                <div className="col-2"></div>
             </div>
         </div>
     )
