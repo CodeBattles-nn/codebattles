@@ -77,7 +77,7 @@ const SeeProblemPage = () => {
 
         <p></p>
 
-        <div className="p-5 mb-4 bg-light rounded-3">
+        <div className=" mb-4 bg-light rounded-3">
             <div className="container-fluid py-5">
                 <div className="col-md-12 fs-4">
                     <h4>Задача</h4>
