@@ -41,6 +41,16 @@ CREATE TABLE IF NOT EXISTS servers
 )
 '''
 
+STORAGE_TABLE = '''
+CREATE TABLE IF NOT EXISTS storage
+(
+    id SERIAL PRIMARY KEY,
+    key TEXT,
+    value TEXT
+)
+'''
+
+
 def getQueryUsersTable(champId):
     return f"""
 CREATE TABLE champUsers_{champId} (

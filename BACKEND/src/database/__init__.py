@@ -1,7 +1,9 @@
 import psycopg2
 import env
 
-from database.createTables import CHAMPS_TABLE, PROBLEMS_TABLE, SERVERS_TABLE
+from database.createTables import CHAMPS_TABLE, PROBLEMS_TABLE, SERVERS_TABLE, STORAGE_TABLE
+
+__tables = [CHAMPS_TABLE, PROBLEMS_TABLE, SERVERS_TABLE, STORAGE_TABLE]
 
 
 def get_connection():
@@ -17,8 +19,7 @@ def init_tables():
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute(CHAMPS_TABLE)
-    cur.execute(PROBLEMS_TABLE)
-    cur.execute(SERVERS_TABLE)
+    for sql in __tables:
+        cur.execute(sql)
 
     connection.commit()
