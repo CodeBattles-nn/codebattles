@@ -1,6 +1,6 @@
 requests~=2.31.0
-Flask~=2.1
+Flask==3.0.0
 transliterate~=1.10.2
 python-dotenv~=1.0.0
-psycopg2-binary~=2.9.7
+psycopg2-binary==2.9.9
 Flask-Cors~=4.0.0

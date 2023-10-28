@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
-import apiAxios from "../apiAxios";
-import {noInternetToast, serverErrorToast} from "../utils/api";
+import apiAxios from "../../apiAxios";
+import {noInternetToast, serverErrorToast} from "../../utils/api";
 
 const AxiosConfigurer = () => {
     const navigate = useNavigate();

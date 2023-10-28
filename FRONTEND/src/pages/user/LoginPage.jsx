@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
 import apiAxios from "../../apiAxios";
+import If from "../../components/If";
 
 const LoginPage = () => {
     const [id, setId] = useState(0);
@@ -32,7 +33,11 @@ const LoginPage = () => {
                 <div className="col-2"></div>
                 <div className="col-8 bg-light p-5" style={{"border-radius": "15px"}}>
                     <h4 className="text-danger">
-                        {isLoading ? (<p>Загрузка....</p>) : (<p>{errorMsg}</p>)}
+                        <If
+                            condition={isLoading}
+                            is_true={<p>Загрузка....</p>}
+                            is_false={<p>{errorMsg}</p>}
+                        />
                     </h4>
                     <form>
                         <div className="form-group">

@@ -16,7 +16,7 @@ const AuthedHeader = () => {
             .finally(() => setLogoutProcessing(false))
     }
 
-    return <nav className="navbar navbar-expand-md navbar-dark bg-dark" style={{height: "56px"}}>
+    return <nav className="navbar navbar-expand-md navbar-dark bg-dark" style={{minHeight: "56px"}}>
         <div className="container-fluid">
             <Link to="/problems" className="navbar-brand" style={{"color": "red"}}>
                 <img src="/logo200.png" width="30" height="30"
