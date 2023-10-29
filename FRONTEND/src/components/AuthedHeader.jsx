@@ -30,23 +30,28 @@ const AuthedHeader = () => {
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
-                    <li className="nav-item">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/problems">Задачи</Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/stats">Положение</Link>
                     </li>
-                    <li className="nav-item">
+                    <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/sends">Посылки</Link>
                     </li>
                 </ul>
                 <ul className="navbar-nav  my-2 my-md-0">
-                    <li className="nav-item">
+                    <li className="nav-item mr-2" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/statuses">Помощь</Link>
                     </li>
-                    <button className="btn btn-danger ml-2" onClick={onLogoutBtnClicked}
-                            disabled={logoutProcessing}>Выход
-                    </button>
+                    <div data-toggle="collapse" data-target=".navbar-collapse.show">
+                        <button className="btn btn-danger" onClick={onLogoutBtnClicked}
+                                disabled={logoutProcessing}
+
+                        >Выход
+                        </button>
+                    </div>
+
                 </ul>
             </div>
         </div>
