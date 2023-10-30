@@ -5,7 +5,6 @@ import env
 from app import *
 from database import init_tables
 
-
 from web.admin.auth import *
 from web.admin.panel import *
 from web.admin.problems import *
@@ -13,7 +12,10 @@ from web.admin.problems import *
 from web.api.auth import *
 from web.api.battle import *
 from web.api.sends import *
+
 from web.api.send_prog import *
+
+from web.checker_api import *
 
 
 def init_env():
