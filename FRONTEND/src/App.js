@@ -11,9 +11,13 @@ import ProgramStatusInfo from "./pages/user/ProgramStatusInfo";
 
 import 'react-toastify/dist/ReactToastify.css';
 import LoginPage from "./pages/user/LoginPage";
+import {default as AdminLoginPage} from "./pages/admin/LoginPage";
+import {default as TeacherLoginPage} from "./pages/teacher/LoginPage";
 import AxiosConfigurer from "./components/configs/AxiosConfigurer";
 import Base from "./components/Base";
 import ToastConfig from "./components/configs/ToastConfig";
+import ChampsPage from "./pages/teacher/ChampsPage";
+import ChampSettings from "./pages/teacher/ChampSettings";
 
 function App() {
     return (
@@ -28,6 +32,10 @@ function App() {
                     <Route path="/sends" element={<SendsPage/>}/>
                     <Route path="/send/:id" element={<SeeSendPage/>}/>
                     <Route path="/statuses" element={<ProgramStatusInfo/>}/>
+                    <Route path="/admin" element={<AdminLoginPage />}></Route>
+                    <Route path="/teacher" element={<TeacherLoginPage />}></Route>
+                    <Route path="/teacher/champs" element={<ChampsPage />}></Route>
+                    <Route path="/teacher/champs/:id" element={<ChampSettings />}></Route>
                     <Route path="*" element={<ProblemsPage/>}/>
                 </Routes>
             </Base>
