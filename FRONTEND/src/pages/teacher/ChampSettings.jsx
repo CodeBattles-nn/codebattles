@@ -49,7 +49,7 @@ const ChampsPage = () => {
                                 <th scope="col">Задача</th>
                                 <th scope="col">id</th>
                                 <th scope="col">Название</th>
-                                <th scope="col"></th>
+                                <th scope="col">Действие</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -73,25 +73,29 @@ const ChampsPage = () => {
                         </table>
                         <form style={{border: "1px solid #dfe0e1"}} className="p-3">
                             <div className="form-group">
-                                <label>Задача</label>
-                                <select
-                                    id="cars"
-                                    name="cars"
-                                    className="mb-2 form-control"
-                                >
-                                    <option>A</option>
-                                    <option>B</option>
-                                    <option>C</option>
-                                    <option>D</option>
-                                    <option>E</option>
-                                    <option>F</option>
-                                    <option>G</option>
-                                    <option>H</option>
-                                </select>
+                                <label className="w-100">
+                                    Задача
+                                    <select
+                                        id="__problem-letter"
+                                        name="letter"
+                                        className="mb-2 form-control"
+                                    >
+                                        <option>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>D</option>
+                                        <option>E</option>
+                                        <option>F</option>
+                                        <option>G</option>
+                                        <option>H</option>
+                                    </select>
+                                </label>
                             </div>
                             <div className="form-group">
-                                <label>ID задачи</label>
-                                <input type="number" className="form-control"/>
+                                <label className="w-100">
+                                    ID задачи
+                                    <input type="number" className="form-control"/>
+                                </label>
                             </div>
                             <div className="form-group">
                                 <button type="button" className="btn btn-warning">

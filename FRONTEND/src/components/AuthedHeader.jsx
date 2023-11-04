@@ -20,7 +20,7 @@ const AuthedHeader = () => {
         <div className="container-fluid">
             <Link to="/problems" className="navbar-brand" style={{"color": "red"}}>
                 <img src="/logo200.png" width="30" height="30"
-                     className="d-inline-block align-top mr-1" alt=""/>
+                     className="d-inline-block align-top mr-1" alt="Логотип"/>
                 {/*CodeBattles*/}
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse"
