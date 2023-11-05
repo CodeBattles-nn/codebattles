@@ -2,13 +2,26 @@ import json
 
 from app import app
 from database import get_connection
-from decorators import get_user_id, api_login_required
+from decorators import get_user_id, api_login_required, redis_conn
 
 
 @app.route("/api/sends")
 @api_login_required
 @get_user_id
-def api_sends(user_id, uid):
+@redis_conn
+def api_sends(user_id, uid, r):
+    champ_id = user_id
+
+    redis_cache = r.get(f"r-champ-{champ_id}-sends-user-{uid}")
+    if redis_cache is not None:
+        response = app.response_class(
+            response=redis_cache,
+            status=200,
+            mimetype='application/json'
+        )
+
+        return response
+
     connection = get_connection()
     cur = connection.cursor()
 
@@ -30,7 +43,11 @@ def api_sends(user_id, uid):
 
     print()
 
-    return dict(success=True, sends=to_render)
+    dict_resp = dict(success=True, sends=to_render)
+
+    r.set(f"r-champ-{champ_id}-sends-user-{uid}", json.dumps(dict_resp))
+
+    return dict_resp
 
 
 @app.route("/api/send/<send_id>")

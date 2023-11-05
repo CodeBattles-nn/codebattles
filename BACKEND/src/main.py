@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import env
 from app import *
 from database import init_tables
+from database.redis import redis_pool_init
 
 from web.admin.auth import *
 from web.admin.panel import *
@@ -24,6 +25,7 @@ def init_env():
         load_dotenv(dotenv_path)
 
     env.init()
+    redis_pool_init()
 
 
 def webapp():

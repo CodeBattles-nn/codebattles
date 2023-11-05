@@ -1,11 +1,11 @@
 import json
 import string
 
-from flask import  abort
+from flask import abort
 
 from app import app
 from database import get_connection
-from decorators import get_user_id, api_login_required
+from decorators import get_user_id, api_login_required, redis_conn
 from utils import fix_new_line, get_table_color_class_by_score
 
 
@@ -137,7 +137,20 @@ def api_problem(letter, user_id):
 @app.route("/api/stats")
 @api_login_required
 @get_user_id
-def api_statistics(user_id, uid):
+@redis_conn
+def api_statistics(user_id, uid, r):
+    champ_id = user_id
+
+    redis_cache = r.get(f"r-champ-{champ_id}-stats")
+    if redis_cache is not None:
+        response = app.response_class(
+            response=redis_cache,
+            status=200,
+            mimetype='application/json'
+        )
+        print("redis")
+        return response
+
     connection = get_connection()
     cur = connection.cursor()
 
@@ -190,4 +203,7 @@ def api_statistics(user_id, uid):
 
         print()
 
-    return dict(success=True, cols=strs[:problems_counts], users=users)
+    resp_string = dict(success=True, cols=strs[:problems_counts], users=users)
+
+    r.set(f"r-champ-{champ_id}-stats", json.dumps(resp_string))
+    return resp_string
