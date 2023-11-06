@@ -17,11 +17,11 @@ const SendsPage = () => {
         )
     }, []);
 
-    return <div className="jumbotron bg-light table-bordered table-hover p-3">
+    return <div className="jumbotron theme-bg-light p-3">
         <h4>Посылки</h4>
         <p></p>
         <div className="table-responsive">
-            <table className="table table-striped">
+            <table className="table table-striped table-bordered ">
                 <thead>
                 <tr>
                     <th scope="col">№</th>

@@ -15,16 +15,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const onSend = async () => {
-        setIsLoading(true)
-
-        await apiAxios.post(getApiAddress() + '/api/login',
-            {id: id, login: login, password: passsword}).then(
-            () => {
-                setErrorMsg("Успешный вход")
-                navigate("/problems")
-            })
-            .catch(() => setErrorMsg("Неверные данные"))
-            .finally(() => setIsLoading(false));
+      navigate("/teacher/champs")
     };
 
     return (
@@ -39,12 +30,11 @@ const LoginPage = () => {
                         />
                     </h4>
                     <form>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">ID соревнования</label>
-                            <input className="form-control" name="id" aria-describedby="emailHelp"
-                                   placeholder="Введите id" onChange={
-                                (e) => setId(e.target.value)
-                            }/>
+                        <div>
+                            <h3 className="text-center text-primary">
+                                Интерфейс Учителя
+                            </h3>
+                            <br />
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Логин</label>

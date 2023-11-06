@@ -22,7 +22,7 @@ const SeeSendPage = () => {
 
 
     return (
-        <div className="jumbotron bg-light table-bordered table-hover p-3">
+        <div className="jumbotron theme-bg-light  p-3">
             <h3>Анализ посылки</h3>
             <p><b>Язык:</b> {data.lang}</p>
             <p><b>Исходный код:</b></p>
@@ -32,7 +32,7 @@ const SeeSendPage = () => {
 
             <p><b>Тесты: </b></p>
             <div className="table-responsive">
-                <table className="table table-striped">
+                <table className="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th scope="col">№ Теста</th>
@@ -41,7 +41,7 @@ const SeeSendPage = () => {
                         <th scope="col">Вывод</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="theme-text-dark">
 
                     {
                         data.tests.map(test => {

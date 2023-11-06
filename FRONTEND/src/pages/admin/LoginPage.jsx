@@ -3,6 +3,8 @@ import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
 import apiAxios from "../../apiAxios";
 import If from "../../components/If";
+import {changeTheme} from "../../theme.dark";
+
 
 const LoginPage = () => {
     const [id, setId] = useState(0);
@@ -14,17 +16,20 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
 
-    const onSend = async () => {
-        setIsLoading(true)
 
-        await apiAxios.post(getApiAddress() + '/api/login',
-            {id: id, login: login, password: passsword}).then(
-            () => {
-                setErrorMsg("Успешный вход")
-                navigate("/problems")
-            })
-            .catch(() => setErrorMsg("Неверные данные"))
-            .finally(() => setIsLoading(false));
+    const onSend = async () => {
+        await console.log("OMG")
+        // setIsLoading(true)
+        //
+        // await apiAxios.post(getApiAddress() + '/api/login',
+        //     {id: id, login: login, password: passsword}).then(
+        //     () => {
+        //         setErrorMsg("Успешный вход")
+        //         navigate("/problems")
+        //     })
+        //     .catch(() => setErrorMsg("Неверные данные"))
+        //     .finally(() => setIsLoading(false));
+
     };
 
     return (
@@ -39,12 +44,11 @@ const LoginPage = () => {
                         />
                     </h4>
                     <form>
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">ID соревнования</label>
-                            <input className="form-control" name="id" aria-describedby="emailHelp"
-                                   placeholder="Введите id" onChange={
-                                (e) => setId(e.target.value)
-                            }/>
+                        <div>
+                            <h3 className="text-center text-info">
+                                Интерфейс Администратора
+                            </h3>
+                            <br/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Логин</label>
@@ -70,6 +74,36 @@ const LoginPage = () => {
                         >
                             Войти
                         </button>
+
+                        <p/>
+
+                        <button
+                            className="btn btn-primary"
+                            type="button"
+                            onClick={() => changeTheme(true)}
+                        >Dark
+                        </button>
+
+                        <button
+                            className="btn btn-primary"
+                            type="button"
+                            onClick={() => changeTheme(false)}
+                        >Light
+                        </button>
+
+                        <span className="material-symbols-outlined">
+                        dark_mode
+                        </span>
+                        <span className="material-symbols-outlined">
+
+
+                        light_mode
+                        </span>
+
+                        <span className="material-symbols-outlined">
+routine
+</span>
+
                     </form>
                 </div>
             </div>

@@ -21,11 +21,11 @@ const StatsPage = () => {
     const myUserId = getCookie("user_id");
 
 
-    return <div className="jumbotron bg-light table-bordered table-hover p-3">
+    return <div className="jumbotron theme-bg-light  p-3">
         <h4>Положение</h4>
         <p></p>
         <div className="table-responsive">
-            <table className="table table-striped">
+            <table className="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th scope="col">№</th>
@@ -49,7 +49,7 @@ const StatsPage = () => {
                     [...data.users].map((user) => {
                         let tableClassName = ""
                         if (user.user_id == myUserId) {
-                            tableClassName = "table-primary"
+                            tableClassName = "table-primary theme-text-dark"
                         }
 
                         return (

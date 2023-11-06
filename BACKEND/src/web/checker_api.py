@@ -7,7 +7,7 @@ from flask import redirect
 
 from app import *
 from database import get_connection
-from decorators import login_required, get_user_id
+from decorators import login_required, get_user_id, redis_conn
 import env
 
 
@@ -100,7 +100,8 @@ def send_prog(user_id, uid):
 
 
 @app.route("/api/check_system_callback", methods=['POST'])
-def check_system():
+@redis_conn
+def check_system(r):
     data = request.json
     print(data)
     all_count = 0
@@ -114,20 +115,25 @@ def check_system():
 
     print(round((correct_count / all_count) * 100))
 
+    champ_id = meta['champ_id']
+    user_id = meta["user_id"]
+
     con = get_connection()
     cur = con.cursor()
 
-    cur.execute(f"UPDATE champUsers_{meta['champ_id']} SET {meta['problem'][0]} = %s WHERE id = %s;",
-                (round((correct_count / all_count) * 100), meta["user_id"]))
+    cur.execute(f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = %s WHERE id = %s;",
+                (round((correct_count / all_count) * 100), user_id))
 
     result_str = json.dumps(data['results'], indent=2)
 
     print(result_str)
 
     cur.execute(
-        f"UPDATE champSends_{meta['champ_id']} SET score = %s,state = 'Протестировано', description = %s  WHERE id = %s;",
+        f"UPDATE champSends_{champ_id} SET score = %s,state = 'Протестировано', description = %s  WHERE id = %s;",
         (round((correct_count / all_count) * 100), result_str, meta['id']))
 
     con.commit()
+
+    r.delete(f"r-champ-{champ_id}-stats", f"r-champ-{champ_id}-sends-user-{user_id}")
 
     return "OK"

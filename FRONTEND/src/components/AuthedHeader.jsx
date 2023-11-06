@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import getApiAddress from "../utils/api";
+import {changeTheme} from "../theme.dark";
+import ChangeThemeButton from "./ChangeThemeButton";
 
 const AuthedHeader = () => {
 
@@ -20,7 +22,7 @@ const AuthedHeader = () => {
         <div className="container-fluid">
             <Link to="/problems" className="navbar-brand" style={{"color": "red"}}>
                 <img src="/logo200.png" width="30" height="30"
-                     className="d-inline-block align-top mr-1" alt=""/>
+                     className="d-inline-block align-top mr-1" alt="Логотип"/>
                 {/*CodeBattles*/}
             </Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -51,6 +53,8 @@ const AuthedHeader = () => {
                         >Выход
                         </button>
                     </div>
+
+                    <ChangeThemeButton />
 
                 </ul>
             </div>

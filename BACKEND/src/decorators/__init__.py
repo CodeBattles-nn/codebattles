@@ -1,11 +1,24 @@
 from functools import wraps
 
 import psycopg2
+import redis
 from flask import request, redirect, make_response
 
+import env
 from config import ADMIN_LOGIN, ADMIN_PASSWORD
 from database import get_connection
+from database.redis import redis_pool
+from database.redis.redisWrapper import RedisWrapper
 from utils import salt_crypt
+
+
+def redis_conn(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        r = RedisWrapper(pool=redis_pool, host=env.REDIS_HOST)
+        return f(*args, **kwargs, r=r)
+
+    return decorated_function
 
 
 def admin_required(f):
