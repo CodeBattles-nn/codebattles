@@ -5,7 +5,7 @@ import redis
 from flask import request, redirect, make_response
 
 import env
-from config import ADMIN_LOGIN, ADMIN_PASSWORD
+
 from database import get_connection
 from database.redis import redis_pool
 from database.redis.redisWrapper import RedisWrapper
@@ -25,7 +25,8 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         admin_login_password = request.cookies.get("admin", None)
-        is_admin = admin_login_password == f"{ADMIN_LOGIN}_{ADMIN_PASSWORD}_531"
+        is_admin = admin_login_password == f"{env.ADMIN_LOGIN}_{env.ADMIN_PASSWORD}_531"
+
         if is_admin:
             return f(*args, **kwargs)
         return redirect("/admin/auth")
