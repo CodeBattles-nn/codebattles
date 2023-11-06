@@ -22,11 +22,11 @@ const ChampsPage = () => {
     return (
         <div className="row">
             <div className="col-12">
-                <div className="jumbotron bg-light table-bordered table-hover p-3">
+                <div className="jumbotron theme-bg-light  p-3">
                     <h4>Соревнования</h4>
                     <p></p>
                     <div className="table-responsive">
-                        <table className="table table-striped">
+                        <table className="table table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th scope="col">id</th>

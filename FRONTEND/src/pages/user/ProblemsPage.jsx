@@ -23,11 +23,11 @@ const ProblemsPage = () => {
     return (
         <div className="row">
             <div className="col-12">
-                <div className="jumbotron bg-light table-bordered table-hover p-3">
+                <div className="jumbotron theme-bg-light  p-3">
                     <h4>Задачи</h4>
                     <p></p>
                     <div className="table-responsive">
-                        <table className="table table-striped">
+                        <table className="table table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th scope="col"></th>
@@ -38,8 +38,15 @@ const ProblemsPage = () => {
 
                             {
                                 Object.keys(problems).map((letter) => {
+
+                                    let css_class = css[letter];
+
+                                    if (css_class !== ""){
+                                        css_class += " theme-text-dark"
+                                    }
+
                                     return (
-                                        <tr key={letter} className={css[letter]}>
+                                        <tr key={letter} className={css_class}>
                                             <th className="{{problem[2]}}" scope="row">{letter}</th>
                                             <td className="{{problem[2]}}"><Link
                                                 to={`/problem/${letter}`}>{problems[letter]}</Link></td>

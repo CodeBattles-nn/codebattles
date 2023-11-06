@@ -8,23 +8,28 @@ const ProgramStatusInfo = () => {
 
     statuses.push({
         name: "WRONG_ANSWER",
-        desc: "Программа выдает неверный ответ (Скорее всего, ваша программа работает неправильно)"
+        desc: "Программа выдает неверный ответ (Скорее всего, ваша программа работает неправильно)",
+        class: "theme-text-dark"
     })
     statuses.push({
         name: "SUCCESS",
-        desc: "Верный ответ"
+        desc: "Верный ответ",
+        class: "theme-text-dark"
     })
     statuses.push({
         name: "RUNTIME_ERROR",
-        desc: "Ошибка во время работы программы (Возможно, вы отправили не ту программу. Попробуйте запустить ее на своем пк. Если это не помогает, у вас ошибка в программе)"
+        desc: "Ошибка во время работы программы (Возможно, вы отправили не ту программу. Попробуйте запустить ее на своем пк. Если это не помогает, у вас ошибка в программе)",
+        class: "theme-text-dark"
     })
     statuses.push({
         name: "COMPILATION_ERROR",
-        desc: "Ошибка компиляции"}
-    )
+        desc: "Ошибка компиляции",
+        class: "theme-text-dark"
+    })
     statuses.push({
         name: "TIME_LIMIT",
-        desc: "Ваша программа привысила время на выполнение (Скорее всего, ваша программа написана неоптимально, из-за чего работает медленно)"
+        desc: "Ваша программа привысила время на выполнение (Скорее всего, ваша программа написана неоптимально, из-за чего работает медленно)",
+        class: "theme-text-dark"
     })
     statuses.push({
         name: "NOT_EXECUTED",
@@ -36,11 +41,11 @@ const ProgramStatusInfo = () => {
     return (
         <div className="row">
             <div className="col-12">
-                <div className="jumbotron bg-light table-bordered table-hover p-3">
+                <div className="jumbotron theme-bg-light  p-3">
                     <h4>Статусы выполнения программ</h4>
                     <p></p>
                     <div className="table-responsive">
-                        <table className="table table-striped">
+                        <table className="table table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th scope="col">Название</th>
@@ -51,7 +56,7 @@ const ProgramStatusInfo = () => {
 
                             {
                                 statuses.map(status => {
-                                    return <tr key={status} className={cssClassByStatus[status.name]}>
+                                    return <tr key={status} className={cssClassByStatus[status.name] + " " + status.class}>
                                         <th scope="row">{status.name}</th>
                                         <td>{status.desc}</td>
                                     </tr>

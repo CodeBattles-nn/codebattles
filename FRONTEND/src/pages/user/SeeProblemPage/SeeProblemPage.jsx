@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import AceEditor from "react-ace";
 
-import "./utils.css"
+import "./example.css"
 import "./style.css"
 import {useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../../utils/api";
@@ -59,13 +59,13 @@ const SeeProblemPage = () => {
     return <>
         <div className="row align-items-md-stretch" style={{rowGap:"1em"}}>
             <div className="col-md-6">
-                <div className="h-60 p-3 text-white bg-dark rounded-3">
+                <div className="h-60 p-3 theme-bg-light rounded-3">
                     <h2 style={{"color": "#6c757d;"}}>Задача {info.letter}</h2>
                     <h3>{info.name}</h3>
                 </div>
             </div>
             <div className="col-md-6">
-                <div className="h-100 p-3 bg-light border rounded-3">
+                <div className="h-100 p-3 theme-bg-light rounded-3">
                     <h2>Ограничения</h2>
                     <p style={{"white-space": "pre-line"}}>
                         Время выполнения: 1000мс
@@ -77,7 +77,7 @@ const SeeProblemPage = () => {
 
         <p></p>
 
-        <div className=" mb-4 bg-light rounded-3">
+        <div className=" mb-4 theme-bg-light rounded-3">
             <div className="container-fluid py-5">
                 <div className="col-md-12 fs-4">
                     <h4>Задача</h4>
@@ -92,7 +92,7 @@ const SeeProblemPage = () => {
             </div>
         </div>
 
-        <div className="jumbotron bg-light">
+        <div className="jumbotron theme-bg-light">
             <h2>Примеры</h2>
 
             {
@@ -129,7 +129,7 @@ const SeeProblemPage = () => {
 
         <div className="row align-items-md-stretch">
             <div className="col-md-12">
-                <div className="h-100 p-5 text-white bg-dark rounded-3">
+                <div className="h-100 p-5 text-light bg-dark rounded-3">
                     <h2>Отправить решение</h2>
                     <p>Вставьте код здесь</p>
                     <form id="sendform">

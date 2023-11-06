@@ -1,0 +1,59 @@
+:root{
+    --theme-color-light:  #f8f9fa;
+    --theme-color-dark:  #343a40;
+    --theme-color-bg-light: #b2d8ff;
+    --theme-color-bg-dark: #465e77;
+    
+}
+/*
+!!!
+variables will be inited in js; ignore errors
+*/
+
+
+/*:root {*/
+/*    --theme-light: var(--dark);*/
+/*    --theme-dark: var(--light);*/
+/*    --theme-bg: #7b623d;*/
+/*}*/
+
+html,
+body,
+.theme-bg-main,
+.theme-bg-dark,
+.theme-bg-light,
+.form-control
+{
+    transition:
+            background-color ease-in-out 0.2s,
+            color ease-in-out 0.2s !important;
+}
+
+
+.theme-bg-main {
+    background-color: var(--theme-bg);
+}
+
+.form-control,
+.form-control:hover,
+.theme-bg-dark {
+    background-color: var(--theme-dark);
+    color: var(--theme-light);
+}
+
+.form-control,
+.form-control:hover,
+.theme-bg-light {
+    background-color: var(--theme-light);
+    color: var(--theme-dark);
+}
+
+
+.theme-text-dark{
+    color: var(--theme-color-dark);
+}
+
+
+.theme-text-light{
+    color: var(--theme-color-light);
+}

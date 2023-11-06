@@ -24,7 +24,7 @@ const ChampsPage = () => {
     return (
         <div className="row">
             <div className="col-12">
-                <div className="jumbotron bg-light table-bordered table-hover p-3">
+                <div className="jumbotron theme-bg-light  p-3">
                     <h4>Соревнование {"{name}"} | Настройки</h4>
                     <div>
                         <button className="btn btn-outline-danger">Удалить</button>
@@ -43,7 +43,7 @@ const ChampsPage = () => {
                     <Link to="rikroll">Посмотреть все задачи</Link>
 
                     <div className="table-responsive mt-4">
-                        <table className="table table-striped">
+                        <table className="table table-striped table-bordered ">
                             <thead>
                             <tr>
                                 <th scope="col">Задача</th>

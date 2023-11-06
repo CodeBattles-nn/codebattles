@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import getApiAddress from "../utils/api";
+import {changeTheme} from "../theme.dark";
+import ChangeThemeButton from "./ChangeThemeButton";
 
 const AuthedHeader = () => {
 
@@ -51,6 +53,8 @@ const AuthedHeader = () => {
                         >Выход
                         </button>
                     </div>
+
+                    <ChangeThemeButton />
 
                 </ul>
             </div>
