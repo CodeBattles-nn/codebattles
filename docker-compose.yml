@@ -3,7 +3,7 @@ services:
   frontend:
     build: FRONTEND/.
     ports:
-      - "80:80"
+      - "8000:80"
     restart: unless-stopped
   backend:
     build: BACKEND/.
@@ -19,7 +19,7 @@ services:
       ADMIN_PASSWORD: goodprog
       PYTHONUNBUFFERED: TRUE
     ports:
-      - "5000:8000"
+      - "8001:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -45,6 +45,13 @@ services:
       interval: 2s
       timeout: 2s
     restart: unless-stopped
+  gateway:
+    build: GATEWAY/.
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
   init_configurer:
     build: INIT_CONFIGURER/.
     environment:
