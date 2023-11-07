@@ -1,0 +1,15 @@
+on:
+  workflow_run:
+    branches: 
+      main
+jobs:
+  deploy:
+    name: deploy to prod
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: build
+      run: docker compose build
+    - name: run
+      run: docker compose up -d
+      
