@@ -1,5 +1,7 @@
 # CodeBattles
 
+[![deploy](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml)
+
 ## Info
 
 Like codeforces or Yandex Contest system
