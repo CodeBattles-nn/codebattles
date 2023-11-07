@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
 import apiAxios from "../../apiAxios";
 import If from "../../components/If";
+import PageTitle from "../../components/PageTitle";
+import {useAppContext} from "../../hooks/useAppContext";
 
 const LoginPage = () => {
     const [id, setId] = useState(0);
@@ -14,6 +16,16 @@ const LoginPage = () => {
 
     const navigate = useNavigate();
 
+    const {setAuthed} = useAppContext();
+
+    useEffect(() => {
+        apiAxios.get(getApiAddress() + "/api/problems").then(
+            (r) => {
+                console.log(r.data)
+            }
+        )
+    }, []);
+
     const onSend = async () => {
         setIsLoading(true)
 
@@ -21,6 +33,7 @@ const LoginPage = () => {
             {id: id, login: login, password: passsword}).then(
             () => {
                 setErrorMsg("Успешный вход")
+                setAuthed(true)
                 navigate("/problems")
             })
             .catch(() => setErrorMsg("Неверные данные"))
@@ -29,6 +42,7 @@ const LoginPage = () => {
 
     return (
         <div className="container">
+            <PageTitle title="CodeBattles"/>
             <div className="row" style={{"margin-top": "25%", justifyContent: "center"}}>
                 <div className="col-md-8 col-sm-11 theme-bg-light p-5" style={{"border-radius": "15px"}}>
                     <h4 className="text-danger">

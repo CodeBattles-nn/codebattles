@@ -23,32 +23,36 @@ import ChampAccessSettings from "./pages/teacher/ChampAccessSettings";
 import "./theme.dark.css"
 import "./icons.css"
 import ThemeConfigurer from "./components/configs/ThemeConfigurer";
+import {AppContextProvider} from "./components/AppContextProvider";
+import HeaderSelector from "./components/HeaderSelector";
 
 function App() {
     return (
-        <BrowserRouter>
-            <AuthedHeader/>
-            <Base>
-                <Routes>
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/stats" element={<StatsPage/>}/>
-                    <Route path="/problem/:letter" element={<SeeProblemPage/>}/>
-                    <Route path="/problems" element={<ProblemsPage/>}/>
-                    <Route path="/sends" element={<SendsPage/>}/>
-                    <Route path="/send/:id" element={<SeeSendPage/>}/>
-                    <Route path="/statuses" element={<ProgramStatusInfo/>}/>
-                    <Route path="/admin" element={<AdminLoginPage/>}></Route>
-                    <Route path="/teacher" element={<TeacherLoginPage/>}></Route>
-                    <Route path="/teacher/champs" element={<ChampsPage/>}></Route>
-                    <Route path="/teacher/champs/:id" element={<ChampSettings/>}></Route>
-                    <Route path="/teacher/champs/:id/access" element={<ChampAccessSettings/>}></Route>
-                    <Route path="*" element={<ProblemsPage/>}/>
-                </Routes>
-            </Base>
-            <AxiosConfigurer/>
-            <ToastConfig/>
-            {/*<ThemeConfigurer/>*/}
-        </BrowserRouter>
+        <AppContextProvider authed={true}>
+            <BrowserRouter>
+                <HeaderSelector />
+                <Base>
+                    <Routes>
+                        <Route path="/login" element={<LoginPage/>}/>
+                        <Route path="/stats" element={<StatsPage/>}/>
+                        <Route path="/problem/:letter" element={<SeeProblemPage/>}/>
+                        <Route path="/problems" element={<ProblemsPage/>}/>
+                        <Route path="/sends" element={<SendsPage/>}/>
+                        <Route path="/send/:id" element={<SeeSendPage/>}/>
+                        <Route path="/statuses" element={<ProgramStatusInfo/>}/>
+                        <Route path="/admin" element={<AdminLoginPage/>}></Route>
+                        <Route path="/teacher" element={<TeacherLoginPage/>}></Route>
+                        <Route path="/teacher/champs" element={<ChampsPage/>}></Route>
+                        <Route path="/teacher/champs/:id" element={<ChampSettings/>}></Route>
+                        <Route path="/teacher/champs/:id/access" element={<ChampAccessSettings/>}></Route>
+                        <Route path="*" element={<ProblemsPage/>}/>
+                    </Routes>
+                </Base>
+                <AxiosConfigurer/>
+                <ToastConfig/>
+                {/*<ThemeConfigurer/>*/}
+            </BrowserRouter>
+        </AppContextProvider>
     )
 }
 

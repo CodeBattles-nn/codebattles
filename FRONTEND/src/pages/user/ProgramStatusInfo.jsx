@@ -1,5 +1,6 @@
 import React from 'react';
 import {cssClassByStatus} from "../../utils/colors";
+import PageTitle from "../../components/PageTitle";
 
 const ProgramStatusInfo = () => {
 
@@ -42,6 +43,7 @@ const ProgramStatusInfo = () => {
         <div className="row">
             <div className="col-12">
                 <div className="jumbotron theme-bg-light  p-3">
+                    <PageTitle title="Помощь"/>
                     <h4>Статусы выполнения программ</h4>
                     <p></p>
                     <div className="table-responsive">

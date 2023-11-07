@@ -3,18 +3,25 @@ import {Link, useNavigate} from "react-router-dom";
 import getApiAddress from "../utils/api";
 import {changeTheme} from "../theme.dark";
 import ChangeThemeButton from "./ChangeThemeButton";
+import {useAppContext} from "../hooks/useAppContext";
+import apiAxios from "../apiAxios";
 
 const AuthedHeader = () => {
 
 
     const nav = useNavigate();
 
+    const {setAuthed} = useAppContext();
+
     const [logoutProcessing, setLogoutProcessing] = useState(false);
 
     const onLogoutBtnClicked = () => {
         setLogoutProcessing(true)
-        fetch(getApiAddress() + "/api/logout")
-            .then(() => nav("/login"))
+        apiAxios.post(getApiAddress() + "/api/logout")
+            .then(() => {
+                nav("/login")
+                setAuthed(false)
+            })
             .finally(() => setLogoutProcessing(false))
     }
 
