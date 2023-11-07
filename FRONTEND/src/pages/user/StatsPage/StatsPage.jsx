@@ -5,6 +5,7 @@ import {getCookie} from "../../../utils/cookie";
 
 import "./stats.css"
 import apiAxios from "../../../apiAxios";
+import PageTitle from "../../../components/PageTitle";
 
 const StatsPage = () => {
     const [data, setData] = useState({cols: "", users: []});
@@ -22,6 +23,7 @@ const StatsPage = () => {
 
 
     return <div className="jumbotron theme-bg-light  p-3">
+        <PageTitle title="Положение"/>
         <h4>Положение</h4>
         <p></p>
         <div className="table-responsive">

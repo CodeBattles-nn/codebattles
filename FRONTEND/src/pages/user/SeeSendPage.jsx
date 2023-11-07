@@ -4,6 +4,7 @@ import getApiAddress from "../../utils/api";
 import {cssClassByStatus} from "../../utils/colors";
 import SyntaxHighlight from "../../components/wraps/SyntaxHightlight";
 import apiAxios from "../../apiAxios";
+import PageTitle from "../../components/PageTitle";
 
 const SeeSendPage = () => {
 
@@ -23,6 +24,7 @@ const SeeSendPage = () => {
 
     return (
         <div className="jumbotron theme-bg-light  p-3">
+            <PageTitle title={`Посылка #${id}`}/>
             <h3>Анализ посылки</h3>
             <p><b>Язык:</b> {data.lang}</p>
             <p><b>Исходный код:</b></p>

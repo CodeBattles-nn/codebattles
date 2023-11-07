@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import apiAxios from "../../apiAxios";
+import If from "../../components/If";
+import PageTitle from "../../components/PageTitle";
 
 const ProblemsPage = () => {
 
@@ -20,7 +22,7 @@ const ProblemsPage = () => {
     }, []);
 
 
-    return (
+    return (<><PageTitle title="Задачи"/>
         <div className="row">
             <div className="col-12">
                 <div className="jumbotron theme-bg-light  p-3">
@@ -60,7 +62,7 @@ const ProblemsPage = () => {
                 </div>
             </div>
         </div>
-
+        </>
     )
 };
 

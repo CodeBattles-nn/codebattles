@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import apiAxios from "../../apiAxios";
 import If from "../../components/If";
+import PageTitle from "../../components/PageTitle";
 
 const SendsPage = () => {
     const [sends, setSends] = useState({sends: []});
@@ -18,6 +19,7 @@ const SendsPage = () => {
     }, []);
 
     return <div className="jumbotron theme-bg-light p-3">
+        <PageTitle title="Посылки"/>
         <h4>Посылки</h4>
         <p></p>
         <div className="table-responsive">
