@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import apiAxios from "../../apiAxios";
 import If from "../../components/If";
 import PageTitle from "../../components/PageTitle";
+import {useAppContext} from "../../hooks/useAppContext";
 
 const LoginPage = () => {
     const [id, setId] = useState(0);
@@ -14,6 +15,8 @@ const LoginPage = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
+
+    const {setAuthed} = useAppContext();
 
     useEffect(() => {
         apiAxios.get(getApiAddress() + "/api/problems").then(
@@ -30,6 +33,7 @@ const LoginPage = () => {
             {id: id, login: login, password: passsword}).then(
             () => {
                 setErrorMsg("Успешный вход")
+                setAuthed(true)
                 navigate("/problems")
             })
             .catch(() => setErrorMsg("Неверные данные"))
