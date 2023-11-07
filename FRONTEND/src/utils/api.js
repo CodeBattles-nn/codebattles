@@ -3,7 +3,7 @@ import {toast} from "react-toastify";
 const API_PORT = 80
 
 export function getApiAddress() {
-    return `${document.location.protocol}//${document.location.hostname}:${document.location.port}`
+    return `${document.location.protocol}//${document.location.hostname}:${API_PORT}`
 }
 
 export function serverErrorToast() {
