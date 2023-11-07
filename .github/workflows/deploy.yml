@@ -1,12 +1,16 @@
+name: deploy
 on: workflow_dispatch
 jobs:
-  deploy:
-    name: deploy to prod
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v1
-    - name: build
-      run: docker compose build
-    - name: run
-      run: docker compose up -d
-      
+    build:
+        name: build
+        runs-on: self-hosted
+        steps:
+        - uses: actions/checkout@v1
+        - name: build
+          run: docker compose build
+    run:
+        needs: [build]
+        runs-on: self-hosted
+        steps:
+            - name: run
+              run: docker compose up -d
