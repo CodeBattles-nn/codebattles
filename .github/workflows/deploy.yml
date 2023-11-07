@@ -2,7 +2,7 @@ on: workflow_dispatch
 jobs:
   deploy:
     name: deploy to prod
-    runs-on: ubuntu-18.04
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v1
     - name: build
