@@ -45,7 +45,7 @@ function App() {
                         <Route path="/teacher/champs" element={<ChampsPage/>}></Route>
                         <Route path="/teacher/champs/:id" element={<ChampSettings/>}></Route>
                         <Route path="/teacher/champs/:id/access" element={<ChampAccessSettings/>}></Route>
-                        <Route path="/secret" element={<h1>Привет </h1>}></Route>
+                        <Route path="/secret" element={<h1>Привет 2</h1>}></Route>
                         <Route path="*" element={<ProblemsPage/>}/>
                     </Routes>
                 </Base>
