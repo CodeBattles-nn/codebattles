@@ -30,7 +30,7 @@ const ChangeThemeButton = (props) => {
     const styles = {
         userSelect: "none",
         cursor: "pointer",
-        fontSize: "25px"
+        filter: "invert(1)"
     }
 
     const wrapStyles = {
@@ -42,9 +42,7 @@ const ChangeThemeButton = (props) => {
 
     return (
         <div className="ml-4" onClick={onChangeTheme} style={wrapStyles}>
-            <span className="material-symbols-outlined" style={styles}>
-                {icon_name}
-            </span>
+            <img color="white" src={`./icons/${icon_name}.webp`} style={styles}/>
         </div>
     )
 };
