@@ -61,6 +61,7 @@ services:
       DB_NAME: "cb"
     links:
       - backend
+      - postgres
     restart: unless-stopped
   checker-java:
     build:
