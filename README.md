@@ -1,15 +1,13 @@
 # CodeBattles
 
 [![deploy](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml)
-
+[![Licence](https://img.shields.io/github/license/doctorixx/CodeBattles?style=flat)](./LICENSE)
 ## Info
-
 Like codeforces or Yandex Contest system
 
-Now supports Java and Python
+[Documentation RU](https://doctorixx.gitbook.io/codebattles/)
 
-Examples problems in **EXAMPLE.sql**
-
+[Documentation EN](https://doctorixx.gitbook.io/codebattles/v/en) 
 
 ## Starting
 
@@ -17,7 +15,10 @@ Examples problems in **EXAMPLE.sql**
 docker compose up
 ```
 
-## Ports
+## Containers exposed ports
 
-Server at 8080 port
+Gateway at 80 port
+Backend at 8001 port
+Frontend at 8000
 Database at 25565 port
+Redis at 6379 port
