@@ -17,8 +17,8 @@ docker compose up
 
 ## Containers exposed ports
 
-Gateway at 80 port
-Backend at 8001 port
-Frontend at 8000
-Database at 25565 port
-Redis at 6379 port
+- Gateway at 80 port
+- Backend at 8001 port
+- Frontend at 8000
+- Database at 25565 port
+- Redis at 6379 port
