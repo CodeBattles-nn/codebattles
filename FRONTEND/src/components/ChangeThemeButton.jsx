@@ -42,7 +42,7 @@ const ChangeThemeButton = (props) => {
 
     return (
         <div className="ml-4" onClick={onChangeTheme} style={wrapStyles}>
-            <img color="white" src={`./icons/${icon_name}.webp`} style={styles}/>
+            <img color="white" src={`/icons/${icon_name}.webp`} style={styles}/>
         </div>
     )
 };
