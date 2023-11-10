@@ -67,6 +67,9 @@ def api_send_viewer(send_id, user_id):
 
     data = cur.fetchone()
 
+    if data is None:
+        return {}, 404
+
     result = json.loads(data[7])
 
     prog = data[8]
