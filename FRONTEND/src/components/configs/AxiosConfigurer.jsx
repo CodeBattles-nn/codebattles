@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import apiAxios from "../../apiAxios";
 import {noInternetToast, serverErrorToast} from "../../utils/api";
 import {useAppContext} from "../../hooks/useAppContext";
+import {toast} from "react-toastify";
 
 const AxiosConfigurer = () => {
     const navigate = useNavigate();
@@ -16,9 +17,12 @@ const AxiosConfigurer = () => {
 
         if (error.response?.status === 403) {
             navigate("/login")
-        } else if (error.response?.status >= 500) {
+        } else if (error.response?.status === 404) {
+            toast.warn("Запрашиваемая страница не найдена!", {autoClose: 5000})
+            navigate("/problems")
+        }else if (error.response?.status >= 500) {
             serverErrorToast();
-            navigate("/login")
+            navigate("/problems")
         } else {
             noInternetToast();
         }
