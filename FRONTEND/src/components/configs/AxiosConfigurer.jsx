@@ -17,6 +17,7 @@ const AxiosConfigurer = () => {
 
         if (error.response?.status === 403) {
             navigate("/login")
+            setAuthed(false);
         } else if (error.response?.status === 404) {
             toast.warn("Запрашиваемая страница не найдена!", {autoClose: 5000})
             navigate("/problems")
@@ -26,8 +27,6 @@ const AxiosConfigurer = () => {
         } else {
             noInternetToast();
         }
-
-        setAuthed(false);
 
         return Promise.reject(error);
 
