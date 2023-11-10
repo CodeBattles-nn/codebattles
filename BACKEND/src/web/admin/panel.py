@@ -134,15 +134,18 @@ def create_users_in_champ_post(champ_id):
     cursor = connection.cursor()
 
     for name in users:
-        login = translit(name, 'ru', reversed=True)
-        login = login.replace(" ", "")
-        login = login.replace("'", "")
-        if len(login) > 7:
-            login = login[:6]
+        # login = translit(name, 'ru', reversed=True)
+        # login = login.replace(" ", "")
+        # login = login.replace("'", "")
+        # if len(login) > 7:
+        #     login = login[:6]
+        #
+        # login = f"{login}{random.randint(10, 99)}"
+        #
+        # password = get_random_string(8)
 
-        login = f"{login}{random.randint(10, 99)}"
-
-        password = get_random_string(8)
+        login = ''.join(map(str, [random.randint(0, 9) for i in range(5)]))
+        password = ''.join(map(str, [random.randint(0, 9) for i in range(5)]))
 
         cursor.execute(f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
                        (login, password, name))
