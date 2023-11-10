@@ -43,7 +43,7 @@ const AuthedHeader = () => {
                         <Link className="nav-link" to="/problems">Задачи</Link>
                     </li>
                     <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                        <Link className="nav-link" to="/stats">Положение</Link>
+                        <Link className="nav-link" to="/stats">Рейтинг</Link>
                     </li>
                     <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/sends">Посылки</Link>

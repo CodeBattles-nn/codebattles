@@ -23,8 +23,8 @@ const StatsPage = () => {
 
 
     return <div className="jumbotron theme-bg-light  p-3">
-        <PageTitle title="Положение"/>
-        <h4>Положение</h4>
+        <PageTitle title="Рейтинг"/>
+        <h4>Рейтинг</h4>
         <p></p>
         <div className="table-responsive">
             <table className="table table-striped table-bordered">
