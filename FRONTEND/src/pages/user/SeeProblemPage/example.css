@@ -9,6 +9,7 @@ p.console{
     color: #801d1d;
     font-weight: 400;
     padding: 5px;
+    overflow-x: scroll;
 }
 
 .example {
