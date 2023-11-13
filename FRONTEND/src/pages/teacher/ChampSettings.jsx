@@ -1,24 +1,29 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import apiAxios from "../../apiAxios";
+import {toast} from "react-toastify";
+import {nonImplemeneted} from "../../utils/toast";
 
 const ChampsPage = () => {
+
+    const {id, user_id} = useParams();
 
     const defaultState = [
         {
             id: 2,
             letter: "A",
-            name: "hi"
+            name: "Пироги"
         },
         {
             letter: "B",
             id: 1,
-            name: "hiler"
+            name: "Буратино"
         }
     ]
 
     const [champs, setChamps] = useState(defaultState);
+
 
 
     return (
@@ -31,8 +36,9 @@ const ChampsPage = () => {
                     </div>
                     <br/>
                     <div>
-                        <Link className="mr-5" to={"/aboba"}>Управление пользователями</Link>
-                        <Link to={"/aboba"}>Управление доступом</Link>
+                        <Link className="mr-5" to={`users`}>Управление пользователями</Link>
+                        <Link className="mr-5" to={"stats"}>Рейтинг</Link>
+                        <Link to={"access"} >Управление доступом</Link>
                     </div>
 
 
@@ -62,7 +68,8 @@ const ChampsPage = () => {
                                             <th className="col-1" scope="row">{champ.id}</th>
                                             <td className="col">{champ.name}</td>
                                             <th className="col-1" scope="row">
-                                                <Link to="">Просмотр</Link>
+                                                <Link to="" onClick={nonImplemeneted}>Просмотр
+                                                </Link>
                                             </th>
 
                                         </tr>
@@ -98,7 +105,7 @@ const ChampsPage = () => {
                                 </label>
                             </div>
                             <div className="form-group">
-                                <button type="button" className="btn btn-warning">
+                                <button type="button" className="btn btn-warning" onClick={nonImplemeneted}>
                                     Установить
                                 </button>
                             </div>
