@@ -1,4 +1,4 @@
-name: launch-test
+name: build-test
 on: 
   pull_request:
     branches:
