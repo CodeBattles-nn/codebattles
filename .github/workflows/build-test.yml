@@ -11,5 +11,5 @@ jobs:
         steps:
         - uses: actions/checkout@v1
         - name: build
-          run: docker compose -p test_codebattles__ build
+          run: docker compose -p TEST_CODEBATTLES build
           
