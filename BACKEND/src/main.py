@@ -18,6 +18,8 @@ from web.api.send_prog import *
 
 from web.checker_api import *
 
+import web.teacher_api
+
 
 def init_env():
     dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
@@ -35,4 +37,4 @@ def webapp():
 
 
 if __name__ == '__main__':
-    webapp().run(host="0.0.0.0", port=80)
+    webapp().run(host="0.0.0.0", port=80, debug=True)
