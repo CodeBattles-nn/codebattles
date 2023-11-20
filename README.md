@@ -15,6 +15,19 @@ Like codeforces or Yandex Contest system
 docker compose up
 ```
 
+## Usage
+go to page localhost
+___
+### Main endpoints
+| Endpoint       |       Description |
+|----------------|-------------------|
+|/admin          | Admin panel       |
+|/admin/problems | See all problems  |
+|/               | Student interface |
+
+
+
+
 ## Containers exposed ports
 
 - Gateway at 80 port
