@@ -2,9 +2,11 @@ import string
 
 from app import app
 from database import get_connection
+from decorators import teacher_required
 
 
 @app.route("/api/teacher/champs")
+@teacher_required
 def get_champs_route():
     connection = get_connection()
     cursor = connection.cursor()
@@ -19,6 +21,7 @@ def get_champs_route():
 
 
 @app.route("/api/teacher/champs/<champ_id>")
+@teacher_required
 def get_champs_byid_route(champ_id):
     connection = get_connection()
     cur = connection.cursor()

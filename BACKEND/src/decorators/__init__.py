@@ -37,16 +37,17 @@ def admin_required(f):
 def teacher_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        admin_login_password = request.cookies.get("admin", None)
-        is_admin = admin_login_password == f"{env.ADMIN_LOGIN}_{env.ADMIN_PASSWORD}_531"
-        return f(*args, **kwargs)
-    #
-    #     if is_admin:
-    #         return f(*args, **kwargs)
-    #     return redirect("/admin/auth")
-    #
-    # return decorated_function
-    #
+        teacher_login_password = request.cookies.get("teacher", None)
+
+        # print(f"{teacher_login_password=}")
+        is_teacher = teacher_login_password == f"{'login'}_{'psswd'}_88416"
+
+        if is_teacher:
+            return f(*args, **kwargs)
+        else:
+            return {"success": False, "msg": "Bad Credentials"}, 403
+
+    return decorated_function
 
 
 def login_required(f):

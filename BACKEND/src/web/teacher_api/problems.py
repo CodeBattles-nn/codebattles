@@ -2,9 +2,11 @@ from psycopg2.extras import RealDictCursor
 
 from app import app
 from database import get_connection
+from decorators import teacher_required
 
 
 @app.route("/api/teacher/problems")
+@teacher_required
 def get_problems_api_route():
     connection = get_connection()
     cursor = connection.cursor(cursor_factory=RealDictCursor)
@@ -14,7 +16,9 @@ def get_problems_api_route():
 
     return problems
 
+
 @app.route("/api/teacher/problems/<problem_id>")
+@teacher_required
 def get_problems_byid_api_route(problem_id):
     connection = get_connection()
     cursor = connection.cursor(cursor_factory=RealDictCursor)
@@ -28,4 +32,3 @@ def get_problems_byid_api_route(problem_id):
         return "", 404
 
     return problem
-
