@@ -29,7 +29,6 @@ PROBLEMS_TABLE = '''
     ); 
 '''
 
-
 SERVERS_TABLE = '''
 CREATE TABLE IF NOT EXISTS servers
 (
@@ -51,9 +50,9 @@ CREATE TABLE IF NOT EXISTS storage
 '''
 
 
-def getQueryUsersTable(champId):
+def get_query_users_table(champ_id):
     return f"""
-CREATE TABLE champUsers_{champId} (
+CREATE TABLE champUsers_{champ_id} (
     id SERIAL PRIMARY KEY,
     login TEXT,
     password TEXT,
@@ -69,15 +68,17 @@ CREATE TABLE champUsers_{champId} (
     I INTEGER,
     J INTEGER,
     K INTEGER,
-    score INTEGER GENERATED ALWAYS AS (COALESCE(A, 0) + COALESCE(B, 0) + COALESCE(C, 0) + COALESCE(D, 0) + COALESCE(E, 0) + COALESCE(F, 0) + COALESCE(G, 0) + COALESCE(H, 0) + COALESCE(I, 0) + COALESCE(J, 0) + COALESCE(K, 0)) STORED
+    score INTEGER GENERATED ALWAYS AS (COALESCE(A, 0) + COALESCE(B, 0) + COALESCE(C, 0) + COALESCE(D, 0) \
+        + COALESCE(E, 0)\ + COALESCE(F, 0) + COALESCE(G, 0) + COALESCE(H, 0) \
+        + COALESCE(I, 0) + COALESCE(J, 0) + COALESCE(K, 0)) STORED
 ); 
 
     """
 
 
-def getQuerySendsTable(champId):
+def get_query_sends_table(champ_id):
     return f"""
-       CREATE TABLE champSends_{champId} (
+       CREATE TABLE champSends_{champ_id} (
         id SERIAL PRIMARY KEY,
         problem_letter TEXT,
         problem_name TEXT NOT NULL,

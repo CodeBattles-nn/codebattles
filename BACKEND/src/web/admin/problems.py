@@ -39,7 +39,8 @@ def admin_list_problems_add():
         build_json = json.loads(build)
         build_json['tests'] = json.dumps(build_json['tests'])
         build_json['examples'] = json.dumps(build_json['examples'])
-    except:
+    except Exception as e:
+        print("Maybe Json parse exception \n" + str(e))
         return "Not json (404 ERR)", 400
 
     print(build)

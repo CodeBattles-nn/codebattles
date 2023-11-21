@@ -1,11 +1,9 @@
 from functools import wraps
 
 import psycopg2
-import redis
 from flask import request, redirect, make_response
 
 import env
-
 from database import get_connection
 from database.redis import redis_pool
 from database.redis.redisWrapper import RedisWrapper

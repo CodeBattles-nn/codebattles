@@ -8,6 +8,8 @@ from database import get_connection
 from decorators import get_user_id, api_login_required, redis_conn
 from utils import fix_new_line, get_table_color_class_by_score
 
+JSON_MIMETYPE = 'application/json'
+
 
 @app.route("/api/problems")
 @api_login_required
@@ -86,39 +88,21 @@ def api_problem(letter, user_id):
 
     cur.execute(sql, tuple(problems_ids))
 
-    tasks_dict = dict.fromkeys(problems_ids)
-
     x = list(cur.fetchall())
-
-    tasks = [
-        # ('A', "Искуственный Интелект"),
-        # ('B', "Футбол"),
-        # ('C', "Магазин"),
-
-    ]
 
     problem_ = None
 
     for i in x:
-        id = i[0]
-        problem_letter = strs[problems_ids.index(id)]
+        problem_id = i[0]
+        problem_letter = strs[problems_ids.index(problem_id)]
         if letter == problem_letter:
             problem_ = i
-
-    print()
-
-    examples = (
-        ("12\n13", "25"),
-        ("3\n2", "5"),
-    )
 
     if problem_ is None:
         abort(404)
 
     cur.execute("SELECT name, id FROM servers WHERE enabled=true")
     servers = cur.fetchall()
-
-    print()
 
     _pr_id, _pr_name, _pr_desc, _pr_in, _pr_out, _pr_tests, _pr_examples = problem_
 
@@ -146,7 +130,7 @@ def api_statistics(user_id, uid, r):
         response = app.response_class(
             response=redis_cache,
             status=200,
-            mimetype='application/json'
+            mimetype=JSON_MIMETYPE
         )
         print("redis")
         return response
