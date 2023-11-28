@@ -5,7 +5,7 @@ from app import app
 
 @app.route("/api/teacher/auth", methods=['POST'])
 def teacher_auth_post():
-    login, password = request.form['login'], request.form['password']
+    login, password = request.json['login'], request.json['password']
 
     resp = make_response({"success": True})
 
