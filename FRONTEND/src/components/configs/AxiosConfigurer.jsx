@@ -20,7 +20,7 @@ const AxiosConfigurer = () => {
             setAuthed(false);
         } else if (error.response?.status === 404) {
             toast.warn("Запрашиваемая страница не найдена!", {autoClose: 5000})
-            navigate("/problems")
+            // navigate("/problems")
         }else if (error.response?.status >= 500) {
             serverErrorToast();
             navigate("/problems")

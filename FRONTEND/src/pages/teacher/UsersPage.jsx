@@ -17,15 +17,23 @@ const ProblemsPage = () => {
     const {id} = useParams();
 
     useEffect(() => {
-        setUsers([
-            {name: "ИМя", login: "login", password: "password"},
-            {name: "ИМя", login: "login", password: "password"},
-            {name: "ИМя56", login: "login", password: "password"},
-            {name: "ИМя", login: "login", password: "password"},
-            {name: "ИМя", login: "login", password: "password"},
-            {name: "ИМя", login: "login", password: "password"},
-            {name: "ИМя", login: "login", password: "password"},
-        ])
+        apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}/users`).then(
+            (data) => {
+                // setErrorMsg("Успешный вход")
+                // navigate("/teacher/champs")
+                setUsers(data.data)
+                console.log(data)
+            })
+        //
+        // setUsers([
+        //     {name: "ИМя", login: "login", password: "password"},
+        //     {name: "ИМя", login: "login", password: "password"},
+        //     {name: "ИМя56", login: "login", password: "password"},
+        //     {name: "ИМя", login: "login", password: "password"},
+        //     {name: "ИМя", login: "login", password: "password"},
+        //     {name: "ИМя", login: "login", password: "password"},
+        //     {name: "ИМя", login: "login", password: "password"},
+        // ])
     }, []);
 
     // useEffect(() => {
@@ -50,7 +58,9 @@ const ProblemsPage = () => {
                     <div className="jumbotron theme-bg-light  p-3">
                         <h4>Пользователи</h4>
 
-                        <button className="btn btn-outline-success" onClick={nonImplemeneted}>Добавить</button>
+                        <Link to={"add"}>
+                            <button className="btn btn-outline-success">Добавить</button>
+                        </Link>
                         <div className="form-check form-switch m-2">
                             <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault"
                                    onClick={() => setIsPrintMode(!isPrintMode)}/>
@@ -90,7 +100,13 @@ const ProblemsPage = () => {
                                                     is_true={<th className={gc()} scope="col">{id}</th>}
                                                 />
                                                 <th className={gc()}>{user.login}</th>
-                                                <th className={gc()}>{user.password}</th>
+                                                <th className={gc()}>
+                                                    <If condition={true}
+                                                        is_true={user.password}
+                                                        is_false='*******'
+                                                    />
+
+                                                </th>
 
 
                                             </tr>

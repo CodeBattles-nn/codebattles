@@ -9,6 +9,26 @@ const ChampsPage = () => {
 
     const {id, user_id} = useParams();
 
+    let problem_letter = "A";
+    let problem_id = 0;
+
+    const [champVersion, setChampVersion] = useState(0);
+
+    const OnSetNewProblem = () => {
+        apiAxios.post(
+            getApiAddress() + `/api/teacher/champs/${id}`,
+            {
+                problem: problem_letter,
+                problem_id: problem_id
+            }
+        )
+            .then((data) => {
+                // setErrorMsg("Успешный вход")
+                // navigate("/teacher/champs")
+                setChampVersion(champVersion + 1);
+                toast.success("Успешно!")
+            })
+    };
 
     useEffect(() => {
         apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}`).then(
@@ -20,7 +40,7 @@ const ChampsPage = () => {
             })
         // .catch(() => setErrorMsg("Неверные данные"))
         // .finally(() => setIsLoading(false));
-    }, []);
+    }, [champVersion]);
 
 
     const [champs, setChamps] = useState({});
@@ -86,6 +106,7 @@ const ChampsPage = () => {
                                         id="__problem-letter"
                                         name="letter"
                                         className="mb-2 form-control"
+                                        onChange={(event) => problem_letter = event.target.value}
                                     >
                                         <option>A</option>
                                         <option>B</option>
@@ -101,11 +122,12 @@ const ChampsPage = () => {
                             <div className="form-group">
                                 <label className="w-100">
                                     ID задачи
-                                    <input type="number" className="form-control"/>
+                                    <input type="number" className="form-control"
+                                           onChange={(event) => problem_id = event.target.value}/>
                                 </label>
                             </div>
                             <div className="form-group">
-                                <button type="button" className="btn btn-warning" onClick={nonImplemeneted}>
+                                <button type="button" className="btn btn-warning" onClick={OnSetNewProblem}>
                                     Установить
                                 </button>
                             </div>

@@ -29,6 +29,7 @@ import ThemeConfigurer from "./components/configs/ThemeConfigurer";
 import {AppContextProvider} from "./components/AppContextProvider";
 import HeaderSelector from "./components/HeaderSelector";
 import UsersPage from "./pages/teacher/UsersPage";
+import AddUsersPage from "./pages/teacher/AddUsersPage";
 
 function App() {
     return (
@@ -51,6 +52,7 @@ function App() {
                         <Route path="/teacher/champs/:id/access" element={<ChampAccessSettings/>}></Route>
                         <Route path="/teacher/champs/:id/stats" element={<TeacherStatsPage/>}></Route>
                         <Route path="/teacher/champs/:id/users" element={<UsersPage/>}></Route>
+                        <Route path="/teacher/champs/:id/users/add" element={<AddUsersPage/>}></Route>
                         <Route path="/teacher/champs/:id/users/:user_id" element={<TeacherStatsPage/>}></Route>
                         <Route path="/teacher/champs/:id/users/:user_id/sends" element={<TeacherSendsPage/>}></Route>
                         <Route path="/teacher/champs/:id/users/:user_id/sends/:letter" element={<TeacherSeeSandPage/>}></Route>
