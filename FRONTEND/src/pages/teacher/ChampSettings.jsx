@@ -9,28 +9,28 @@ const ChampsPage = () => {
 
     const {id, user_id} = useParams();
 
-    const defaultState = [
-        {
-            id: 2,
-            letter: "A",
-            name: "Пироги"
-        },
-        {
-            letter: "B",
-            id: 1,
-            name: "Буратино"
-        }
-    ]
 
-    const [champs, setChamps] = useState(defaultState);
+    useEffect(() => {
+        apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}`).then(
+            (data) => {
+                // setErrorMsg("Успешный вход")
+                // navigate("/teacher/champs")
+                setChamps(data.data)
+                console.log(data)
+            })
+        // .catch(() => setErrorMsg("Неверные данные"))
+        // .finally(() => setIsLoading(false));
+    }, []);
 
+
+    const [champs, setChamps] = useState({});
 
 
     return (
         <div className="row">
             <div className="col-12">
                 <div className="jumbotron theme-bg-light  p-3">
-                    <h4>Соревнование {"{name}"} | Настройки</h4>
+                    <h4>Соревнование <b>{champs.name} </b>| Настройки</h4>
                     <div>
                         <button className="btn btn-outline-danger">Удалить</button>
                     </div>
@@ -38,7 +38,7 @@ const ChampsPage = () => {
                     <div>
                         <Link className="mr-5" to={`users`}>Управление пользователями</Link>
                         <Link className="mr-5" to={"stats"}>Рейтинг</Link>
-                        <Link to={"access"} >Управление доступом</Link>
+                        <Link to={"access"}>Управление доступом</Link>
                     </div>
 
 
@@ -61,7 +61,7 @@ const ChampsPage = () => {
                             <tbody>
 
                             {
-                                champs.map((champ) => {
+                                champs?.tasks?.map((champ) => {
                                     return (
                                         <tr key={champ}>
                                             <th className="col-1" scope="row">{champ.letter}</th>

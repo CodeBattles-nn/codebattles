@@ -15,7 +15,16 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const onSend = async () => {
-      navigate("/teacher/champs")
+        setIsLoading(true)
+
+        await apiAxios.post(getApiAddress() + '/api/teacher/auth',
+            {id: id, login: login, password: passsword}).then(
+            () => {
+                setErrorMsg("Успешный вход")
+                navigate("/teacher/champs")
+            })
+            .catch(() => setErrorMsg("Неверные данные"))
+            .finally(() => setIsLoading(false));
     };
 
     return (
