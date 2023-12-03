@@ -1,3 +1,4 @@
+from flask import request
 from psycopg2.extras import RealDictCursor
 
 from app import app

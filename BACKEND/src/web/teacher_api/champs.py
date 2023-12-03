@@ -1,5 +1,7 @@
 import string
 
+from flask import request
+
 from app import app
 from database import get_connection
 from decorators import teacher_required
@@ -56,3 +58,27 @@ def get_champs_byid_route(champ_id):
         tasks.append(dict(letter=strs[problems_ids.index(id)], id=id, name=name))
 
     return dict(tasks=tasks, id=fetch[0], name=fetch[1])
+
+
+@app.route("/api/teacher/champs/<champ_id>", methods=['POST'])
+def settings_post_teacher_api(champ_id):
+    connection = get_connection()
+    cur = connection.cursor()
+
+    form = request.json
+    problem = form['problem']
+    problem_id = form['problem_id']
+
+    if problem_id == "":
+        return {"success": "false"}, 400
+    problem_id = int(problem_id)
+
+    print(problem, problem_id)
+
+    cur.execute(f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
+
+    connection.commit()
+
+    return {"success": "true"}
+
+
