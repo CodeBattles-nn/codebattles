@@ -21,13 +21,9 @@ const ChampsPage = () => {
     useEffect(() => {
         apiAxios.get(getApiAddress() + '/api/teacher/champs').then(
             (data) => {
-                // setErrorMsg("Успешный вход")
-                // navigate("/teacher/champs")
                 setChamps(data.data)
                 console.log(data)
             })
-            // .catch(() => setErrorMsg("Неверные данные"))
-            // .finally(() => setIsLoading(false));
     }, []);
 
     return (

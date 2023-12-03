@@ -5,7 +5,6 @@ import apiAxios from "../../apiAxios";
 import If from "../../components/If";
 
 const LoginPage = () => {
-    const [id, setId] = useState(0);
     const [login, setLogin] = useState();
     const [passsword, setPasssword] = useState();
 
@@ -18,7 +17,7 @@ const LoginPage = () => {
         setIsLoading(true)
 
         await apiAxios.post(getApiAddress() + '/api/teacher/auth',
-            {id: id, login: login, password: passsword}).then(
+            {login: login, password: passsword}).then(
             () => {
                 setErrorMsg("Успешный вход")
                 navigate("/teacher/champs")

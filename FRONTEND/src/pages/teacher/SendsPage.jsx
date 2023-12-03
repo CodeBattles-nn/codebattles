@@ -6,16 +6,6 @@ import PageTitle from "../../components/PageTitle";
 const SendsPage = () => {
     const [sends, setSends] = useState({sends: []});
 
-
-    // useEffect(() => {
-    //     apiAxios.get(getApiAddress() + "/api/sends").then(
-    //         (r) => {
-    //             console.log(r.data)
-    //             setSends(r.data)
-    //         }
-    //     )
-    // }, []);
-
     return <div className="jumbotron theme-bg-light p-3">
         <PageTitle title="Посылки"/>
         <h4>Посылки</h4>

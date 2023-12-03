@@ -23,8 +23,6 @@ const ChampsPage = () => {
             }
         )
             .then((data) => {
-                // setErrorMsg("Успешный вход")
-                // navigate("/teacher/champs")
                 setChampVersion(champVersion + 1);
                 toast.success("Успешно!")
             })
@@ -33,13 +31,9 @@ const ChampsPage = () => {
     useEffect(() => {
         apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}`).then(
             (data) => {
-                // setErrorMsg("Успешный вход")
-                // navigate("/teacher/champs")
                 setChamps(data.data)
                 console.log(data)
             })
-        // .catch(() => setErrorMsg("Неверные данные"))
-        // .finally(() => setIsLoading(false));
     }, [champVersion]);
 
 

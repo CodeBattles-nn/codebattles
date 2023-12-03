@@ -34,14 +34,6 @@ const StatsPage = () => {
         setData({cols: "ABCD", users: users})
     }, []);
 
-    // useEffect(() => {
-    //     apiAxios.get(getApiAddress() + "/api/stats").then(
-    //         (r) => {
-    //             console.log(r.data)
-    //             setData(r.data)
-    //         }
-    //     )
-    // }, []);
 
     const myUserId = getCookie("user_id");
 

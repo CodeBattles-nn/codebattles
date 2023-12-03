@@ -9,16 +9,6 @@ const SeeSendPage = () => {
     const [data, setData] = useState({tests: []});
 
     const {id} = useParams();
-    //
-    // useEffect(() => {
-    //     apiAxios.get(getApiAddress() + `/api/send/${id}`).then(
-    //         (r) => {
-    //             console.log(r.data)
-    //             setData(r.data)
-    //         }
-    //     )
-    // }, []);
-
 
     return (
         <div className="jumbotron theme-bg-light  p-3">

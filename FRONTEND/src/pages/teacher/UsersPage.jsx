@@ -18,32 +18,11 @@ const ProblemsPage = () => {
     useEffect(() => {
         apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}/users`).then(
             (data) => {
-                // setErrorMsg("Успешный вход")
-                // navigate("/teacher/champs")
                 setUsers(data.data)
                 console.log(data)
             })
-        //
-        // setUsers([
-        //     {name: "ИМя", login: "login", password: "password"},
-        //     {name: "ИМя", login: "login", password: "password"},
-        //     {name: "ИМя56", login: "login", password: "password"},
-        //     {name: "ИМя", login: "login", password: "password"},
-        //     {name: "ИМя", login: "login", password: "password"},
-        //     {name: "ИМя", login: "login", password: "password"},
-        //     {name: "ИМя", login: "login", password: "password"},
-        // ])
     }, []);
 
-    // useEffect(() => {
-    //     apiAxios.get(getApiAddress() + "/api/problems").then(
-    //         (r) => {
-    //             console.log(r.data)
-    //             setProblems(r.data.problems)
-    //             setCss(r.data.colors)
-    //         }
-    //     )
-    // }, []);
 
     const getClassOrSkip = (className) => {
         if (isPrintMode) return " printMode "
