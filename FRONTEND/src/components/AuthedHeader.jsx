@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import getApiAddress from "../utils/api";
-import {changeTheme} from "../theme.dark";
 import ChangeThemeButton from "./ChangeThemeButton";
 import {useAppContext} from "../hooks/useAppContext";
 import apiAxios from "../apiAxios";

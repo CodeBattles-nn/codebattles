@@ -6,7 +6,6 @@ import If from "../../components/If";
 import PageTitle from "../../components/PageTitle";
 
 import "./printMode.css"
-import {nonImplemeneted} from "../../utils/toast";
 
 const ProblemsPage = () => {
 

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import {cssClassByStatus} from "../../utils/colors";
 import SyntaxHighlight from "../../components/wraps/SyntaxHightlight";

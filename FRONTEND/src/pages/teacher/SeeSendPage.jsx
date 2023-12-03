@@ -1,9 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from "react-router-dom";
-import getApiAddress from "../../utils/api";
+import React, {useState} from 'react';
+import {useParams} from "react-router-dom";
 import {cssClassByStatus} from "../../utils/colors";
 import SyntaxHighlight from "../../components/wraps/SyntaxHightlight";
-import apiAxios from "../../apiAxios";
 import PageTitle from "../../components/PageTitle";
 
 const SeeSendPage = () => {

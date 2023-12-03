@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
-import apiAxios from "../../apiAxios";
 import If from "../../components/If";
 import {changeTheme} from "../../theme.dark";
 

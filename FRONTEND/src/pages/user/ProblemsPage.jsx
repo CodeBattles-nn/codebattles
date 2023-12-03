@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import getApiAddress from "../../utils/api";
 import apiAxios from "../../apiAxios";
-import If from "../../components/If";
 import PageTitle from "../../components/PageTitle";
 
 const ProblemsPage = () => {

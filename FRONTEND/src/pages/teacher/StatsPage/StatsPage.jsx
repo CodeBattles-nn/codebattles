@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate, useParams} from "react-router-dom";
-import getApiAddress from "../../../utils/api";
+import {Link, useParams} from "react-router-dom";
 import {getCookie} from "../../../utils/cookie";
 
 import "./stats.css"
-import apiAxios from "../../../apiAxios";
 import PageTitle from "../../../components/PageTitle";
 
 const StatsPage = () => {

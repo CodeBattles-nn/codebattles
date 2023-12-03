@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 
-import AceEditor from "react-ace";
-
 import "./example.css"
 import "./style.css"
 import {useNavigate, useParams} from "react-router-dom";
@@ -15,7 +13,6 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import Markdown from "../../../components/wraps/Markdown";
 import apiAxios from "../../../apiAxios";
 import CodeEditor from "../../../components/wraps/CodeEditor";
-import {Helmet} from "react-helmet";
 import PageTitle from "../../../components/PageTitle";
 
 

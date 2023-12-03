@@ -1,7 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import getApiAddress from "../../utils/api";
-import apiAxios from "../../apiAxios";
 
 const ChampsPage = () => {
 

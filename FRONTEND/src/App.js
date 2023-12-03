@@ -1,7 +1,5 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-
-import AuthedHeader from "./components/AuthedHeader";
 import StatsPage from "./pages/user/StatsPage/StatsPage";
 import SeeProblemPage from "./pages/user/SeeProblemPage/SeeProblemPage";
 import ProblemsPage from "./pages/user/ProblemsPage";
@@ -25,7 +23,6 @@ import ChampAccessSettings from "./pages/teacher/ChampAccessSettings";
 
 import "./theme.dark.css"
 import "./icons.css"
-import ThemeConfigurer from "./components/configs/ThemeConfigurer";
 import {AppContextProvider} from "./components/AppContextProvider";
 import HeaderSelector from "./components/HeaderSelector";
 import UsersPage from "./pages/teacher/UsersPage";
