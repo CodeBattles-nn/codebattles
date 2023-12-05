@@ -8,7 +8,17 @@ const SeeSendPage = () => {
 
     const [data, setData] = useState({tests: []});
 
-    const {id} = useParams();
+    const {id, user_id, letter} = useParams();
+
+    useEffect(() => {
+        const params = new URLSearchParams([['problem', letter], ['user_id', user_id]]);
+        apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}/stats/search`, {params})
+            .then((r) => {
+                    console.log(r.data)
+                    setData(r.data)
+                }
+            )
+    }, []);
 
     return (
         <div className="jumbotron theme-bg-light  p-3">

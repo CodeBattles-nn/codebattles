@@ -10,30 +10,15 @@ const StatsPage = () => {
 
     const{id } = useParams();
 
+
     useEffect(() => {
-
-        const users = [
-            {
-                id: "1",
-                position: "1",
-                name: "Test",
-                score: 100,
-                problems_score : [100, null, 0, null],
-                last_send: "Last send",
-            },
-            {
-                id: "2",
-                position: 2,
-                name: "Test 2",
-                score: 100,
-                problems_score : [100, null, 0, null],
-                last_send: "Last send",
+        apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}/stats`).then(
+            (r) => {
+                console.log(r.data)
+                setData(r.data)
             }
-        ]
-
-        setData({cols: "ABCD", users: users})
+        )
     }, []);
-
 
     const myUserId = getCookie("user_id");
 
@@ -41,7 +26,7 @@ const StatsPage = () => {
     return <div className="jumbotron theme-bg-light  p-3">
         <PageTitle title="Рейтинг"/>
         <h4>Рейтинг</h4>
-        <p>Для просмотра всех посылок участника кликните на его имя</p>
+        {/*<p>Для просмотра всех посылок участника кликните на его имя</p>*/}
         <p>Для просмотра посылки участника по задаче нажмите на счет за задачу участника</p>
         <p></p>
         <div className="table-responsive">
@@ -76,9 +61,9 @@ const StatsPage = () => {
                             <tr className={tableClassName}>
                                 <th scope="row">{user.position}</th>
                                 <td>
-                                    <Link to={`/teacher/champs/${id}/users/${user.id}/sends`}>
-                                        {user.name}
-                                    </Link>
+                                    {/*<Link to={`/teacher/champs/${id}/users/${user.user_id}/sends`}>*/}
+                                    {user.name}
+                                    {/*</Link>*/}
                                 </td>
                                 <td>{user.score}</td>
                                 {
@@ -88,7 +73,10 @@ const StatsPage = () => {
                                                 <div style={{"text-align": "center"}}
                                                      className="text-center">
                                                     <p className="p-0 m-0">
-                                                        <Link to={`/teacher/champs/${id}/users/${user.id}/sends/${data.cols[i]}`}>
+                                                        <Link
+                                                            target="_blank"
+                                                            to={`/teacher/champs/${id}/users/${user.user_id}/sends/${data.cols[i]}`}
+                                                        >
                                                             {problem_score}
                                                         </Link>
                                                     </p>
