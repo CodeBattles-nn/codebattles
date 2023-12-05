@@ -120,7 +120,7 @@ def check_system(r):
     con = get_connection()
     cur = con.cursor()
 
-    points = (round((correct_count / all_count) * 100),)
+    points = (round((correct_count / all_count) * 100))
 
     cur.execute(
         f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = {points} \
