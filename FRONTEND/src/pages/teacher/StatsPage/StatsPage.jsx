@@ -4,6 +4,8 @@ import {getCookie} from "../../../utils/cookie";
 
 import "./stats.css"
 import PageTitle from "../../../components/PageTitle";
+import apiAxios from "../../../apiAxios";
+import getApiAddress from "../../../utils/api";
 
 const StatsPage = () => {
     const [data, setData] = useState({cols: "", users: []});

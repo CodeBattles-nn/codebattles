@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../../utils/api";
 import {toast} from "react-toastify";
 
+import "react-ace"
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/snippets/python";
 import "ace-builds/src-noconflict/theme-tomorrow";
