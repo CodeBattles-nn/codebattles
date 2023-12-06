@@ -40,14 +40,49 @@ const ChampsPage = () => {
     const [champs, setChamps] = useState({});
 
 
+    const [deleteModalText, setDeleteModalText] = useState("")
+
     return (
         <div className="row">
             <div className="col-12">
                 <div className="jumbotron theme-bg-light  p-3">
                     <h4>Соревнование <b>{champs.name} </b>| Настройки</h4>
                     <div>
-                        <button className="btn btn-outline-danger">Удалить</button>
+                        <button className="btn btn-outline-danger" data-toggle="modal" data-target="#exampleModal">Удалить</button>
                     </div>
+
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">Удаление соревнования <b>{champs.name} </b></h5>
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                    <p>
+                                        Вы точно хотите удалить соревнование? Это действие нельзя будет отменить
+                                    </p>
+                                    <form>
+                                        <div className="form-group">
+                                            <label htmlFor="recipient-name" className="col-form-label">Введите <b>{champs.name} </b> для удаления</label>
+                                            <input type="text" className="form-control" id="recipient-name" onChange={ (event) => setDeleteModalText(event.target.value)} />
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" disabled={deleteModalText !== champs.name}>
+                                        Удалить 
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <br/>
                     <div>
                         <Link className="mr-5" to={`users`}>Управление пользователями</Link>
