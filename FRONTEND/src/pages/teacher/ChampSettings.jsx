@@ -95,7 +95,7 @@ const ChampsPage = () => {
                     <br/>
 
                     <h4>Задачи</h4>
-                    <Link to="rikroll">Посмотреть все задачи</Link>
+                    <Link to="/teacher/problems">Посмотреть все задачи</Link>
 
                     <div className="table-responsive mt-4">
                         <table className="table table-striped table-bordered ">
@@ -117,8 +117,7 @@ const ChampsPage = () => {
                                             <th className="col-1" scope="row">{champ.id}</th>
                                             <td className="col">{champ.name}</td>
                                             <th className="col-1" scope="row">
-                                                <Link to="" onClick={nonImplemeneted}>Просмотр
-                                                </Link>
+                                                <Link to={`/teacher/problems/${champ.id}`}>Просмотр</Link>
                                             </th>
 
                                         </tr>

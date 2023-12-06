@@ -1,0 +1,7 @@
+.nav-link.active.navbar{
+    background-color: rgb(128, 128, 128);
+    border-radius: 10px;
+}
+.width-inner {
+    display:inline-block;
+}
