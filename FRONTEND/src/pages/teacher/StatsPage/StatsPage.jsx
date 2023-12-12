@@ -10,7 +10,7 @@ import getApiAddress from "../../../utils/api";
 const StatsPage = () => {
     const [data, setData] = useState({cols: "", users: []});
 
-    const{id } = useParams();
+    const {id} = useParams();
 
 
     useEffect(() => {
@@ -42,7 +42,7 @@ const StatsPage = () => {
                     {
                         [...data.cols].map((col) => {
                             return (
-                                <th scope="col"><Link to={`/problem/${col}`}>{col}</Link></th>
+                                <th scope="col">{col}</th>
                             )
                         })
                     }
