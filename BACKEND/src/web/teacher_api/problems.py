@@ -1,9 +1,12 @@
+import json
+
 from flask import request
 from psycopg2.extras import RealDictCursor
 
 from app import app
 from database import get_connection
 from decorators import teacher_required
+from utils import fix_new_line
 
 
 @app.route("/api/teacher/problems")
@@ -24,7 +27,8 @@ def get_problems_byid_api_route(problem_id):
     connection = get_connection()
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-    cursor.execute(f"SELECT id, name, description FROM problems WHERE id = {problem_id}")
+    cursor.execute(
+        f"""SELECT id, name, description, "in", "out", examples, tests FROM problems WHERE id = {problem_id}""")
     problem = cursor.fetchone()
 
     print(problem)
@@ -32,4 +36,13 @@ def get_problems_byid_api_route(problem_id):
     if problem is None:
         return "", 404
 
-    return problem
+    out_data = {
+        'tests': [],
+        'examples': fix_new_line(json.loads(problem['examples'])),
+        'name': problem['name'],
+        'description': problem['description'],
+        'out_data': problem['out'],
+        'in_data': problem['in']
+    }
+
+    return out_data
