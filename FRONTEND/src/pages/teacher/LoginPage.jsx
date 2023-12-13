@@ -42,7 +42,7 @@ const LoginPage = () => {
                             <h3 className="text-center text-primary">
                                 Интерфейс Учителя
                             </h3>
-                            <br />
+                            <br/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Логин</label>

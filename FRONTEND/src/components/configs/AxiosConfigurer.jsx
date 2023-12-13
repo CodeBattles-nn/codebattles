@@ -16,12 +16,28 @@ const AxiosConfigurer = () => {
         console.log(error)
 
         if (error.response?.status === 403) {
-            navigate("/login")
+            const redirect_url = error.response?.data?.redirect;
+            let use_redirect = error.response?.data?.use_redirect;
+            if (use_redirect === undefined || use_redirect === null) use_redirect = true;
+
+            console.log(use_redirect + "|")
+
+            console.log(error.response)
+
+            if (use_redirect) {
+                if (redirect_url) {
+                    navigate(redirect_url)
+                } else {
+                    navigate("/login")
+                }
+            }
+
+
             setAuthed(false);
         } else if (error.response?.status === 404) {
             toast.warn("Запрашиваемая страница не найдена!", {autoClose: 5000})
             // navigate("/problems")
-        }else if (error.response?.status >= 500) {
+        } else if (error.response?.status >= 500) {
             serverErrorToast();
             navigate("/problems")
         } else {
