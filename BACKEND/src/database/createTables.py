@@ -92,3 +92,25 @@ def get_query_sends_table(champ_id):
         lang TEXT
     ); 
     """
+
+
+TEACHER_CHAMPS_TABLE = """
+CREATE TABLE IF NOT EXISTS teacher_champs
+(
+    id SERIAL PRIMARY KEY,
+    teacher_id bigint NOT NULL,
+    champ_id bigint NOT NULL,
+    "isOwner" boolean NOT NULL DEFAULT true
+)"""
+
+GLOBALUSERS_TABLE = """
+CREATE TABLE IF NOT EXISTS globalusers
+(
+    id SERIAL PRIMARY KEY,
+    login text  NOT NULL,
+    password text NOT NULL,
+    role text NOT NULL,
+    description text,
+    name text
+)
+"""

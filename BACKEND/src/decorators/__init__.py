@@ -2,6 +2,7 @@ from functools import wraps
 
 import psycopg2
 from flask import request, redirect, make_response
+from psycopg2.extras import RealDictCursor
 
 import env
 from database import get_connection
@@ -38,9 +39,22 @@ def teacher_required(f):
         teacher_login_password = request.cookies.get("teacher", None)
 
         # print(f"{teacher_login_password=}")
-        is_teacher = teacher_login_password == f"{'login'}_{'psswd'}_88416"
+        # is_teacher = teacher_login_password == f"{'login'}_{'psswd'}_88416"
+        login, password, _ = teacher_login_password.split("_")
 
-        if is_teacher:
+        # return ",", 403
+
+        connection = get_connection()
+        cursor = connection.cursor(cursor_factory=RealDictCursor)
+
+        cursor.execute(f"""
+            SELECT id from globalusers
+        WHERE role = 'TEACHER' 
+          AND password = '{password}'
+          AND login = '{login}'
+        """)
+
+        if cursor.fetchone():
             return f(*args, **kwargs)
         else:
             return {"success": False, "msg": "Bad Credentials"}, 403
