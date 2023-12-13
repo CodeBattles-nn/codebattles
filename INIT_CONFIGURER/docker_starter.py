@@ -1,4 +1,6 @@
+import time
+
 import main
 
 while 1:
-    pass
+    time.sleep(3600)
