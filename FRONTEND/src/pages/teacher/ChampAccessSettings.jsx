@@ -1,20 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import getApiAddress from "../../utils/api";
-import apiAxios from "../../apiAxios";
 
 const ChampsPage = () => {
 
     const defaultState = [
         {
             id: 2,
-            letter: "A",
-            name: "hi"
+            name: "Самсонов Алекйсей Иванович",
         },
         {
-            letter: "B",
+            name: "Суслов Ярослав Андреевич",
             id: 1,
-            name: "hiler"
         }
     ]
 
@@ -47,8 +43,8 @@ const ChampsPage = () => {
                                 champs.map((champ) => {
                                     return (
                                         <tr key={champ}>
-                                            <th className="col-2" scope="row">{champ.letter}</th>
-                                            <th className="col" scope="row">{champ.id}</th>
+                                            <th className="col-2" scope="row">{champ.id}</th>
+                                            <th className="col" scope="row">{champ.name}</th>
                                             <th className="col-1" scope="row">
                                                 <Link to="">Удалить</Link>
                                             </th>

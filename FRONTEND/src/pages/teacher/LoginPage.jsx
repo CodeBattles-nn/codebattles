@@ -5,7 +5,6 @@ import apiAxios from "../../apiAxios";
 import If from "../../components/If";
 
 const LoginPage = () => {
-    const [id, setId] = useState(0);
     const [login, setLogin] = useState();
     const [passsword, setPasssword] = useState();
 
@@ -15,7 +14,16 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const onSend = async () => {
-      navigate("/teacher/champs")
+        setIsLoading(true)
+
+        await apiAxios.post(getApiAddress() + '/api/teacher/auth',
+            {login: login, password: passsword}).then(
+            () => {
+                setErrorMsg("Успешный вход")
+                navigate("/teacher/champs")
+            })
+            .catch(() => setErrorMsg("Неверные данные"))
+            .finally(() => setIsLoading(false));
     };
 
     return (
@@ -34,7 +42,7 @@ const LoginPage = () => {
                             <h3 className="text-center text-primary">
                                 Интерфейс Учителя
                             </h3>
-                            <br />
+                            <br/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputEmail1">Логин</label>

@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import getApiAddress from "../utils/api";
+import React from 'react';
+import {Link} from "react-router-dom";
 import ChangeThemeButton from "./ChangeThemeButton";
 
 const UnAuthedHeader = () => {
@@ -18,15 +17,33 @@ const UnAuthedHeader = () => {
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
+
+
                 <ul className="navbar-nav mr-auto">
+
+                    <li className="nav-item dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Интерфейс
+                        </a>
+                        <div className="dropdown-menu " aria-labelledby="navbarDropdown">
+                            <Link className="dropdown-item" to="/teacher">Учитель</Link>
+                            <Link className="dropdown-item" to="/login">Ученик</Link>
+                            <div className="dropdown-divider"></div>
+                            <Link className="dropdown-item" to="/admin">Администратор</Link>
+                        </div>
+                    </li>
+
                     <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/login">Вход</Link>
                     </li>
+
                 </ul>
                 <ul className="navbar-nav  my-2 my-md-0">
                     <li className="nav-item mr-2" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/statuses">Помощь</Link>
                     </li>
+
+
 
 
                     <ChangeThemeButton />

@@ -1,11 +1,10 @@
 from functools import wraps
 
 import psycopg2
-import redis
 from flask import request, redirect, make_response
+from psycopg2.extras import RealDictCursor
 
 import env
-
 from database import get_connection
 from database.redis import redis_pool
 from database.redis.redisWrapper import RedisWrapper
@@ -30,6 +29,35 @@ def admin_required(f):
         if is_admin:
             return f(*args, **kwargs)
         return redirect("/admin/auth")
+
+    return decorated_function
+
+
+def teacher_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        teacher_login_password = request.cookies.get("teacher", None)
+
+        # print(f"{teacher_login_password=}")
+        # is_teacher = teacher_login_password == f"{'login'}_{'psswd'}_88416"
+        login, password, _ = teacher_login_password.split("_")
+
+        # return ",", 403
+
+        connection = get_connection()
+        cursor = connection.cursor(cursor_factory=RealDictCursor)
+
+        cursor.execute(f"""
+            SELECT id from globalusers
+        WHERE role = 'TEACHER' 
+          AND password = '{password}'
+          AND login = '{login}'
+        """)
+
+        if cursor.fetchone():
+            return f(*args, **kwargs)
+        else:
+            return {"success": False, "msg": "Bad Credentials"}, 403
 
     return decorated_function
 

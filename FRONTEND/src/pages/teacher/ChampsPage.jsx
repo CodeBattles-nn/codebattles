@@ -18,6 +18,13 @@ const ChampsPage = () => {
 
     const [champs, setChamps] = useState(defaultState);
 
+    useEffect(() => {
+        apiAxios.get(getApiAddress() + '/api/teacher/champs').then(
+            (data) => {
+                setChamps(data.data)
+                console.log(data)
+            })
+    }, []);
 
     return (
         <div className="row">

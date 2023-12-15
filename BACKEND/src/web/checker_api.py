@@ -77,7 +77,6 @@ def send_prog(user_id, uid):
         "id": inserted_id,
     }
 
-
     data = {
         "meta": json.dumps(meta),
         "source": request.form['src'],
@@ -121,8 +120,11 @@ def check_system(r):
     con = get_connection()
     cur = con.cursor()
 
-    cur.execute(f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = %s WHERE id = %s;",
-                (round((correct_count / all_count) * 100), user_id))
+    points = (round((correct_count / all_count) * 100))
+
+    cur.execute(
+        f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = {points} \
+        WHERE id = {user_id} AND {meta['problem'][0]} > {points};")
 
     result_str = json.dumps(data['results'], indent=2)
 

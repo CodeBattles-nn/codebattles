@@ -42,6 +42,6 @@ def login_post_api():
 
         return resp
     except Exception as e:
-        pass
+        print(e)
 
     return {"success": False, "msg": "Bad Credentials"}, 403

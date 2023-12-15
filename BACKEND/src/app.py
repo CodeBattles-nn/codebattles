@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 
 @app.after_request
-def after_request_func(response):
+def cors_middleware(response):
     origin = request.headers.get('Origin')
     if request.method == 'OPTIONS':
         response = make_response()

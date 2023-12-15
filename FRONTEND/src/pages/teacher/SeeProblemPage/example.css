@@ -1,0 +1,32 @@
+.console {
+    white-space: pre-line;
+    background-color: aliceblue;
+    border: solid 1px;
+}
+
+
+p.console{
+    color: #801d1d;
+    font-weight: 400;
+    padding: 5px;
+    overflow-x: scroll;
+}
+
+.example {
+    margin-bottom: 25px;
+}
+
+.copy-btn{
+    text-align: justify; float: right;
+    height: min-content;
+    width: min-content;
+    font-size: smaller;
+    border: solid gray 1px;
+}
+
+.copy-btn:hover{
+    transition: 0.3s;
+    background-color: gray;
+    color: white;
+}
+

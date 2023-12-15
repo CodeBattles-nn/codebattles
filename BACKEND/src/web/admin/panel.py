@@ -1,14 +1,12 @@
 import random
 import string
-from transliterate import translit
 
 from flask import render_template, redirect, request
 
 from app import app
 from database import get_connection
-from database.createTables import getQueryUsersTable, getQuerySendsTable
+from database.createTables import get_query_users_table, get_query_sends_table
 from decorators import admin_required
-from passwordTools import get_random_string
 
 
 @app.route("/admin")
@@ -55,10 +53,10 @@ def settings(champ_id):
     tasks = []
 
     for i, task in enumerate(x):
-        id = task[0]
+        task_id = task[0]
         name = task[1]
-        tasks_dict[id] = task
-        tasks.append((strs[problems_ids.index(id)], id, name))
+        tasks_dict[task_id] = task
+        tasks.append((strs[problems_ids.index(task_id)], task_id, name))
 
     tasks.sort()
 
@@ -111,8 +109,8 @@ def create_champ_post():
     cur.execute("SELECT currval(pg_get_serial_sequence('champs','id'));")
     champ_id = cur.fetchone()[0]
 
-    cur.execute(getQueryUsersTable(champ_id))
-    cur.execute(getQuerySendsTable(champ_id))
+    cur.execute(get_query_users_table(champ_id))
+    cur.execute(get_query_sends_table(champ_id))
 
     connection.commit()
 
@@ -144,8 +142,8 @@ def create_users_in_champ_post(champ_id):
         #
         # password = get_random_string(8)
 
-        login = ''.join(map(str, [random.randint(0, 9) for i in range(5)]))
-        password = ''.join(map(str, [random.randint(0, 9) for i in range(5)]))
+        login = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
+        password = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
 
         cursor.execute(f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
                        (login, password, name))
@@ -157,7 +155,7 @@ def create_users_in_champ_post(champ_id):
 
 @app.route("/admin/champ/<champ_id>/users")
 @admin_required
-def users(champ_id):
+def users_route(champ_id):
     connection = get_connection()
     cur = connection.cursor()
 

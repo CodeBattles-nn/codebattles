@@ -1,22 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import getApiAddress from "../../utils/api";
-import apiAxios from "../../apiAxios";
 import If from "../../components/If";
 import PageTitle from "../../components/PageTitle";
 
 const SendsPage = () => {
     const [sends, setSends] = useState({sends: []});
-
-
-    useEffect(() => {
-        apiAxios.get(getApiAddress() + "/api/sends").then(
-            (r) => {
-                console.log(r.data)
-                setSends(r.data)
-            }
-        )
-    }, []);
 
     return <div className="jumbotron theme-bg-light p-3">
         <PageTitle title="Посылки"/>

@@ -1,5 +1,5 @@
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nord as theme } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {nord as theme} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 const SyntaxHighlight = ({ props, children, lang = "" }) => {
 

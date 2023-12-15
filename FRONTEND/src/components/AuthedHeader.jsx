@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import getApiAddress from "../utils/api";
-import {changeTheme} from "../theme.dark";
 import ChangeThemeButton from "./ChangeThemeButton";
 import {useAppContext} from "../hooks/useAppContext";
 import apiAxios from "../apiAxios";
@@ -50,6 +49,11 @@ const AuthedHeader = () => {
                     </li>
                 </ul>
                 <ul className="navbar-nav  my-2 my-md-0">
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a className="dropdown-item" href="#">Action</a>
+                        <a className="dropdown-item" href="#">Another action</a>
+                        <a className="dropdown-item" href="#">Something else here</a>
+                    </div>
                     <li className="nav-item mr-2" data-toggle="collapse" data-target=".navbar-collapse.show">
                         <Link className="nav-link" to="/statuses">Помощь</Link>
                     </li>

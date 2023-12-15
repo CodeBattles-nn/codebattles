@@ -1,31 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
-import getApiAddress from "../../utils/api";
 import {cssClassByStatus} from "../../utils/colors";
 import SyntaxHighlight from "../../components/wraps/SyntaxHightlight";
-import apiAxios from "../../apiAxios";
 import PageTitle from "../../components/PageTitle";
+import apiAxios from "../../apiAxios";
+import getApiAddress from "../../utils/api";
 
 const SeeSendPage = () => {
 
     const [data, setData] = useState({tests: []});
 
-    const {id} = useParams();
+    const {id, user_id, letter} = useParams();
 
     useEffect(() => {
-        apiAxios.get(getApiAddress() + `/api/send/${id}`).then(
-            (r) => {
-                console.log(r.data)
-                setData(r.data)
-            }
-        )
+        const params = new URLSearchParams([['problem', letter], ['user_id', user_id]]);
+        apiAxios.get(getApiAddress() + `/api/teacher/champs/${id}/stats/search`, {params})
+            .then((r) => {
+                    console.log(r.data)
+                    setData(r.data)
+                }
+            )
     }, []);
-
 
     return (
         <div className="jumbotron theme-bg-light  p-3">
             <PageTitle title={`Посылка #${id}`}/>
-            <h3>Анализ посылки</h3>
+            <h3>Просмотр посылки</h3>
             <p><b>Язык:</b> {data.lang}</p>
             <p><b>Исходный код:</b></p>
             <SyntaxHighlight lang={data.lang_id}>

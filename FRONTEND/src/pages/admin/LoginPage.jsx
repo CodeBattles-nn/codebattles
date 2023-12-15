@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import getApiAddress from "../../utils/api";
 import {useNavigate} from "react-router-dom";
-import apiAxios from "../../apiAxios";
 import If from "../../components/If";
 import {changeTheme} from "../../theme.dark";
 
@@ -76,34 +74,6 @@ const LoginPage = () => {
                         </button>
 
                         <p/>
-
-                        <button
-                            className="btn btn-primary"
-                            type="button"
-                            onClick={() => changeTheme(true)}
-                        >Dark
-                        </button>
-
-                        <button
-                            className="btn btn-primary"
-                            type="button"
-                            onClick={() => changeTheme(false)}
-                        >Light
-                        </button>
-
-                        <span className="material-symbols-outlined">
-                        dark_mode
-                        </span>
-                        <span className="material-symbols-outlined">
-
-
-                        light_mode
-                        </span>
-
-                        <span className="material-symbols-outlined">
-routine
-</span>
-
                     </form>
                 </div>
             </div>
