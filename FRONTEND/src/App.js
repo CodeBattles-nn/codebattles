@@ -29,6 +29,7 @@ import {AppContextProvider} from "./components/AppContextProvider";
 import HeaderSelector from "./components/HeaderSelector";
 import UsersPage from "./pages/teacher/UsersPage";
 import AddUsersPage from "./pages/teacher/AddUsersPage";
+import AddProblemsPage from "./pages/teacher/AddProblemsPage";
 
 function App() {
     return (
@@ -57,6 +58,7 @@ function App() {
                         <Route path="/teacher/champs/:id/users/:user_id/sends/:letter" element={<TeacherSeeSandPage/>}></Route>
                         <Route path="/teacher/problems" element={<TeacherProblemsPage/>}></Route>
                         <Route path="/teacher/problems/:id" element={<TeacherSeeProblemPage/>}></Route>
+                        <Route path="/teacher/problems/add" element={<AddProblemsPage/>}></Route>
                         <Route path="/secret" element={<h1>Привет 2</h1>}></Route>
                         <Route path="*" element={<ProblemsPage/>}/>
                     </Routes>

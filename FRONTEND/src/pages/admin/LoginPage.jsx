@@ -74,34 +74,6 @@ const LoginPage = () => {
                         </button>
 
                         <p/>
-
-                        <button
-                            className="btn btn-primary"
-                            type="button"
-                            onClick={() => changeTheme(true)}
-                        >Dark
-                        </button>
-
-                        <button
-                            className="btn btn-primary"
-                            type="button"
-                            onClick={() => changeTheme(false)}
-                        >Light
-                        </button>
-
-                        <span className="material-symbols-outlined">
-                        dark_mode
-                        </span>
-                        <span className="material-symbols-outlined">
-
-
-                        light_mode
-                        </span>
-
-                        <span className="material-symbols-outlined">
-routine
-</span>
-
                     </form>
                 </div>
             </div>
