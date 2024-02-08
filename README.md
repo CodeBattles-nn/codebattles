@@ -1,7 +1,7 @@
 # CodeBattles
 
 [![deploy](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml)
-[![Licence](https://img.shields.io/github/license/doctorixx/CodeBattles?style=flat)](./LICENSE)
+[![Licence](https://img.shields.io/github/license/CodeBattles-nn/CodeBattles?style=flat)](./LICENSE)
 ## Info
 Like codeforces or Yandex Contest system
 
