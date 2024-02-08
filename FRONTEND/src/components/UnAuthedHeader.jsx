@@ -28,8 +28,8 @@ const UnAuthedHeader = () => {
                         <div className="dropdown-menu " aria-labelledby="navbarDropdown">
                             <Link className="dropdown-item" to="/teacher">Учитель</Link>
                             <Link className="dropdown-item" to="/login">Ученик</Link>
-                            <div className="dropdown-divider"></div>
-                            <Link className="dropdown-item" to="/admin">Администратор</Link>
+                            {/*<div className="dropdown-divider"></div>*/}
+                            {/*<Link className="dropdown-item" to="/admin">Администратор</Link>*/}
                         </div>
                     </li>
 
