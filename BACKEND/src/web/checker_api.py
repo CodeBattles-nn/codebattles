@@ -124,7 +124,7 @@ def check_system(r):
 
     cur.execute(
         f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = {points} \
-        WHERE id = {user_id} AND {meta['problem'][0]} > {points};")
+        WHERE id = {user_id} AND ({meta['problem'][0]} < {points} OR {meta['problem'][0]} IS NULL)")
 
     result_str = json.dumps(data['results'], indent=2)
 

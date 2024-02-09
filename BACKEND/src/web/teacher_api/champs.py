@@ -1,9 +1,10 @@
 import string
 
-from flask import request
+from flask import request, redirect
 
 from app import app
 from database import get_connection
+from database.createTables import get_query_users_table, get_query_sends_table
 from decorators import teacher_required
 
 
@@ -21,6 +22,28 @@ def get_champs_route():
 
     return champs
 
+
+@app.route("/api/teacher/champs", methods=['POST'])
+@teacher_required
+def create_champ_post_teacher():
+    name = request.json['name']
+
+    connection = get_connection()
+    cur = connection.cursor()
+
+    cur.execute("INSERT INTO champs (name) VALUES (%s)", (name,))
+
+    connection.commit()
+
+    cur.execute("SELECT currval(pg_get_serial_sequence('champs','id'));")
+    champ_id = cur.fetchone()[0]
+
+    cur.execute(get_query_users_table(champ_id))
+    cur.execute(get_query_sends_table(champ_id))
+
+    connection.commit()
+
+    return redirect("/admin")
 
 @app.route("/api/teacher/champs/<champ_id>")
 @teacher_required

@@ -32,6 +32,7 @@ const ChampsPage = () => {
                 <div className="jumbotron theme-bg-light  p-3">
                     <h4>Соревнования</h4>
                     <p></p>
+                    <Link className="btn btn-success mb-3" to={"/teacher/champs/new"}>Добавить</Link>
                     <div className="table-responsive">
                         <table className="table table-striped table-bordered">
                             <thead>
