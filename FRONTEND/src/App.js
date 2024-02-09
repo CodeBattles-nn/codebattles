@@ -30,6 +30,9 @@ import HeaderSelector from "./components/HeaderSelector";
 import UsersPage from "./pages/teacher/UsersPage";
 import AddUsersPage from "./pages/teacher/AddUsersPage";
 import AddProblemsPage from "./pages/teacher/AddProblemsPage";
+import ProblemSeePageSwitch from "./pages/user/ProblemsSeePageSwitch";
+import SeeProblemQuestionPage from "./pages/user/SeeProblemQuestionPage";
+import CreateChampPage from "./pages/teacher/CreateChampPage";
 
 function App() {
     return (
@@ -40,7 +43,8 @@ function App() {
                     <Routes>
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
-                        <Route path="/problem/:letter" element={<SeeProblemPage/>}/>
+                        {/*<Route path="/problem/:letter" element={<ProblemSeePageSwitch/>}/>*/}
+                        {/*<Route path="/problem/:letter/TEST" element={<SeeProblemQuestionPage/>}/>*/}
                         <Route path="/problems" element={<ProblemsPage/>}/>
                         <Route path="/sends" element={<SendsPage/>}/>
                         <Route path="/send/:id" element={<SeeSendPage/>}/>
@@ -48,6 +52,7 @@ function App() {
                         <Route path="/admin" element={<AdminLoginPage/>}></Route>
                         <Route path="/teacher" element={<TeacherLoginPage/>}></Route>
                         <Route path="/teacher/champs" element={<ChampsPage/>}></Route>
+                        <Route path="/teacher/champs/new" element={<CreateChampPage/>}></Route>
                         <Route path="/teacher/champs/:id" element={<ChampSettings/>}></Route>
                         <Route path="/teacher/champs/:id/access" element={<ChampAccessSettings/>}></Route>
                         <Route path="/teacher/champs/:id/stats" element={<TeacherStatsPage/>}></Route>
