@@ -4,10 +4,10 @@ WORKDIR /app
 COPY yarn.lock /app
 COPY package.json /app
 
-RUN yarn install
+RUN npm install
 
 COPY . /app
-RUN yarn build
+RUN npm run build
 
 # production environment
 FROM nginx:stable-alpine
