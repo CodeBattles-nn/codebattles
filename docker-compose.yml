@@ -48,7 +48,7 @@ services:
   gateway:
     build: GATEWAY/.
     ports:
-      - "80:80"
+      - "2500:80"
     depends_on:
       - frontend
       - backend
