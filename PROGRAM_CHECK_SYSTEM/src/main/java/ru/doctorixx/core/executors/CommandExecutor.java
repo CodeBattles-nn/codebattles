@@ -1,5 +1,6 @@
 package ru.doctorixx.core.executors;
 
+import ru.doctorixx.Env;
 import ru.doctorixx.core.compilers.AbstractCompiler;
 import ru.doctorixx.core.structures.ProcessEndStatus;
 import ru.doctorixx.core.structures.ProgramResult;
@@ -33,7 +34,12 @@ public abstract class CommandExecutor {
         List<String> command = new LinkedList<>();
 
         command.add(mainCommand);
-        command.add(filename);
+
+        boolean needToAddFileName = Boolean.parseBoolean(Env.get(Env.EnvVars.ENV_EXECUTOR_WITH_FILENAME));
+        if (needToAddFileName) {
+            command.add(filename);
+        }
+
 
         ProcessBuilder builder = new ProcessBuilder(command)
                 .directory(new File(directory));

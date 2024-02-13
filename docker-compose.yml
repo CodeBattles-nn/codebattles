@@ -71,3 +71,7 @@ services:
     build:
       dockerfile: ./Python.Dockerfile
     restart: unless-stopped
+  checker-pascal:
+    build:
+      dockerfile: ./Pascal.Dockerfile
+    restart: unless-stopped

@@ -14,6 +14,7 @@ public class Env {
         ENV_EXECUTOR_COMPILER_COMMAND("ENV_EXECUTOR_COMPILER_COMMAND"),
         ENV_EXECUTOR_COMPILER_NEED("ENV_EXECUTOR_COMPILER_NEED"),
         ENV_EXECUTOR_RUN_COMMAND("ENV_EXECUTOR_RUN_COMMAND"),
+        ENV_EXECUTOR_WITH_FILENAME("ENV_EXECUTOR_WITH_FILENAME"),
 
         ;
         private final String value;
@@ -38,6 +39,7 @@ public class Env {
         defaultEnv.put(EnvVars.ENV_EXECUTOR_RUN_COMMAND.value, "java");
         defaultEnv.put(EnvVars.ENV_EXECUTOR_ENABLE.value, "false");
         defaultEnv.put(EnvVars.ENV_EXECUTOR_FILENAME.value, "Main.java");
+        defaultEnv.put(EnvVars.ENV_EXECUTOR_WITH_FILENAME.value, "true");
     }
 
     public static String get(String key) {
