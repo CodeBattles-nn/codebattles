@@ -43,8 +43,8 @@ function App() {
                     <Routes>
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
-                        {/*<Route path="/problem/:letter" element={<ProblemSeePageSwitch/>}/>*/}
-                        {/*<Route path="/problem/:letter/TEST" element={<SeeProblemQuestionPage/>}/>*/}
+                        <Route path="/problem/:letter" element={<ProblemSeePageSwitch/>}/>
+                        <Route path="/problem/:letter/TEST" element={<SeeProblemQuestionPage/>}/>
                         <Route path="/problems" element={<ProblemsPage/>}/>
                         <Route path="/sends" element={<SendsPage/>}/>
                         <Route path="/send/:id" element={<SeeSendPage/>}/>
