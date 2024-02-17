@@ -87,7 +87,7 @@ def api_send_prog(user_id, uid):
 
     #print(cur.fetchone())
 
-    cur.execute(f"SELECT address FROM servers WHERE id = {request.json['cars']}")
+    cur.execute(f"SELECT address FROM servers WHERE id = {request.json['cars']} and enabled = true")
 
     server_addr = cur.fetchone()
     server_addr = server_addr[0]
