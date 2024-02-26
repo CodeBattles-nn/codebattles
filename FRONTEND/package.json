@@ -5,7 +5,7 @@
   "dependencies": {
     "@vitejs/plugin-react": "^4.2.1",
     "ace-builds": "^1.30.0",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "dompurify": "^3.0.8",
     "nth-check": "^2.0.1",
