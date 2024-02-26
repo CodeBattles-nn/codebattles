@@ -85,12 +85,12 @@ def api_send_prog(user_id, uid):
 
     connection.commit()
 
-    print(cur.fetchone())
+    #print(cur.fetchone())
 
-    cur.execute(f"SELECT address FROM servers WHERE id = {request.json['cars']}")
+    cur.execute(f"SELECT address FROM servers WHERE id = {request.json['cars']} and enabled = true")
 
-    server_addr = cur.fetchone()[0]
-
+    server_addr = cur.fetchone()
+    server_addr = server_addr[0]
     print()
 
     requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test", json=data)

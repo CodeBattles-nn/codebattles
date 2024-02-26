@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import remarkGemoji from 'remark-gemoji'
 import SyntaxHighlight from "./SyntaxHightlight";
+import dompurify from 'dompurify';
 
 
 const Markdown = ({text = ""}) => {
@@ -23,7 +25,10 @@ const Markdown = ({text = ""}) => {
     return (
         <ReactMarkdown
             remarkPlugins={[gfm, remarkGemoji]}
-            children={text}
+            rehypePlugins={[rehypeRaw]}
+            children={
+            dompurify.sanitize(text)
+            }
             components={components}
         />
     )

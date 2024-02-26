@@ -141,7 +141,7 @@ const SeeProblemPage = () => {
                                 name="cars"
                                 className="mb-2"
                                 style={{"height": "15%;"}}
-                                onSelect={e => {
+                                onChange={e => {
                                     console.log("Hi")
                                     setLang(e.target.value)
                                 }}

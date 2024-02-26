@@ -34,7 +34,7 @@ const CreateChampPage = () => {
     return (<div className="row">
             <div className="col-12">
                 <div className="jumbotron theme-bg-light  p-3">
-                    <h4>Добавить пользователей</h4>
+                    <h4>Добавить соревнование</h4>
                     <form className="p-3">
                         <div className="form-group">
                             <label htmlFor="exampleFormControlTextarea1">Введите название соревнования</label>

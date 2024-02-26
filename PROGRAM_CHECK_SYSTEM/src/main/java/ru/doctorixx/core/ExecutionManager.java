@@ -48,7 +48,7 @@ public class ExecutionManager {
 
     private ProgramResult execute(int runId) {
         ProgramResult out;
-        File tempdir = new File(executeHomeDirectory + "\\" + runId);
+        File tempdir = new File(executeHomeDirectory + "/" + runId);
         try {
 
             if (!hasNewId) {
@@ -74,7 +74,7 @@ public class ExecutionManager {
             throw new RuntimeException(e);
         } finally {
             FileUtils.recursiveDelete(tempdir);
-            tempdir.deleteOnExit();
+            //tempdir.deleteOnExit();
         }
 
         return out;

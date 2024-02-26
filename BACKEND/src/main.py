@@ -25,4 +25,4 @@ def webapp():
 
 
 if __name__ == '__main__':
-    webapp().run(host="0.0.0.0", port=80, debug=True)
+    webapp().run(host="0.0.0.0", port=2500, debug=True)
