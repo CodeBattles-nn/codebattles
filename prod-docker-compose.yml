@@ -3,7 +3,7 @@ services:
   frontend:
     build: FRONTEND/.
     ports:
-      - "8000:80"
+      - "8001:80"
     restart: unless-stopped
   backend:
     build: BACKEND/.
@@ -19,7 +19,7 @@ services:
       ADMIN_LOGIN: ${ADMIN_LOGIN}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
     ports:
-      - "8001:8000"
+      - "8000:8000"
     depends_on:
       postgres:
         condition: service_healthy
