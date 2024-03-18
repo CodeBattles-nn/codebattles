@@ -85,7 +85,7 @@ const SeeProblemPage = () => {
     console.log(info)
 
     return <>
-        <PageTitle title={`Задача }`}/>
+        <PageTitle title={`Задача id=` + id }/>
 
         <div className="p-3 mb-4 bg-danger theme-text-light rounded-3 text-center">
             Просмотр в режиме учителя
@@ -94,7 +94,7 @@ const SeeProblemPage = () => {
         <div className="row align-items-md-stretch" style={{rowGap: "1em"}}>
             <div className="col-md-6">
                 <div className="h-60 p-3 theme-bg-light rounded-3">
-                    <h2 style={{"color": "#6c757d;"}}>Задача ??</h2>
+                    <h2 style={{"color": "#6c757d;"}}>Задача id={id}</h2>
                     <h3>{info.name}</h3>
                 </div>
             </div>
