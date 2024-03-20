@@ -47,7 +47,14 @@ const SeeProblemPage = () => {
     }, []);
 
     useEffect(() => {
-        if (info.langs.length > 0) {
+        const saved_value =Number.parseInt( localStorage.getItem("lang"))
+
+        console.log(Object.values(info.langs))
+        console.log(saved_value)
+
+        if (Object.values(info.langs).includes(saved_value)){
+            setLang(saved_value)
+        }else if (info.langs.length > 0) {
             setLang(info.langs[0])
         }
         console.log(info.langs)
@@ -144,6 +151,7 @@ const SeeProblemPage = () => {
                                 onChange={e => {
                                     console.log("Hi")
                                     setLang(e.target.value)
+                                    localStorage.setItem("lang", e.target.value)
                                 }}
                             >
 
@@ -151,9 +159,15 @@ const SeeProblemPage = () => {
                                     Object.keys(info.langs).map((name) => {
                                         const key = info?.langs[name]
 
+                                        console.log(key)
+                                        console.log(name)
+                                        console.log(key == localStorage.getItem("lang"))
+                                        console.log(localStorage.getItem("lang"))
+                                        console.log(lang)
+                                        console.log("___")
 
                                         return (
-                                            <option key={key} value={key}>{name}</option>
+                                            <option key={key} value={key} selected={key == localStorage.getItem("lang")}>{name}</option>
                                         )
 
 
