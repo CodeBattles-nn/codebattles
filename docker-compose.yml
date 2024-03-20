@@ -31,6 +31,7 @@ services:
     image: redis:alpine3.18
     ports:
         - 6379:6379
+    restart: unless-stopped
   postgres:
     image: postgres:13.3-alpine
     environment:
@@ -52,6 +53,7 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: unless-stopped
   init_configurer:
     build: INIT_CONFIGURER/.
     environment:
