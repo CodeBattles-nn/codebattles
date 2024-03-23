@@ -1,6 +1,7 @@
 import React from 'react';
 import {cssClassByStatus} from "../../utils/colors";
 import PageTitle from "../../components/PageTitle";
+import {Link} from "react-router-dom";
 
 const ProgramStatusInfo = () => {
 
@@ -42,6 +43,12 @@ const ProgramStatusInfo = () => {
     return (
         <div className="row">
             <div className="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol className="breadcrumb theme-bg-light">
+                        <li className="breadcrumb-item"><Link to="/problems">Задачи</Link></li>
+                        <li className="breadcrumb-item active" aria-current="page">Помощь</li>
+                    </ol>
+                </nav>
                 <div className="jumbotron theme-bg-light  p-3">
                     <PageTitle title="Помощь"/>
                     <h4>Статусы выполнения программ</h4>

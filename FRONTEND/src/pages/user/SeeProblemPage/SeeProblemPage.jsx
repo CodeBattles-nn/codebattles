@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 
 import "./example.css"
 import "./style.css"
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../../utils/api";
 import {toast} from "react-toastify";
 
@@ -65,6 +65,13 @@ const SeeProblemPage = () => {
 
     return <>
        <PageTitle title={`Задача ${letter}`}/>
+        <nav aria-label="breadcrumb">
+            <ol className="breadcrumb theme-bg-light">
+                <li className="breadcrumb-item"><Link to="/problems">Задачи</Link></li>
+                <li className="breadcrumb-item active" aria-current="page">Задача {letter}</li>
+            </ol>
+        </nav>
+
         <div className="row align-items-md-stretch" style={{rowGap:"1em"}}>
             <div className="col-md-6">
                 <div className="h-60 p-3 theme-bg-light rounded-3">

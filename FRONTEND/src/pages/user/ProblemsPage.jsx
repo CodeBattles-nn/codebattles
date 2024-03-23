@@ -22,6 +22,12 @@ const ProblemsPage = () => {
 
 
     return (<><PageTitle title="Задачи"/>
+            <nav aria-label="breadcrumb">
+                <ol className="breadcrumb theme-bg-light">
+                    <li className="breadcrumb-item active"><Link to="/problems">Задачи</Link></li>
+                    <li className="breadcrumb-item active"></li>
+                </ol>
+            </nav>
         <div className="row">
             <div className="col-12">
                 <div className="jumbotron theme-bg-light  p-3">
