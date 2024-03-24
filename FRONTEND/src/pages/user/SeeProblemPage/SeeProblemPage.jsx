@@ -30,7 +30,7 @@ const SeeProblemPage = () => {
 
     const [sent, setSent] = useState(false)
 
-    let editorCode;
+    const [editorCode, setEditorCode] = useState("")
 
     const onSend = async () => {
         setSent(true)
@@ -190,7 +190,7 @@ const SeeProblemPage = () => {
 
 
                             </select>
-                            <CodeEditor onChange={(val) => editorCode = val}/>
+                            <CodeEditor value = {editorCode}  onChange={(val) => setEditorCode(val)}/>
                             <p></p>
                             <button onClick={onSend} type="button"
                                     className="btn btn-success"
