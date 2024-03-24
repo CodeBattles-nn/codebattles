@@ -6,6 +6,8 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../../utils/api";
 import {toast} from "react-toastify";
 
+import If from "../../../components/If"
+
 import "react-ace"
 import "ace-builds/src-noconflict/mode-python";
 import "ace-builds/src-noconflict/snippets/python";
@@ -107,40 +109,42 @@ const SeeProblemPage = () => {
             </div>
         </div>
 
-        <div className="jumbotron theme-bg-light">
-            <h2>Примеры</h2>
+       <If condition={info.examples.length > 0} is_true={
+           <div className="jumbotron theme-bg-light">
+               <h2>Примеры</h2>
 
-            {
-                info.examples.map((data, index) => {
-                    const [input_data, output_data] = data
+               {
+                   info.examples.map((data, index) => {
+                       const [input_data, output_data] = data
 
-                    const example_id = `example_${index}`
+                       const example_id = `example_${index}`
 
-                    const copyFunction = () => {
-                        const copyText = document.getElementById(example_id);
+                       const copyFunction = () => {
+                           const copyText = document.getElementById(example_id);
 
-                        toast.success('Успешно скопировано');
+                           toast.success('Успешно скопировано');
 
-                        console.log(copyText)
-                        navigator.clipboard.writeText(copyText.innerText);
-                    }
+                           console.log(copyText)
+                           navigator.clipboard.writeText(copyText.innerText);
+                       }
 
-                    return (
-                        <div className="example" key={example_id}>
-                            <div className="width-wrap">
-                                <h6 className="m-1 width-inner">Входные данные</h6>
-                                <button className="copy-btn" onClick={copyFunction}>Скопировать</button>
-                            </div>
+                       return (
+                           <div className="example" key={example_id}>
+                               <div className="width-wrap">
+                                   <h6 className="m-1 width-inner">Входные данные</h6>
+                                   <button className="copy-btn" onClick={copyFunction}>Скопировать</button>
+                               </div>
 
-                            <p className=" m-0 console" id={example_id}>{input_data}</p>
-                            <h6 className="m-1">Выходные данные</h6>
-                            <p className="m-0 console">{output_data}</p>
+                               <p className=" m-0 console" id={example_id}>{input_data}</p>
+                               <h6 className="m-1">Выходные данные</h6>
+                               <p className="m-0 console">{output_data}</p>
 
-                        </div>
-                    )
-                })
-            }
-        </div>
+                           </div>
+                       )
+                   })
+               }
+           </div>
+       }/>
 
         <div className="row align-items-md-stretch">
             <div className="col-md-12">
