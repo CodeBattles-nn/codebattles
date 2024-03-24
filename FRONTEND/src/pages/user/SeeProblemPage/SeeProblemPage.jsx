@@ -28,15 +28,18 @@ const SeeProblemPage = () => {
 
     const [lang, setLang] = useState(1);
 
+    const [sent, setSent] = useState(false)
+
     let editorCode;
 
     const onSend = async () => {
+        setSent(true)
         await apiAxios.post(getApiAddress() + '/api/send',
             {src: editorCode, cars: lang, problem: letter}).then(
             () => {
-                navigate("/sends")
+                setTimeout(() => navigate("/sends"), 500)
             }
-        )
+        ).catch(() => setSent(false))
     };
 
     useEffect(() => {
@@ -190,7 +193,9 @@ const SeeProblemPage = () => {
                             <CodeEditor onChange={(val) => editorCode = val}/>
                             <p></p>
                             <button onClick={onSend} type="button"
-                                    className="btn btn-success">Отправить
+                                    className="btn btn-success"
+                                    disabled={sent}
+                            >Отправить
                             </button>
                         </div>
                     </form>
