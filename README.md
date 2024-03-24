@@ -16,7 +16,7 @@ docker compose up
 ```
 
 ## Использование
-перейти на localhost
+перейти на [http://localhost:2500](http://localhost:2500)
 ___
 
 
