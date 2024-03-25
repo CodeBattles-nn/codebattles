@@ -2,6 +2,7 @@
 
 [![deploy](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml)
 [![Licence](https://img.shields.io/github/license/CodeBattles-nn/CodeBattles?style=flat)](./LICENSE)
+![](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/codebattles-nn/codebattles/badge)
 
 [Documentation RU](https://doctorixx.gitbook.io/codebattles/)
 
