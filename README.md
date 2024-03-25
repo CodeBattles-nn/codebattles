@@ -9,23 +9,23 @@
 
 [Documentation EN](https://doctorixx.gitbook.io/codebattles/v/en) 
 
-## Запуск
+## Get started
 
-> Для запуска должен быть установлен Docker Compose
+> You must to install Docker Compose to run
 
 ```shell
 docker compose up
 ```
 
-## Использование
-перейти на [http://localhost:2500](http://localhost:2500)
+## Usage
+Go to [http://localhost:2500](http://localhost:2500)
 ___
 
 
-## Открытые порты контейнеров
+## Open container ports
 
-- Шлюз на 2500 порту
-- Серверная часть на порту 8001
-- Фронтенд на 8000
-- База данных на порту 25565
-- Redis на порту 6379
+- Gateway on port 2500
+- Server part on port 8001
+- Frontend on port 8000
+- Database on port 25565
+- Redis on port 6379
