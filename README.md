@@ -1,4 +1,5 @@
 # CodeBattles
+[codebattles.ru](codebattles.ru)
 
 [![deploy](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml)
 [![Licence](https://img.shields.io/github/license/CodeBattles-nn/CodeBattles?style=flat)](./LICENSE)
