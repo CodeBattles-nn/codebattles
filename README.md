@@ -11,7 +11,7 @@
 
 ## Get started
 
-> You must to install Docker Compose to run
+> You must to install Docker Compose to run:
 
 ```shell
 docker compose up
