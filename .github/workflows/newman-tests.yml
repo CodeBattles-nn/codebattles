@@ -11,11 +11,11 @@ jobs:
         steps:
         - uses: actions/checkout@v1
         - name: Docker up
-          run: docker compose -p test_codebattles up -d
+          run: docker compose -p test_codebattles -f test-docker-compose.yml up  -d
         - uses: matt-ball/newman-action@master
           with:
             collection: tests/autotests.json
             environment: tests/local_env.json
         - name: Docker down
-          run: docker compose -p test_codebattles down
+          run: docker compose -p test_codebattles -f test-docker-compose.yml down
           
