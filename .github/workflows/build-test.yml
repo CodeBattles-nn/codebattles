@@ -15,6 +15,7 @@ jobs:
     api-test:
       name: API (Newman) test
       runs-on: self-hosted
+      needs: [build]
       steps:
         - uses: actions/checkout@v1
         - name: Docker up
