@@ -1,4 +1,4 @@
-name: build-test
+name: PR Tests
 on: 
   pull_request:
     branches:
@@ -6,10 +6,26 @@ on:
 
 jobs:
     build:
-        name: build
+        name: Docker build test
         runs-on: self-hosted
         steps:
         - uses: actions/checkout@v1
         - name: build
           run: docker compose -p test_codebattles build
-          
+    api-test:
+      name: API (Newman) test
+      runs-on: self-hosted
+      steps:
+        - uses: actions/checkout@v1
+        - name: Docker up
+          run: docker compose -p test_codebattles -f test-docker-compose.yml up  -d
+        - name: Sleep for 30 seconds
+          uses: jakejarvis/wait-action@master
+          with:
+            time: '30s'
+        - uses: matt-ball/newman-action@master
+          with:
+            collection: tests/autotests.json
+            environment: tests/local_env.json
+        - name: Docker down
+          run: docker compose -p test_codebattles -f test-docker-compose.yml down
