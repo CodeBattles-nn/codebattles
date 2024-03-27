@@ -22,71 +22,78 @@ const StatsPage = () => {
     const myUserId = getCookie("user_id");
 
 
-    return <div className="jumbotron theme-bg-light  p-3">
-        <PageTitle title="Рейтинг"/>
-        <h4>Рейтинг</h4>
-        <p></p>
-        <div className="table-responsive">
-            <table className="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th scope="col">№</th>
-                    <th scope="col">Пользователь</th>
-                    <th scope="col">Всего</th>
+    return <>
+        <nav aria-label="breadcrumb">
+            <ol className="breadcrumb theme-bg-light">
+                <li className="breadcrumb-item"><Link to="/problems">Задачи</Link></li>
+                <li className="breadcrumb-item active" aria-current="page">Рейтинг</li>
+            </ol>
+        </nav>
+        <div className="jumbotron theme-bg-light  p-3">
+            <PageTitle title="Рейтинг"/>
+            <h4>Рейтинг</h4>
+            <p></p>
+            <div className="table-responsive">
+                <table className="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">№</th>
+                        <th scope="col">Пользователь</th>
+                        <th scope="col">Всего</th>
+
+                        {
+                            [...data.cols].map((col) => {
+                                return (
+                                    <th scope="col"><Link to={`/problem/${col}`}>{col}</Link></th>
+                                )
+                            })
+                        }
+                        <th scope="col">Посл. Посылка</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
 
                     {
-                        [...data.cols].map((col) => {
+                        [...data.users].map((user) => {
+                            let tableClassName = ""
+                            if (user.user_id == myUserId) {
+                                tableClassName = "table-primary theme-text-dark"
+                            }
+
                             return (
-                                <th scope="col"><Link to={`/problem/${col}`}>{col}</Link></th>
+                                <tr className={tableClassName}>
+                                    <th scope="row">{user.position}</th>
+                                    <td>{user.name}</td>
+                                    <td>{user.score}</td>
+                                    {
+                                        [...user.problems_score].map((problem_score) => {
+                                            return (
+                                                <td className="p-1">
+                                                    <div style={{"text-align": "center"}}
+                                                         className="text-center">
+                                                        <p className="int p-0 m-0">{problem_score}</p>
+                                                        <p style={{"font-size": "small"}}
+                                                           className="p-0"></p>
+                                                    </div>
+                                                </td>
+                                            )
+                                        })
+                                    }
+                                    <td>{user.last_send}</td>
+
+                                </tr>
                             )
                         })
                     }
-                    <th scope="col">Посл. Посылка</th>
-
-                </tr>
-                </thead>
-                <tbody>
-
-                {
-                    [...data.users].map((user) => {
-                        let tableClassName = ""
-                        if (user.user_id == myUserId) {
-                            tableClassName = "table-primary theme-text-dark"
-                        }
-
-                        return (
-                            <tr className={tableClassName}>
-                                <th scope="row">{user.position}</th>
-                                <td>{user.name}</td>
-                                <td>{user.score}</td>
-                                {
-                                    [...user.problems_score].map((problem_score) => {
-                                        return (
-                                            <td className="p-1">
-                                                <div style={{"text-align": "center"}}
-                                                     className="text-center">
-                                                    <p className="int p-0 m-0">{problem_score}</p>
-                                                    <p style={{"font-size": "small"}}
-                                                       className="p-0"></p>
-                                                </div>
-                                            </td>
-                                        )
-                                    })
-                                }
-                                <td>{user.last_send}</td>
-
-                            </tr>
-                        )
-                    })
-                }
 
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-
+    </>
 };
 
 export default StatsPage;

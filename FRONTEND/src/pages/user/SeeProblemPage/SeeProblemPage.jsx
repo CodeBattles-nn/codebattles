@@ -2,9 +2,11 @@ import React, {useEffect, useState} from 'react';
 
 import "./example.css"
 import "./style.css"
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import getApiAddress from "../../../utils/api";
 import {toast} from "react-toastify";
+
+import If from "../../../components/If"
 
 import "react-ace"
 import "ace-builds/src-noconflict/mode-python";
@@ -26,15 +28,18 @@ const SeeProblemPage = () => {
 
     const [lang, setLang] = useState(1);
 
-    let editorCode;
+    const [sent, setSent] = useState(false)
+
+    const [editorCode, setEditorCode] = useState("")
 
     const onSend = async () => {
+        setSent(true)
         await apiAxios.post(getApiAddress() + '/api/send',
             {src: editorCode, cars: lang, problem: letter}).then(
             () => {
-                navigate("/sends")
+                setTimeout(() => navigate("/sends"), 500)
             }
-        )
+        ).catch(() => setSent(false))
     };
 
     useEffect(() => {
@@ -47,7 +52,14 @@ const SeeProblemPage = () => {
     }, []);
 
     useEffect(() => {
-        if (info.langs.length > 0) {
+        const saved_value =Number.parseInt( localStorage.getItem("lang"))
+
+        console.log(Object.values(info.langs))
+        console.log(saved_value)
+
+        if (Object.values(info.langs).includes(saved_value)){
+            setLang(saved_value)
+        }else if (info.langs.length > 0) {
             setLang(info.langs[0])
         }
         console.log(info.langs)
@@ -58,6 +70,13 @@ const SeeProblemPage = () => {
 
     return <>
        <PageTitle title={`Задача ${letter}`}/>
+        <nav aria-label="breadcrumb">
+            <ol className="breadcrumb theme-bg-light">
+                <li className="breadcrumb-item"><Link to="/problems">Задачи</Link></li>
+                <li className="breadcrumb-item active" aria-current="page">Задача {letter}</li>
+            </ol>
+        </nav>
+
         <div className="row align-items-md-stretch" style={{rowGap:"1em"}}>
             <div className="col-md-6">
                 <div className="h-60 p-3 theme-bg-light rounded-3">
@@ -93,40 +112,42 @@ const SeeProblemPage = () => {
             </div>
         </div>
 
-        <div className="jumbotron theme-bg-light">
-            <h2>Примеры</h2>
+       <If condition={info.examples.length > 0} is_true={
+           <div className="jumbotron theme-bg-light">
+               <h2>Примеры</h2>
 
-            {
-                info.examples.map((data, index) => {
-                    const [input_data, output_data] = data
+               {
+                   info.examples.map((data, index) => {
+                       const [input_data, output_data] = data
 
-                    const example_id = `example_${index}`
+                       const example_id = `example_${index}`
 
-                    const copyFunction = () => {
-                        const copyText = document.getElementById(example_id);
+                       const copyFunction = () => {
+                           const copyText = document.getElementById(example_id);
 
-                        toast.success('Успешно скопировано');
+                           toast.success('Успешно скопировано');
 
-                        console.log(copyText)
-                        navigator.clipboard.writeText(copyText.innerText);
-                    }
+                           console.log(copyText)
+                           navigator.clipboard.writeText(copyText.innerText);
+                       }
 
-                    return (
-                        <div className="example" key={example_id}>
-                            <div className="width-wrap">
-                                <h6 className="m-1 width-inner">Входные данные</h6>
-                                <button className="copy-btn" onClick={copyFunction}>Скопировать</button>
-                            </div>
+                       return (
+                           <div className="example" key={example_id}>
+                               <div className="width-wrap">
+                                   <h6 className="m-1 width-inner">Входные данные</h6>
+                                   <button className="copy-btn" onClick={copyFunction}>Скопировать</button>
+                               </div>
 
-                            <p className=" m-0 console" id={example_id}>{input_data}</p>
-                            <h6 className="m-1">Выходные данные</h6>
-                            <p className="m-0 console">{output_data}</p>
+                               <p className=" m-0 console" id={example_id}>{input_data}</p>
+                               <h6 className="m-1">Выходные данные</h6>
+                               <p className="m-0 console">{output_data}</p>
 
-                        </div>
-                    )
-                })
-            }
-        </div>
+                           </div>
+                       )
+                   })
+               }
+           </div>
+       }/>
 
         <div className="row align-items-md-stretch">
             <div className="col-md-12">
@@ -144,6 +165,7 @@ const SeeProblemPage = () => {
                                 onChange={e => {
                                     console.log("Hi")
                                     setLang(e.target.value)
+                                    localStorage.setItem("lang", e.target.value)
                                 }}
                             >
 
@@ -151,9 +173,15 @@ const SeeProblemPage = () => {
                                     Object.keys(info.langs).map((name) => {
                                         const key = info?.langs[name]
 
+                                        console.log(key)
+                                        console.log(name)
+                                        console.log(key == localStorage.getItem("lang"))
+                                        console.log(localStorage.getItem("lang"))
+                                        console.log(lang)
+                                        console.log("___")
 
                                         return (
-                                            <option key={key} value={key}>{name}</option>
+                                            <option key={key} value={key} selected={key == localStorage.getItem("lang")}>{name}</option>
                                         )
 
 
@@ -162,10 +190,12 @@ const SeeProblemPage = () => {
 
 
                             </select>
-                            <CodeEditor onChange={(val) => editorCode = val}/>
+                            <CodeEditor value = {editorCode}  onChange={(val) => setEditorCode(val)}/>
                             <p></p>
                             <button onClick={onSend} type="button"
-                                    className="btn btn-success">Отправить
+                                    className="btn btn-success"
+                                    disabled={sent}
+                            >Отправить
                             </button>
                         </div>
                     </form>
