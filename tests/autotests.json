@@ -179,6 +179,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get champ data Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(pm.request)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/teacher/champs/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"teacher",
+								"champs",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -200,6 +238,8 @@
 									"    var jsonData = pm.response.json();\r",
 									"    pm.expect(jsonData.success).to.eql(true);\r",
 									"});\r",
+									"\r",
+									"console.log(pm.request)\r",
 									""
 								],
 								"type": "text/javascript",
@@ -212,7 +252,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"1\",\r\n    \"login\": \"17773\",\r\n    \"password\": \"01098\"\r\n}",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"login\": \"{{GEN_user_login}}\",\r\n    \"password\": \"{{GEN_user_password}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
