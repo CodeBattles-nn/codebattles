@@ -8,10 +8,10 @@
 	},
 	"item": [
 		{
-			"name": "-1 Teacher Prepare",
+			"name": "0 Prepare enviorement",
 			"item": [
 				{
-					"name": "Login Copy",
+					"name": "0.1 Login to teacher panel",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -41,7 +41,7 @@
 					"response": []
 				},
 				{
-					"name": "Create champ Copy",
+					"name": "0.2 Create champ",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -69,7 +69,7 @@
 					"response": []
 				},
 				{
-					"name": "Assign problem Copy",
+					"name": "0.3 Assign problem to champ",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -104,7 +104,7 @@
 					"response": []
 				},
 				{
-					"name": "Add users Copy",
+					"name": "0.4 Create user",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -140,7 +140,7 @@
 					"response": []
 				},
 				{
-					"name": "Get users Copy",
+					"name": "0.5 Save user",
 					"event": [
 						{
 							"listen": "test",
@@ -179,52 +179,170 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Get champ data Copy",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"console.log(pm.request)"
-								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/teacher/champs/:id",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"teacher",
-								"champs",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
 		{
-			"name": "0. Login",
+			"name": "1. Login",
 			"item": [
 				{
-					"name": "Login test",
+					"name": "1.2 Invalid credential tests",
+					"item": [
+						{
+							"name": "1.2.2 Login test (Invalid id)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(pm.request)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"1000\",\r\n    \"login\": \"{{GEN_user_login}}\",\r\n    \"password\": \"{{GEN_user_password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1.2.3 Login test (Invalid login)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(pm.request)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"1\",\r\n    \"login\": \"{{GEN_user_login}}{{GEN_user_login}}\",\r\n    \"password\": \"{{GEN_user_password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1.2.4 Login test (Invalid password)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"console.log(pm.request)\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"1\",\r\n    \"login\": \"{{GEN_user_login}}\",\r\n    \"password\": \"{{GEN_user_password}}{{GEN_user_password}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Success field equals false test\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.success).to.eql(false);\r",
+									"});\r",
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "1.2.1 Login test",
 					"event": [
 						{
 							"listen": "test",
@@ -275,13 +393,13 @@
 			]
 		},
 		{
-			"name": "1. Checkers Test",
+			"name": "2. Checkers Test",
 			"item": [
 				{
-					"name": "1.1 Valid program",
+					"name": "2.1 Valid program",
 					"item": [
 						{
-							"name": "1.1.1 Send program to test",
+							"name": "2.1.1 Send program to test",
 							"event": [
 								{
 									"listen": "test",
@@ -339,7 +457,7 @@
 							"response": []
 						},
 						{
-							"name": "1.1.2 Get tested result",
+							"name": "2.1.2 Get tested result",
 							"event": [
 								{
 									"listen": "test",
@@ -400,10 +518,10 @@
 					]
 				},
 				{
-					"name": "1.2 Invalid program",
+					"name": "2.2 Invalid program",
 					"item": [
 						{
-							"name": "1.2.1 Send program to test",
+							"name": "2.2.1 Send program to test",
 							"event": [
 								{
 									"listen": "test",
@@ -461,7 +579,7 @@
 							"response": []
 						},
 						{
-							"name": "1.2.2 Get tested result",
+							"name": "2.2.2 Get tested result",
 							"event": [
 								{
 									"listen": "test",
