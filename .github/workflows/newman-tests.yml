@@ -1,8 +1,5 @@
 name: newman-tests
-on: 
-  pull_request:
-    branches:
-      - master
+on: [workflow_dispatch]
 
 jobs:
     build:
