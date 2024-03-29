@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import ProblemExample from "../components/ProblemExample.jsx";
+import CodeEditor from "../components/wraps/CodeEditor.jsx";
 
 const SeeProblemPage = () => {
     return (
@@ -66,16 +67,7 @@ const SeeProblemPage = () => {
                             <option>Pascal</option>
                         </select>
 
-                        <Card>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                        </Card>
+                        <CodeEditor className="my-5 rounded-2" />
 
                         <button className="btn btn-success">Отправить</button>
                     </Card>
