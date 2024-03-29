@@ -1,1 +1,5 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.css";
+
+.text-lines{
+    white-space: pre-line;
+}
