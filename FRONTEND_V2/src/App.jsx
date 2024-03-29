@@ -9,6 +9,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.min.js"
 import SeeSendPage from "./pages/SeeSendPage.jsx";
 import StatusesPage from "./pages/StatusesPage.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LoginPage from "./pages/LoginPage.jsx";
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
                 <div className="row my-4"></div>
                 <div className="row">
                     <Routes>
-                        <Route path="/" element={<ProblemsListPage />}/>
+                        <Route path="/problems" element={<ProblemsListPage />}/>
+                        <Route path="/" element={<LoginPage />}/>
                         <Route path="/problems" element={<ProblemsListPage />}/>
                         <Route path="/problems/:letter" element={<SeeProblemPage />}/>
                         <Route path="/stats" element={<StatsPage />}/>
