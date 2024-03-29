@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "../components/bootstrap/Card.jsx";
+import {Link} from "react-router-dom";
 
 const ProblemsListPage = () => {
     return (
@@ -18,25 +19,25 @@ const ProblemsListPage = () => {
                         <tbody>
                         <tr>
                             <th scope="row" className="">A</th>
-                            <td><a href="#">Четность числа</a></td>
+                            <td><Link to="/problems/A">Четность числа</Link></td>
 
                         </tr>
                         <tr>
                             <th scope="row">B</th>
-                            <td><a href="">Ужасная задача</a></td>
+                            <td><Link to="/problems/B">Ужасная задача</Link></td>
 
                         </tr>
                         <tr>
                             <th scope="row">C</th>
-                            <td><a href="">Прямоугольник</a></td>
+                            <td><Link to="/problems/C">Прямоугольник</Link></td>
                         </tr>
                         <tr>
                             <th scope="row">D</th>
-                            <td><a href="">Попугай</a></td>
+                            <td><Link to="/problems/D">Попугай</Link></td>
                         </tr>
                         <tr>
-                            <th scope="row">C</th>
-                            <td><a href="">Список A</a></td>
+                            <th scope="row">E</th>
+                            <td><Link to="/problems/E">Список A</Link></td>
                         </tr>
                         </tbody>
                     </table>

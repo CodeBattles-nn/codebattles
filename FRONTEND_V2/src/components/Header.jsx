@@ -1,11 +1,15 @@
+
+import "./css/Header.css"
+import {Link} from "react-router-dom";
+
 const Header = () => {
     return (
-        <nav className="navbar  navbar-expand-lg">
+        <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container">
                 <div className="fs-2 me-2 nav-link">
-                    <a className="nav-link navbar-brand fs-4" href="/">
+                    <Link className="nav-link navbar-brand fs-4" to="/">
                         <img className="mb-1" src="/logo200.png" width="30" height="30" alt="logo" />
-                    </a>
+                    </Link>
                 </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -15,17 +19,17 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item active">
-                            <a className="nav-link" href="/">Задачи</a>
+                            <Link className="nav-link" to="/">Задачи</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/stats">Рейтинг</a>
+                            <Link className="nav-link" to="/stats">Рейтинг</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/sends">Посылки</a>
+                            <Link className="nav-link" to="/sends">Посылки</Link>
                         </li>
 
                     </ul>
-                    <a className="nav-link mx-2" href="/mentor">Посылки</a>
+                    <Link className="nav-link mx-2" to="/statuses">Помощь</Link>
                     <button className="btn btn-danger">Выход</button>
                 </div>
             </div>

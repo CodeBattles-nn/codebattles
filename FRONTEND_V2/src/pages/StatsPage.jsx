@@ -1,11 +1,12 @@
 import React from 'react';
 import Card from "../components/bootstrap/Card.jsx";
+import {Link} from "react-router-dom";
 
 const StatsPage = () => {
     return (
         <div>
             <Card>
-                <h2 className="mb-3">Посылки</h2>
+                <h2 className="mb-3">Рейтинг</h2>
                 <div className="border rounded-2 p-1">
                     <table className="table table-striped table-bordered">
                         <thead>
@@ -13,11 +14,11 @@ const StatsPage = () => {
                             <th scope="col">№</th>
                             <th scope="col">Пользователь</th>
                             <th scope="col">Всего</th>
-                            <th scope="col"><a href="/problem/A">A</a></th>
-                            <th scope="col"><a href="/problem/B">B</a></th>
-                            <th scope="col"><a href="/problem/C">C</a></th>
-                            <th scope="col"><a href="/problem/D">D</a></th>
-                            <th scope="col"><a href="/problem/E">E</a></th>
+                            <th scope="col"><Link to="/problems/A">A</Link></th>
+                            <th scope="col"><Link to="/problems/B">B</Link></th>
+                            <th scope="col"><Link to="/problems/C">C</Link></th>
+                            <th scope="col"><Link to="/problems/D">D</Link></th>
+                            <th scope="col"><Link to="/problems/E">E</Link></th>
                             <th scope="col">Посл. Посылка</th>
                         </tr>
                         </thead>

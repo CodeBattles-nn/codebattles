@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "../components/bootstrap/Card.jsx";
+import {Link} from "react-router-dom";
 
 const SendsListPage = () => {
     return (
@@ -23,37 +24,37 @@ const SendsListPage = () => {
                         <tr>
                             <th scope="row" className="">1</th>
                             <td>02/29/2024, 12:24:42</td>
-                            <td><a href="#">A. Четность числа</a></td>
+                            <td><Link to="/problems/A">A. Четность числа</Link></td>
                             <td className="text-center text-success">0</td>
                             <td>Протестировано</td>
-                            <td><a href="#">Вердикт</a></td>
+                            <td><Link to="/sends/1">Вердикт</Link></td>
 
                         </tr>
                        <tr>
                             <th scope="row" className="">2</th>
                             <td>02/29/2024, 12:24:42</td>
-                            <td><a href="#">A. Четность числа</a></td>
+                            <td><Link to="/problems/A">A. Четность числа</Link></td>
                             <td className="text-center text-success">50</td>
                             <td>Протестировано</td>
-                            <td><a href="#">Вердикт</a></td>
+                            <td><Link to="/sends/1">Вердикт</Link></td>
 
                         </tr>
                        <tr>
                             <th scope="row" className="">3</th>
                             <td>02/29/2024, 12:24:42</td>
-                            <td><a href="#">A. Четность числа</a></td>
+                            <td><Link to="/problems/A">A. Четность числа</Link></td>
                             <td className="text-center text-success">100</td>
                             <td>Протестировано</td>
-                            <td><a href="#">Вердикт</a></td>
+                            <td><Link to="/sends/1">Вердикт</Link></td>
 
                         </tr>
                        <tr>
                             <th scope="row" className="">4</th>
                             <td>02/29/2024, 12:24:42</td>
-                            <td><a href="#">A. Четность числа</a></td>
+                            <td><Link to="/problems/A">A. Четность числа</Link></td>
                             <td className="text-center text-success">100</td>
                             <td>Протестировано</td>
-                            <td><a href="#">Вердикт</a></td>
+                            <td><Link to="/sends/1">Вердикт</Link></td>
 
                         </tr>
 

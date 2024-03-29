@@ -1,16 +1,17 @@
 import React from 'react';
 import Card from "../components/bootstrap/Card.jsx";
+import SyntaxHighlight from "../components/wraps/SyntaxHighlight.jsx";
 
 const SeeSendPage = () => {
     return (
-        <>
             <Card>
                 <h3>Анализ посылки</h3>
                 <p><b>Язык:</b> Python 3.8</p>
                 <b>Исходный код:</b>
-                <Card>
+                <SyntaxHighlight lang="python">
                     print("Hello")
-                </Card>
+                </SyntaxHighlight>
+                <div className="my-4"></div>
                 <table className="table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -78,7 +79,7 @@ const SeeSendPage = () => {
                     </tbody>
                 </table>
             </Card>
-        </>
+
     );
 };
 

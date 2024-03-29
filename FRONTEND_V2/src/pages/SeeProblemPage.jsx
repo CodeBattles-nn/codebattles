@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from "../components/bootstrap/Card.jsx";
+import ProblemExample from "../components/ProblemExample.jsx";
 
 const SeeProblemPage = () => {
     return (
@@ -16,6 +17,7 @@ const SeeProblemPage = () => {
                         <h3>Ограничения</h3>
                         <p>
                             Время выполнения: 1000мс
+                            <br/>
                             Память: 256мб
                         </p>
                     </Card>
@@ -40,6 +42,42 @@ const SeeProblemPage = () => {
                             <p>Вывести "YES", если число четное. "NO" - если
                                 нечетное. (Вывод выполняется без ковычек)</p>
                         </div>
+                    </Card>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <Card>
+                        <h3>Примеры</h3>
+                        <ProblemExample in_data="1" out_data="NO"/>
+                        <ProblemExample in_data="2" out_data="YES"/>
+                    </Card>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col">
+                    <Card>
+                        <h4 className="mb-3">Отправить решение</h4>
+                        <p>Вставьте код здесь</p>
+                        <select className="form-select">
+                            <option>Python 3.9</option>
+                            <option>Java 17</option>
+                            <option>Pascal</option>
+                        </select>
+
+                        <Card>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </Card>
+
+                        <button className="btn btn-success">Отправить</button>
                     </Card>
                 </div>
             </div>

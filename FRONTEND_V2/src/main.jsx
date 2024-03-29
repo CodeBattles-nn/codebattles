@@ -8,6 +8,6 @@ import ThemeChanger from "./components/ThemeChanger.jsx";
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
-      <ThemeChanger />
+      {/*<ThemeChanger />*/}
   </React.StrictMode>,
 )
