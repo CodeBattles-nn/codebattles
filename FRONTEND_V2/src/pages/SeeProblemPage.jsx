@@ -1,12 +1,11 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import ProblemExample from "../components/ProblemExample.jsx";
-import CodeEditor from "../components/wraps/CodeEditor.jsx";
 import {useNavigate, useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import constants from "../utils/consts.js";
+import LazyCodeEditor from "../components/lazy/LazyCodeEditor.jsx";
 
 const SeeProblemPage = () => {
 
@@ -100,7 +99,7 @@ const SeeProblemPage = () => {
                                     })
                                 }
                             </select>
-                            <CodeEditor className="my-5 rounded-2"/>
+                            <LazyCodeEditor className="my-5 rounded-2"/>
 
                             <button className="btn btn-success">Отправить</button>
                         </form>
