@@ -7,7 +7,7 @@ export default defineConfig({
     plugins: [
         react(),
         chunkSplitPlugin({
-            strategy: 'unbundle',
+            strategy: 'default',
         })
     ],
     build: { //add this property
