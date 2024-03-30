@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
+import useCachedGetAPI from "../hooks/useGetAPI.js";
 
 const SendsListPage = () => {
+
+    const [data, update]= useCachedGetAPI("http://localhost:2500/api/sends");
+
+    useEffect(() => {
+        update();
+    }, []);
+
     return (
         <div>
             <Card>
@@ -21,43 +29,19 @@ const SendsListPage = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" className="">1</th>
-                            <td>02/29/2024, 12:24:42</td>
-                            <td><Link to="/problems/A">A. Четность числа</Link></td>
-                            <td className="text-center text-success">0</td>
-                            <td>Протестировано</td>
-                            <td><Link to="/sends/1">Вердикт</Link></td>
 
-                        </tr>
-                       <tr>
-                            <th scope="row" className="">2</th>
-                            <td>02/29/2024, 12:24:42</td>
-                            <td><Link to="/problems/A">A. Четность числа</Link></td>
-                            <td className="text-center text-success">50</td>
-                            <td>Протестировано</td>
-                            <td><Link to="/sends/1">Вердикт</Link></td>
+                        {data?.sends?.map(send => {
+                            return (
+                                <tr>
+                                <th scope="row" className="">{send.id}</th>
+                                <td>{send.send_time}</td>
+                                <td><Link to={`/problems/${send.letter}`}>{send.letter}. {send.name}</Link></td>
+                                <td className="text-center text-success">{send.score}</td>
+                                <td>{send.state}</td>
+                                <td><Link to={`/sends/${send.id}`}>Вердикт</Link></td>
 
-                        </tr>
-                       <tr>
-                            <th scope="row" className="">3</th>
-                            <td>02/29/2024, 12:24:42</td>
-                            <td><Link to="/problems/A">A. Четность числа</Link></td>
-                            <td className="text-center text-success">100</td>
-                            <td>Протестировано</td>
-                            <td><Link to="/sends/1">Вердикт</Link></td>
-
-                        </tr>
-                       <tr>
-                            <th scope="row" className="">4</th>
-                            <td>02/29/2024, 12:24:42</td>
-                            <td><Link to="/problems/A">A. Четность числа</Link></td>
-                            <td className="text-center text-success">100</td>
-                            <td>Протестировано</td>
-                            <td><Link to="/sends/1">Вердикт</Link></td>
-
-                        </tr>
-
+                            </tr>)
+                        })}
                         </tbody>
                     </table>
                 </div>

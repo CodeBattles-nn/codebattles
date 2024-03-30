@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
+import useCachedGetAPI from "../hooks/useGetAPI.js";
 
 const ProblemsListPage = () => {
+
+    const [data, update]= useCachedGetAPI("http://localhost:2500/api/problems");
+
+    useEffect(() => {
+        update();
+    }, []);
+
     return (
         <div>
             <Card>
@@ -17,28 +25,18 @@ const ProblemsListPage = () => {
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row" className="">A</th>
-                            <td><Link to="/problems/A">Четность числа</Link></td>
 
-                        </tr>
-                        <tr>
-                            <th scope="row">B</th>
-                            <td><Link to="/problems/B">Ужасная задача</Link></td>
+                        {
+                            data.problems &&
+                            Object.keys(data.problems).map( letter =>{
+                                return (<tr key={letter}>
+                                    <th scope="row" className="">{letter}</th>
+                                    <td><Link to={`/problems/${letter}`}>{data.problems[letter]}</Link></td>
 
-                        </tr>
-                        <tr>
-                            <th scope="row">C</th>
-                            <td><Link to="/problems/C">Прямоугольник</Link></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">D</th>
-                            <td><Link to="/problems/D">Попугай</Link></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">E</th>
-                            <td><Link to="/problems/E">Список A</Link></td>
-                        </tr>
+                                </tr>)
+                            })
+                        }
+
                         </tbody>
                     </table>
                 </div>
