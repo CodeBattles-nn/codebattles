@@ -1,4 +1,3 @@
-import React from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 
 const SeeSendPage = () => {

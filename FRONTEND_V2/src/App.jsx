@@ -20,14 +20,14 @@ function App() {
                 <div className="row my-4"></div>
                 <div className="row">
                     <Routes>
-                        <Route path="/problems" element={<ProblemsListPage />}/>
-                        <Route path="/" element={<LoginPage />}/>
-                        <Route path="/problems" element={<ProblemsListPage />}/>
-                        <Route path="/problems/:letter" element={<SeeProblemPage />}/>
-                        <Route path="/stats" element={<StatsPage />}/>
-                        <Route path="/sends" element={<SendsListPage />}/>
-                        <Route path="/sends/:id" element={<SeeSendPage />}/>
-                        <Route path="/statuses" element={<StatusesPage />}/>
+                        <Route path="/problems" element={<ProblemsListPage/>}/>
+                        <Route path="/" element={<LoginPage/>}/>
+                        <Route path="/problems" element={<ProblemsListPage/>}/>
+                        <Route path="/problems/:letter" element={<SeeProblemPage/>}/>
+                        <Route path="/stats" element={<StatsPage/>}/>
+                        <Route path="/sends" element={<SendsListPage/>}/>
+                        <Route path="/sends/:id" element={<SeeSendPage/>}/>
+                        <Route path="/statuses" element={<StatusesPage/>}/>
                     </Routes>
 
 

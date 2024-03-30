@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
@@ -29,7 +29,8 @@ const StatsPage = () => {
                             <th scope="col">Всего</th>
                             {
                                 data?.cols?.split('').map(letter => {
-                                    return <th scope="col"><Link to={`/problems/${letter}`}>{letter}</Link></th>
+                                    return <th key={"stats-letter-header" + letter} scope="col"><Link to={`/problems/${letter}`}>{letter}</Link>
+                                    </th>
                                 })
                             }
                             <th scope="col">Посл. Посылка</th>
@@ -39,14 +40,14 @@ const StatsPage = () => {
                         {
                             data?.users?.map(user => {
                                 return (
-                                    <tr className={user.user_id == mine_user_id ? ( "table-secondary") : ('')} >
+                                    <tr key={"stats-usr" + user.position } className={user.user_id == mine_user_id ? ("table-secondary") : ('')}>
                                         <th scope="row">{user.position}</th>
                                         <td>{user.name}</td>
                                         <td>{user.score}</td>
                                         {
-                                            user.problems_score.map(problem_score => {
+                                            user.problems_score.map((problem_score,index) => {
                                                 return (
-                                                    <td className="p-1">
+                                                    <td key={"stats-usr-hex" + user.position + "--"  + index } className="p-1">
                                                         <div className="text-center">
                                                             <p className="text-success p-0 m-0">
                                                                 {problem_score}

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import SyntaxHighlight from "../components/wraps/SyntaxHighlight.jsx";
 import {useParams} from "react-router-dom";
@@ -34,7 +34,7 @@ const SeeSendPage = () => {
                 {
                     data?.tests?.map(test => {
                         return (
-                            <tr className="">
+                            <tr className="" key={"see-send-test-id-" + test.id}>
                                 <th scope="row">{test.id}</th>
                                 <td>{test.time}</td>
                                 <td>{test.msg}</td>
