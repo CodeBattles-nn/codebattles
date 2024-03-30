@@ -6,9 +6,10 @@ const SyntaxHighlight = ({props, children, lang = ""}) => {
 
     lang = lang.replace("language-", "")
 
-    return (<SyntaxHighlighter style={theme} language={lang} showLineNumbers {...props}>
-        {children}
-    </SyntaxHighlighter>)
+    return (
+        <SyntaxHighlighter style={theme} language={lang} showLineNumbers {...props}>
+            {children}
+        </SyntaxHighlighter>)
 };
 
 export default SyntaxHighlight;

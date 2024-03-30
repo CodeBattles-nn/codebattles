@@ -1,8 +1,8 @@
 import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
-import SyntaxHighlight from "../components/wraps/SyntaxHighlight.jsx";
 import {useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
+import LazySyntaxHighlight from "../components/lazy/LazySyntaxHightlight.jsx";
 
 const SeeSendPage = () => {
 
@@ -17,9 +17,9 @@ const SeeSendPage = () => {
             <h3>Анализ посылки</h3>
             <p><b>Язык:</b> {data.lang}</p>
             <b>Исходный код:</b>
-            <SyntaxHighlight lang={data.lang_id}>
+            <LazySyntaxHighlight lang={data.lang_id}>
                 {data.program}
-            </SyntaxHighlight>
+            </LazySyntaxHighlight>
             <div className="my-4"></div>
             <table className="table table-striped table-bordered">
                 <thead>
