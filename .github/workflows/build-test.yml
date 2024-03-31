@@ -18,6 +18,8 @@ jobs:
       needs: [build]
       steps:
         - uses: actions/checkout@v1
+        - name: Docker down
+          run: docker compose -p test_codebattles -f test-docker-compose.yml down
         - name: Docker up
           run: docker compose -p test_codebattles -f test-docker-compose.yml up  -d
         - name: Sleep for 30 seconds

@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 
 const ProblemsListPage = () => {
 
-    const [data, update]= useCachedGetAPI("http://localhost:2500/api/problems");
+    const [data, update] = useCachedGetAPI("http://localhost:2500/api/problems");
 
     useEffect(() => {
         update();
@@ -28,8 +28,8 @@ const ProblemsListPage = () => {
 
                         {
                             data.problems &&
-                            Object.keys(data.problems).map( letter =>{
-                                return (<tr key={letter}>
+                            Object.keys(data.problems).map(letter => {
+                                return (<tr key={"problems-page-key" + letter}>
                                     <th scope="row" className="">{letter}</th>
                                     <td><Link to={`/problems/${letter}`}>{data.problems[letter]}</Link></td>
 

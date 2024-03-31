@@ -4,23 +4,22 @@
 
 *,
 *:before,
-*:after{
+*:after {
     font-family: "Inter", sans-serif;
 }
 
 
-.text-lines{
+.text-lines {
     white-space: pre-line;
 }
 
-#root{
+#root {
     background-color: #334353;
 }
 
 .width-inner {
     display: inline-block;
 }
-
 
 
 .ace_editor,

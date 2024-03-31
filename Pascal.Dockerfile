@@ -1,7 +1,7 @@
 #
 # Build stage
 #
-FROM maven:3.9.3-sapmachine-17 AS build
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 COPY PROGRAM_CHECK_SYSTEM/src /home/app/src
 COPY PROGRAM_CHECK_SYSTEM/pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
@@ -9,8 +9,9 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 # Package stage
 #
-FROM openjdk:17-alpine
+FROM alpine:20240329
 
+RUN apk add openjdk17-jre
 WORKDIR /
 
 ENV SERVER_ENDPOINT  http://backend:8000/api/check_system_callback

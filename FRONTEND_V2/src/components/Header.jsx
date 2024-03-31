@@ -1,4 +1,3 @@
-
 import "./css/Header.css"
 import {Link} from "react-router-dom";
 
@@ -8,7 +7,7 @@ const Header = () => {
             <div className="container">
                 <div className="fs-2 me-2 nav-link">
                     <Link className="nav-link navbar-brand fs-4" to="/">
-                        <img className="mb-1" src="/logo200.png" width="30" height="30" alt="logo" />
+                        <img className="mb-1" src="/logo200.png" width="30" height="30" alt="logo"/>
                     </Link>
                 </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"

@@ -2,11 +2,13 @@ version: "3.9"
 services:
   frontend:
     build: FRONTEND/.
+    image: ghcr.io/codebattles-nn/frontend
     ports:
       - "8001:80"
     restart: unless-stopped
   backend:
     build: BACKEND/.
+    image: ghcr.io/codebattles-nn/backend
     environment:
       CHECKER_PORT: 7070
       DB_HOST: postgres
@@ -48,6 +50,7 @@ services:
     restart: unless-stopped
   gateway:
     build: GATEWAY/.
+    image: ghcr.io/codebattles-nn/gateway
     ports:
       - "2500:80"
     depends_on:
@@ -56,6 +59,7 @@ services:
     restart: unless-stopped
   init_configurer:
     build: INIT_CONFIGURER/.
+    image: ghcr.io/codebattles-nn/init-configurer
     environment:
       DB_HOST: postgres
       DB_USERNAME: "postgres"
@@ -68,10 +72,12 @@ services:
   checker-java:
     build:
       dockerfile: ./Java.Dockerfile
+    image: ghcr.io/codebattles-nn/checker-java
     restart: unless-stopped
   checker-python:
     build:
       dockerfile: ./Python.Dockerfile
+    image: ghcr.io/codebattles-nn/checker-python
     restart: unless-stopped
 #  checker-pascal:
 #    build:

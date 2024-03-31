@@ -1,8 +1,8 @@
-import React from 'react';
 import Card from "./bootstrap/Card.jsx";
 
 import "./css/ProblemExample.css"
 
+// eslint-disable-next-line react/prop-types
 const ProblemExample = ({in_data, out_data}) => {
     return (
         <div className="my-5">

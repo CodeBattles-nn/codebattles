@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {toast} from "react-toastify";
 
 import "react-ace"
@@ -18,6 +18,22 @@ const SeeProblemQuestionPage = () => {
 
     const [questionNumber, setQuestionNumber] = useState(0)
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const [answers, setAnswers] = useState({})
+
+    useEffect(() => {
+        const prevQuestion = searchParams.get("q");
+        if (prevQuestion) {
+            setQuestionNumber(Number.parseInt(prevQuestion))
+        }
+
+    }, []);
+
+    useEffect(() => {
+
+        setSearchParams({"q": questionNumber})
+    }, [questionNumber]);
 
     const defaultData = [
         {
@@ -44,7 +60,7 @@ const SeeProblemQuestionPage = () => {
             ]
         },
         {
-            title: "5 + 5 = ?",
+            title: "5 + 5 = ?  (ОТВЕТ ПИСАТЬ ЦИФРАМИ)",
             type: "integer",
             variants: []
         },
@@ -72,21 +88,26 @@ const SeeProblemQuestionPage = () => {
             <nav aria-label="Page navigation example " className="d-none  d-xl-block">
                 <ul className="pagination justify-content-center pagination-lg">
 
-                    <li className="page-item"><a className="page-link" href="#">1</a></li>
-                    <li className="page-item bg-danger"><a className="page-link" href="#">2</a></li>
-                    <li className="page-item active"><a className="page-link active" href="#">3 </a></li>
-                    <li className="page-item"><a className="page-link" href="#">4</a></li>
-                    <li className="page-item"><a className="page-link" href="#">5</a></li>
-                    <li className="page-item"><a className="page-link" href="#">6</a></li>
-                    <li className="page-item"><a className="page-link" href="#">7</a></li>
-                    <li className="page-item"><a className="page-link" href="#">8</a></li>
-                    <li className="page-item"><a className="page-link" href="#">9</a></li>
+
+                    {defaultData.map((e, num) => {
+                        return <li className={questionNumber == num ? ("page-item active") : ("page-item")}>
+                            <btn onClick={() => {
+                                setQuestionNumber(num)
+                            }} className="page-link" href="#">{num + 1}</btn>
+                        </li>
+                    })}
 
 
                 </ul>
             </nav>
             <h2>Вопрос #{questionNumber + 1}<small className="text-secondary">/{data.length}</small></h2>
-            <br/>
+            <button className="btn btn-outline-primary mr-1"
+                    onClick={() => setQuestionNumber(Math.max(0, questionNumber - 1))}>назад
+            </button>
+            <button className="btn btn-outline-primary mr-1"
+                    onClick={() => setQuestionNumber(Math.min(questionNumber + 1, defaultData.length - 1))}>след
+            </button>
+            <div className="my-5"></div>
             <h5>
                 {currentQuestion.title}
             </h5>
@@ -95,7 +116,7 @@ const SeeProblemQuestionPage = () => {
                     <div className="form-group">
                         <select className="form-control" id="exampleFormControlSelect1">
                             {
-                                currentQuestion.variants.map( (elem) => {
+                                currentQuestion.variants.map((elem) => {
                                     return <option>{elem}</option>
                                 })
                             }
@@ -104,28 +125,28 @@ const SeeProblemQuestionPage = () => {
                 }/>
                 <If condition={currentQuestion.type === "multiselect"} is_true={
                     <div className="form-group">
-                        <small>ЧТОБЫ ВЫБРАТЬ НЕСКОЛЬКО ВАРИАНТОВ, НАЖИМАЙТЕ НА НИХ С ЗАЖАТОЙ КНОПКОЙ Ctrl</small>
+                        {/*<small>ЧТОБЫ ВЫБРАТЬ НЕСКОЛЬКО ВАРИАНТОВ, НАЖИМАЙТЕ НА НИХ С ЗАЖАТОЙ КНОПКОЙ Ctrl</small>*/}
                         <br/>
-                        <select multiple className="form-control" style={{minHeight: "200px"}}>
-                            <option>N = k/2</option>
-                            <option>15 = 15 + 9</option>
-                            <option>AlexGyver</option>
-                            <option>Нет такого понятия</option>
-                            <option>Я бобер</option>
-                        </select>
-
+                        <form>
+                            {
+                                currentQuestion.variants.map((elem) => {
+                                    return <div>
+                                        <input type="checkbox"/> {elem}
+                                    </div>
+                                })
+                            }
+                        </form>
                     </div>
                 }/>
                 <If condition={currentQuestion.type === "integer"} is_true={
                     <div class="form-group">
-                        <input type="number" class="form-control"/>
+                        <input type="number" class="form-control" pattern="\d*"/>
                     </div>
 
                 }/>
 
             </form>
-            <button onClick={() => setQuestionNumber(questionNumber - 1)}>назад</button>
-            <button onClick={() => setQuestionNumber(questionNumber + 1)}>след</button>
+
 
         </div>
 
