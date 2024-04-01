@@ -14,7 +14,7 @@ const LoginPage = () => {
 
     const onSubmit = (data) => {
         console.log(data)
-        axios.post('http://localhost:2500/api/login', data)
+        axios.post('/api/login', data)
             .then(() => localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "true"))
             .then(() => navigate("/problems"))
             .catch(() => setHasErrorInData(true))

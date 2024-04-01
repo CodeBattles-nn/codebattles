@@ -7,7 +7,7 @@ import UserLoginRequired from "../components/UserLoginRequired.jsx";
 
 const StatsPage = () => {
 
-    const [data, update] = useCachedGetAPI("http://localhost:2500/api/stats");
+    const [data, update] = useCachedGetAPI("/api/stats");
 
     useEffect(() => {
         update();

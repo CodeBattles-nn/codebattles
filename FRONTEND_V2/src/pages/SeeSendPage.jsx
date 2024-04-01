@@ -8,7 +8,7 @@ import UserLoginRequired from "../components/UserLoginRequired.jsx";
 const SeeSendPage = () => {
 
     const {id} = useParams();
-    const [data, update] = useCachedGetAPI(`http://localhost:2500/api/send/${id}`);
+    const [data, update] = useCachedGetAPI(`/api/send/${id}`);
 
     useEffect(() => {
         update()

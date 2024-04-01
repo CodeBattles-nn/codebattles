@@ -6,7 +6,7 @@ import UserLoginRequired from "../components/UserLoginRequired.jsx";
 
 const SendsListPage = () => {
 
-    const [data, update] = useCachedGetAPI("http://localhost:2500/api/sends");
+    const [data, update] = useCachedGetAPI("/api/sends");
 
     useEffect(() => {
         update();

@@ -12,7 +12,7 @@ const SeeProblemPage = () => {
 
     const {letter} = useParams();
     const navigate = useNavigate();
-    const [data, update] = useCachedGetAPI(`http://localhost:2500/api/problem/${letter}`);
+    const [data, update] = useCachedGetAPI(`/api/problem/${letter}`);
     const [isLoading, setIsLoading] = useState(false);
 
 
