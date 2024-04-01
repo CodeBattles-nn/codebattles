@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import ProblemExample from "../components/ProblemExample.jsx";
 import {useNavigate, useParams} from "react-router-dom";
@@ -6,14 +6,15 @@ import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import LazyCodeEditor from "../components/lazy/LazyCodeEditor.jsx";
+import UserLoginRequired from "../components/UserLoginRequired.jsx";
 
 const SeeProblemPage = () => {
 
     const {letter} = useParams();
     const navigate = useNavigate();
     const [data, update] = useCachedGetAPI(`http://localhost:2500/api/problem/${letter}`);
+    const [isLoading, setIsLoading] = useState(false);
 
-    let codeEditorText = ""
 
     useEffect(() => {
         update()
@@ -27,12 +28,20 @@ const SeeProblemPage = () => {
         // alert(JSON.stringify(data))
 
         axios.post('http://localhost:2500/api/send', data)
-            .then(() => window.location.href = "/sends")
+            .then(() => {
+                setTimeout(() => {
+                    navigate("/sends")
+                    setIsLoading(false)
+                }, 1000)
+            })
+
+        setIsLoading(true)
 
     }
 
     return (
-        <div>
+        <>
+            <UserLoginRequired/>
             <div className="row">
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
@@ -95,19 +104,30 @@ const SeeProblemPage = () => {
                                 {
 
                                     Object.keys(data.langs || {}).map(lang => {
-                                        return <option key={"lang" + lang} selected value={data.langs[lang]}>{lang}</option>
+                                        return <option key={"lang" + lang} selected
+                                                       value={data.langs[lang]}>{lang}</option>
                                     })
                                 }
                             </select>
                             <LazyCodeEditor className="my-5 rounded-2"/>
 
-                            <button className="btn btn-success">Отправить</button>
+                            <button className="btn btn-success" disabled={isLoading}>
+                                Отправить
+                                {
+                                    isLoading ?
+                                        (<span className="spinner-border spinner-border-sm mx-2"
+                                               aria-hidden="true"></span>) :
+                                        (<></>)
+
+
+                                }
+                            </button>
                         </form>
                     </Card>
                 </div>
             </div>
 
-        </div>
+        </>
     );
 };
 

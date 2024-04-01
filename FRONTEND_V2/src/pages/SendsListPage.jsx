@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
+import UserLoginRequired from "../components/UserLoginRequired.jsx";
 
 const SendsListPage = () => {
 
@@ -12,7 +13,8 @@ const SendsListPage = () => {
     }, []);
 
     return (
-        <div>
+        <>
+            <UserLoginRequired />
             <Card>
                 <h2 className="mb-3">Посылки</h2>
                 <div className="border rounded-2 p-1">
@@ -47,7 +49,7 @@ const SendsListPage = () => {
                 </div>
 
             </Card>
-        </div>
+        </>
     );
 };
 
