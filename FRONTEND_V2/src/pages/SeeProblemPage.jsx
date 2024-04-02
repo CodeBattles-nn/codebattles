@@ -89,7 +89,14 @@ const SeeProblemPage = () => {
                             <h3>Примеры</h3>
                             {
                                 data?.examples?.map(example => {
-                                    return <ProblemExample in_data={example[0]} out_data={example[1]}/>
+                                    const in_data = example[0]
+                                    const out_data = example[1]
+
+                                    return <ProblemExample
+                                        key={`example-${in_data}--${out_data}`}
+                                        in_data={in_data}
+                                        out_data={out_data}
+                                    />
                                 })
                             }
                         </Card>
