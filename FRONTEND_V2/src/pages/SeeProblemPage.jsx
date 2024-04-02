@@ -18,19 +18,27 @@ const SeeProblemPage = () => {
 
 
     useEffect(() => {
-        update()
+        update();
     }, []);
+
 
     const {register, handleSubmit} = useForm()
 
-    const onSubmit = (data) => {
-        data.src = document.getElementsByClassName("ace_content")[0].innerText
-        console.log(data)
+    const onSubmit = (formData) => {
+        formData.src = document.getElementsByClassName("ace_content")[0].innerText
+        console.log(formData)
 
-        setEditorText(data.src)
+        setEditorText(formData.src)
         // alert(JSON.stringify(data))
 
-        axios.post('http://localhost:2500/api/send', data)
+        const defaultLang = Object.keys(data.langs)[0]
+        if (formData.cars === ""){
+            formData.cars = data.langs[defaultLang]
+        }
+
+        console.log(defaultLang)
+
+        axios.post('http://localhost:2500/api/send', formData)
             .then(() => {
                 setTimeout(() => {
                     navigate("/sends")
@@ -114,8 +122,9 @@ const SeeProblemPage = () => {
                                 {
 
                                     Object.keys(data.langs || {}).map(lang => {
-                                        return <option key={"lang" + lang} selected
-                                                       value={data.langs[lang]}>{lang}</option>
+                                        return <option key={"lang" + lang} value={data.langs[lang]}>
+                                            {lang}
+                                        </option>
                                     })
                                 }
                             </select>

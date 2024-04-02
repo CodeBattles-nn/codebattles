@@ -46,7 +46,7 @@ function useCachedGetAPI(
 
     useEffect(() => {
         getData();
-    });
+    },[]);
 
     return [data, updateCallback];
 }
