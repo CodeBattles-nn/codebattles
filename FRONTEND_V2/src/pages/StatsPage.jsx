@@ -11,7 +11,7 @@ const StatsPage = () => {
 
     useEffect(() => {
         update();
-    });
+    }, []);
 
     const mine_user_id = getCookie("user_id")
     // console.log(mine_user_id)

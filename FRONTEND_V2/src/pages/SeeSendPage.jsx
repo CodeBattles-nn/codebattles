@@ -12,7 +12,7 @@ const SeeSendPage = () => {
 
     useEffect(() => {
         update()
-    });
+    }, []);
 
     return (<>
             <UserLoginRequired/>

@@ -19,7 +19,7 @@ const SeeProblemPage = () => {
 
     useEffect(() => {
         update()
-    });
+    }, []);
 
     const {register, handleSubmit} = useForm()
 
