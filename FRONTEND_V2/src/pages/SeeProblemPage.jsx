@@ -13,6 +13,7 @@ const SeeProblemPage = () => {
     const {letter} = useParams();
     const navigate = useNavigate();
     const [data, update] = useCachedGetAPI(`/api/problem/${letter}`);
+    const [editorText, setEditorText] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
 
 
@@ -25,6 +26,8 @@ const SeeProblemPage = () => {
     const onSubmit = (data) => {
         data.src = document.getElementsByClassName("ace_content")[0].innerText
         console.log(data)
+
+        setEditorText(data.src)
         // alert(JSON.stringify(data))
 
         axios.post('http://localhost:2500/api/send', data)
@@ -109,7 +112,10 @@ const SeeProblemPage = () => {
                                     })
                                 }
                             </select>
-                            <LazyCodeEditor className="my-5 rounded-2"/>
+                            <LazyCodeEditor
+                                className="my-5 rounded-2"
+                                value = {editorText || "print('Hello, world')"}
+                            />
 
                             <button className="btn btn-success" disabled={isLoading}>
                                 Отправить
