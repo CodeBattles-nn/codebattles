@@ -10,7 +10,7 @@ const ProblemsListPage = () => {
 
     useEffect(() => {
         update();
-    }, []);
+    });
 
     return (
         <>

@@ -10,7 +10,7 @@ const SendsListPage = () => {
 
     useEffect(() => {
         update();
-    }, []);
+    });
 
     return (
         <>
