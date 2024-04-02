@@ -7,6 +7,7 @@ COPY package.json /app
 RUN yarn install
 
 COPY . /app
+RUN yarn lint
 RUN yarn build
 
 # production environment
