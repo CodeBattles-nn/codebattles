@@ -1,9 +1,17 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, useMemo} from 'react';
 
 
 const LazyCodeEditor = (props) => {
 
-    const __CodeEditor = React.lazy(() => import("../wraps/CodeEditor.jsx"))
+    const __CodeEditor =
+        useMemo(() => {
+            return React.lazy(
+                () => import("../wraps/CodeEditor.jsx"))
+        }, []);
+
+    // const __CodeEditor = React.lazy(
+    //     () => import("../wraps/CodeEditor.jsx"))
+
 
     return (
         <Suspense fallback={<></>}>

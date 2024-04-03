@@ -1,7 +1,18 @@
 import "./css/Header.css"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import constants from "../utils/consts.js";
 
 const Header = () => {
+
+    let navigate = useNavigate();
+
+    let isAuthed = localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true"
+
+    const onLogoutButtonClick = () => {
+        localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
+        navigate("/")
+    }
+
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container">
@@ -17,19 +28,31 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item active">
-                            <Link className="nav-link" to="/problems">Задачи</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/stats">Рейтинг</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/sends">Посылки</Link>
-                        </li>
+                        {
+                            isAuthed &&
 
+                            <>
+                                <li className="nav-item active">
+                                    <Link className="nav-link" to="/problems">Задачи</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/stats">Рейтинг</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/sends">Посылки</Link>
+                                </li>
+                            </>
+
+                        }
+                        <a className="nav-link mx-5" target="_blank" href="/teacher">Учителю</a>
                     </ul>
                     <Link className="nav-link mx-2" to="/statuses">Помощь</Link>
-                    <button className="btn btn-danger">Выход</button>
+
+                    {
+                        isAuthed && <button className="btn btn-danger" onClick={onLogoutButtonClick}>Выход</button>
+                    }
+
+
                 </div>
             </div>
         </nav>

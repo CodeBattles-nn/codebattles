@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import constants from "../utils/consts.js";
 
 const defaultEmptyFunction = () => {
 };
@@ -12,6 +14,7 @@ function useCachedGetAPI(
     onError = defaultEmptyFunction
 ) {
     const [data, setData] = useState({});
+    const navigate = useNavigate()
 
     const apiGetData = () => {
         axios
@@ -20,6 +23,10 @@ function useCachedGetAPI(
             .then(({data}) => {
                 setData(data)
                 localStorage.setItem(LOCALSTORAGE_PREFIX + url, JSON.stringify(data))
+            })
+            .catch(() => {
+                localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
+                navigate("/")
             })
             .catch(onError)
     }
@@ -39,7 +46,7 @@ function useCachedGetAPI(
 
     useEffect(() => {
         getData();
-    }, []);
+    },[]);
 
     return [data, updateCallback];
 }

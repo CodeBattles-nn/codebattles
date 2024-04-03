@@ -6,6 +6,12 @@ services:
     ports:
       - "8001:80"
     restart: unless-stopped
+  frontend-v2:
+    build: FRONTEND_V2/.
+    image: ghcr.io/codebattles-nn/frontend-v2
+    ports:
+      - "8002:80"
+    restart: unless-stopped
   backend:
     build: BACKEND/.
     image: ghcr.io/codebattles-nn/backend

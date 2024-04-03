@@ -3,10 +3,11 @@ import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {getCookie} from "../utils/cookies.js";
+import UserLoginRequired from "../components/UserLoginRequired.jsx";
 
 const StatsPage = () => {
 
-    const [data, update] = useCachedGetAPI("http://localhost:2500/api/stats");
+    const [data, update] = useCachedGetAPI("/api/stats");
 
     useEffect(() => {
         update();
@@ -16,7 +17,8 @@ const StatsPage = () => {
     // console.log(mine_user_id)
 
     return (
-        <div>
+        <>
+            <UserLoginRequired />
             <Card>
                 <h2 className="mb-3">Рейтинг</h2>
                 <div className="border rounded-2 p-1">
@@ -70,7 +72,7 @@ const StatsPage = () => {
                 </div>
 
             </Card>
-        </div>
+        </>
     );
 };
 

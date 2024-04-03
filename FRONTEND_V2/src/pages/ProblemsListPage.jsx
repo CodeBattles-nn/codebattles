@@ -2,17 +2,19 @@ import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
+import UserLoginRequired from "../components/UserLoginRequired.jsx";
 
 const ProblemsListPage = () => {
 
-    const [data, update] = useCachedGetAPI("http://localhost:2500/api/problems");
+    const [data, update] = useCachedGetAPI("/api/problems");
 
     useEffect(() => {
         update();
     }, []);
 
     return (
-        <div>
+        <>
+            <UserLoginRequired/>
             <Card>
                 <h2 className="mb-3">Задачи</h2>
                 <div className="border rounded-2 p-1">
@@ -42,7 +44,7 @@ const ProblemsListPage = () => {
                 </div>
 
             </Card>
-        </div>
+        </>
     );
 };
 
