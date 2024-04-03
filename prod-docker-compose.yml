@@ -5,6 +5,11 @@ services:
     ports:
       - "8001:80"
     restart: unless-stopped
+  frontend-v2:
+    build: FRONTEND_V2/.
+    ports:
+      - "8002:80"
+    restart: unless-stopped
   backend:
     build: BACKEND/.
     environment:
@@ -31,6 +36,7 @@ services:
     image: redis:alpine3.18
     ports:
         - 6379:6379
+    restart: unless-stopped
   postgres:
     image: postgres:13.3-alpine
     environment:
@@ -52,6 +58,7 @@ services:
     depends_on:
       - frontend
       - backend
+    restart: unless-stopped
   init_configurer:
     build: INIT_CONFIGURER/.
     environment:
