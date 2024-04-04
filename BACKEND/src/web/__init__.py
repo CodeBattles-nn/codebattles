@@ -1,6 +1,6 @@
-from web.admin import *
-from web.api import *
-from web.teacher_api import *
+import web.admin
+import web.api
+import web.teacher_api
 
-from web.checker_api import *
-from web.error_handlers import *
+import web.checker_api
+import web.error_handlers

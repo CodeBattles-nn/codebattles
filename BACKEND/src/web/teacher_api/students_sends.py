@@ -66,13 +66,16 @@ def get_stats_teacher_api(champ_id, r):
 
         # problems_score = list(map(lambda s: (s, "")[s is None], problems_score))
 
-        users.append(dict(position=i + 1,
-                          name=nickname,
-                          user_id=user_id,
-                          score=score,
-                          problems_score=problems_score,
-                          last_send=last_send
-                          ))
+        users.append(
+            {
+                'position': i + 1,
+                'name': nickname,
+                'user_id': user_id,
+                'score': score,
+                'problems_score': problems_score,
+                'last_send': last_send
+            }
+        )
 
         print()
 
@@ -111,7 +114,7 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
     tests = []
     result = []
     try:
-        result = json.loads(desc := res["description"])
+        result = json.loads(res["description"])
     except TypeError:
         pass
 
@@ -122,7 +125,7 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
         if message == "WRONG_ANSWER":
             out = """ВЫВОД СКРЫТ"""
 
-        to_add = dict(id=i + 1, time=test['time'], msg=message, out=out)
+        to_add = {'id': i + 1, 'time': test['time'], 'msg': message, 'out': out}
         tests.append(to_add)
 
     return {**{"tests": tests}, **res}

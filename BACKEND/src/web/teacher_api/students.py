@@ -34,8 +34,9 @@ def create_users_in_champ_post_teachers_api(champ_id):
         login = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
         password = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
 
-        cursor.execute(f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
-                       (login, password, name))
+        cursor.execute(
+            f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
+            (login, password, name))
 
     connection.commit()
 

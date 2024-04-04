@@ -58,7 +58,7 @@ def api_send_prog(user_id, uid):
         f'''
         INSERT INTO champSends_{user_id}
         (problem_name, problem_id, user_id, send_time, state, program, problem_letter, lang)
-        VALUES(%s, %s, %s, %s, %s, %s, %s, %s); 
+        VALUES(%s, %s, %s, %s, %s, %s, %s, %s);
         ''',
         (
             problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", f_code,
@@ -84,8 +84,6 @@ def api_send_prog(user_id, uid):
     }
 
     connection.commit()
-
-    #print(cur.fetchone())
 
     cur.execute(f"SELECT address FROM servers WHERE id = {request.json['cars']} and enabled = true")
 

@@ -1,3 +1,3 @@
-from web.admin.panel import *
-from web.admin.auth import *
-from web.admin.problems import *
+import web.admin.panel
+import web.admin.auth
+import web.admin.problems
