@@ -1,16 +1,21 @@
-# CodeBattles
+# [Codebattles](codebattles.ru)
 
-[codebattles.ru](codebattles.ru)
+Programming competition system
 
 [![deploy](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml)
 [![Licence](https://img.shields.io/github/license/CodeBattles-nn/CodeBattles?style=flat)](./LICENSE)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/w/codebattles-nn/codebattles)
 ![Lines of code](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/codebattles-nn/codebattles/badge)
+![GitHub language count](https://img.shields.io/github/languages/count/codebattles-nn/codebattles)
+
 
 ![Main image](images/image1.png)
 
 [Documentation RU](https://doctorixx.gitbook.io/codebattles/)
 
 [Documentation EN](https://doctorixx.gitbook.io/codebattles/v/en)
+
+[Service monitoring](https://doctorixx.gitbook.io/codebattles/v/en)
 
 ## Get started
 
@@ -61,13 +66,18 @@ docker compose up
 Go to [http://localhost:2500](http://localhost:2500)
 ___
 
-## Open container ports
+### Open container ports
 
 - Gateway on port 2500
 - Server part on port 8001
 - Frontend on port 8000
 - Database on port 25565
 - Redis on port 6379
+### Generate tasks for compeptition
+For this create your custom tasks or use public repository
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=codebattles-nn&repo=task-generator)](https://github.com/codebattles-nn/task-generator)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=codebattles-nn&repo=problems-repo)](https://github.com/codebattles-nn/problems-repo)
 
 ___
 CodeBattles, 2024
