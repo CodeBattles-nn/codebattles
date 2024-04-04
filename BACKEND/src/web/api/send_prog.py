@@ -2,10 +2,11 @@ import datetime
 import json
 import string
 
-import requests as requests
+import requests
+from flask import request
 
 import env
-from app import *
+from app import app
 from database import get_connection
 from decorators import get_user_id, api_login_required
 
@@ -40,8 +41,8 @@ def api_send_prog(user_id, uid):
     problem_letter_form = request.json['problem']
 
     for i in x:
-        id = i[0]
-        problem_letter = strs[problems_ids.index(id)]
+        _id = i[0]
+        problem_letter = strs[problems_ids.index(_id)]
         if problem_letter_form == problem_letter:
             problem_ = i
 

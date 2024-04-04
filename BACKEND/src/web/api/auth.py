@@ -27,7 +27,10 @@ def login_post_api():
 
         con = get_connection()
         cur = con.cursor()
-        cur.execute(f"SELECT * FROM public.champUsers_{champ_id} WHERE login = '{login}' AND password = '{password}'")
+        cur.execute(
+            f"SELECT * FROM public.champUsers_{champ_id}"
+            f" WHERE login = '{login}' AND password = '{password}'"
+        )
         user = cur.fetchone()
 
         assert user is not None

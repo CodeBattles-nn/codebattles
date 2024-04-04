@@ -75,10 +75,10 @@ def get_champs_byid_route(champ_id):
     tasks = []
 
     for task in x:
-        id = task[0]
+        _id = task[0]
         name = task[1]
-        tasks_dict[id] = task
-        tasks.append({'letter': strs[problems_ids.index(id)], 'id': id, 'name': name})
+        tasks_dict[_id] = task
+        tasks.append({'letter': strs[problems_ids.index(_id)], 'id': _id, 'name': name})
 
     return {'tasks': tasks, 'id': fetch[0], 'name': fetch[1]}
 

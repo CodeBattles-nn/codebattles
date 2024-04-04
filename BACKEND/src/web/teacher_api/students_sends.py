@@ -79,7 +79,8 @@ def get_stats_teacher_api(champ_id, r):
 
         print()
 
-    resp_string = dict(success=True, cols=strs[:problems_counts], users=users)
+    resp_string = {'success': True, 'cols': strs[:problems_counts],
+                   'users': users}
 
     r.set(f"r-champ-{champ_id}-stats", json.dumps(resp_string))
     return resp_string
@@ -101,7 +102,7 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
           AND user_id = {user_id}
         ORDER BY score DESC, send_time DESC
         LIMIT 1
-    
+
         """, (problem_letter))
     except psycopg2.errors.UndefinedTable:
         abort(404)
