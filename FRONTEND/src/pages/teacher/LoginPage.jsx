@@ -17,7 +17,7 @@ const LoginPage = () => {
         setIsLoading(true)
 
         await apiAxios.post(getApiAddress() + '/api/teacher/auth',
-            {login: login, password: passsword}).then(
+            {login: login || "", password: passsword || ""}).then(
             () => {
                 setErrorMsg("Успешный вход")
                 navigate("/teacher/champs")

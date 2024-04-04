@@ -28,7 +28,7 @@ const AxiosConfigurer = () => {
                 if (redirect_url) {
                     navigate(redirect_url)
                 } else {
-                    navigate("/login")
+                    navigate("/teacher")
                 }
             }
 
@@ -39,7 +39,7 @@ const AxiosConfigurer = () => {
             // navigate("/problems")
         } else if (error.response?.status >= 500) {
             serverErrorToast();
-            navigate("/problems")
+            navigate("/teacher")
         } else {
             noInternetToast();
         }
