@@ -28,6 +28,7 @@
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -48,5 +49,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6"
   }
 }

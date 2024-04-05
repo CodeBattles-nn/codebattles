@@ -16,13 +16,13 @@ class RedisWrapper:
         def inner(*args, **kwargs):
             if not self.__redis_inited:
                 return None
-            else:
-                try:
-                    result = func(*args, **kwargs)
-                    return result
-                except RedisError as e:
-                    print(e)
-                    self.__redis_inited = False
-                    return None
+
+            try:
+                result = func(*args, **kwargs)
+                return result
+            except RedisError as e:
+                print(e)
+                self.__redis_inited = False
+                return None
 
         return inner

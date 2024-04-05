@@ -49,15 +49,15 @@ def teacher_required(f):
 
         cursor.execute(f"""
             SELECT id from globalusers
-        WHERE role = 'TEACHER' 
+        WHERE role = 'TEACHER'
           AND password = '{password}'
           AND login = '{login}'
         """)
 
         if cursor.fetchone():
             return f(*args, **kwargs)
-        else:
-            return {"success": False, "msg": "Bad Credentials"}, 403
+
+        return {"success": False, "msg": "Bad Credentials"}, 403
 
     return decorated_function
 

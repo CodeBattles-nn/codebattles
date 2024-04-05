@@ -8,7 +8,9 @@ from psycopg2.extras import RealDictCursor
 from app import app
 from database import get_connection
 from decorators import redis_conn
-from web import JSON_MIMETYPE
+from web.api.battle import JSON_MIMETYPE
+
+
 
 
 @app.route("/api/teacher/champs/<champ_id>/stats")
@@ -66,17 +68,21 @@ def get_stats_teacher_api(champ_id, r):
 
         # problems_score = list(map(lambda s: (s, "")[s is None], problems_score))
 
-        users.append(dict(position=i + 1,
-                          name=nickname,
-                          user_id=user_id,
-                          score=score,
-                          problems_score=problems_score,
-                          last_send=last_send
-                          ))
+        users.append(
+            {
+                'position': i + 1,
+                'name': nickname,
+                'user_id': user_id,
+                'score': score,
+                'problems_score': problems_score,
+                'last_send': last_send
+            }
+        )
 
         print()
 
-    resp_string = dict(success=True, cols=strs[:problems_counts], users=users)
+    resp_string = {'success': True, 'cols': strs[:problems_counts],
+                   'users': users}
 
     r.set(f"r-champ-{champ_id}-stats", json.dumps(resp_string))
     return resp_string
@@ -98,7 +104,7 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
           AND user_id = {user_id}
         ORDER BY score DESC, send_time DESC
         LIMIT 1
-    
+
         """, (problem_letter))
     except psycopg2.errors.UndefinedTable:
         abort(404)
@@ -111,7 +117,7 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
     tests = []
     result = []
     try:
-        result = json.loads(desc := res["description"])
+        result = json.loads(res["description"])
     except TypeError:
         pass
 
@@ -122,7 +128,7 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
         if message == "WRONG_ANSWER":
             out = """ВЫВОД СКРЫТ"""
 
-        to_add = dict(id=i + 1, time=test['time'], msg=message, out=out)
+        to_add = {'id': i + 1, 'time': test['time'], 'msg': message, 'out': out}
         tests.append(to_add)
 
     return {**{"tests": tests}, **res}

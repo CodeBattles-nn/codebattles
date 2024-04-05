@@ -61,7 +61,7 @@ def api_send_viewer(send_id, user_id):
       FROM public.champSends_{user_id} as t1
       INNER JOIN public.servers as t2
                   on CAST(t1.lang as INTEGER) = t2.id
-                  
+
       WHERE t1.id = %s
     ''', (send_id,))
 
@@ -85,11 +85,13 @@ def api_send_viewer(send_id, user_id):
         if message == "WRONG_ANSWER":
             out = """ВЫВОД СКРЫТ"""
 
-        to_add = dict(id=i + 1, time=test['time'], msg=message, out=out)
+        to_add = {'id': i + 1, 'time': test['time'], 'msg': message,
+                  'out': out}
         to_render.append(to_add)
 
     connection.close()
 
     print()
 
-    return dict(success=True, tests=to_render, lang=lang, program=prog, lang_id=lang_id)
+    return {'success': True, 'tests': to_render, 'lang': lang, 'program': prog,
+            'lang_id': lang_id}

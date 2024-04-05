@@ -1,9 +1,10 @@
 import {toast} from "react-toastify";
 
-const API_PORT = 2500
 
 export function getApiAddress() {
     return `${document.location.protocol}//${document.location.hostname}:${document.location.port}`
+
+
 }
 
 export function serverErrorToast() {

@@ -177,17 +177,14 @@ def api_statistics(user_id, uid, r):
 
         # problems_score = list(map(lambda s: (s, "")[s is None], problems_score))
 
-        users.append(dict(position=i + 1,
-                          name=nickname,
-                          user_id=user_id,
-                          score=score,
-                          problems_score=problems_score,
-                          last_send=last_send
-                          ))
+        users.append({'position': i + 1, 'name': nickname, 'user_id': user_id,
+                      'score': score, 'problems_score': problems_score,
+                      'last_send': last_send})
 
         print()
 
-    resp_string = dict(success=True, cols=strs[:problems_counts], users=users)
+    resp_string = {'success': True, 'cols': strs[:problems_counts],
+                   'users': users}
 
     r.set(f"r-champ-{champ_id}-stats", json.dumps(resp_string))
     return resp_string

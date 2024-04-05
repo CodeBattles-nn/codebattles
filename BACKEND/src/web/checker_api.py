@@ -2,10 +2,10 @@ import json
 import string
 import datetime
 
-import requests as requests
-from flask import redirect
+import requests
+from flask import redirect, request
 
-from app import *
+from app import app
 from database import get_connection
 from decorators import login_required, get_user_id, redis_conn
 import env
@@ -41,8 +41,8 @@ def send_prog(user_id, uid):
     problem_letter_form = request.form['problem']
 
     for i in x:
-        id = i[0]
-        problem_letter = strs[problems_ids.index(id)]
+        _id = i[0]
+        problem_letter = strs[problems_ids.index(_id)]
         if problem_letter_form == problem_letter:
             problem_ = i
 
@@ -59,7 +59,7 @@ def send_prog(user_id, uid):
         f'''
         INSERT INTO champSends_{user_id}
         (problem_name, problem_id, user_id, send_time, state, program, problem_letter, lang)
-        VALUES(%s, %s, %s, %s, %s, %s, %s, %s); 
+        VALUES(%s, %s, %s, %s, %s, %s, %s, %s);
         ''',
         (
             problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", f_code,
@@ -94,7 +94,11 @@ def send_prog(user_id, uid):
 
     print()
 
-    requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test", json=data)
+    requests.post(
+        f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test",
+        json=data,
+        timeout=1000
+    )
     return redirect("/sends")
 
 
@@ -124,7 +128,7 @@ def check_system(r):
 
     cur.execute(
         f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = {points} \
-        WHERE id = {user_id} AND ({meta['problem'][0]} < {points} OR {meta['problem'][0]} IS NULL)")
+        WHERE id= {user_id} AND ({meta['problem'][0]} < {points} OR {meta['problem'][0]} IS NULL)")
 
     result_str = json.dumps(data['results'], indent=2)
 

@@ -6,7 +6,7 @@ from app import *
 from database import init_tables
 from database.redis import redis_pool_init
 
-from web import *
+import web
 
 
 def init_env():

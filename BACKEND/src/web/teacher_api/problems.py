@@ -28,7 +28,8 @@ def get_problems_byid_api_route(problem_id):
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
     cursor.execute(
-        f"""SELECT id, name, description, "in", "out", examples, tests FROM problems WHERE id = {problem_id}""")
+        f"""SELECT id, name, description, "in", "out", examples, tests
+        FROM problems WHERE id = {problem_id}""")
     problem = cursor.fetchone()
 
     print(problem)
