@@ -1,9 +1,8 @@
 import {toast} from "react-toastify";
 
-const API_PORT = document.location.port
 
 export function getApiAddress() {
-    return `${document.location.protocol}//${document.location.hostname}:${API_PORT}`
+    return `${document.location.protocol}//${document.location.hostname}:${document.location.port}`
 
 
 }
