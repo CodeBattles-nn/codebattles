@@ -38,7 +38,7 @@ const SeeProblemPage = () => {
 
         console.log(defaultLang)
 
-        axios.post('http://localhost:2500/api/send', formData)
+        axios.post('/api/send', formData)
             .then(() => {
                 setTimeout(() => {
                     navigate("/sends")
