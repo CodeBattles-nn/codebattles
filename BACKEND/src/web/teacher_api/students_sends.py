@@ -8,7 +8,9 @@ from psycopg2.extras import RealDictCursor
 from app import app
 from database import get_connection
 from decorators import redis_conn
-from web import JSON_MIMETYPE
+from web.api.battle import JSON_MIMETYPE
+
+
 
 
 @app.route("/api/teacher/champs/<champ_id>/stats")
