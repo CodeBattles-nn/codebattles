@@ -3,6 +3,7 @@ import Card from "../components/bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
+import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 
 const SendsListPage = () => {
 
@@ -18,7 +19,7 @@ const SendsListPage = () => {
             <Card>
                 <h2 className="mb-3">Посылки</h2>
                 <div className="border rounded-2 p-1">
-                    <table className="table table-striped table-hover" style={{}}>
+                    <ResponsiveTable>
                         <thead>
                         <tr>
                             <th scope="col">№</th>
@@ -45,7 +46,7 @@ const SendsListPage = () => {
                                 </tr>)
                         })}
                         </tbody>
-                    </table>
+                    </ResponsiveTable>
                 </div>
 
             </Card>

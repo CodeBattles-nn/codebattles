@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {getCookie} from "../utils/cookies.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
+import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 
 const StatsPage = () => {
 
@@ -22,7 +23,7 @@ const StatsPage = () => {
             <Card>
                 <h2 className="mb-3">Рейтинг</h2>
                 <div className="border rounded-2 p-1">
-                    <table className="table table-striped table-bordered">
+                    <ResponsiveTable>
                         <thead>
 
                         <tr>
@@ -68,7 +69,7 @@ const StatsPage = () => {
                             })
                         }
                         </tbody>
-                    </table>
+                    </ResponsiveTable>
                 </div>
 
             </Card>

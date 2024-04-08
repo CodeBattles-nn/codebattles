@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import LazySyntaxHighlight from "../components/lazy/LazySyntaxHightlight.jsx";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
+import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 
 const SeeSendPage = () => {
 
@@ -24,7 +25,7 @@ const SeeSendPage = () => {
                     {data.program}
                 </LazySyntaxHighlight>
                 <div className="my-4"></div>
-                <table className="table table-striped table-bordered">
+                <ResponsiveTable>
                     <thead>
                     <tr>
                         <th scope="col">№ Теста</th>
@@ -48,7 +49,7 @@ const SeeSendPage = () => {
                     }
 
                     </tbody>
-                </table>
+                </ResponsiveTable>
             </Card>
         </>
     );
