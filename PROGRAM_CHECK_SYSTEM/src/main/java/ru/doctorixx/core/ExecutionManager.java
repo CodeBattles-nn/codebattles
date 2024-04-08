@@ -67,13 +67,13 @@ public class ExecutionManager {
             }
 
 
-            out = executor.execute(inputData);
+            out = executor.executeAndAlwaysCompile(inputData);
 
 
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
-            FileUtils.recursiveDelete(tempdir);
+//            FileUtils.recursiveDelete(tempdir);
             //tempdir.deleteOnExit();
         }
 

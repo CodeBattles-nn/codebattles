@@ -31,6 +31,7 @@ public class RunManager {
 
             executionManager.setInputData(test.in());
             ProgramResult result = executionManager.executeOne();
+            System.out.println("EXECUTED ONE");
 
             if (result.msg().equals(ProcessEndStatus.TIME_LIMIT)) {
                 timeLimitExceeded = true;
