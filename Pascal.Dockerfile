@@ -9,20 +9,24 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 # Package stage
 #
-FROM alpine:20240329
+FROM ubuntu
 
-RUN apk add openjdk17-jre
+#RUN apk add openjdk17-jre
 WORKDIR /
 
-ENV SERVER_ENDPOINT  http://backend:8000/api/check_system_callback
-ENV ENV_EXECUTOR_ENABLE true
-ENV ENV_EXECUTOR_COMPILER_NEED false
-ENV ENV_EXECUTOR_COMPILER_COMMAND fpc main.pas
-ENV ENV_EXECUTOR_FILENAME main.pas
-ENV ENV_EXECUTOR_WITH_FILENAME true
-ENV ENV_EXECUTOR_RUN_COMMAND ./main
-
+RUN apt update
+RUN apt-get install fpc -y
+RUN apt install openjdk-17-jre -y
 
 COPY --from=build /home/app/target/ProgramCheckSystem-1.0-SNAPSHOT.jar /usr/local/lib/demo.jar
 EXPOSE 7070
+
+ENV SERVER_ENDPOINT  http://backend:8000/api/check_system_callback
+ENV ENV_EXECUTOR_ENABLE true
+ENV ENV_EXECUTOR_COMPILER_NEED true
+ENV ENV_EXECUTOR_COMPILER_COMMAND "fpc ./main.pas"
+ENV ENV_EXECUTOR_FILENAME main.pas
+ENV ENV_EXECUTOR_WITH_FILENAME false
+ENV ENV_EXECUTOR_RUN_COMMAND "./main"
+
 ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]

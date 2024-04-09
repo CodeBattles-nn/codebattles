@@ -89,7 +89,7 @@ services:
     build:
       dockerfile: ./CPP.Dockerfile
     restart: unless-stopped
-#  checker-pascal:
-#    build:
-#      dockerfile: ./Pascal.Dockerfile
-#    restart: unless-stopped
+  checker-pascal:
+    build:
+      dockerfile: ./Pascal.Dockerfile
+    restart: unless-stopped
