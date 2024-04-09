@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import LazySyntaxHighlight from "../components/lazy/LazySyntaxHightlight.jsx";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
+import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 
 const SeeSendPage = () => {
 
@@ -13,6 +14,15 @@ const SeeSendPage = () => {
     useEffect(() => {
         update()
     }, []);
+
+    const colorsByResult = {
+        "WRONG_ANSWER" : "table-danger",
+        "SUCCESS" : "table-success",
+        "RUNTIME_ERROR" : "table-info",
+        "COMPILATION_ERROR" : "table-info",
+        "TIME_LIMIT" : "table-warning",
+        "NOT_EXECUTED" : "table-active",
+    }
 
     return (<>
             <UserLoginRequired/>
@@ -24,7 +34,7 @@ const SeeSendPage = () => {
                     {data.program}
                 </LazySyntaxHighlight>
                 <div className="my-4"></div>
-                <table className="table table-striped table-bordered">
+                <ResponsiveTable>
                     <thead>
                     <tr>
                         <th scope="col">№ Теста</th>
@@ -37,7 +47,7 @@ const SeeSendPage = () => {
                     {
                         data?.tests?.map(test => {
                             return (
-                                <tr className="" key={"see-send-test-id-" + test.id}>
+                                <tr className={colorsByResult[test.msg]} key={"see-send-test-id-" + test.id}>
                                     <th scope="row">{test.id}</th>
                                     <td>{test.time}</td>
                                     <td>{test.msg}</td>
@@ -48,7 +58,7 @@ const SeeSendPage = () => {
                     }
 
                     </tbody>
-                </table>
+                </ResponsiveTable>
             </Card>
         </>
     );

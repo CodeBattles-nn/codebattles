@@ -1,11 +1,12 @@
 import Card from "../components/bootstrap/Card.jsx";
+import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 
 const SeeSendPage = () => {
     return (
         <>
             <Card>
                 <h3 className="mb-4">Статусы выполнения программ</h3>
-                <table className="table table-striped table-bordered">
+                <ResponsiveTable>
                     <thead>
                     <tr>
                         <th scope="col">Название</th>
@@ -43,7 +44,7 @@ const SeeSendPage = () => {
                         </td>
                     </tr>
                     </tbody>
-                </table>
+                </ResponsiveTable>
             </Card>
         </>
     );

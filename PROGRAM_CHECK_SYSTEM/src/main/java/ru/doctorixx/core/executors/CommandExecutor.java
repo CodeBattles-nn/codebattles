@@ -9,6 +9,7 @@ import ru.doctorixx.core.utils.ProcessUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,15 +34,20 @@ public abstract class CommandExecutor {
     private ProgramResult execute(String in, String mainCommand) throws IOException {
         List<String> command = new LinkedList<>();
 
+//        command.add("cat");
+//        command.add("/test.txt");
         command.add(mainCommand);
+
+        command.addAll(List.of(mainCommand.split(" ")));
+        System.out.println(Arrays.deepToString(mainCommand.split(" ")));
 
         boolean needToAddFileName = Boolean.parseBoolean(Env.get(Env.EnvVars.ENV_EXECUTOR_WITH_FILENAME));
         if (needToAddFileName) {
-            command.add(filename);
+            mainCommand = mainCommand + " " + filename;
         }
 
 
-        ProcessBuilder builder = new ProcessBuilder(command)
+        ProcessBuilder builder = new ProcessBuilder("sh", "-c", mainCommand)
                 .directory(new File(directory));
         Process pr = builder.start();
 
@@ -96,6 +102,21 @@ public abstract class CommandExecutor {
         return execute(in, getRunCommand());
 
     }
+
+    public ProgramResult executeAndAlwaysCompile(String in) throws IOException {
+        ProgramResult compileResult = compile();
+        if (!compileResult.success()) {
+            return compileResult;
+        }
+
+        compiled = true;
+        filename = getCompiler().filenameModifyAfterComplete(filename);
+
+
+        return execute(in, getRunCommand());
+
+    }
+
 
     private ProgramResult compile() throws IOException {
         AbstractCompiler compiler = getCompiler();

@@ -1,3 +1,5 @@
+import SeeQuizzProblemPage from "./pages/SeeQuizzProblemPage.jsx";
+
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
 
@@ -25,6 +27,7 @@ function App() {
                         <Route path="/" element={<LoginPage/>}/>
                         <Route path="/problems" element={<ProblemsListPage/>}/>
                         <Route path="/problems/:letter" element={<SeeProblemPage/>}/>
+                        <Route path="/problems/:letter/quizz" element={<SeeQuizzProblemPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
                         <Route path="/sends" element={<SendsListPage/>}/>
                         <Route path="/sends/:id" element={<SeeSendPage/>}/>
