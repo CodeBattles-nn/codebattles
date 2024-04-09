@@ -15,6 +15,15 @@ const SeeSendPage = () => {
         update()
     }, []);
 
+    const colorsByResult = {
+        "WRONG_ANSWER" : "table-danger",
+        "SUCCESS" : "table-success",
+        "RUNTIME_ERROR" : "table-info",
+        "COMPILATION_ERROR" : "table-info",
+        "TIME_LIMIT" : "table-warning",
+        "NOT_EXECUTED" : "table-active",
+    }
+
     return (<>
             <UserLoginRequired/>
             <Card>
@@ -38,7 +47,7 @@ const SeeSendPage = () => {
                     {
                         data?.tests?.map(test => {
                             return (
-                                <tr className="" key={"see-send-test-id-" + test.id}>
+                                <tr className={colorsByResult[test.msg]} key={"see-send-test-id-" + test.id}>
                                     <th scope="row">{test.id}</th>
                                     <td>{test.time}</td>
                                     <td>{test.msg}</td>
