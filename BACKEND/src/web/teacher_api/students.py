@@ -7,6 +7,8 @@ from app import app
 from database import get_connection
 from decorators import teacher_required
 
+from decorators import redis_conn
+
 
 @app.route("/api/teacher/champs/<champ_id>/users")
 @teacher_required
@@ -22,7 +24,8 @@ def get_users_get_route(champ_id):
 
 @app.route("/api/teacher/champs/<champ_id>/add_users", methods=['POST'])
 @teacher_required
-def create_users_in_champ_post_teachers_api(champ_id):
+@redis_conn
+def create_users_in_champ_post_teachers_api(champ_id, r):
     users = (request.json['users']
              .replace("\r", "")
              .split("\n"))
@@ -39,5 +42,7 @@ def create_users_in_champ_post_teachers_api(champ_id):
             (login, password, name))
 
     connection.commit()
+
+    r.delete(f"r-champ-{champ_id}-stats")
 
     return {"success": "true"}, 201
