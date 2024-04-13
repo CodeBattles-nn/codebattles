@@ -4,6 +4,7 @@ on:
 
 jobs:
   build-and-publish:
+    permissions: write-all
     runs-on: self-hosted
 
     steps:
