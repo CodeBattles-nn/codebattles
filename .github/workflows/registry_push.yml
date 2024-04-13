@@ -1,25 +1,21 @@
-name: Github Registry push
-
-on: [workflow_dispatch]
+name: Build and Publish
+on:
+  push:
+    branches:
+      - main  # Замените на вашу основную ветку
 
 jobs:
-  login:
+  build-and-publish:
     runs-on: self-hosted
+
     steps:
-        - name: Login to GitHub Container Registry
-          uses: docker/login-action@v3
-          with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
-  push:
-    runs-on: self-hosted
-    needs: [login]
-    steps:
-      - uses: actions/checkout@v1
-      - name: Docker compose build
-        run: docker compose build
-        
-      - name: Docker compose push
-        run: docker compose push
-      
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and push Docker images
+        run: |
+          docker-compose build
+          docker-compose push
