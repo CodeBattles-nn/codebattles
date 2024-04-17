@@ -85,13 +85,13 @@ services:
       dockerfile: ./Python.Dockerfile
     image: ghcr.io/codebattles-nn/checker-python
     restart: unless-stopped
-  checker-cpp:
-    build:
-      dockerfile: ./CPP.Dockerfile
-    image: ghcr.io/codebattles-nn/checker-cpp
-    restart: unless-stopped
-  checker-pascal:
-    build:
-      dockerfile: ./Pascal.Dockerfile
-    image: ghcr.io/codebattles-nn/checker-pascal
-    restart: unless-stopped
+#  checker-cpp:
+#    build:
+#      dockerfile: ./CPP.Dockerfile
+#    image: ghcr.io/codebattles-nn/checker-cpp
+#    restart: unless-stopped
+#  checker-pascal:
+#    build:
+#      dockerfile: ./Pascal.Dockerfile
+#    image: ghcr.io/codebattles-nn/checker-pascal
+#    restart: unless-stopped
