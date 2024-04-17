@@ -10,7 +10,7 @@ from decorators import teacher_required
 from decorators import redis_conn
 
 
-@app.route("/api/teacher/champs/<champ_id>/users")
+@app.route("/api/teacher/champs/<int:champ_id>/users")
 @teacher_required
 def get_users_get_route(champ_id):
     connection = get_connection()
@@ -22,7 +22,7 @@ def get_users_get_route(champ_id):
     return users
 
 
-@app.route("/api/teacher/champs/<champ_id>/add_users", methods=['POST'])
+@app.route("/api/teacher/champs/<int:champ_id>/add_users", methods=['POST'])
 @teacher_required
 @redis_conn
 def create_users_in_champ_post_teachers_api(champ_id, r):

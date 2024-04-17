@@ -50,7 +50,7 @@ def api_sends(user_id, uid, r):
     return dict_resp
 
 
-@app.route("/api/send/<send_id>")
+@app.route("/api/send/<int:send_id>")
 @api_login_required
 def api_send_viewer(send_id, user_id):
     connection = get_connection()

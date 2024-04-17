@@ -1,6 +1,7 @@
 import string
 
 from flask import request, redirect
+from flask_parameter_validation import ValidateParameters
 
 from app import app
 from database import get_connection
@@ -18,7 +19,8 @@ def get_champs_route():
 
     champs = cursor.fetchall()
     champs = list(map(lambda x: [*x], champs))
-    champs = list(map(lambda x: {'id': x[0], 'name': x[1], 'start_dt': x[2]}, champs))
+    champs = list(
+        map(lambda x: {'id': x[0], 'name': x[1], 'start_dt': x[2]}, champs))
 
     return champs
 
@@ -45,8 +47,10 @@ def create_champ_post_teacher():
 
     return redirect("/admin")
 
-@app.route("/api/teacher/champs/<champ_id>")
+
+@app.route("/api/teacher/champs/<int:champ_id>")
 @teacher_required
+# @ValidateParameters
 def get_champs_byid_route(champ_id):
     connection = get_connection()
     cur = connection.cursor()
@@ -78,12 +82,13 @@ def get_champs_byid_route(champ_id):
         _id = task[0]
         name = task[1]
         tasks_dict[_id] = task
-        tasks.append({'letter': strs[problems_ids.index(_id)], 'id': _id, 'name': name})
+        tasks.append(
+            {'letter': strs[problems_ids.index(_id)], 'id': _id, 'name': name})
 
     return {'tasks': tasks, 'id': fetch[0], 'name': fetch[1]}
 
 
-@app.route("/api/teacher/champs/<champ_id>", methods=['POST'])
+@app.route("/api/teacher/champs/<int:champ_id>", methods=['POST'])
 def settings_post_teacher_api(champ_id):
     connection = get_connection()
     cur = connection.cursor()
@@ -98,10 +103,9 @@ def settings_post_teacher_api(champ_id):
 
     print(problem, problem_id)
 
-    cur.execute(f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
+    cur.execute(
+        f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
 
     connection.commit()
 
     return {"success": "true"}
-
-
