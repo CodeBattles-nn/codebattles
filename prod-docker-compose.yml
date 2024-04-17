@@ -78,11 +78,11 @@ services:
     build:
       dockerfile: ./Python.Dockerfile
     restart: unless-stopped
-  checker-cpp:
-    build:
-      dockerfile: ./CPP.Dockerfile
-    restart: unless-stopped
-  checker-pascal:
-    build:
-      dockerfile: ./Pascal.Dockerfile
-    restart: unless-stopped
+#  checker-cpp:
+#    build:
+#      dockerfile: ./CPP.Dockerfile
+#    restart: unless-stopped
+#  checker-pascal:
+#    build:
+#      dockerfile: ./Pascal.Dockerfile
+#    restart: unless-stopped
