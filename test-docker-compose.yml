@@ -3,6 +3,9 @@ services:
   frontend:
     build: FRONTEND/.
     restart: unless-stopped
+  frontend-v2:
+    build: FRONTEND_V2/.
+    restart: unless-stopped
   backend:
     build: BACKEND/.
     environment:
