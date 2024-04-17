@@ -1,7 +1,6 @@
 import string
 
 from flask import request, redirect
-from flask_parameter_validation import ValidateParameters
 
 from app import app
 from database import get_connection
