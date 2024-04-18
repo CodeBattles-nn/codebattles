@@ -30,11 +30,7 @@ def before_request():
             json_data = request.get_json()
 
             for key, value in json_data.items():
-                modified_value = value \
-                    .replace("'", "") \
-                    .replace("\"", "") \
-                    .replace("--", "") \
-                    .replace(";", "")
+                modified_value = value.replace("'", "")
 
                 if modified_value != value:
                     return {"status": "something went wrong"}, 418
