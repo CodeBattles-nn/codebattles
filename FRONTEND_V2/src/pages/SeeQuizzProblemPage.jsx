@@ -3,7 +3,7 @@ import Card from "../components/bootstrap/Card.jsx";
 import {useParams, useSearchParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
-
+import {useLocalStorage} from "usehooks-ts";
 const SeeQuizzProblemPage = () => {
 
     const {letter} = useParams();
@@ -16,7 +16,7 @@ const SeeQuizzProblemPage = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // const [savedAnswers, setSavedAnswers] = useState({});
+    const [savedAnswers, setSavedAnswers] = useLocalStorage("test-storage", {});
 
     useEffect(() => {
         update();
@@ -47,19 +47,45 @@ const SeeQuizzProblemPage = () => {
             ]
         },
         {
-            id: 1,
+            id: 12,
             name: "Ты абоб а 2",
             answers: [
-                "Абобус",
-                "Абобус",
-                "Абобус",
                 "Абобус",
                 "Абобус 2",
                 "Абобус 3",
             ]
-        }
+        },
+        {
+            id: 13,
+            name: "4^(0.5)",
+            answers: [
+                "4",
+                "2",
+                "1",
+                "Че за",
+            ]
+        },
+        {
+            id: 133,
+            name: "Готов работать за еду?",
+            answers: [
+                "Дв",
+            ]
+        },
     ]
 
+    useEffect(() => {
+        console.log(savedAnswers)
+    }, [savedAnswers]);
+
+    const onAnswerClicked = (id, text) => {
+        console.log(id + " " + text)
+
+        const newAnswers = {...savedAnswers}
+        newAnswers[id] = [text]
+        setSavedAnswers(newAnswers)
+
+    }
 
     return (
         <>
@@ -91,7 +117,12 @@ const SeeQuizzProblemPage = () => {
                             <ul className="pagination justify-content-center">
                                 {
                                     questions.map((_, i) => {
-                                        return <li key={`quizz-variant-${i}`} className="page-item"><a className="page-link" href="#">{i + 1}</a>
+
+                                        const activeClass = i === questionNumber ? ("active") : ("")
+
+                                        return <li key={`quizz-variant-${i}`} className={"page-item " + activeClass}>
+                                            <btn className="page-link"
+                                                 onClick={() => setQuestionNumber(i)}>{i + 1}</btn>
                                         </li>
                                     })
                                 }
@@ -106,14 +137,19 @@ const SeeQuizzProblemPage = () => {
             <div className="row">
                 <div className="col">
                     <Card>
-                        <h3 className="width-inner">{questionNumber + 1}</h3>
-                        <small className="width-inner">/{questions.length} </small>
+                        <h3 className="width-inner">№{questionNumber + 1}</h3>
+                        <small className="width-inner me-3">/{questions.length}</small>
                         <h3 className="width-inner">{questions[questionNumber].name}</h3>
 
                         {
                             questions[questionNumber].answers.map((elem) => {
+
+                                const selectedClass = savedAnswers[questions[questionNumber].id]?.includes(elem) ? ("bg-primary") : ""
+
                                 return (
-                                    <Card className="btn btn-outline-secondary text-start" key={elem.name}>
+                                    <Card className={"btn btn-outline-secondary text-start " + selectedClass}
+                                          key={elem.name}
+                                          onClick={() => onAnswerClicked(questions[questionNumber].id, elem)}>
                                         {elem}
                                     </Card>
                                 )
@@ -121,12 +157,14 @@ const SeeQuizzProblemPage = () => {
                         }
 
 
-                        <button className="btn btn-outline-secondary justify-content-end mx-1" onClick={() => {
-                            setQuestionNumber(questionNumber - 1)
-                        }}>Предыдущий
+                        <button
+                            className={"btn btn-outline-secondary justify-content-end mx-1 " + (questionNumber === 0 && "disabled")}
+                            onClick={() => {
+                                setQuestionNumber(questionNumber - 1)
+                            }}>Предыдущий
                         </button>
-                        <button className="btn btn-outline-secondary justify-content-end mx-1" onClick={() => {
-                            if (questionNumber === questions.length){
+                        <button  className={"btn btn-outline-secondary justify-content-end mx-1 " + (questionNumber === questions.length - 1 && "disabled")} onClick={() => {
+                            if (questionNumber === questions.length) {
                                 // console.log(savedAnswers)
                             }
 

@@ -1,4 +1,5 @@
 import json
+import re
 import string
 
 from flask import abort
@@ -6,7 +7,7 @@ from flask import abort
 from app import app
 from database import get_connection
 from decorators import get_user_id, api_login_required, redis_conn
-from utils import fix_new_line, get_table_color_class_by_score
+from utils import fix_new_line, get_table_color_class_by_score, LETTER_REGEX
 
 JSON_MIMETYPE = 'application/json'
 
@@ -58,7 +59,8 @@ def api_problems(user_id, uid):
 
         tasks[letter] = name
 
-        css_colors[letter] = get_table_color_class_by_score(score[strs.index(letter)])
+        css_colors[letter] = get_table_color_class_by_score(
+            score[strs.index(letter)])
 
     print()
 
@@ -68,6 +70,9 @@ def api_problems(user_id, uid):
 @app.route("/api/problem/<letter>")
 @api_login_required
 def api_problem(letter, user_id):
+    if not re.fullmatch(LETTER_REGEX, letter):
+        return abort(404)
+
     connection = get_connection()
     cur = connection.cursor()
 
@@ -114,7 +119,8 @@ def api_problem(letter, user_id):
         langs[i[0]] = i[1]
 
     return dict(success=True, name=_pr_name, description=_pr_desc,
-                letter=letter, in_data=_pr_in, out_data=_pr_out, examples=_pr_examples,
+                letter=letter, in_data=_pr_in, out_data=_pr_out,
+                examples=_pr_examples,
                 langs=langs)
 
 
@@ -170,7 +176,8 @@ def api_statistics(user_id, uid, r):
         user_id = usr[0]
         score = usr[15]
         last_send = usr[16]
-        last_send = None if last_send is None else last_send.strftime("%m/%d/%Y, %H:%M:%S")
+        last_send = None if last_send is None else last_send.strftime(
+            "%m/%d/%Y, %H:%M:%S")
 
         nickname = usr[3]
         problems_score = usr[4:problems_counts + 4]

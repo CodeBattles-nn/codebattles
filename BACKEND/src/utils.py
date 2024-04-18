@@ -1,3 +1,4 @@
+import re
 from hashlib import sha256
 import env
 
@@ -40,3 +41,6 @@ def get_table_color_class_by_test_message(msg):
         return "table-danger"
 
     return "table-info"
+
+
+LETTER_REGEX = re.compile(r"[A-Z]")

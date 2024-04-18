@@ -23,7 +23,7 @@ def admin_panel():
     return render_template("admin/panel.html", champs=champs)
 
 
-@app.route("/admin/champ/<champ_id>")
+@app.route("/admin/champ/<int:champ_id>")
 @admin_required
 def settings(champ_id):
     connection = get_connection()
@@ -65,7 +65,7 @@ def settings(champ_id):
     return render_template("admin/settings.html", tasks=tasks, id=fetch[0], name=fetch[1])
 
 
-@app.route("/admin/champ/<champ_id>", methods=['POST'])
+@app.route("/admin/champ/<int:champ_id>", methods=['POST'])
 @admin_required
 def settings_post(champ_id):
     connection = get_connection()
@@ -117,13 +117,13 @@ def create_champ_post():
     return redirect("/admin")
 
 
-@app.route("/admin/champ/<champ_id>/add_users")
+@app.route("/admin/champ/<int:champ_id>/add_users")
 @admin_required
 def create_users_in_champ(champ_id):
     return render_template("admin/add_users.html")
 
 
-@app.route("/admin/champ/<champ_id>/add_users", methods=['POST'])
+@app.route("/admin/champ/<int:champ_id>/add_users", methods=['POST'])
 @admin_required
 def create_users_in_champ_post(champ_id):
     users = request.form['users'].split("\r\n")
@@ -153,7 +153,7 @@ def create_users_in_champ_post(champ_id):
     return redirect(f"/admin/champ/{champ_id}/users")
 
 
-@app.route("/admin/champ/<champ_id>/users")
+@app.route("/admin/champ/<int:champ_id>/users")
 @admin_required
 def users_route(champ_id):
     connection = get_connection()

@@ -11,9 +11,7 @@ from decorators import redis_conn
 from web.api.battle import JSON_MIMETYPE
 
 
-
-
-@app.route("/api/teacher/champs/<champ_id>/stats")
+@app.route("/api/teacher/champs/<int:champ_id>/stats")
 @redis_conn
 def get_stats_teacher_api(champ_id, r):
     redis_cache = r.get(f"r-champ-{champ_id}-stats")
@@ -61,7 +59,8 @@ def get_stats_teacher_api(champ_id, r):
         user_id = usr[0]
         score = usr[15]
         last_send = usr[16]
-        last_send = None if last_send is None else last_send.strftime("%m/%d/%Y, %H:%M:%S")
+        last_send = None if last_send is None else last_send.strftime(
+            "%m/%d/%Y, %H:%M:%S")
 
         nickname = usr[3]
         problems_score = usr[4:problems_counts + 4]
@@ -88,7 +87,7 @@ def get_stats_teacher_api(champ_id, r):
     return resp_string
 
 
-@app.route("/api/teacher/champs/<champ_id>/stats/search")
+@app.route("/api/teacher/champs/<int:champ_id>/stats/search")
 def get_stats_teacher_api_get_by_task_and_user(champ_id):
     args = request.args
     user_id, problem_letter = args["user_id"], args["problem"]
@@ -128,7 +127,8 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
         if message == "WRONG_ANSWER":
             out = """ВЫВОД СКРЫТ"""
 
-        to_add = {'id': i + 1, 'time': test['time'], 'msg': message, 'out': out}
+        to_add = {'id': i + 1, 'time': test['time'], 'msg': message,
+                  'out': out}
         tests.append(to_add)
 
     return {**{"tests": tests}, **res}

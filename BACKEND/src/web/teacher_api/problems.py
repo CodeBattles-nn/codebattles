@@ -21,7 +21,7 @@ def get_problems_api_route():
     return problems
 
 
-@app.route("/api/teacher/problems/<problem_id>")
+@app.route("/api/teacher/problems/<int:problem_id>")
 @teacher_required
 def get_problems_byid_api_route(problem_id):
     connection = get_connection()
