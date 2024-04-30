@@ -6,12 +6,18 @@ services:
     ports:
       - "8001:80"
     restart: unless-stopped
+    networks:
+      - no-internet
+
   frontend-v2:
     build: FRONTEND_V2/.
     image: ghcr.io/codebattles-nn/frontend-v2
     ports:
       - "8002:80"
     restart: unless-stopped
+    networks:
+      - no-internet
+
   backend:
     build: BACKEND/.
     image: ghcr.io/codebattles-nn/backend
@@ -34,12 +40,18 @@ services:
     links:
       - postgres
     restart: unless-stopped
-    
+    networks:
+      - no-internet
+
+
   redis:
     image: redis:alpine3.18
     ports:
         - 6379:6379
     restart: unless-stopped
+    networks:
+      - no-internet
+
   postgres:
     image: postgres:13.3-alpine
     environment:
@@ -54,6 +66,9 @@ services:
       interval: 2s
       timeout: 2s
     restart: unless-stopped
+    networks:
+      - no-internet
+
   gateway:
     build: GATEWAY/.
     image: ghcr.io/codebattles-nn/gateway
@@ -63,6 +78,9 @@ services:
       - frontend
       - backend
     restart: unless-stopped
+    networks:
+      - no-internet
+
   init_configurer:
     build: INIT_CONFIGURER/.
     image: ghcr.io/codebattles-nn/init-configurer
@@ -75,16 +93,25 @@ services:
       - backend
       - postgres
     restart: unless-stopped
+    networks:
+      - no-internet
+
   checker-java:
     build:
       dockerfile: ./Java.Dockerfile
     image: ghcr.io/codebattles-nn/checker-java
     restart: unless-stopped
+    networks:
+      - no-internet
+
   checker-python:
     build:
       dockerfile: ./Python.Dockerfile
     image: ghcr.io/codebattles-nn/checker-python
     restart: unless-stopped
+    networks:
+      - no-internet
+
 #  checker-cpp:
 #    build:
 #      dockerfile: ./CPP.Dockerfile
@@ -95,3 +122,8 @@ services:
 #      dockerfile: ./Pascal.Dockerfile
 #    image: ghcr.io/codebattles-nn/checker-pascal
 #    restart: unless-stopped
+
+networks:
+  no-internet:
+    driver: bridge
+    internal: true
