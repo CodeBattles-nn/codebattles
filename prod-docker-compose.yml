@@ -60,6 +60,7 @@ services:
       timeout: 2s
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
   gateway:
     build: GATEWAY/.
