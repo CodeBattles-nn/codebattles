@@ -7,6 +7,7 @@ services:
       - "8001:80"
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
   frontend-v2:
@@ -16,6 +17,7 @@ services:
       - "8002:80"
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
   backend:
@@ -41,6 +43,7 @@ services:
       - postgres
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
 
@@ -50,6 +53,7 @@ services:
       - 6379:6379
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
   postgres:
@@ -67,6 +71,7 @@ services:
       timeout: 2s
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
   gateway:
@@ -95,6 +100,7 @@ services:
       - postgres
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
   checker-java:
@@ -103,6 +109,7 @@ services:
     image: ghcr.io/codebattles-nn/checker-java
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
   checker-python:
@@ -111,6 +118,7 @@ services:
     image: ghcr.io/codebattles-nn/checker-python
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
 #  checker-cpp:
