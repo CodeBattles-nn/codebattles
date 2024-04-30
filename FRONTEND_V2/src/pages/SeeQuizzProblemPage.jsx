@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {useParams, useSearchParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
-import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import {useLocalStorage} from "usehooks-ts";
 const SeeQuizzProblemPage = () => {
 
@@ -89,7 +88,7 @@ const SeeQuizzProblemPage = () => {
 
     return (
         <>
-            <UserLoginRequired/>
+            
             <div className="row">
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
