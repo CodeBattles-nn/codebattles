@@ -47,7 +47,7 @@ services:
   redis:
     image: redis:alpine3.18
     ports:
-        - 6379:6379
+      - 6379:6379
     restart: unless-stopped
     networks:
       - no-internet
@@ -79,6 +79,7 @@ services:
       - backend
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
 
   init_configurer:
@@ -127,3 +128,7 @@ networks:
   no-internet:
     driver: bridge
     internal: true
+  with-internet:
+    driver: bridge
+
+

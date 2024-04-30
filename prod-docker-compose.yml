@@ -70,6 +70,7 @@ services:
       - backend
     restart: unless-stopped
     networks:
+      - with-internet
       - no-internet
   init_configurer:
     build: INIT_CONFIGURER/.
@@ -110,4 +111,7 @@ networks:
   no-internet:
     driver: bridge
     internal: true
+  with-internet:
+    driver: bridge
+
 
