@@ -104,7 +104,7 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
         ORDER BY score DESC, send_time DESC
         LIMIT 1
 
-        """, (problem_letter))
+        """)
     except psycopg2.errors.UndefinedTable:
         abort(404)
 

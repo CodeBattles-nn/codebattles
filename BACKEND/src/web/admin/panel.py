@@ -62,7 +62,10 @@ def settings(champ_id):
 
     print()
 
-    return render_template("admin/settings.html", tasks=tasks, id=fetch[0], name=fetch[1])
+    return render_template(
+        "admin/settings.html", tasks=tasks,
+        id=fetch[0], name=fetch[1]
+    )
 
 
 @app.route("/admin/champ/<int:champ_id>", methods=['POST'])
@@ -81,7 +84,9 @@ def settings_post(champ_id):
 
     print(problem, problem_id)
 
-    cur.execute(f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
+    cur.execute(
+        f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}"""
+    )
 
     connection.commit()
 
@@ -145,8 +150,11 @@ def create_users_in_champ_post(champ_id):
         login = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
         password = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
 
-        cursor.execute(f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
-                       (login, password, name))
+        cursor.execute(
+            f"INSERT INTO champUsers_{champ_id} (login, password, name)"
+            f" VALUES (%s, %s, %s)",
+            (login, password, name)
+        )
 
     connection.commit()
 

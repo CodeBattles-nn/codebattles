@@ -1,8 +1,14 @@
 import psycopg2
 import env
 
-from database.createTables import CHAMPS_TABLE, PROBLEMS_TABLE, SERVERS_TABLE, STORAGE_TABLE, TEACHER_CHAMPS_TABLE, \
+from database.createTables import (
+    CHAMPS_TABLE,
+    PROBLEMS_TABLE,
+    SERVERS_TABLE,
+    STORAGE_TABLE,
+    TEACHER_CHAMPS_TABLE,
     GLOBALUSERS_TABLE
+)
 
 __tables = [
     CHAMPS_TABLE,
