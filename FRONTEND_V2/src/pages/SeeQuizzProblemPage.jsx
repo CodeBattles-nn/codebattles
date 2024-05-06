@@ -3,6 +3,7 @@ import Card from "../components/bootstrap/Card.jsx";
 import {useParams, useSearchParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useLocalStorage} from "usehooks-ts";
+
 const SeeQuizzProblemPage = () => {
 
     const {letter} = useParams();
@@ -88,12 +89,15 @@ const SeeQuizzProblemPage = () => {
 
     return (
         <>
-            
+
             <div className="row">
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
                         <h2>Задача {letter}</h2>
                         <h3>{data.name}</h3>
+                        <button className="btn btn-outline-success">
+                            Отправить задание на проверку
+                        </button>
                     </Card>
                 </div>
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
@@ -115,12 +119,14 @@ const SeeQuizzProblemPage = () => {
                         <nav aria-label="Page navigation example" className="my-3">
                             <ul className="pagination justify-content-center">
                                 {
-                                    questions.map((_, i) => {
+                                    questions.map((question, i) => {
 
                                         const activeClass = i === questionNumber ? ("active") : ("")
 
+                                        const buttonClass = savedAnswers[question.id] ? ("text-warning") : ("")
+
                                         return <li key={`quizz-variant-${i}`} className={"page-item " + activeClass}>
-                                            <btn className="page-link"
+                                            <btn className={"page-link " + buttonClass}
                                                  onClick={() => setQuestionNumber(i)}>{i + 1}</btn>
                                         </li>
                                     })
@@ -162,14 +168,16 @@ const SeeQuizzProblemPage = () => {
                                 setQuestionNumber(questionNumber - 1)
                             }}>Предыдущий
                         </button>
-                        <button  className={"btn btn-outline-secondary justify-content-end mx-1 " + (questionNumber === questions.length - 1 && "disabled")} onClick={() => {
-                            if (questionNumber === questions.length) {
-                                // console.log(savedAnswers)
-                            }
+                        <button
+                            className={"btn btn-outline-secondary justify-content-end mx-1 " + (questionNumber === questions.length - 1 && "disabled")}
+                            onClick={() => {
+                                if (questionNumber === questions.length) {
+                                    // console.log(savedAnswers)
+                                }
 
-                            setQuestionNumber(questionNumber + 1)
-                        }
-                        }>Следующий
+                                setQuestionNumber(questionNumber + 1)
+                            }
+                            }>Следующий
                         </button>
 
                     </Card>
