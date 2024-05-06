@@ -96,7 +96,14 @@ def settings_post_teacher_api(champ_id):
     problem = form['problem']
     problem_id = form['problem_id']
 
-    if problem_id == "":
+    cur.execute(
+        f"""SELECT id FROM problems WHERE id={problem_id}""")
+
+    prefetched_problem = cur.fetchone()
+
+    print(prefetched_problem)
+
+    if problem_id == "" or prefetched_problem is None:
         return {"success": "false"}, 400
     problem_id = int(problem_id)
 
