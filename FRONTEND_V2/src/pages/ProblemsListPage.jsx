@@ -32,11 +32,18 @@ const ProblemsListPage = () => {
                         {
                             data.problems &&
                             Object.keys(data.problems).map(letter => {
-                                const link = data?.is_quizes?.[letter] ? (`/problems/${letter}/quizz`) : (`/problems/${letter}`)
+                                const is_quiz = data?.is_quizes?.[letter]
+                                const link = is_quiz ? (`/problems/${letter}/quizz`) : (`/problems/${letter}`)
+                                const link_icon_css_class = is_quiz ? (`bi-card-checklist`) : (`bi-braces`)
 
                                 return (<tr key={"problems-page-key" + letter} className={data?.colors?.[letter]}>
-                                    <th scope="row" className="">{letter}</th>
-                                    <td><Link to={link}>{data.problems[letter]}</Link></td>
+                                    <th scope="row" className="">
+                                        {letter}
+                                    </th>
+                                    <td><Link to={link}>
+                                        <i className={"bi me-2 " + link_icon_css_class}></i>
+                                        {data.problems[letter]}
+                                    </Link></td>
 
                                 </tr>)
                             })
