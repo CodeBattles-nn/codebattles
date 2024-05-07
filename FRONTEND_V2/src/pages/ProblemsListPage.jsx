@@ -32,9 +32,11 @@ const ProblemsListPage = () => {
                         {
                             data.problems &&
                             Object.keys(data.problems).map(letter => {
+                                const link = data?.is_quizes?.[letter] ? (`/problems/${letter}/quizz`) : (`/problems/${letter}`)
+
                                 return (<tr key={"problems-page-key" + letter} className={data?.colors?.[letter]}>
                                     <th scope="row" className="">{letter}</th>
-                                    <td><Link to={`/problems/${letter}`}>{data.problems[letter]}</Link></td>
+                                    <td><Link to={link}>{data.problems[letter]}</Link></td>
 
                                 </tr>)
                             })

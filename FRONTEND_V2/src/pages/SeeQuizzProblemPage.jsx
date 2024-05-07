@@ -8,11 +8,12 @@ const SeeQuizzProblemPage = () => {
 
     const {letter} = useParams();
     // const navigate = useNavigate();
-    const [data, update] = useCachedGetAPI(`/api/problem/${letter}`);
+
     // const [editorText, setEditorText] = useState(null)
     // const [isLoading, setIsLoading] = useState(false);
 
     const [questionNumber, setQuestionNumber] = useState(0)
+    const [data, update] = useCachedGetAPI(`/api/problem/${letter}/quiz`)
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -22,6 +23,7 @@ const SeeQuizzProblemPage = () => {
         update();
     }, []);
 
+    console.log(data)
 
     useEffect(() => {
         const prevQuestion = searchParams.get("q");
@@ -36,50 +38,13 @@ const SeeQuizzProblemPage = () => {
         setSearchParams({"q": questionNumber})
     }, [questionNumber]);
 
-    const questions = [
-        {
-            id: 1,
-            name: "Ты абоба",
-            answers: [
-                "Абобус",
-                "Абобус 2",
-                "Абобус 3",
-            ]
-        },
-        {
-            id: 12,
-            name: "Ты абоб а 2",
-            answers: [
-                "Абобус",
-                "Абобус 2",
-                "Абобус 3",
-            ]
-        },
-        {
-            id: 13,
-            name: "4^(0.5)",
-            answers: [
-                "4",
-                "2",
-                "1",
-                "Че за",
-            ]
-        },
-        {
-            id: 133,
-            name: "Готов работать за еду?",
-            answers: [
-                "Дв",
-            ]
-        },
-    ]
+    const questions = data.tests || [];
 
     useEffect(() => {
         console.log(savedAnswers)
     }, [savedAnswers]);
 
     const onAnswerClicked = (id, text) => {
-        console.log(id + " " + text)
 
         const newAnswers = {...savedAnswers}
         newAnswers[id] = [text]
@@ -126,8 +91,8 @@ const SeeQuizzProblemPage = () => {
                                         const buttonClass = savedAnswers[question.id] ? ("text-warning") : ("")
 
                                         return <li key={`quizz-variant-${i}`} className={"page-item " + activeClass}>
-                                            <btn className={"page-link " + buttonClass}
-                                                 onClick={() => setQuestionNumber(i)}>{i + 1}</btn>
+                                            <button className={"page-link " + buttonClass}
+                                                 onClick={() => setQuestionNumber(i)}>{i + 1}</button>
                                         </li>
                                     })
                                 }
@@ -144,10 +109,10 @@ const SeeQuizzProblemPage = () => {
                     <Card>
                         <h3 className="width-inner">№{questionNumber + 1}</h3>
                         <small className="width-inner me-3">/{questions.length}</small>
-                        <h3 className="width-inner">{questions[questionNumber].name}</h3>
+                        <h3 className="width-inner">{questions[questionNumber]?.name }</h3>
 
                         {
-                            questions[questionNumber].answers.map((elem) => {
+                            questions[questionNumber]?.answers?.map((elem) => {
 
                                 const selectedClass = savedAnswers[questions[questionNumber].id]?.includes(elem) ? ("bg-primary") : ""
 
