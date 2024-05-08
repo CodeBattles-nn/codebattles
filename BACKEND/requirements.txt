@@ -5,3 +5,4 @@ python-dotenv~=1.0.0
 psycopg2-binary==2.9.9
 Flask-Cors~=4.0.0
 redis~=5.0.1
+captcha~=0.5.0
