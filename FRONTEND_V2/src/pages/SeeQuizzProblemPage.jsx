@@ -1,13 +1,17 @@
 import {useEffect, useState} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useLocalStorage} from "usehooks-ts";
+import {getCookie} from "../utils/cookies.js";
+import axios from "axios";
 
 const SeeQuizzProblemPage = () => {
 
+    const battle_id = getCookie("battle_id")
+
     const {letter} = useParams();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     // const [editorText, setEditorText] = useState(null)
     // const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +21,7 @@ const SeeQuizzProblemPage = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [savedAnswers, setSavedAnswers] = useLocalStorage("test-storage", {});
+    const [savedAnswers, setSavedAnswers] = useLocalStorage(`answer-storage/?b=${battle_id}&l=${letter}`, {});
 
     useEffect(() => {
         update();
@@ -52,6 +56,16 @@ const SeeQuizzProblemPage = () => {
 
     }
 
+    const onSend = () => {
+        const toSendData = {
+            problem: letter,
+            answers: savedAnswers
+        }
+
+        axios.post("/api/send/quiz", toSendData)
+            .then(() => navigate("/sends"))
+    }
+
     return (
         <>
 
@@ -60,7 +74,7 @@ const SeeQuizzProblemPage = () => {
                     <Card>
                         <h2>Задача {letter}</h2>
                         <h3>{data.name}</h3>
-                        <button className="btn btn-outline-success">
+                        <button className="btn btn-outline-success" onClick={onSend}>
                             Отправить задание на проверку
                         </button>
                     </Card>
