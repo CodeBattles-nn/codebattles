@@ -88,6 +88,7 @@ def get_champs_byid_route(champ_id):
 
 
 @app.route("/api/teacher/champs/<int:champ_id>", methods=['POST'])
+@teacher_required
 def settings_post_teacher_api(champ_id):
     connection = get_connection()
     cur = connection.cursor()

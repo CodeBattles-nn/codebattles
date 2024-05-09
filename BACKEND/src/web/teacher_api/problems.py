@@ -50,6 +50,7 @@ def get_problems_byid_api_route(problem_id):
 
 
 @app.route("/api/teacher/problems/add", methods=['POST'])
+@teacher_required
 def teacher_list_problems_add():
     connection = get_connection()
     cursor = connection.cursor()
