@@ -63,6 +63,8 @@ services:
       POSTGRES_USER: "postgres"
       PGUSER: "postgres"
       POSTGRES_PASSWORD: "admin"
+      REQUIRE_CAPTCHA: false
+
     ports:
       - "25565:5432"
     healthcheck:

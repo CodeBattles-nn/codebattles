@@ -27,6 +27,7 @@ services:
       PYTHONUNBUFFERED: TRUE
       ADMIN_LOGIN: ${ADMIN_LOGIN}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      REQUIRE_CAPTCHA: true
     ports:
       - "8000:8000"
     depends_on:
