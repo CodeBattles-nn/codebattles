@@ -56,39 +56,57 @@ def teacher_list_problems_add():
     cursor = connection.cursor()
 
     build = request.json['build']
-    problem_type = build.get("type", "question")
+    print(build)
 
-    match problem_type:
-        case "quiz":
-            pass
-        case "question":
-            try:
-                build_json = json.loads(build)
-                build_json['tests'] = json.dumps(build_json['tests'])
-                build_json['examples'] = json.dumps(build_json['examples'])
-            except Exception as e:
-                print("Maybe Json parse exception \n" + str(e))
-                return "Not json (404 ERR)", 400
+    try:
+        build_json = json.loads(build)
 
-            print(build)
-            print(build_json)
+        problem_type = build_json.get("type", "question")
+    except Exception as e:
+        print("Maybe Json parse exception \n" + str(e))
+        return "Not json (404 ERR)", 400
 
-            cursor.execute(
-                """
-                 INSERT INTO problems (name, description, "in", out, examples, tests)
-                 VALUES (%s, %s, %s, %s, %s, %s)
-                """,
-                (build_json['name'],
-                 build_json['description'],
-                 build_json['in'],
-                 build_json['out'],
-                 build_json['examples'],
-                 build_json['tests'],)
+    print()
+
+    if problem_type == "quiz":
+        print()
+
+        cursor.execute(
+            """
+             INSERT INTO problems (name, description, "in", out, examples, tests, is_question)
+             VALUES (%s, %s, %s, %s, %s, %s, TRUE)
+            """,
+            (
+                build_json['name'],
+                "Тест",
+                "-",
+                "-",
+                "[]",
+                json.dumps(build_json)
             )
+        )
 
-        case _:
-            pass
+        pass
+    elif problem_type == "question":
+        build_json['tests'] = json.dumps(build_json['tests'])
+        build_json['examples'] = json.dumps(build_json['examples'])
 
+        print(build)
+        print(build_json)
+
+        cursor.execute(
+            """
+             INSERT INTO problems (name, description, "in", out, examples, tests)
+             VALUES (%s, %s, %s, %s, %s, %s)
+            """,
+            (build_json['name'],
+             build_json['description'],
+             build_json['in'],
+             build_json['out'],
+             build_json['examples'],
+             build_json['tests']
+             )
+        )
 
     connection.commit()
 
