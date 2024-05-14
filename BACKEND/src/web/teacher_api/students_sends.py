@@ -99,12 +99,12 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
         cursor.execute(f"""
            SELECT *
         FROM champsends_{champ_id}
-        WHERE problem_letter = '{problem_letter}'
-          AND user_id = {user_id}
+        WHERE problem_letter = %s
+          AND user_id = %s
         ORDER BY score DESC, send_time DESC
         LIMIT 1
 
-        """)
+        """, (problem_letter, user_id))
     except psycopg2.errors.UndefinedTable:
         abort(404)
 

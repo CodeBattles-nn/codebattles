@@ -1,3 +1,4 @@
+import re
 import string
 
 from flask import request, redirect
@@ -98,7 +99,7 @@ def settings_post_teacher_api(champ_id):
     problem_id = form['problem_id']
 
     cur.execute(
-        f"""SELECT id FROM problems WHERE id={problem_id}""")
+        f"""SELECT id FROM problems WHERE id=%s""", (problem_id,))
 
     prefetched_problem = cur.fetchone()
 
@@ -110,8 +111,13 @@ def settings_post_teacher_api(champ_id):
 
     print(problem, problem_id)
 
+    problem_validation_result = re.fullmatch("[a-zA-z]", problem)
+    if not problem_validation_result:
+        return {"success": "false"}, 400
+
     cur.execute(
-        f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
+        f"""UPDATE champs SET {problem} = %s WHERE id = %s""",
+        (problem_id, champ_id))
 
     connection.commit()
 
