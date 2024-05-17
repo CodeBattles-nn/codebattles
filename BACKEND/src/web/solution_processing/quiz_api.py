@@ -74,11 +74,7 @@ def send_quiz_solution(user_id, uid):
     cur.execute(
         f"""
         UPDATE champUsers_{user_id} SET {problem.lower()} = {totalPoints}
-        WHERE id= {user_id} AND (
-        {problem.lower()} < {points}
-        OR
-        {problem.lower()} IS NULL
-        )""")
+        WHERE id= {user_id}""")
 
     connection.commit()
 
