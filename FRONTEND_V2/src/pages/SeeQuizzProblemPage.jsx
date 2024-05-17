@@ -5,6 +5,7 @@ import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useLocalStorage} from "usehooks-ts";
 import {getCookie} from "../utils/cookies.js";
 import axios from "axios";
+import Markdown from "../components/wraps/Markdown.jsx";
 
 const SeeQuizzProblemPage = () => {
 
@@ -26,6 +27,15 @@ const SeeQuizzProblemPage = () => {
     useEffect(() => {
         update();
     }, []);
+
+    useEffect(() => {
+        return () => {
+            if (localStorage.getItem(`answer-storage/?b=${battle_id}&l=${letter}-completed`)) {
+                navigate("/sends")
+            }
+        };
+    }, []);
+
 
     console.log(data)
 
@@ -64,6 +74,7 @@ const SeeQuizzProblemPage = () => {
 
         axios.post("/api/send/quiz", toSendData)
             .then(() => navigate("/sends"))
+            .then(() => localStorage.setItem(`answer-storage/?b=${battle_id}&l=${letter}-completed`, "true"))
     }
 
     return (
@@ -106,7 +117,7 @@ const SeeQuizzProblemPage = () => {
 
                                         return <li key={`quizz-variant-${i}`} className={"page-item " + activeClass}>
                                             <button className={"page-link " + buttonClass}
-                                                 onClick={() => setQuestionNumber(i)}>{i + 1}</button>
+                                                    onClick={() => setQuestionNumber(i)}>{i + 1}</button>
                                         </li>
                                     })
                                 }
@@ -123,7 +134,7 @@ const SeeQuizzProblemPage = () => {
                     <Card>
                         <h3 className="width-inner">№{questionNumber + 1}</h3>
                         <small className="width-inner me-3">/{questions.length}</small>
-                        <h3 className="width-inner">{questions[questionNumber]?.name }</h3>
+                        <Markdown text={questions[questionNumber]?.name}/>
 
                         {
                             questions[questionNumber]?.answers?.map((elem) => {
@@ -134,7 +145,7 @@ const SeeQuizzProblemPage = () => {
                                     <Card className={"btn btn-outline-secondary text-start " + selectedClass}
                                           key={elem.name}
                                           onClick={() => onAnswerClicked(questions[questionNumber].id, elem)}>
-                                        {elem}
+                                        <Markdown text={elem}/>
                                     </Card>
                                 )
                             })

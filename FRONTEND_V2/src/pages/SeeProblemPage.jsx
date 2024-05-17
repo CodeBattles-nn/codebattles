@@ -7,6 +7,7 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import LazyCodeEditor from "../components/lazy/LazyCodeEditor.jsx";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
+import Markdown from "../components/wraps/Markdown.jsx";
 
 const SeeProblemPage = () => {
 
@@ -78,13 +79,13 @@ const SeeProblemPage = () => {
                     <Card>
                         <div>
                             <h4>Задача</h4>
-                            <p>{data.description}</p>
+                            <Markdown text={data.description}/>
 
                             <h4 className="mt-5">Входные данные</h4>
-                            <p>{data.in_data}</p>
+                            <Markdown text={data.in_data}/>
 
                             <h4 className="mt-5">Выходные данные</h4>
-                            <p>{data.out_data}</p>
+                            <Markdown text={data.out_data}/>
                         </div>
                     </Card>
                 </div>
