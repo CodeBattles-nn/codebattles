@@ -22,18 +22,3 @@ def cors_middleware(response):
 
     return response
 
-
-# @app.before_request
-# def before_request():
-#     if request.method in ("POST", "PUT", "PATCH", "DELETE"):
-#         if request.is_json:
-#             json_data = request.get_json()
-#
-#             for key, value in json_data.items():
-#                 try:
-#                     modified_value = value.replace("'", "")
-#
-#                     if modified_value != value:
-#                         return {"status": "something went wrong"}, 418
-#                 except:
-#                     pass
