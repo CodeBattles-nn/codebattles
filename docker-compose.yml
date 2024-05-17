@@ -107,7 +107,7 @@ services:
 
   checker-java:
     build:
-      dockerfile: ./Java.Dockerfile
+      dockerfile: z_checkers_dockerfiles/Java.Dockerfile
     image: ghcr.io/codebattles-nn/checker-java
     restart: unless-stopped
     networks:
@@ -116,7 +116,7 @@ services:
 
   checker-python:
     build:
-      dockerfile: ./Python.Dockerfile
+      dockerfile: z_checkers_dockerfiles/Python.Dockerfile
     image: ghcr.io/codebattles-nn/checker-python
     restart: unless-stopped
     networks:

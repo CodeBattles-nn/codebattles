@@ -89,13 +89,13 @@ services:
       - no-internet
   checker-java:
     build:
-      dockerfile: ./Java.Dockerfile
+      dockerfile: z_checkers_dockerfiles/Java.Dockerfile
     restart: unless-stopped
     networks:
       - no-internet
   checker-python:
     build:
-      dockerfile: ./Python.Dockerfile
+      dockerfile: z_checkers_dockerfiles/Python.Dockerfile
     restart: unless-stopped
     networks:
       - no-internet
