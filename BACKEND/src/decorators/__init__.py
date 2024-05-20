@@ -50,10 +50,10 @@ def teacher_required(f):
 
         cursor.execute(f"""
             SELECT id from globalusers
-        WHERE role = 'TEACHER'
-          AND password = '{password}'
-          AND login = '{login}'
-        """)
+            WHERE role = 'TEACHER'
+                AND password = %s
+                AND login = %s
+        """, (password, login))
 
         if cursor.fetchone():
             return f(*args, **kwargs)

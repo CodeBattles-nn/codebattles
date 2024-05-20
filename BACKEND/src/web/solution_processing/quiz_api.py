@@ -1,5 +1,6 @@
 import datetime
 import json
+import re
 
 from flask import request
 from psycopg2.extras import RealDictCursor
@@ -19,6 +20,9 @@ def send_quiz_solution(user_id, uid):
 
     answers: dict
     problem, answers = request.json['problem'], request.json['answers']
+
+    if not re.fullmatch("[a-zA-Z]", problem):
+        return "", 409
 
     cur.execute(f"SELECT {problem.lower()} FROM champs WHERE id = %s",
                 (str(user_id),))
