@@ -129,11 +129,11 @@ def check_system(r):
     column = meta['problem'][0]
 
 
-    if not re.fullmatch("[1-9]+", champ_id):
+    if not re.fullmatch("[1-9]+", str(champ_id)):
         return "", 409
-    if not re.fullmatch("[1-9]+", user_id):
+    if not re.fullmatch("[1-9]+", str(user_id)):
         return "", 409
-    if not re.fullmatch("[a-zA-Z]", column):
+    if not re.fullmatch("[a-zA-Z]", str(column)):
         return "", 409
 
 
