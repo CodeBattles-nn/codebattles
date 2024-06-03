@@ -1,4 +1,5 @@
 import json
+import re
 import string
 import datetime
 
@@ -125,6 +126,16 @@ def check_system(r):
 
     champ_id = meta['champ_id']
     user_id = meta["user_id"]
+    column = meta['problem'][0]
+
+
+    if not re.fullmatch("[1-9]+", champ_id):
+        return "", 409
+    if not re.fullmatch("[1-9]+", user_id):
+        return "", 409
+    if not re.fullmatch("[a-zA-Z]", column):
+        return "", 409
+
 
     con = get_connection()
     cur = con.cursor()
@@ -132,8 +143,8 @@ def check_system(r):
     points = (round((correct_count / all_count) * 100))
 
     cur.execute(
-        f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = {points} \
-        WHERE id= {user_id} AND ({meta['problem'][0]} < {points} OR {meta['problem'][0]} IS NULL)")
+        f"UPDATE champUsers_{champ_id} SET {column} = {points} \
+        WHERE id= {user_id} AND ({column} < {points} OR {column} IS NULL)")
 
     result_str = json.dumps(data['results'], indent=2)
 
