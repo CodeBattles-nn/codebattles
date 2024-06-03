@@ -6,7 +6,7 @@ jobs:
         name: build
         runs-on: self-hosted
         steps:
-        - uses: actions/checkout@v1
+        - uses: actions/checkout@v4
         - name: Docker up
           run: docker compose -p test_codebattles -f test-docker-compose.yml up  -d
         - name: Sleep for 30 seconds
