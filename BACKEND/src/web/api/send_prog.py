@@ -62,11 +62,13 @@ def api_send_prog(user_id, uid):
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s);
         ''',
         (
-            problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", f_code,
+            problem_[1], problem_[0], uid, datetime.datetime.now(),
+            "Тестируется", f_code,
             problem_letter_form,
             f_lang)
     )
-    cur.execute(f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
+    cur.execute(
+        f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
 
     inserted_id = cur.fetchone()[0]
 
@@ -86,11 +88,14 @@ def api_send_prog(user_id, uid):
 
     connection.commit()
 
-    cur.execute(f"SELECT address FROM servers WHERE id = {request.json['cars']} and enabled = true")
+    cur.execute(
+        f"SELECT address FROM servers WHERE id = %s and enabled = true",
+        (request.json['cars'],))
 
     server_addr = cur.fetchone()
     server_addr = server_addr[0]
     print()
 
-    requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test", json=data)
+    requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test",
+                  json=data)
     return {"success": True}

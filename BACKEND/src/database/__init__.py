@@ -1,8 +1,15 @@
 import psycopg2
 import env
 
-from database.createTables import CHAMPS_TABLE, PROBLEMS_TABLE, SERVERS_TABLE, STORAGE_TABLE, TEACHER_CHAMPS_TABLE, \
+from database.createTables import (
+    CHAMPS_TABLE,
+    PROBLEMS_TABLE,
+    SERVERS_TABLE,
+    STORAGE_TABLE,
+    TEACHER_CHAMPS_TABLE,
     GLOBALUSERS_TABLE
+)
+from database.migrations import sql_migrations
 
 __tables = [
     CHAMPS_TABLE,
@@ -28,6 +35,9 @@ def init_tables():
     cur = connection.cursor()
 
     for sql in __tables:
+        cur.execute(sql)
+
+    for sql in sql_migrations:
         cur.execute(sql)
 
     connection.commit()

@@ -2,8 +2,8 @@
 # Build stage
 #
 FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
-COPY PROGRAM_CHECK_SYSTEM/src /home/app/src
-COPY PROGRAM_CHECK_SYSTEM/pom.xml /home/app
+COPY ../PROGRAM_CHECK_SYSTEM/src /home/app/src
+COPY ../PROGRAM_CHECK_SYSTEM/pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package
 
 #

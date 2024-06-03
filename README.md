@@ -8,7 +8,6 @@ Programming competition system
 ![Lines of code](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/codebattles-nn/codebattles/badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/codebattles-nn/codebattles)
 
-
 ![Main image](images/image1.png)
 
 [Documentation RU](https://doctorixx.gitbook.io/codebattles/)
@@ -19,7 +18,7 @@ Programming competition system
 
 ## Get started
 
-> You must to install Docker Compose to run:
+> You must install Docker Compose to run:
 
 ```shell
 docker compose up
@@ -35,31 +34,30 @@ docker compose up
 ### Tested at
 
 | Architecture | Status |
-|--------------|--------|
-| x64          |    ✅   |
-| aarch64      |    ✅   |
-| x32          |    ❓   |
+|--------------|:------:|
+| x64          |   ✅    |
+| aarch64      |   ✅    |
+| x32          |   ❓    |
 
-
-## Update 
+## Update
 
 - Pull new version of code from repository
+
 ```shell
 git pull
 ```
 
 - Pull docker images
+
 ```shell
 docker compose pull
 ```
 
 - And finally run application
+
 ```shell
 docker compose up
 ```
-
-
-
 
 ## Usage
 
@@ -73,11 +71,22 @@ ___
 - Frontend on port 8000
 - Database on port 25565
 - Redis on port 6379
+
 ### Generate tasks for compeptition
+
 For this create your custom tasks or use public repository
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=codebattles-nn&repo=task-generator)](https://github.com/codebattles-nn/task-generator)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=codebattles-nn&repo=problems-repo)](https://github.com/codebattles-nn/problems-repo)
+
+## Main contributors
+
+Thank you for your huge contribution to the project:
+
+- **user3050** - security audit and vulnerability search
+- **[Zeevss](https://github.com/Zeevss)** - testing and suggestions
+
+Thanks to [school30nn](https://school30nn.ru) for use of the system and provision of server resources
 
 ___
 CodeBattles, 2024

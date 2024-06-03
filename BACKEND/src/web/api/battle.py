@@ -41,6 +41,7 @@ def api_problems(user_id, uid):
     x = list(cur.fetchall())
 
     tasks = {}
+    is_quizes = {}
 
     cur.execute(f"SELECT * FROM champUsers_{user_id} WHERE id = %s", (uid,))
 
@@ -53,18 +54,24 @@ def api_problems(user_id, uid):
     for i, task in enumerate(x):
         id = task[0]
         name = task[1]
+        is_quiz = task[-1]
+        if is_quiz is None:
+            is_quiz = False
+
         tasks_dict[id] = task
 
         letter = strs[problems_ids.index(id)]
 
         tasks[letter] = name
+        is_quizes[letter] = is_quiz
 
         css_colors[letter] = get_table_color_class_by_score(
             score[strs.index(letter)])
 
     print()
 
-    return {"success": "true", "problems": tasks, "colors": css_colors}
+    return {"success": "true", "problems": tasks, "colors": css_colors,
+            "is_quizes": is_quizes}
 
 
 @app.route("/api/problem/<letter>")
@@ -109,7 +116,7 @@ def api_problem(letter, user_id):
     cur.execute("SELECT name, id FROM servers WHERE enabled=true")
     servers = cur.fetchall()
 
-    _pr_id, _pr_name, _pr_desc, _pr_in, _pr_out, _pr_tests, _pr_examples = problem_
+    _pr_id, _pr_name, _pr_desc, _pr_in, _pr_out, _pr_tests, _pr_examples, _ = problem_
 
     _pr_examples = fix_new_line(json.loads(_pr_examples))
 

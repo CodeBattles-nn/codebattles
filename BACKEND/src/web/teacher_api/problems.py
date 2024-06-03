@@ -28,8 +28,10 @@ def get_problems_byid_api_route(problem_id):
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
     cursor.execute(
-        f"""SELECT id, name, description, "in", "out", examples, tests
-        FROM problems WHERE id = {problem_id}""")
+        f"""
+        SELECT id, name, description, "in", "out", examples, tests
+        FROM problems WHERE id = %s
+        """, (problem_id,))
     problem = cursor.fetchone()
 
     print(problem)
@@ -50,31 +52,63 @@ def get_problems_byid_api_route(problem_id):
 
 
 @app.route("/api/teacher/problems/add", methods=['POST'])
+@teacher_required
 def teacher_list_problems_add():
     connection = get_connection()
     cursor = connection.cursor()
 
     build = request.json['build']
+    print(build)
+
     try:
         build_json = json.loads(build)
-        build_json['tests'] = json.dumps(build_json['tests'])
-        build_json['examples'] = json.dumps(build_json['examples'])
+
+        problem_type = build_json.get("type", "question")
     except Exception as e:
         print("Maybe Json parse exception \n" + str(e))
         return "Not json (404 ERR)", 400
 
-    print(build)
-    print(build_json)
+    print()
 
-    cursor.execute(
-        """INSERT INTO problems (name, description, "in", out, examples, tests) VALUES (%s, %s, %s, %s, %s, %s) """,
-        (build_json['name'],
-         build_json['description'],
-         build_json['in'],
-         build_json['out'],
-         build_json['examples'],
-         build_json['tests'],)
-    )
+    if problem_type == "quiz":
+        print()
+
+        cursor.execute(
+            """
+             INSERT INTO problems (name, description, "in", out, examples, tests, is_question)
+             VALUES (%s, %s, %s, %s, %s, %s, TRUE)
+            """,
+            (
+                build_json['name'],
+                "Тест",
+                "-",
+                "-",
+                "[]",
+                json.dumps(build_json)
+            )
+        )
+
+        pass
+    elif problem_type == "question":
+        build_json['tests'] = json.dumps(build_json['tests'])
+        build_json['examples'] = json.dumps(build_json['examples'])
+
+        print(build)
+        print(build_json)
+
+        cursor.execute(
+            """
+             INSERT INTO problems (name, description, "in", out, examples, tests)
+             VALUES (%s, %s, %s, %s, %s, %s)
+            """,
+            (build_json['name'],
+             build_json['description'],
+             build_json['in'],
+             build_json['out'],
+             build_json['examples'],
+             build_json['tests']
+             )
+        )
 
     connection.commit()
 

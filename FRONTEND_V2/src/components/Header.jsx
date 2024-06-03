@@ -9,7 +9,7 @@ const Header = () => {
     let isAuthed = localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true"
 
     const onLogoutButtonClick = () => {
-        localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
+        localStorage.clear()
         navigate("/")
     }
 

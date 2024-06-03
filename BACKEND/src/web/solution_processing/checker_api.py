@@ -1,4 +1,5 @@
 import json
+import re
 import string
 import datetime
 
@@ -62,11 +63,13 @@ def send_prog(user_id, uid):
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s);
         ''',
         (
-            problem_[1], problem_[0], uid, datetime.datetime.now(), "Тестируется", f_code,
+            problem_[1], problem_[0], uid, datetime.datetime.now(),
+            "Тестируется", f_code,
             problem_letter_form,
             f_lang)
     )
-    cur.execute(f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
+    cur.execute(
+        f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
 
     inserted_id = cur.fetchone()[0]
 
@@ -88,7 +91,10 @@ def send_prog(user_id, uid):
 
     print(cur.fetchone())
 
-    cur.execute(f"SELECT address FROM servers WHERE id = {request.form['cars']}")
+    cur.execute(
+        f"SELECT address FROM servers WHERE id = %s",
+        (request.form['cars'],)
+    )
 
     server_addr = cur.fetchone()[0]
 
@@ -120,6 +126,16 @@ def check_system(r):
 
     champ_id = meta['champ_id']
     user_id = meta["user_id"]
+    column = meta['problem'][0]
+
+
+    if not re.fullmatch("[1-9]+", str(champ_id)):
+        return "", 409
+    if not re.fullmatch("[1-9]+", str(user_id)):
+        return "", 409
+    if not re.fullmatch("[a-zA-Z]", str(column)):
+        return "", 409
+
 
     con = get_connection()
     cur = con.cursor()
@@ -127,8 +143,8 @@ def check_system(r):
     points = (round((correct_count / all_count) * 100))
 
     cur.execute(
-        f"UPDATE champUsers_{champ_id} SET {meta['problem'][0]} = {points} \
-        WHERE id= {user_id} AND ({meta['problem'][0]} < {points} OR {meta['problem'][0]} IS NULL)")
+        f"UPDATE champUsers_{champ_id} SET {column} = {points} \
+        WHERE id= {user_id} AND ({column} < {points} OR {column} IS NULL)")
 
     result_str = json.dumps(data['results'], indent=2)
 
@@ -140,6 +156,7 @@ def check_system(r):
 
     con.commit()
 
-    r.delete(f"r-champ-{champ_id}-stats", f"r-champ-{champ_id}-sends-user-{user_id}")
+    r.delete(f"r-champ-{champ_id}-stats",
+             f"r-champ-{champ_id}-sends-user-{user_id}")
 
     return "OK"

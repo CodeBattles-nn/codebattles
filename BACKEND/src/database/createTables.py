@@ -14,7 +14,7 @@ CHAMPS_TABLE = '''
         I INTEGER,
         J INTEGER,
         K INTEGER
-    ); 
+    );
 
 '''
 PROBLEMS_TABLE = '''
@@ -26,7 +26,7 @@ PROBLEMS_TABLE = '''
         "out"  TEXT,
         tests  TEXT,
         examples  TEXT
-    ); 
+    );
 '''
 
 SERVERS_TABLE = '''
@@ -68,10 +68,11 @@ CREATE TABLE champUsers_{champ_id} (
     I INTEGER,
     J INTEGER,
     K INTEGER,
-    score INTEGER GENERATED ALWAYS AS (COALESCE(A, 0) + COALESCE(B, 0) + COALESCE(C, 0) + COALESCE(D, 0)
+    score INTEGER GENERATED ALWAYS AS (COALESCE(A, 0)
+        +  COALESCE(B, 0) + COALESCE(C, 0) + COALESCE(D, 0)
         + COALESCE(E, 0) + COALESCE(F, 0) + COALESCE(G, 0) + COALESCE(H, 0)
         + COALESCE(I, 0) + COALESCE(J, 0) + COALESCE(K, 0)) STORED
-); 
+);
 
     """
 
@@ -90,7 +91,7 @@ def get_query_sends_table(champ_id):
         program TEXT,
         score INTEGER,
         lang TEXT
-    ); 
+    );
     """
 
 

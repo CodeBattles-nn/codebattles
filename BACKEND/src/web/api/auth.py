@@ -29,7 +29,9 @@ def login_post_api():
         cur = con.cursor()
         cur.execute(
             f"SELECT * FROM public.champUsers_{champ_id}"
-            f" WHERE login = '{login}' AND password = '{password}'"
+            f" WHERE login = %s AND password = %s"
+            ,
+            (login, password)
         )
         user = cur.fetchone()
 

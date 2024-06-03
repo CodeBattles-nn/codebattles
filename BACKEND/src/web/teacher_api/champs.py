@@ -1,3 +1,4 @@
+import re
 import string
 
 from flask import request, redirect
@@ -88,6 +89,7 @@ def get_champs_byid_route(champ_id):
 
 
 @app.route("/api/teacher/champs/<int:champ_id>", methods=['POST'])
+@teacher_required
 def settings_post_teacher_api(champ_id):
     connection = get_connection()
     cur = connection.cursor()
@@ -96,14 +98,26 @@ def settings_post_teacher_api(champ_id):
     problem = form['problem']
     problem_id = form['problem_id']
 
-    if problem_id == "":
+    cur.execute(
+        f"""SELECT id FROM problems WHERE id=%s""", (problem_id,))
+
+    prefetched_problem = cur.fetchone()
+
+    print(prefetched_problem)
+
+    if problem_id == "" or prefetched_problem is None:
         return {"success": "false"}, 400
     problem_id = int(problem_id)
 
     print(problem, problem_id)
 
+    problem_validation_result = re.fullmatch("[a-zA-z]", problem)
+    if not problem_validation_result:
+        return {"success": "false"}, 400
+
     cur.execute(
-        f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
+        f"""UPDATE champs SET {problem} = %s WHERE id = %s""",
+        (problem_id, champ_id))
 
     connection.commit()
 

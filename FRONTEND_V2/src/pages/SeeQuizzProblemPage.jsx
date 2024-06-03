@@ -1,26 +1,43 @@
 import {useEffect, useState} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useLocalStorage} from "usehooks-ts";
+import {getCookie} from "../utils/cookies.js";
+import axios from "axios";
+import Markdown from "../components/wraps/Markdown.jsx";
+
 const SeeQuizzProblemPage = () => {
 
+    const battle_id = getCookie("battle_id")
+
     const {letter} = useParams();
-    // const navigate = useNavigate();
-    const [data, update] = useCachedGetAPI(`/api/problem/${letter}`);
+    const navigate = useNavigate();
+
     // const [editorText, setEditorText] = useState(null)
     // const [isLoading, setIsLoading] = useState(false);
 
     const [questionNumber, setQuestionNumber] = useState(0)
+    const [data, update] = useCachedGetAPI(`/api/problem/${letter}/quiz`)
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [savedAnswers, setSavedAnswers] = useLocalStorage("test-storage", {});
+    const [savedAnswers, setSavedAnswers] = useLocalStorage(`answer-storage/?b=${battle_id}&l=${letter}`, {});
 
     useEffect(() => {
         update();
     }, []);
 
+    useEffect(() => {
+        return () => {
+            if (localStorage.getItem(`answer-storage/?b=${battle_id}&l=${letter}-completed`)) {
+                navigate("/sends")
+            }
+        };
+    }, []);
+
+
+    console.log(data)
 
     useEffect(() => {
         const prevQuestion = searchParams.get("q");
@@ -35,50 +52,13 @@ const SeeQuizzProblemPage = () => {
         setSearchParams({"q": questionNumber})
     }, [questionNumber]);
 
-    const questions = [
-        {
-            id: 1,
-            name: "Ты абоба",
-            answers: [
-                "Абобус",
-                "Абобус 2",
-                "Абобус 3",
-            ]
-        },
-        {
-            id: 12,
-            name: "Ты абоб а 2",
-            answers: [
-                "Абобус",
-                "Абобус 2",
-                "Абобус 3",
-            ]
-        },
-        {
-            id: 13,
-            name: "4^(0.5)",
-            answers: [
-                "4",
-                "2",
-                "1",
-                "Че за",
-            ]
-        },
-        {
-            id: 133,
-            name: "Готов работать за еду?",
-            answers: [
-                "Дв",
-            ]
-        },
-    ]
+    const questions = data.tests || [];
 
     useEffect(() => {
         console.log(savedAnswers)
     }, [savedAnswers]);
 
     const onAnswerClicked = (id, text) => {
-        console.log(id + " " + text)
 
         const newAnswers = {...savedAnswers}
         newAnswers[id] = [text]
@@ -86,14 +66,28 @@ const SeeQuizzProblemPage = () => {
 
     }
 
+    const onSend = () => {
+        const toSendData = {
+            problem: letter,
+            answers: savedAnswers
+        }
+
+        axios.post("/api/send/quiz", toSendData)
+            .then(() => navigate("/sends"))
+            .then(() => localStorage.setItem(`answer-storage/?b=${battle_id}&l=${letter}-completed`, "true"))
+    }
+
     return (
         <>
-            
+
             <div className="row">
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
                         <h2>Задача {letter}</h2>
                         <h3>{data.name}</h3>
+                        <button className="btn btn-outline-success" onClick={onSend}>
+                            Отправить задание на проверку
+                        </button>
                     </Card>
                 </div>
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
@@ -115,13 +109,15 @@ const SeeQuizzProblemPage = () => {
                         <nav aria-label="Page navigation example" className="my-3">
                             <ul className="pagination justify-content-center">
                                 {
-                                    questions.map((_, i) => {
+                                    questions.map((question, i) => {
 
                                         const activeClass = i === questionNumber ? ("active") : ("")
 
+                                        const buttonClass = savedAnswers[question.id] ? ("text-warning") : ("")
+
                                         return <li key={`quizz-variant-${i}`} className={"page-item " + activeClass}>
-                                            <btn className="page-link"
-                                                 onClick={() => setQuestionNumber(i)}>{i + 1}</btn>
+                                            <button className={"page-link " + buttonClass}
+                                                    onClick={() => setQuestionNumber(i)}>{i + 1}</button>
                                         </li>
                                     })
                                 }
@@ -138,10 +134,10 @@ const SeeQuizzProblemPage = () => {
                     <Card>
                         <h3 className="width-inner">№{questionNumber + 1}</h3>
                         <small className="width-inner me-3">/{questions.length}</small>
-                        <h3 className="width-inner">{questions[questionNumber].name}</h3>
+                        <Markdown text={questions[questionNumber]?.name}/>
 
                         {
-                            questions[questionNumber].answers.map((elem) => {
+                            questions[questionNumber]?.answers?.map((elem) => {
 
                                 const selectedClass = savedAnswers[questions[questionNumber].id]?.includes(elem) ? ("bg-primary") : ""
 
@@ -149,7 +145,7 @@ const SeeQuizzProblemPage = () => {
                                     <Card className={"btn btn-outline-secondary text-start " + selectedClass}
                                           key={elem.name}
                                           onClick={() => onAnswerClicked(questions[questionNumber].id, elem)}>
-                                        {elem}
+                                        <Markdown text={elem}/>
                                     </Card>
                                 )
                             })
@@ -162,14 +158,16 @@ const SeeQuizzProblemPage = () => {
                                 setQuestionNumber(questionNumber - 1)
                             }}>Предыдущий
                         </button>
-                        <button  className={"btn btn-outline-secondary justify-content-end mx-1 " + (questionNumber === questions.length - 1 && "disabled")} onClick={() => {
-                            if (questionNumber === questions.length) {
-                                // console.log(savedAnswers)
-                            }
+                        <button
+                            className={"btn btn-outline-secondary justify-content-end mx-1 " + (questionNumber === questions.length - 1 && "disabled")}
+                            onClick={() => {
+                                if (questionNumber === questions.length) {
+                                    // console.log(savedAnswers)
+                                }
 
-                            setQuestionNumber(questionNumber + 1)
-                        }
-                        }>Следующий
+                                setQuestionNumber(questionNumber + 1)
+                            }
+                            }>Следующий
                         </button>
 
                     </Card>

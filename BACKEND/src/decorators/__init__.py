@@ -24,7 +24,8 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         admin_login_password = request.cookies.get("admin", None)
-        is_admin = admin_login_password == f"{env.ADMIN_LOGIN}_{env.ADMIN_PASSWORD}_531"
+        is_admin = admin_login_password == \
+                   f"{env.ADMIN_LOGIN}_{env.ADMIN_PASSWORD}_531"
 
         if is_admin:
             return f(*args, **kwargs)
@@ -49,10 +50,10 @@ def teacher_required(f):
 
         cursor.execute(f"""
             SELECT id from globalusers
-        WHERE role = 'TEACHER'
-          AND password = '{password}'
-          AND login = '{login}'
-        """)
+            WHERE role = 'TEACHER'
+                AND password = %s
+                AND login = %s
+        """, (password, login))
 
         if cursor.fetchone():
             return f(*args, **kwargs)
@@ -79,7 +80,10 @@ def login_required(f):
             cur = connection.cursor()
 
             try:
-                cur.execute(f"SELECT * FROM champUsers_{battle_id} WHERE id = {user_id}")
+                cur.execute(
+                    f"SELECT * FROM champUsers_{battle_id} "
+                    f"WHERE id = {user_id}"
+                )
             except psycopg2.errors.UndefinedTable:
                 return redirect("/logout")
 
@@ -121,7 +125,9 @@ def api_login_required(f):
             cur = connection.cursor()
 
             try:
-                cur.execute(f"SELECT * FROM champUsers_{battle_id} WHERE id = {user_id}")
+                cur.execute(
+                    f"SELECT * FROM champUsers_{battle_id}"
+                    f" WHERE id = {user_id}")
             except psycopg2.errors.UndefinedTable:
                 return reset_cookie_and_return_bad_cred()
 

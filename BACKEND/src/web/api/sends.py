@@ -25,7 +25,9 @@ def api_sends(user_id, uid, r):
     connection = get_connection()
     cur = connection.cursor()
 
-    cur.execute(f"SELECT * FROM champSends_{user_id} WHERE user_id = %s ORDER BY send_time DESC", (uid,))
+    cur.execute(
+        f"SELECT * FROM champSends_{user_id} WHERE user_id = %s ORDER BY send_time DESC",
+        (uid,))
 
     db_sends = cur.fetchall()
 
@@ -37,7 +39,8 @@ def api_sends(user_id, uid, r):
         human_send_time = send_time.strftime("%m/%d/%Y, %H:%M:%S")
 
         to_render.append(
-            dict(id=id, letter=letter, name=name, send_time=human_send_time, state=state,
+            dict(id=id, letter=letter, name=name, send_time=human_send_time,
+                 state=state,
                  score=(score, "")[score is None],
                  program_checked=result is not None))
 
