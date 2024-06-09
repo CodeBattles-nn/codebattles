@@ -1,3 +1,43 @@
+# Node.js
 node_modules
+npm-debug.log
+yarn-error.log
+
+# React build
 build
+dist
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+**/node_modules
+
+# Directory for local environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker related files
+Dockerfile
+docker-compose.yml
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore IDE specific files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Ignore test coverage directories
+coverage
+
+
+# Other
 README.md
