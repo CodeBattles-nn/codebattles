@@ -1,4 +1,7 @@
+import wtforms_json
 from flask import Flask, request, make_response
+
+wtforms_json.init()
 
 app = Flask(__name__)
 
