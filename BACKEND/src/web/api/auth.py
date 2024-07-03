@@ -2,7 +2,9 @@ from flask import request, make_response
 
 from app import app
 from database import get_connection
+from decorators.validation import json_validate
 from utils import salt_crypt
+from web.validation_form.api import LoginForm
 
 
 @app.route("/api/logout", methods=['POST', 'GET'])
@@ -17,11 +19,12 @@ def logout_api():
 
 
 @app.route("/api/login", methods=['POST'])
-def login_post_api():
+@json_validate(LoginForm)
+def login_post_api(data: LoginForm):
     try:
-        champ_id = request.json['id']
-        login = request.json['login']
-        password = request.json['password']
+        champ_id = data.id.data
+        login = data.login.data
+        password = data.password.data
 
         champ_id = int(champ_id)
 

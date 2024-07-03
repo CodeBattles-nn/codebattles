@@ -3,20 +3,26 @@ import json
 import string
 
 import requests
-from flask import request
 
 import env
 from app import app
 from database import get_connection
 from decorators import get_user_id, api_login_required
+from decorators.validation import json_validate
+from web.validation_form.api import SendProgramForm
 
 
 @app.route("/api/send", methods=['POST'])
 @api_login_required
 @get_user_id
-def api_send_prog(user_id, uid):
+@json_validate(SendProgramForm)
+def api_send_prog(user_id, uid, data: SendProgramForm):
     connection = get_connection()
     cur = connection.cursor()
+
+    f_lang = data.cars.data
+    f_code = data.src.data
+    problem_letter_form = data.problem.data
 
     cur.execute("SELECT * FROM champs WHERE id = %s", (str(user_id),))
 
@@ -38,7 +44,6 @@ def api_send_prog(user_id, uid):
     x = list(cur.fetchall())
 
     problem_ = None
-    problem_letter_form = request.json['problem']
 
     for i in x:
         _id = i[0]
@@ -51,9 +56,6 @@ def api_send_prog(user_id, uid):
     tests = list(map(lambda z: {"in": z[0], "out": z[1]}, tests))
 
     print(problem_)
-
-    f_lang = request.json['cars']
-    f_code = request.json['src']
 
     cur.execute(
         f'''
@@ -75,14 +77,14 @@ def api_send_prog(user_id, uid):
     meta = {
         "champ_id": user_id,
         "user_id": uid,
-        "problem": request.json['problem'],
+        "problem": problem_letter_form,
         "id": inserted_id,
     }
 
-    data = {
+    payload = {
         "meta": json.dumps(meta),
-        "source": request.json['src'],
-        "compiler": request.json['cars'],
+        "source": f_code,
+        "compiler": f_lang,
         "tests": tests,
     }
 
@@ -90,12 +92,12 @@ def api_send_prog(user_id, uid):
 
     cur.execute(
         f"SELECT address FROM servers WHERE id = %s and enabled = true",
-        (request.json['cars'],))
+        (f_lang,))
 
     server_addr = cur.fetchone()
     server_addr = server_addr[0]
     print()
 
     requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test",
-                  json=data)
+                  json=payload)
     return {"success": True}
