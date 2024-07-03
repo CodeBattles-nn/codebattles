@@ -1,4 +1,4 @@
-# [Codebattles](codebattles.ru)
+# [Codebattles](https://codebattles.ru)
 
 Programming competition system
 
@@ -33,11 +33,11 @@ docker compose up
 
 ### Tested at
 
-| Architecture | Status |
-|--------------|:------:|
-| x64          |   ✅    |
-| aarch64      |   ✅    |
-| x32          |   ❓    |
+| Architecture |           Status           |
+|--------------|:--------------------------:|
+| x64          |      ✅  (In registry)      |
+| aarch64      | ✅  (Required manual build) |
+| x32          |             ❓              |
 
 ## Update
 
