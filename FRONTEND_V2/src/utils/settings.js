@@ -7,4 +7,4 @@ if (!isProd) {
     // axios.defaults.baseURL =`${document.location.protocol}//${document.location.hostname}:2500`
 }
 
-axios.defaults.baseURL =`${document.location.protocol}//${document.location.hostname}`
+axios.defaults.baseURL =`${document.location.protocol}//${document.location.hostname}:${document.location.port}`
