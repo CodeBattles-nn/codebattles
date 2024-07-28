@@ -31,4 +31,5 @@ jobs:
             collection: tests/autotests.json
             environment: tests/local_env.json
         - name: Docker down
+          if: always()
           run: docker compose -p test_codebattles -f test-docker-compose.yml down
