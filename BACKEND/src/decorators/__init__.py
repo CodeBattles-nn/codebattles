@@ -41,7 +41,12 @@ def teacher_required(f):
 
         # print(f"{teacher_login_password=}")
         # is_teacher = teacher_login_password == f"{'login'}_{'psswd'}_88416"
-        login, password, _ = teacher_login_password.split("_")
+        login, password, client_hash = teacher_login_password.split("_")
+
+        predicted_hash = salt_crypt(login, password)
+
+        if predicted_hash != client_hash:
+            return {"success": False, "msg": "Bad Credentials"}, 403
 
         # return ",", 403
 

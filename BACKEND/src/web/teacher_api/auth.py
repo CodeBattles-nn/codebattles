@@ -5,6 +5,7 @@ import env
 from app import app
 from database import get_connection
 from services import captcha_service
+from utils import salt_crypt
 
 
 @app.route("/api/teacher/auth")
@@ -50,6 +51,7 @@ def teacher_auth_post():
 
     if cursor.fetchone():
         resp = make_response({"success": True})
-        resp.set_cookie("teacher", f"{login}_{password}_88416")
+        client_hash = salt_crypt(login, password)
+        resp.set_cookie("teacher", f"{login}_{password}_{client_hash}")
 
     return resp
