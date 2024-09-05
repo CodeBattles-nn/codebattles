@@ -47,15 +47,34 @@ def send_quiz_solution(user_id, uid, r):
     print(questionById)
 
     points = 0
+    report = ""
     for answer_id, answer in answers.items():
         current_answer = answer[0]
         print(questionById)
         correct_answer = questionById[int(answer_id)]['correct_answers'][0]
         print(correct_answer)
+        report += "=" * 30 + "\n"
+        report += "Expected: " + "\n"
+        report += str(correct_answer) + "\n"
+        report += "Answered: " + "\n"
+        report += str(current_answer) + "\n"
+
+
         if current_answer == correct_answer:
             points += 1
+            report += f"Got 1 point" + "\n"
+        else:
+            report += f"Got 0 point" + "\n"
+
+        report += "=" * 30 + "\n"
 
     totalPoints = int(points / qustionsCount * 100)
+
+    report += "\n"
+    report += f"Final points: {points}/{qustionsCount} => {totalPoints}"
+    report += "\n"
+
+
 
     cur.execute(f"""SELECT id FROM champSends_{user_id} where user_id={uid} and problem_id={problem_id}""")
     equals_sends = cur.fetchall()
@@ -75,7 +94,7 @@ def send_quiz_solution(user_id, uid, r):
                 uid,
                 datetime.datetime.now(),
                 "Подсчитано",
-                json.dumps(answers),
+                report,
                 problem,
                 totalPoints
 
