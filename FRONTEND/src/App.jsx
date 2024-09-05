@@ -33,6 +33,7 @@ import AddProblemsPage from "./pages/teacher/AddProblemsPage";
 import ProblemSeePageSwitch from "./pages/user/ProblemsSeePageSwitch";
 import SeeProblemQuestionPage from "./pages/user/SeeProblemQuestionPage";
 import CreateChampPage from "./pages/teacher/CreateChampPage";
+import TeacherNavBar from "./components/Header";
 
 function App() {
     return (
@@ -40,6 +41,7 @@ function App() {
             <BrowserRouter>
                 <HeaderSelector />
                 <Base>
+                    <TeacherNavBar hiddenUrl={"/teacher"}/>
                     <Routes>
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
