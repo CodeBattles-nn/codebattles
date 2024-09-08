@@ -13,7 +13,8 @@ const TeacherNavBar = ({hiddenUrl}) => {
             <div className="row">
                 <div className="col-12">
                     <div className="jumbotron theme-bg-light  p-3">
-                        <Link to={"/teacher/champs"}>Соревнования</Link>
+                        <Link className="mr-2" to={"/teacher/champs"}>Соревнования</Link>
+                        <Link to={"/teacher/profile"}>Смена пароля</Link>
                     </div>
                 </div>
             </div>
