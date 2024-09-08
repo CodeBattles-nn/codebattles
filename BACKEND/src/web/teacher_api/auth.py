@@ -4,7 +4,9 @@ from psycopg2.extras import RealDictCursor
 import env
 from app import app
 from database import get_connection
+from decorators import teacher_required
 from services import captcha_service
+from utils import salt_crypt
 
 
 @app.route("/api/teacher/auth")
@@ -50,6 +52,45 @@ def teacher_auth_post():
 
     if cursor.fetchone():
         resp = make_response({"success": True})
-        resp.set_cookie("teacher", f"{login}_{password}_88416")
+        client_hash = salt_crypt(login, password)
+        resp.set_cookie("teacher", f"{login}_{password}_{client_hash}")
 
     return resp
+
+@app.route("/api/teacher/changecred", methods=['POST'])
+@teacher_required
+def teacher_change_credential_post():
+    new_login, new_password, current_password = request.json['login'], request.json['password'], request.json['current_password']
+
+    connection = get_connection()
+    cursor = connection.cursor(cursor_factory=RealDictCursor)
+
+    cursor.execute(f"""
+    SELECT id from globalusers
+    WHERE role = 'TEACHER'
+     AND password = %s
+    AND login = %s
+    """, (current_password, new_login))
+
+    resp = make_response({"success": False, "use_redirect": False}, 422)
+
+
+
+    user_db = cursor.fetchone()
+
+    print(user_db)
+    if user_db is None:
+        pass
+    elif len(user_db) > 0:
+        cursor.execute(
+            "UPDATE globalusers SET login = %s, password = %s WHERE id = %s;",
+            (new_login, new_password, user_db["id"])
+        )
+        resp = make_response({"success": True})
+        client_hash = salt_crypt(new_login, new_password)
+        resp.set_cookie("teacher", f"{new_login}_{new_password}_{client_hash}")
+
+        connection.commit()
+
+    return resp
+

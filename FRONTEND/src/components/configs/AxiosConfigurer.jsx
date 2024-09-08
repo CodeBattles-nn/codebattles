@@ -37,7 +37,10 @@ const AxiosConfigurer = () => {
         } else if (error.response?.status === 404) {
             toast.warn("Запрашиваемая страница не найдена!", {autoClose: 5000})
             // navigate("/problems")
-        } else if (error.response?.status >= 500) {
+        } else if (error.response?.status === 422) {
+            // ...
+        }
+        else if (error.response?.status >= 500) {
             serverErrorToast();
             navigate("/teacher")
         } else {

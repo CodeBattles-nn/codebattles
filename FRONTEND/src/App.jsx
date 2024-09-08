@@ -33,6 +33,8 @@ import AddProblemsPage from "./pages/teacher/AddProblemsPage";
 import ProblemSeePageSwitch from "./pages/user/ProblemsSeePageSwitch";
 import SeeProblemQuestionPage from "./pages/user/SeeProblemQuestionPage";
 import CreateChampPage from "./pages/teacher/CreateChampPage";
+import TeacherNavBar from "./components/Header";
+import ChangeCredentialsPage from "./pages/teacher/ChangeCredentialsPage";
 
 function App() {
     return (
@@ -40,6 +42,7 @@ function App() {
             <BrowserRouter>
                 <HeaderSelector />
                 <Base>
+                    <TeacherNavBar hiddenUrl={"/teacher"}/>
                     <Routes>
                         <Route path="/login" element={<LoginPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
@@ -52,6 +55,7 @@ function App() {
                         <Route path="/admin" element={<AdminLoginPage/>}></Route>
                         <Route path="/teacher" element={<TeacherLoginPage/>}></Route>
                         <Route path="/teacher/champs" element={<ChampsPage/>}></Route>
+                        <Route path="/teacher/profile" element={<ChangeCredentialsPage/>}></Route>
                         <Route path="/teacher/champs/new" element={<CreateChampPage/>}></Route>
                         <Route path="/teacher/champs/:id" element={<ChampSettings/>}></Route>
                         <Route path="/teacher/champs/:id/access" element={<ChampAccessSettings/>}></Route>
