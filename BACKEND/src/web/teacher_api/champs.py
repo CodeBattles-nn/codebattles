@@ -19,16 +19,15 @@ def get_champs_route():
 
     champs = cursor.fetchall()
     champs = list(map(lambda x: [*x], champs))
-    champs = list(
-        map(lambda x: {'id': x[0], 'name': x[1], 'start_dt': x[2]}, champs))
+    champs = list(map(lambda x: {"id": x[0], "name": x[1], "start_dt": x[2]}, champs))
 
     return champs
 
 
-@app.route("/api/teacher/champs", methods=['POST'])
+@app.route("/api/teacher/champs", methods=["POST"])
 @teacher_required
 def create_champ_post_teacher():
-    name = request.json['name']
+    name = request.json["name"]
 
     connection = get_connection()
     cur = connection.cursor()
@@ -82,24 +81,22 @@ def get_champs_byid_route(champ_id):
         _id = task[0]
         name = task[1]
         tasks_dict[_id] = task
-        tasks.append(
-            {'letter': strs[problems_ids.index(_id)], 'id': _id, 'name': name})
+        tasks.append({"letter": strs[problems_ids.index(_id)], "id": _id, "name": name})
 
-    return {'tasks': tasks, 'id': fetch[0], 'name': fetch[1]}
+    return {"tasks": tasks, "id": fetch[0], "name": fetch[1]}
 
 
-@app.route("/api/teacher/champs/<int:champ_id>", methods=['POST'])
+@app.route("/api/teacher/champs/<int:champ_id>", methods=["POST"])
 @teacher_required
 def settings_post_teacher_api(champ_id):
     connection = get_connection()
     cur = connection.cursor()
 
     form = request.json
-    problem = form['problem']
-    problem_id = form['problem_id']
+    problem = form["problem"]
+    problem_id = form["problem_id"]
 
-    cur.execute(
-        f"""SELECT id FROM problems WHERE id=%s""", (problem_id,))
+    cur.execute(f"""SELECT id FROM problems WHERE id=%s""", (problem_id,))
 
     prefetched_problem = cur.fetchone()
 
@@ -116,8 +113,8 @@ def settings_post_teacher_api(champ_id):
         return {"success": "false"}, 400
 
     cur.execute(
-        f"""UPDATE champs SET {problem} = %s WHERE id = %s""",
-        (problem_id, champ_id))
+        f"""UPDATE champs SET {problem} = %s WHERE id = %s""", (problem_id, champ_id)
+    )
 
     connection.commit()
 

@@ -31,7 +31,9 @@ def get_problems_byid_api_route(problem_id):
         f"""
         SELECT id, name, description, "in", "out", examples, tests
         FROM problems WHERE id = %s
-        """, (problem_id,))
+        """,
+        (problem_id,),
+    )
     problem = cursor.fetchone()
 
     print(problem)
@@ -40,24 +42,24 @@ def get_problems_byid_api_route(problem_id):
         return "", 404
 
     out_data = {
-        'tests': [],
-        'examples': fix_new_line(json.loads(problem['examples'])),
-        'name': problem['name'],
-        'description': problem['description'],
-        'out_data': problem['out'],
-        'in_data': problem['in']
+        "tests": [],
+        "examples": fix_new_line(json.loads(problem["examples"])),
+        "name": problem["name"],
+        "description": problem["description"],
+        "out_data": problem["out"],
+        "in_data": problem["in"],
     }
 
     return out_data
 
 
-@app.route("/api/teacher/problems/add", methods=['POST'])
+@app.route("/api/teacher/problems/add", methods=["POST"])
 @teacher_required
 def teacher_list_problems_add():
     connection = get_connection()
     cursor = connection.cursor()
 
-    build = request.json['build']
+    build = request.json["build"]
     print(build)
 
     try:
@@ -78,20 +80,13 @@ def teacher_list_problems_add():
              INSERT INTO problems (name, description, "in", out, examples, tests, is_question)
              VALUES (%s, %s, %s, %s, %s, %s, TRUE)
             """,
-            (
-                build_json['name'],
-                "Тест",
-                "-",
-                "-",
-                "[]",
-                json.dumps(build_json)
-            )
+            (build_json["name"], "Тест", "-", "-", "[]", json.dumps(build_json)),
         )
 
         pass
     elif problem_type == "question":
-        build_json['tests'] = json.dumps(build_json['tests'])
-        build_json['examples'] = json.dumps(build_json['examples'])
+        build_json["tests"] = json.dumps(build_json["tests"])
+        build_json["examples"] = json.dumps(build_json["examples"])
 
         print(build)
         print(build_json)
@@ -101,13 +96,14 @@ def teacher_list_problems_add():
              INSERT INTO problems (name, description, "in", out, examples, tests)
              VALUES (%s, %s, %s, %s, %s, %s)
             """,
-            (build_json['name'],
-             build_json['description'],
-             build_json['in'],
-             build_json['out'],
-             build_json['examples'],
-             build_json['tests']
-             )
+            (
+                build_json["name"],
+                build_json["description"],
+                build_json["in"],
+                build_json["out"],
+                build_json["examples"],
+                build_json["tests"],
+            ),
         )
 
     connection.commit()

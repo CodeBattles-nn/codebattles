@@ -19,7 +19,7 @@ def get_stats_teacher_api(champ_id, r):
         response = app.response_class(
             response=redis_cache,
             status=200,
-            mimetype=JSON_MIMETYPE
+            mimetype=JSON_MIMETYPE,
         )
         print("redis")
         return response
@@ -43,13 +43,15 @@ def get_stats_teacher_api(champ_id, r):
 
     print(problems_counts)
 
-    cur.execute(f"""
+    cur.execute(
+        f"""
         SELECT u.*, MAX(s.send_time) AS send_time
         FROM champusers_{champ_id} u
         LEFT JOIN champsends_{champ_id} s ON u.id = s.user_id
         GROUP BY u.id
         ORDER BY score DESC, send_time ASC;
-    """)
+    """
+    )
 
     fetch = cur.fetchall()  # Can be None
 
@@ -59,29 +61,29 @@ def get_stats_teacher_api(champ_id, r):
         user_id = usr[0]
         score = usr[15]
         last_send = usr[16]
-        last_send = None if last_send is None else last_send.strftime(
-            "%m/%d/%Y, %H:%M:%S")
+        last_send = (
+            None if last_send is None else last_send.strftime("%m/%d/%Y, %H:%M:%S")
+        )
 
         nickname = usr[3]
-        problems_score = usr[4:problems_counts + 4]
+        problems_score = usr[4 : problems_counts + 4]
 
         # problems_score = list(map(lambda s: (s, "")[s is None], problems_score))
 
         users.append(
             {
-                'position': i + 1,
-                'name': nickname,
-                'user_id': user_id,
-                'score': score,
-                'problems_score': problems_score,
-                'last_send': last_send
+                "position": i + 1,
+                "name": nickname,
+                "user_id": user_id,
+                "score": score,
+                "problems_score": problems_score,
+                "last_send": last_send,
             }
         )
 
         print()
 
-    resp_string = {'success': True, 'cols': strs[:problems_counts],
-                   'users': users}
+    resp_string = {"success": True, "cols": strs[:problems_counts], "users": users}
 
     r.set(f"r-champ-{champ_id}-stats", json.dumps(resp_string))
     return resp_string
@@ -96,7 +98,8 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
     cursor = conn.cursor(cursor_factory=RealDictCursor)
 
     try:
-        cursor.execute(f"""
+        cursor.execute(
+            f"""
            SELECT *
         FROM champsends_{champ_id}
         WHERE problem_letter = %s
@@ -104,7 +107,9 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
         ORDER BY score DESC, send_time DESC
         LIMIT 1
 
-        """, (problem_letter, user_id))
+        """,
+            (problem_letter, user_id),
+        )
     except psycopg2.errors.UndefinedTable:
         abort(404)
 
@@ -121,14 +126,13 @@ def get_stats_teacher_api_get_by_task_and_user(champ_id):
         pass
 
     for i, test in enumerate(result):
-        message = test['msg']
-        out = test['out']
+        message = test["msg"]
+        out = test["out"]
 
         if message == "WRONG_ANSWER":
             out = """ВЫВОД СКРЫТ"""
 
-        to_add = {'id': i + 1, 'time': test['time'], 'msg': message,
-                  'out': out}
+        to_add = {"id": i + 1, "time": test["time"], "msg": message, "out": out}
         tests.append(to_add)
 
     return {**{"tests": tests}, **res}

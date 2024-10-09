@@ -9,7 +9,7 @@ from database import get_connection
 from decorators import get_user_id, api_login_required, redis_conn
 from utils import fix_new_line, get_table_color_class_by_score, LETTER_REGEX
 
-JSON_MIMETYPE = 'application/json'
+JSON_MIMETYPE = "application/json"
 
 
 @app.route("/api/problem/<letter>/quiz")
@@ -57,17 +57,21 @@ def get_quiz(letter, user_id):
     _pr_tests = json.loads(_pr_tests)
     filtered_test = []
 
-    for question in _pr_tests['questions']:
+    for question in _pr_tests["questions"]:
         print(question)
         filtered_test.append(
             {
-                "id": question['id'],
-                "name": question['question'],
-                "answers": question['answers'],
-                "type": question['type'],
+                "id": question["id"],
+                "name": question["question"],
+                "answers": question["answers"],
+                "type": question["type"],
             }
         )
 
-    return dict(success=True, name=_pr_name, description=_pr_desc,
-                letter=letter,
-                tests=filtered_test)
+    return dict(
+        success=True,
+        name=_pr_name,
+        description=_pr_desc,
+        letter=letter,
+        tests=filtered_test,
+    )

@@ -24,8 +24,7 @@ def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         admin_login_password = request.cookies.get("admin", None)
-        is_admin = admin_login_password == \
-                   f"{env.ADMIN_LOGIN}_{env.ADMIN_PASSWORD}_531"
+        is_admin = admin_login_password == f"{env.ADMIN_LOGIN}_{env.ADMIN_PASSWORD}_531"
 
         if is_admin:
             return f(*args, **kwargs)
@@ -53,12 +52,15 @@ def teacher_required(f):
         connection = get_connection()
         cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-        cursor.execute(f"""
+        cursor.execute(
+            f"""
             SELECT id from globalusers
             WHERE role = 'TEACHER'
                 AND password = %s
                 AND login = %s
-        """, (password, login))
+        """,
+            (password, login),
+        )
 
         if cursor.fetchone():
             return f(*args, **kwargs)
@@ -86,8 +88,7 @@ def login_required(f):
 
             try:
                 cur.execute(
-                    f"SELECT * FROM champUsers_{battle_id} "
-                    f"WHERE id = {user_id}"
+                    f"SELECT * FROM champUsers_{battle_id} " f"WHERE id = {user_id}"
                 )
             except psycopg2.errors.UndefinedTable:
                 return redirect("/logout")
@@ -105,10 +106,10 @@ def login_required(f):
 def reset_cookie_and_return_bad_cred():
     resp = make_response({"success": False, "msg": "Bad Credentials"}, 403)
 
-    resp.set_cookie('user_id', expires=0)
-    resp.set_cookie('authed', expires=0)
-    resp.set_cookie('battle_id', expires=0)
-    resp.set_cookie('__validation', expires=0)
+    resp.set_cookie("user_id", expires=0)
+    resp.set_cookie("authed", expires=0)
+    resp.set_cookie("battle_id", expires=0)
+    resp.set_cookie("__validation", expires=0)
 
     return resp
 
@@ -131,8 +132,8 @@ def api_login_required(f):
 
             try:
                 cur.execute(
-                    f"SELECT * FROM champUsers_{battle_id}"
-                    f" WHERE id = {user_id}")
+                    f"SELECT * FROM champUsers_{battle_id}" f" WHERE id = {user_id}"
+                )
             except psycopg2.errors.UndefinedTable:
                 return reset_cookie_and_return_bad_cred()
 

@@ -12,7 +12,7 @@ from decorators.validation import json_validate
 from web.validation_form.api import SendProgramForm
 
 
-@app.route("/api/send", methods=['POST'])
+@app.route("/api/send", methods=["POST"])
 @api_login_required
 @get_user_id
 @json_validate(SendProgramForm)
@@ -58,19 +58,23 @@ def api_send_prog(user_id, uid, data: SendProgramForm):
     print(problem_)
 
     cur.execute(
-        f'''
+        f"""
         INSERT INTO champSends_{user_id}
         (problem_name, problem_id, user_id, send_time, state, program, problem_letter, lang)
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s);
-        ''',
+        """,
         (
-            problem_[1], problem_[0], uid, datetime.datetime.now(),
-            "Тестируется", f_code,
+            problem_[1],
+            problem_[0],
+            uid,
+            datetime.datetime.now(),
+            "Тестируется",
+            f_code,
             problem_letter_form,
-            f_lang)
+            f_lang,
+        ),
     )
-    cur.execute(
-        f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
+    cur.execute(f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
 
     inserted_id = cur.fetchone()[0]
 
@@ -91,13 +95,12 @@ def api_send_prog(user_id, uid, data: SendProgramForm):
     connection.commit()
 
     cur.execute(
-        f"SELECT address FROM servers WHERE id = %s and enabled = true",
-        (f_lang,))
+        f"SELECT address FROM servers WHERE id = %s and enabled = true", (f_lang,)
+    )
 
     server_addr = cur.fetchone()
     server_addr = server_addr[0]
     print()
 
-    requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test",
-                  json=payload)
+    requests.post(f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test", json=payload)
     return {"success": True}

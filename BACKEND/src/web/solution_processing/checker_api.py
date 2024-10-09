@@ -12,7 +12,7 @@ from decorators import login_required, get_user_id, redis_conn
 import env
 
 
-@app.route("/send", methods=['POST'])
+@app.route("/send", methods=["POST"])
 @login_required
 @get_user_id
 def send_prog(user_id, uid):
@@ -39,7 +39,7 @@ def send_prog(user_id, uid):
     x = list(cur.fetchall())
 
     problem_ = None
-    problem_letter_form = request.form['problem']
+    problem_letter_form = request.form["problem"]
 
     for i in x:
         _id = i[0]
@@ -53,37 +53,41 @@ def send_prog(user_id, uid):
 
     print(problem_)
 
-    f_lang = request.form['cars']
-    f_code = request.form['src']
+    f_lang = request.form["cars"]
+    f_code = request.form["src"]
 
     cur.execute(
-        f'''
+        f"""
         INSERT INTO champSends_{user_id}
         (problem_name, problem_id, user_id, send_time, state, program, problem_letter, lang)
         VALUES(%s, %s, %s, %s, %s, %s, %s, %s);
-        ''',
+        """,
         (
-            problem_[1], problem_[0], uid, datetime.datetime.now(),
-            "Тестируется", f_code,
+            problem_[1],
+            problem_[0],
+            uid,
+            datetime.datetime.now(),
+            "Тестируется",
+            f_code,
             problem_letter_form,
-            f_lang)
+            f_lang,
+        ),
     )
-    cur.execute(
-        f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
+    cur.execute(f"SELECT currval(pg_get_serial_sequence('champSends_{user_id}','id'));")
 
     inserted_id = cur.fetchone()[0]
 
     meta = {
         "champ_id": user_id,
         "user_id": uid,
-        "problem": request.form['problem'],
+        "problem": request.form["problem"],
         "id": inserted_id,
     }
 
     data = {
         "meta": json.dumps(meta),
-        "source": request.form['src'],
-        "compiler": request.form['cars'],
+        "source": request.form["src"],
+        "compiler": request.form["cars"],
         "tests": tests,
     }
 
@@ -91,43 +95,37 @@ def send_prog(user_id, uid):
 
     print(cur.fetchone())
 
-    cur.execute(
-        f"SELECT address FROM servers WHERE id = %s",
-        (request.form['cars'],)
-    )
+    cur.execute(f"SELECT address FROM servers WHERE id = %s", (request.form["cars"],))
 
     server_addr = cur.fetchone()[0]
 
     print()
 
     requests.post(
-        f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test",
-        json=data,
-        timeout=1000
+        f"http://{server_addr}:{env.CHECKER_PORT}/api/v1/test", json=data, timeout=1000
     )
     return redirect("/sends")
 
 
-@app.route("/api/check_system_callback", methods=['POST'])
+@app.route("/api/check_system_callback", methods=["POST"])
 @redis_conn
 def check_system(r):
     data = request.json
     print(data)
     all_count = 0
     correct_count = 0
-    for results in data['results']:
+    for results in data["results"]:
         all_count += 1
-        if results['success']:
+        if results["success"]:
             correct_count += 1
 
-    meta = json.loads(data['meta'])
+    meta = json.loads(data["meta"])
 
     print(round((correct_count / all_count) * 100))
 
-    champ_id = meta['champ_id']
+    champ_id = meta["champ_id"]
     user_id = meta["user_id"]
-    column = meta['problem'][0]
-
+    column = meta["problem"][0]
 
     if not re.fullmatch("[0-9]+", str(champ_id)):
         return "", 409
@@ -136,27 +134,27 @@ def check_system(r):
     if not re.fullmatch("[a-zA-Z]", str(column)):
         return "", 409
 
-
     con = get_connection()
     cur = con.cursor()
 
-    points = (round((correct_count / all_count) * 100))
+    points = round((correct_count / all_count) * 100)
 
     cur.execute(
         f"UPDATE champUsers_{champ_id} SET {column} = {points} \
-        WHERE id= {user_id} AND ({column} < {points} OR {column} IS NULL)")
+        WHERE id= {user_id} AND ({column} < {points} OR {column} IS NULL)"
+    )
 
-    result_str = json.dumps(data['results'], indent=2)
+    result_str = json.dumps(data["results"], indent=2)
 
     print(result_str)
 
     cur.execute(
         f"UPDATE champSends_{champ_id} SET score = %s,state = 'Протестировано', description = %s  WHERE id = %s;",
-        (round((correct_count / all_count) * 100), result_str, meta['id']))
+        (round((correct_count / all_count) * 100), result_str, meta["id"]),
+    )
 
     con.commit()
 
-    r.delete(f"r-champ-{champ_id}-stats",
-             f"r-champ-{champ_id}-sends-user-{user_id}")
+    r.delete(f"r-champ-{champ_id}-stats", f"r-champ-{champ_id}-sends-user-{user_id}")
 
     return "OK"

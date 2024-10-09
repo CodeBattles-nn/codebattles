@@ -9,7 +9,7 @@ from database import get_connection
 from decorators import get_user_id, api_login_required, redis_conn
 from utils import fix_new_line, get_table_color_class_by_score, LETTER_REGEX
 
-JSON_MIMETYPE = 'application/json'
+JSON_MIMETYPE = "application/json"
 
 
 @app.route("/api/problems")
@@ -47,7 +47,7 @@ def api_problems(user_id, uid):
 
     fetch = cur.fetchone()  # Can be None
 
-    score = fetch[4:4 + len(problems_ids)]
+    score = fetch[4 : 4 + len(problems_ids)]
 
     css_colors = {}
 
@@ -65,13 +65,16 @@ def api_problems(user_id, uid):
         tasks[letter] = name
         is_quizes[letter] = is_quiz
 
-        css_colors[letter] = get_table_color_class_by_score(
-            score[strs.index(letter)])
+        css_colors[letter] = get_table_color_class_by_score(score[strs.index(letter)])
 
     print()
 
-    return {"success": "true", "problems": tasks, "colors": css_colors,
-            "is_quizes": is_quizes}
+    return {
+        "success": "true",
+        "problems": tasks,
+        "colors": css_colors,
+        "is_quizes": is_quizes,
+    }
 
 
 @app.route("/api/problem/<letter>")
@@ -125,10 +128,16 @@ def api_problem(letter, user_id):
     for i in servers:
         langs[i[0]] = i[1]
 
-    return dict(success=True, name=_pr_name, description=_pr_desc,
-                letter=letter, in_data=_pr_in, out_data=_pr_out,
-                examples=_pr_examples,
-                langs=langs)
+    return dict(
+        success=True,
+        name=_pr_name,
+        description=_pr_desc,
+        letter=letter,
+        in_data=_pr_in,
+        out_data=_pr_out,
+        examples=_pr_examples,
+        langs=langs,
+    )
 
 
 @app.route("/api/stats")
@@ -141,9 +150,7 @@ def api_statistics(user_id, uid, r):
     redis_cache = r.get(f"r-champ-{champ_id}-stats")
     if redis_cache is not None:
         response = app.response_class(
-            response=redis_cache,
-            status=200,
-            mimetype=JSON_MIMETYPE
+            response=redis_cache, status=200, mimetype=JSON_MIMETYPE
         )
         print("redis")
         return response
@@ -167,13 +174,15 @@ def api_statistics(user_id, uid, r):
 
     print(problems_counts)
 
-    cur.execute(f"""
+    cur.execute(
+        f"""
         SELECT u.*, MAX(s.send_time) AS send_time
         FROM champusers_{user_id} u
         LEFT JOIN champsends_{user_id} s ON u.id = s.user_id
         GROUP BY u.id
         ORDER BY score DESC, send_time ASC;
-    """)
+    """
+    )
 
     fetch = cur.fetchall()  # Can be None
 
@@ -183,22 +192,29 @@ def api_statistics(user_id, uid, r):
         user_id = usr[0]
         score = usr[15]
         last_send = usr[16]
-        last_send = None if last_send is None else last_send.strftime(
-            "%m/%d/%Y, %H:%M:%S")
+        last_send = (
+            None if last_send is None else last_send.strftime("%m/%d/%Y, %H:%M:%S")
+        )
 
         nickname = usr[3]
-        problems_score = usr[4:problems_counts + 4]
+        problems_score = usr[4 : problems_counts + 4]
 
         # problems_score = list(map(lambda s: (s, "")[s is None], problems_score))
 
-        users.append({'position': i + 1, 'name': nickname, 'user_id': user_id,
-                      'score': score, 'problems_score': problems_score,
-                      'last_send': last_send})
+        users.append(
+            {
+                "position": i + 1,
+                "name": nickname,
+                "user_id": user_id,
+                "score": score,
+                "problems_score": problems_score,
+                "last_send": last_send,
+            }
+        )
 
         print()
 
-    resp_string = {'success': True, 'cols': strs[:problems_counts],
-                   'users': users}
+    resp_string = {"success": True, "cols": strs[:problems_counts], "users": users}
 
     r.set(f"r-champ-{champ_id}-stats", json.dumps(resp_string))
     return resp_string

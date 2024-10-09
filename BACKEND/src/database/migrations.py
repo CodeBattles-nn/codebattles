@@ -8,7 +8,4 @@ ALTER TABLE globalusers
 ADD COLUMN IF NOT EXISTS totp TEXT;
 """
 
-sql_migrations = [
-    _0_ADD_TYPE_OF_PROBLEM,
-    _1_ADD_TOTP_CODE
-]
+sql_migrations = [_0_ADD_TYPE_OF_PROBLEM, _1_ADD_TOTP_CODE]
