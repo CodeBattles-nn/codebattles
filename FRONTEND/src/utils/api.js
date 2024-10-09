@@ -2,7 +2,7 @@ import {toast} from "react-toastify";
 
 
 export function getApiAddress() {
-    return `${document.location.protocol}//${document.location.hostname}:${2500}`
+    return `${document.location.protocol}//${document.location.hostname}:${document.location.port}`
 
 
 }
