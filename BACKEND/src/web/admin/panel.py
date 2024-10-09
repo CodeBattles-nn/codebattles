@@ -63,20 +63,19 @@ def settings(champ_id):
     print()
 
     return render_template(
-        "admin/settings.html", tasks=tasks,
-        id=fetch[0], name=fetch[1]
+        "admin/settings.html", tasks=tasks, id=fetch[0], name=fetch[1]
     )
 
 
-@app.route("/admin/champ/<int:champ_id>", methods=['POST'])
+@app.route("/admin/champ/<int:champ_id>", methods=["POST"])
 @admin_required
 def settings_post(champ_id):
     connection = get_connection()
     cur = connection.cursor()
 
     form = request.form
-    problem = form['problem']
-    problem_id = form['problem_id']
+    problem = form["problem"]
+    problem_id = form["problem_id"]
 
     if problem_id == "":
         return redirect(f"/admin/champ/{champ_id}")
@@ -84,9 +83,7 @@ def settings_post(champ_id):
 
     print(problem, problem_id)
 
-    cur.execute(
-        f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}"""
-    )
+    cur.execute(f"""UPDATE champs SET {problem} = {problem_id} WHERE id = {champ_id}""")
 
     connection.commit()
 
@@ -99,10 +96,10 @@ def create_champ():
     return render_template("admin/create.html")
 
 
-@app.route("/admin/create/", methods=['POST'])
+@app.route("/admin/create/", methods=["POST"])
 @admin_required
 def create_champ_post():
-    name = request.form['name']
+    name = request.form["name"]
 
     connection = get_connection()
     cur = connection.cursor()
@@ -128,10 +125,10 @@ def create_users_in_champ(champ_id):
     return render_template("admin/add_users.html")
 
 
-@app.route("/admin/champ/<int:champ_id>/add_users", methods=['POST'])
+@app.route("/admin/champ/<int:champ_id>/add_users", methods=["POST"])
 @admin_required
 def create_users_in_champ_post(champ_id):
-    users = request.form['users'].split("\r\n")
+    users = request.form["users"].split("\r\n")
 
     connection = get_connection()
     cursor = connection.cursor()
@@ -147,13 +144,13 @@ def create_users_in_champ_post(champ_id):
         #
         # password = get_random_string(8)
 
-        login = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
-        password = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
+        login = "".join(map(str, [random.randint(0, 9) for _ in range(5)]))
+        password = "".join(map(str, [random.randint(0, 9) for _ in range(5)]))
 
         cursor.execute(
             f"INSERT INTO champUsers_{champ_id} (login, password, name)"
             f" VALUES (%s, %s, %s)",
-            (login, password, name)
+            (login, password, name),
         )
 
     connection.commit()

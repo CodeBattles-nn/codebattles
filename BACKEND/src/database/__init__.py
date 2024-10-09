@@ -7,7 +7,7 @@ from database.createTables import (
     SERVERS_TABLE,
     STORAGE_TABLE,
     TEACHER_CHAMPS_TABLE,
-    GLOBALUSERS_TABLE
+    GLOBALUSERS_TABLE,
 )
 from database.migrations import sql_migrations
 
@@ -17,7 +17,7 @@ __tables = [
     SERVERS_TABLE,
     STORAGE_TABLE,
     TEACHER_CHAMPS_TABLE,
-    GLOBALUSERS_TABLE
+    GLOBALUSERS_TABLE,
 ]
 
 
@@ -26,7 +26,7 @@ def get_connection():
         dbname=env.DB_NAME,
         user=env.DB_USERNAME,
         password=env.DB_PASSWORD,
-        host=env.DB_HOST
+        host=env.DB_HOST,
     )
 
 

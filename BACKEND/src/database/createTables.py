@@ -1,4 +1,4 @@
-CHAMPS_TABLE = '''
+CHAMPS_TABLE = """
     CREATE TABLE IF NOT EXISTS champs (
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL,
@@ -16,8 +16,8 @@ CHAMPS_TABLE = '''
         K INTEGER
     );
 
-'''
-PROBLEMS_TABLE = '''
+"""
+PROBLEMS_TABLE = """
    CREATE TABLE IF NOT EXISTS problems (
         id  SERIAL PRIMARY KEY,
         name  TEXT,
@@ -27,9 +27,9 @@ PROBLEMS_TABLE = '''
         tests  TEXT,
         examples  TEXT
     );
-'''
+"""
 
-SERVERS_TABLE = '''
+SERVERS_TABLE = """
 CREATE TABLE IF NOT EXISTS servers
 (
     id SERIAL PRIMARY KEY,
@@ -38,16 +38,16 @@ CREATE TABLE IF NOT EXISTS servers
     address TEXT,
     enabled boolean DEFAULT true
 )
-'''
+"""
 
-STORAGE_TABLE = '''
+STORAGE_TABLE = """
 CREATE TABLE IF NOT EXISTS storage
 (
     id SERIAL PRIMARY KEY,
     key TEXT,
     value TEXT
 )
-'''
+"""
 
 
 def get_query_users_table(champ_id):

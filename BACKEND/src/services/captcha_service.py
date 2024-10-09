@@ -23,15 +23,12 @@ class CaptchaValidatedOutput(CaptchaOutput):
 def generate(numbers: int = 6) -> CaptchaOutput:
     image = ImageCaptcha()
 
-    string_ref = ''.join(random.choice(numbers_string) for _ in range(numbers))
+    string_ref = "".join(random.choice(numbers_string) for _ in range(numbers))
     data = image.generate(string_ref)
     encoded_bytes = base64.b64encode(data.getvalue())
-    encoded_string = encoded_bytes.decode('utf-8')
+    encoded_string = encoded_bytes.decode("utf-8")
 
-    return CaptchaOutput(
-        base64image=encoded_string,
-        string=string_ref
-    )
+    return CaptchaOutput(base64image=encoded_string, string=string_ref)
 
 
 def generate_with_validation(numbers: int = 6) -> CaptchaValidatedOutput:
@@ -40,9 +37,7 @@ def generate_with_validation(numbers: int = 6) -> CaptchaValidatedOutput:
     sha_hash = salt_crypt(generated.string + generated.base64image)
 
     return CaptchaValidatedOutput(
-        base64image=generated.base64image,
-        string=generated.string,
-        sha256_hash=sha_hash
+        base64image=generated.base64image, string=generated.string, sha256_hash=sha_hash
     )
 
 

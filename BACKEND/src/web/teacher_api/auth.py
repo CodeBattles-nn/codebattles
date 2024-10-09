@@ -18,35 +18,36 @@ def teacher_auth_captcha():
     }
 
 
-@app.route("/api/teacher/auth", methods=['POST'])
+@app.route("/api/teacher/auth", methods=["POST"])
 def teacher_auth_post():
-    login, password = request.json['login'], request.json['password']
+    login, password = request.json["login"], request.json["password"]
 
     if env.REQUIRE_CAPTCHA:
-        base64image, captchaUserInput, captchaValidate = request.json[
-            'base64image'], request.json['captchaUserInput'], request.json[
-            'captchaValidate'],
+        base64image, captchaUserInput, captchaValidate = (
+            request.json["base64image"],
+            request.json["captchaUserInput"],
+            request.json["captchaValidate"],
+        )
 
         success_captcha = captcha_service.validate(
-            base64image,
-            captchaUserInput,
-            captchaValidate
+            base64image, captchaUserInput, captchaValidate
         )
 
         if not success_captcha:
             return make_response({"success": False, "use_redirect": False}, 403)
 
-
-
     connection = get_connection()
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-    cursor.execute(f"""
+    cursor.execute(
+        f"""
     SELECT id from globalusers
     WHERE role = 'TEACHER'
      AND password = %s
     AND login = %s
-    """, (password, login))
+    """,
+        (password, login),
+    )
 
     resp = make_response({"success": False, "use_redirect": False}, 403)
 
@@ -57,24 +58,30 @@ def teacher_auth_post():
 
     return resp
 
-@app.route("/api/teacher/changecred", methods=['POST'])
+
+@app.route("/api/teacher/changecred", methods=["POST"])
 @teacher_required
 def teacher_change_credential_post():
-    new_login, new_password, current_password = request.json['login'], request.json['password'], request.json['current_password']
+    new_login, new_password, current_password = (
+        request.json["login"],
+        request.json["password"],
+        request.json["current_password"],
+    )
 
     connection = get_connection()
     cursor = connection.cursor(cursor_factory=RealDictCursor)
 
-    cursor.execute(f"""
+    cursor.execute(
+        f"""
     SELECT id from globalusers
     WHERE role = 'TEACHER'
      AND password = %s
     AND login = %s
-    """, (current_password, new_login))
+    """,
+        (current_password, new_login),
+    )
 
     resp = make_response({"success": False, "use_redirect": False}, 422)
-
-
 
     user_db = cursor.fetchone()
 
@@ -84,7 +91,7 @@ def teacher_change_credential_post():
     elif len(user_db) > 0:
         cursor.execute(
             "UPDATE globalusers SET login = %s, password = %s WHERE id = %s;",
-            (new_login, new_password, user_db["id"])
+            (new_login, new_password, user_db["id"]),
         )
         resp = make_response({"success": True})
         client_hash = salt_crypt(new_login, new_password)
@@ -93,4 +100,3 @@ def teacher_change_credential_post():
         connection.commit()
 
     return resp
-

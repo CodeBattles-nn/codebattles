@@ -10,7 +10,7 @@ import web
 
 
 def init_env():
-    dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
+    dotenv_path = os.path.join(os.path.dirname(__file__), "../.env")
     if os.path.exists(dotenv_path):
         load_dotenv(dotenv_path)
 
@@ -24,5 +24,5 @@ def webapp():
     return app
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     webapp().run(host="0.0.0.0", port=2500, debug=True)

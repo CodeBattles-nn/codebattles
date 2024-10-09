@@ -22,24 +22,23 @@ def get_users_get_route(champ_id):
     return users
 
 
-@app.route("/api/teacher/champs/<int:champ_id>/add_users", methods=['POST'])
+@app.route("/api/teacher/champs/<int:champ_id>/add_users", methods=["POST"])
 @teacher_required
 @redis_conn
 def create_users_in_champ_post_teachers_api(champ_id, r):
-    users = (request.json['users']
-             .replace("\r", "")
-             .split("\n"))
+    users = request.json["users"].replace("\r", "").split("\n")
 
     connection = get_connection()
     cursor = connection.cursor()
 
     for name in users:
-        login = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
-        password = ''.join(map(str, [random.randint(0, 9) for _ in range(5)]))
+        login = "".join(map(str, [random.randint(0, 9) for _ in range(5)]))
+        password = "".join(map(str, [random.randint(0, 9) for _ in range(5)]))
 
         cursor.execute(
             f"INSERT INTO champUsers_{champ_id} (login, password, name) VALUES (%s, %s, %s)",
-            (login, password, name))
+            (login, password, name),
+        )
 
     connection.commit()
 

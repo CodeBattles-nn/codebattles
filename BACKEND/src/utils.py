@@ -6,7 +6,7 @@ import env
 def salt_crypt(*args):
     args = list(map(str, args))
     payload = f"{env.HASH_SALT}+++{str(args)}"
-    return sha256(payload.encode('utf-8')).hexdigest()
+    return sha256(payload.encode("utf-8")).hexdigest()
 
 
 def fix_new_line(data):
@@ -17,7 +17,7 @@ def fix_new_line(data):
             out.append(fix_new_line(i))
         return out
     elif isinstance(data, str):
-        return data.replace("\\n", '\n')
+        return data.replace("\\n", "\n")
     else:
         return data
 

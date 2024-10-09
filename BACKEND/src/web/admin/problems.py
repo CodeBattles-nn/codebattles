@@ -22,7 +22,7 @@ def admin_list_problems():
     return render_template("admin/problems_list.html", problems=problems)
 
 
-@app.route("/admin/problems/add", methods=['POST'])
+@app.route("/admin/problems/add", methods=["POST"])
 @admin_required
 def admin_list_problems_add():
     connection = get_connection()
@@ -34,11 +34,11 @@ def admin_list_problems_add():
 
     problems = list(map(lambda problem: [*problem], problems))
 
-    build = request.form['build']
+    build = request.form["build"]
     try:
         build_json = json.loads(build)
-        build_json['tests'] = json.dumps(build_json['tests'])
-        build_json['examples'] = json.dumps(build_json['examples'])
+        build_json["tests"] = json.dumps(build_json["tests"])
+        build_json["examples"] = json.dumps(build_json["examples"])
     except Exception as e:
         print("Maybe Json parse exception \n" + str(e))
         return "Not json (404 ERR)", 400
@@ -48,12 +48,14 @@ def admin_list_problems_add():
 
     cursor.execute(
         """INSERT INTO problems (name, description, "in", out, examples, tests) VALUES (%s, %s, %s, %s, %s, %s) """,
-        (build_json['name'],
-         build_json['description'],
-         build_json['in'],
-         build_json['out'],
-         build_json['examples'],
-         build_json['tests'],)
+        (
+            build_json["name"],
+            build_json["description"],
+            build_json["in"],
+            build_json["out"],
+            build_json["examples"],
+            build_json["tests"],
+        ),
     )
 
     connection.commit()

@@ -8,9 +8,9 @@ def admin_auth():
     return render_template("admin/auth.html")
 
 
-@app.route("/admin/auth", methods=['POST'])
+@app.route("/admin/auth", methods=["POST"])
 def admin_auth_post():
-    login, password = request.form['login'], request.form['password']
+    login, password = request.form["login"], request.form["password"]
 
     resp = make_response(redirect("/admin"))
 
