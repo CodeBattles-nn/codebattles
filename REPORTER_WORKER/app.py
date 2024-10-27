@@ -1,14 +1,24 @@
-import pathlib
+import os
 from datetime import datetime
 
 import jwt
+from dotenv import load_dotenv
 from flask import Flask, send_file, request
 from werkzeug.utils import secure_filename
+
+load_dotenv()
+
+# os.getenv(key, default =" None)
+
+JWT_SECRET = os.getenv("JWT_SECRET", default="jwtsecret")
+API_SECRET = os.getenv("API_SECRET", default="internalapiprotection")
+PUBLIC_ENDPOINTS_PATH = os.getenv("PUBLIC_ENDPOINTS_PATH", default="storage")
+INTERNAL_ENDPOINTS_PATH = os.getenv("INTERNAL_ENDPOINTS_PATH", default="internal")
 
 app = Flask(__name__)
 
 
-@app.route("/storage")
+@app.route(f"/{PUBLIC_ENDPOINTS_PATH}")
 def sendfile():
     token = request.values["token"]
 
@@ -29,7 +39,7 @@ def sendfile():
     return send_file(f"localstorage/{secure_path}", as_attachment=True)
 
 
-@app.route("/storage/list")
+@app.route(f"/{PUBLIC_ENDPOINTS_PATH}/list")
 def listoffiles():
     token = request.values["reportid"]
 

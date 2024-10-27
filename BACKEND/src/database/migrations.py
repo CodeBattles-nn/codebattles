@@ -8,4 +8,16 @@ ALTER TABLE globalusers
 ADD COLUMN IF NOT EXISTS totp TEXT;
 """
 
-sql_migrations = [_0_ADD_TYPE_OF_PROBLEM, _1_ADD_TOTP_CODE]
+_2_CREATE_REPORTS_CHAMPS_TABLE = """
+CREATE TABLE IF NOT EXISTS reports_champs (
+        report_id SERIAL PRIMARY KEY,
+        champ_id INTEGER,
+        status INTEGER
+        )
+"""
+
+sql_migrations = [
+    _0_ADD_TYPE_OF_PROBLEM,
+    _1_ADD_TOTP_CODE,
+    _2_CREATE_REPORTS_CHAMPS_TABLE,
+]
