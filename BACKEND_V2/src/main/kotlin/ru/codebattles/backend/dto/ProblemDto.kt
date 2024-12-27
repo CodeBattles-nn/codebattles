@@ -1,14 +1,12 @@
-package ru.codebattles.backend.entity
+package ru.codebattles.backend.dto
 
-import jakarta.persistence.Entity
 
-@Entity
-data class Problem(
+data class ProblemDto(
+    val id: Long,
     val name: String,
     val description: String,
     val inData: String,
     val outData: String,
-    val tests: String,
     val examples: String,
     val public: Boolean? = false
-) : BaseEntity()
+)

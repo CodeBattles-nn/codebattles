@@ -17,7 +17,17 @@ class SecurityConfig {
             .csrf { it.disable() } // Отключить CSRF при необходимости
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/test/**").permitAll() // Разрешить доступ без авторизации
+                    .requestMatchers("/test/**").permitAll()
+//                    .requestMatchers(
+//                        "/api/auth/login",
+//                        "/api/auth/register",
+//                        "/api/**",
+//                        "/swagger-ui/**",
+//                        "/v3/api-docs/**",
+//                        "/swagger-ui.html",
+//                        "/favicon.ico",
+//                        "/webjars/**"
+//                    ).permitAll()// Разрешить доступ без авторизации
                     .anyRequest().authenticated() // Все остальные запросы требуют авторизации
             }
             .formLogin { it } // Включить стандартный логин через форму

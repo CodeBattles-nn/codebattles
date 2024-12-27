@@ -2,9 +2,7 @@ package ru.codebattles.backend.dto
 
 import java.time.LocalDateTime
 
-data class CompetitionDto(
-    val id: Long,
-    val checkers: Set<CheckerDto>? = emptySet(),
+data class CompetitionCreateDto(
     val name: String,
     val description: String,
     val startedAt: LocalDateTime? = null,
