@@ -5,9 +5,10 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 import ru.codebattles.backend.dto.CompetitionCreateDto
 import ru.codebattles.backend.dto.CompetitionDto
-import ru.codebattles.backend.dto.ProblemDto
+import ru.codebattles.backend.dto.CompetitionsProblemsDto
 import ru.codebattles.backend.dto.mapper.CompetitionsCreateMapper
 import ru.codebattles.backend.dto.mapper.CompetitionsMapper
+import ru.codebattles.backend.dto.mapper.CompetitionsProblemsMapper
 import ru.codebattles.backend.dto.mapper.ProblemsMapper
 import ru.codebattles.backend.entity.CompetitionsProblems
 import ru.codebattles.backend.entity.User
@@ -18,6 +19,7 @@ import ru.codebattles.backend.repository.CompetitionRepository
 class CompetitionService(
     private val competitionRepository: CompetitionRepository,
     private val competitionProblemsRepository: CompetitionProblemsRepository,
+    private val competitionsProblemsMapper: CompetitionsProblemsMapper,
     private val competitionsMapper: CompetitionsMapper,
     private val problemsMapper: ProblemsMapper,
     private val competitionsCreateMapper: CompetitionsCreateMapper
@@ -32,11 +34,14 @@ class CompetitionService(
         throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
 
-    fun getProblemsById(id: Long): List<ProblemDto> {
-        val extractProblemFromDataclass: (trans: CompetitionsProblems) -> ProblemDto =
-            { obj ->  problemsMapper.toDto(obj.problem)}
+    fun getProblemsById(id: Long): Iterable<CompetitionsProblems> {
+        return competitionProblemsRepository.getAllByCompetitionId(id)
+    }
 
-        return competitionProblemsRepository.getAllByCompetitionId(id).map(extractProblemFromDataclass)
+    fun getProblemById(id: Long, problemId: Long): CompetitionsProblemsDto {
+        return competitionsProblemsMapper.toDto(
+            competitionProblemsRepository.getFirstByCompetitionIdAndProblemId(id, problemId)
+        )
     }
 
     fun getAllByUser(user: User): List<CompetitionDto> {

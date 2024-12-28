@@ -20,5 +20,11 @@ data class Answer(
     @Enumerated(EnumType.STRING)
     val status: AnswerStatus = AnswerStatus.IN_PROGRESS,
     val score: Int = 0,
+
+    val code: String,
+
+    @ManyToOne
+    val checker: Checker
+
 )
 

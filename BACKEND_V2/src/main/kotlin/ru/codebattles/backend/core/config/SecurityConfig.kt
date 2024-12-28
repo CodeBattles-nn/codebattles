@@ -9,7 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import ru.codebattles.backend.core.filter.JwtAuthenticationFilter
+import java.util.*
 
 
 @Configuration
@@ -51,8 +55,20 @@ class SecurityConfig(
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf().disable()
+            .cors()
+            .and()
             .authorizeRequests()
             .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers(
+                "/api/auth/login",
+                "/api/auth/register",
+                "/api/**",
+                "/swagger-ui/**",
+                "/v3/api-docs/**",
+                "/swagger-ui.html",
+                "/favicon.ico",
+                "/webjars/**"
+            ).permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
@@ -63,4 +79,16 @@ class SecurityConfig(
     fun encoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
+
+    @Bean
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration()
+        configuration.allowedOrigins = listOf("http://localhost:5173")
+        configuration.allowedMethods = listOf("*")
+        configuration.allowedHeaders = listOf("*")
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
+    }
+
 }
