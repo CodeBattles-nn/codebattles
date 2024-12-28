@@ -9,7 +9,6 @@ import ru.codebattles.backend.dto.CompetitionsProblemsDto
 import ru.codebattles.backend.dto.mapper.CompetitionsCreateMapper
 import ru.codebattles.backend.dto.mapper.CompetitionsMapper
 import ru.codebattles.backend.dto.mapper.CompetitionsProblemsMapper
-import ru.codebattles.backend.dto.mapper.ProblemsMapper
 import ru.codebattles.backend.entity.CompetitionsProblems
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.repository.CompetitionProblemsRepository
@@ -21,7 +20,6 @@ class CompetitionService(
     private val competitionProblemsRepository: CompetitionProblemsRepository,
     private val competitionsProblemsMapper: CompetitionsProblemsMapper,
     private val competitionsMapper: CompetitionsMapper,
-    private val problemsMapper: ProblemsMapper,
     private val competitionsCreateMapper: CompetitionsCreateMapper
 ) {
     fun getById(id: Long): CompetitionDto {

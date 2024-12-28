@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.dto.CompetitionCreateDto
 import ru.codebattles.backend.dto.CompetitionDto
 import ru.codebattles.backend.dto.CompetitionsProblemsDto
-import ru.codebattles.backend.dto.ProblemDto
 import ru.codebattles.backend.entity.CompetitionsProblems
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.services.AnswerService
