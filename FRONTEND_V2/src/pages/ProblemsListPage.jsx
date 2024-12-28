@@ -1,13 +1,15 @@
 import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 
 const ProblemsListPage = () => {
 
-    const [data, update] = useCachedGetAPI("/api/problems");
+    let { id } = useParams();
+
+    const [data, update] = useCachedGetAPI(`/api/competitions/${id}/problems`, () => {}, []);
 
     useEffect(() => {
         update();
@@ -30,19 +32,18 @@ const ProblemsListPage = () => {
                         <tbody>
 
                         {
-                            data.problems &&
-                            Object.keys(data.problems).map(letter => {
-                                const is_quiz = data?.is_quizes?.[letter]
-                                const link = is_quiz ? (`/problems/${letter}/quizz`) : (`/problems/${letter}`)
-                                const link_icon_css_class = is_quiz ? (`bi-card-checklist`) : (`bi-braces`)
+                            data.map(data => {
 
-                                return (<tr key={"problems-page-key" + letter} className={data?.colors?.[letter]}>
+                                const link_icon_css_class = (`bi-braces`)
+
+                                return (
+                                    <tr key={data.id} className="">
                                     <th scope="row" className="">
-                                        {letter}
+                                        A {data.id}
                                     </th>
-                                    <td><Link to={link}>
-                                        <i className={"bi me-2 " + link_icon_css_class}></i>
-                                        {data.problems[letter]}
+                                    <td><Link to={`${data.id}`}>
+                                        <i className={"bi me-2 "+ link_icon_css_class}></i>
+                                        {data.problem?.name}
                                     </Link></td>
 
                                 </tr>)

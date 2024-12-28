@@ -13,6 +13,7 @@ import SeeSendPage from "./pages/SeeSendPage.jsx";
 import StatusesPage from "./pages/StatusesPage.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
+import ChampsPage from "./pages/ChampsPage.jsx";
 
 function App() {
 
@@ -25,13 +26,14 @@ function App() {
                     <Routes>
                         <Route path="/problems" element={<ProblemsListPage/>}/>
                         <Route path="/" element={<LoginPage/>}/>
-                        <Route path="/problems" element={<ProblemsListPage/>}/>
-                        <Route path="/problems/:letter" element={<SeeProblemPage/>}/>
+                        <Route path="/champs/:id/problems" element={<ProblemsListPage/>}/>
+                        <Route path="/champs/:compId/problems/:id" element={<SeeProblemPage/>}/>
                         <Route path="/problems/:letter/quizz" element={<SeeQuizzProblemPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
                         <Route path="/sends" element={<SendsListPage/>}/>
                         <Route path="/sends/:id" element={<SeeSendPage/>}/>
                         <Route path="/statuses" element={<StatusesPage/>}/>
+                        <Route path="/champs" element={<ChampsPage/>}/>
                     </Routes>
 
 

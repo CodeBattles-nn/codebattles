@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
 import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
@@ -13,12 +13,18 @@ const LoginPage = () => {
     const [hasErrorInData, setHasErrorInData] = useState(false);
 
     const onSubmit = (data) => {
-        console.log(data)
-        axios.post('/api/login', data)
+        // console.log(data)
+        axios.post('/api/auth/login', data)
+            .then((req) => localStorage.setItem(constants.LOCALSTORAGE_JWT, req.data.token))
+            .then((dta) => console.log(dta))
             .then(() => localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "true"))
-            .then(() => navigate("/problems"))
+            .then(() => navigate("/champs"))
             .catch(() => setHasErrorInData(true))
     }
+
+    useEffect(() => {
+        if (localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true") navigate("/champs")
+    }, []);
 
     return (
         <div style={{minHeight: "80dvh"}}>
@@ -28,14 +34,14 @@ const LoginPage = () => {
                     {
                         hasErrorInData && (<p className="text-danger">Неправильные данные</p>)
                     }
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">ID соревнования</label>
-                        <input className="form-control" id="exampleInputEmail1" {...register("id")}
-                               aria-describedby="emailHelp"/>
-                    </div>
+                    {/*<div className="mb-3">*/}
+                    {/*    <label htmlFor="exampleInputEmail1" className="form-label">ID соревнования</label>*/}
+                    {/*    <input className="form-control" id="exampleInputEmail1" {...register("id")}*/}
+                    {/*           aria-describedby="emailHelp"/>*/}
+                    {/*</div>*/}
                     <div className="mb-3">
                         <label htmlFor="exampleInputEmail1" className="form-label">Логин</label>
-                        <input className="form-control" id="exampleInputEmail1" {...register("login")}
+                        <input className="form-control" id="exampleInputEmail1" {...register("username")}
                                aria-describedby="emailHelp"/>
                     </div>
                     <div className="mb-3">

@@ -8,18 +8,21 @@ import axios from "axios";
 import LazyCodeEditor from "../components/lazy/LazyCodeEditor.jsx";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import Markdown from "../components/wraps/Markdown.jsx";
+import constants from "../utils/consts.js";
 
 const SeeProblemPage = () => {
 
-    const {letter} = useParams();
+    const {compId, id} = useParams();
     const navigate = useNavigate();
-    const [data, update] = useCachedGetAPI(`/api/problem/${letter}`);
+    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/problems/${id}`);
+    const [champData, champUpdate] = useCachedGetAPI(`/api/competitions/${compId}`);
     const [editorText, setEditorText] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {
         update();
+        champUpdate();
     }, []);
 
 
@@ -32,14 +35,21 @@ const SeeProblemPage = () => {
         setEditorText(formData.src)
         // alert(JSON.stringify(data))
 
-        const defaultLang = Object.keys(data.langs)[0]
-        if (formData.cars === ""){
-            formData.cars = data.langs[defaultLang]
+        const defaultLang = champData?.checkers[0]?.id
+        if (formData.cars === "") {
+            formData.cars = defaultLang
         }
 
         console.log(defaultLang)
 
-        axios.post('/api/send', formData)
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
+            }
+        }
+
+        axios.post(`/api/competitions/${compId}/send`, formData, config)
             .then(() => {
                 setTimeout(() => {
                     navigate("/sends")
@@ -57,8 +67,8 @@ const SeeProblemPage = () => {
             <div className="row">
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
-                        <h2>Задача {letter}</h2>
-                        <h3>{data.name}</h3>
+                        <h2>Задача {'A'}</h2>
+                        <h3>{data.problem?.name}</h3>
                     </Card>
                 </div>
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
@@ -79,13 +89,13 @@ const SeeProblemPage = () => {
                     <Card>
                         <div>
                             <h4>Задача</h4>
-                            <Markdown text={data.description}/>
+                            <Markdown text={data.problem?.description}/>
 
                             <h4 className="mt-5">Входные данные</h4>
-                            <Markdown text={data.in_data}/>
+                            <Markdown text={data.problem?.inData}/>
 
                             <h4 className="mt-5">Выходные данные</h4>
-                            <Markdown text={data.out_data}/>
+                            <Markdown text={data.problem?.outData}/>
                         </div>
                     </Card>
                 </div>
@@ -118,23 +128,27 @@ const SeeProblemPage = () => {
                         <h4 className="mb-3">Отправить решение</h4>
                         <p>Вставьте код здесь</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <input hidden value={letter} {...register("problem")}/>
+                            <input hidden value={"A"} {...register("problem")}/>
                             <select className="form-select" {...register("cars")}>
                                 {
 
-                                    Object.keys(data.langs || {}).map(lang => {
-                                        return <option key={"lang" + lang} value={data.langs[lang]}>
-                                            {lang}
+                                    champData?.checkers?.map(lang => {
+
+
+                                        return <option key={"lang" + lang} value={lang.id}>
+                                            {lang.displayName}
+                                            {/*{JSON.stringify(lang)}*/}
                                         </option>
                                     })
                                 }
                             </select>
                             <LazyCodeEditor
                                 className="my-5 rounded-2"
-                                value = {editorText || "print('Hello, world')"}
+                                value={editorText || "print('Hello, world')"}
                             />
 
                             <button className="btn btn-success" disabled={isLoading}>
+                                {/*<button className="btn btn-success" disabled>*/}
                                 Отправить
                                 {
                                     isLoading ?
