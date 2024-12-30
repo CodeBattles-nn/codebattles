@@ -36,8 +36,8 @@ const SeeProblemPage = () => {
         // alert(JSON.stringify(data))
 
         const defaultLang = champData?.checkers[0]?.id
-        if (formData.cars === "") {
-            formData.cars = defaultLang
+        if (formData.checker === "") {
+            formData.checker = defaultLang
         }
 
         console.log(defaultLang)
@@ -52,7 +52,7 @@ const SeeProblemPage = () => {
         axios.post(`/api/competitions/${compId}/send`, formData, config)
             .then(() => {
                 setTimeout(() => {
-                    navigate("/sends")
+                    navigate(`/champs/${compId}/sends`)
                     setIsLoading(false)
                 }, 1000)
             })
@@ -128,8 +128,9 @@ const SeeProblemPage = () => {
                         <h4 className="mb-3">Отправить решение</h4>
                         <p>Вставьте код здесь</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
-                            <input hidden value={"A"} {...register("problem")}/>
-                            <select className="form-select" {...register("cars")}>
+                            <input hidden value={id} {...register("id")}/>
+                            <input hidden value={compId} {...register("compId")}/>
+                            <select className="form-select" {...register("checker")}>
                                 {
 
                                     champData?.checkers?.map(lang => {

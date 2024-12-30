@@ -9,7 +9,7 @@ import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 const SeeSendPage = () => {
 
     const {id} = useParams();
-    const [data, update] = useCachedGetAPI(`/api/send/${id}`);
+    const [data, update] = useCachedGetAPI(`/api/answers/${id}`);
 
     useEffect(() => {
         update()
@@ -28,10 +28,10 @@ const SeeSendPage = () => {
             <UserLoginRequired/>
             <Card>
                 <h3>Анализ посылки</h3>
-                <p><b>Язык:</b> {data.lang}</p>
+                <p><b>Язык:</b> {data?.checker?.displayName}</p>
                 <b>Исходный код:</b>
-                <LazySyntaxHighlight lang={data.lang_id}>
-                    {data.program}
+                <LazySyntaxHighlight lang={data?.checker?.languageHighlightName}>
+                    {data.code}
                 </LazySyntaxHighlight>
                 <div className="my-4"></div>
                 <ResponsiveTable>
@@ -56,7 +56,12 @@ const SeeSendPage = () => {
                             )
                         })
                     }
-
+                    <tr>
+                        <th scope="row">-1</th>
+                        <td>-</td>
+                        <td>Подробные тесты будут доступны позже</td>
+                        <td><p className="text-lines">-</p></td>
+                    </tr>
                     </tbody>
                 </ResponsiveTable>
             </Card>

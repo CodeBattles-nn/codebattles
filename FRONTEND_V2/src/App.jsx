@@ -30,7 +30,7 @@ function App() {
                         <Route path="/champs/:compId/problems/:id" element={<SeeProblemPage/>}/>
                         <Route path="/problems/:letter/quizz" element={<SeeQuizzProblemPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
-                        <Route path="/sends" element={<SendsListPage/>}/>
+                        <Route path="/champs/:compId/sends" element={<SendsListPage/>}/>
                         <Route path="/sends/:id" element={<SeeSendPage/>}/>
                         <Route path="/statuses" element={<StatusesPage/>}/>
                         <Route path="/champs" element={<ChampsPage/>}/>

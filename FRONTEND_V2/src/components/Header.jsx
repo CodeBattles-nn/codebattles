@@ -28,22 +28,22 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        {
-                            isAuthed &&
+                        {/*{*/}
+                        {/*    isAuthed &&*/}
 
-                            <>
-                                <li className="nav-item active">
-                                    <Link className="nav-link" to="/problems">Задачи</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/stats">Рейтинг</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/sends">Посылки</Link>
-                                </li>
-                            </>
+                        {/*    <>*/}
+                        {/*        <li className="nav-item active">*/}
+                        {/*            <Link className="nav-link" to="/problems">Задачи</Link>*/}
+                        {/*        </li>*/}
+                        {/*        <li className="nav-item">*/}
+                        {/*            <Link className="nav-link" to="/stats">Рейтинг</Link>*/}
+                        {/*        </li>*/}
+                        {/*        <li className="nav-item">*/}
+                        {/*            <Link className="nav-link" to="/sends">Посылки</Link>*/}
+                        {/*        </li>*/}
+                        {/*    </>*/}
 
-                        }
+                        {/*}*/}
                         <a className="nav-link mx-5" target="_blank" href="/teacher">Учителю</a>
                     </ul>
                     <Link className="nav-link mx-2" to="/statuses">Помощь</Link>

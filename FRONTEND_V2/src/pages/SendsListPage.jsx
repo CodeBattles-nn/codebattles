@@ -1,13 +1,15 @@
 import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 
 const SendsListPage = () => {
 
-    const [data, update] = useCachedGetAPI("/api/sends");
+    const {compId} = useParams()
+
+    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/sends`, () => {}, []);
 
     useEffect(() => {
         update();
@@ -33,14 +35,14 @@ const SendsListPage = () => {
                         </thead>
                         <tbody>
 
-                        {data?.sends?.map(send => {
+                        {data?.map(send => {
                             return (
                                 <tr key={"send-id-" + send.id}>
                                     <th scope="row" className="">{send.id}</th>
-                                    <td>{send.send_time}</td>
+                                    <td>{send.createdAt}</td>
                                     <td><Link to={`/problems/${send.letter}`}>{send.letter}. {send.name}</Link></td>
                                     <td className="text-center text-success">{send.score}</td>
-                                    <td>{send.state}</td>
+                                    <td>{send.status}</td>
                                     <td><Link to={`/sends/${send.id}`}>Вердикт</Link></td>
 
                                 </tr>)
