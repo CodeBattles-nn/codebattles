@@ -3,13 +3,17 @@ package ru.codebattles.backend.web.controllers
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
+import ru.codebattles.backend.dto.AnswerDto
 import ru.codebattles.backend.dto.CompetitionCreateDto
 import ru.codebattles.backend.dto.CompetitionDto
 import ru.codebattles.backend.dto.CompetitionsProblemsDto
+import ru.codebattles.backend.entity.Answer
+import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.CompetitionsProblems
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.services.AnswerService
 import ru.codebattles.backend.services.CompetitionService
+import ru.codebattles.backend.web.entity.SendAnswerRequest
 
 
 @RestController
@@ -17,6 +21,7 @@ import ru.codebattles.backend.services.CompetitionService
 class CompetitionsController {
     @Autowired
     private lateinit var competitionService: CompetitionService
+
     @Autowired
     private lateinit var answerService: AnswerService
 
@@ -31,10 +36,14 @@ class CompetitionsController {
     }
 
     @PostMapping("{id}/send")
-    fun send(@PathVariable id: Long, @AuthenticationPrincipal user: User): String {
-        answerService.createAnswer(user)
-
+    fun send(@PathVariable id: Long, @AuthenticationPrincipal user: User, @RequestBody data: SendAnswerRequest): String {
+        answerService.createAnswer(user, data)
         return "aboba"
+    }
+
+    @GetMapping("{id}/sends")
+    fun getAnswers(@PathVariable id: Long, @AuthenticationPrincipal user: User): List<AnswerDto> {
+        return answerService.getAllAnswersByCompetitionsAndUser(id, user);
     }
 
     @GetMapping("{id}/problems")
