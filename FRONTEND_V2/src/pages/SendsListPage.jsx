@@ -6,12 +6,14 @@ import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
 import BreadcrumbsRoot from "../components/BreadcrumpsRoot.jsx";
 import BreadcrumbsElement from "../components/BreadcrumbsElement.jsx";
+import {formatDate} from "../utils/format.js";
 
 const SendsListPage = () => {
 
     const {compId} = useParams()
 
-    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/sends`, () => {}, []);
+    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/sends`, () => {
+    }, []);
 
     useEffect(() => {
         update();
@@ -19,7 +21,7 @@ const SendsListPage = () => {
 
     return (
         <>
-            <UserLoginRequired />
+            <UserLoginRequired/>
 
             <BreadcrumbsRoot>
                 <BreadcrumbsElement name="Соревнования" url="/champs"/>
@@ -47,11 +49,17 @@ const SendsListPage = () => {
                             return (
                                 <tr key={"send-id-" + send.id}>
                                     <th scope="row" className="">{send.id}</th>
-                                    <td>{send.createdAt}</td>
-                                    <td><Link to={`/problems/${send.letter}`}>{send.letter}. {send.name}</Link></td>
+                                    <td>{formatDate(send.createdAt)}</td>
+                                    <td>
+                                        <Link to={`/champs/${compId}/problems/${send?.competitionsProblems?.id}`}>
+                                            {send?.competitionsProblems?.slug}. {send?.competitionsProblems?.problem.name}
+                                        </Link>
+                                    </td>
                                     <td className="text-center text-success">{send.score}</td>
                                     <td>{send.status}</td>
-                                    <td><Link to={`champ/${compId}/sends/${send.id}`}>Вердикт</Link></td>
+                                    <td>
+                                        <Link to={`/champs/${compId}/sends/${send.id}`}>Вердикт</Link>
+                                    </td>
 
                                 </tr>)
                         })}

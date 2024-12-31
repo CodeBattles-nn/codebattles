@@ -13,6 +13,10 @@ const SeeSendPage = () => {
     const {id, compId} = useParams();
     const [data, update] = useCachedGetAPI(`/api/answers/${id}`);
 
+    const tests = JSON.parse(data?.result || "{}")
+
+    console.log(tests)
+
     useEffect(() => {
         update()
     }, []);
@@ -54,10 +58,10 @@ const SeeSendPage = () => {
                     </thead>
                     <tbody className="theme-text-dark">
                     {
-                        data?.tests?.map(test => {
+                        tests?.results?.map((test, i) => {
                             return (
                                 <tr className={colorsByResult[test.msg]} key={"see-send-test-id-" + test.id}>
-                                    <th scope="row">{test.id}</th>
+                                    <th scope="row">{i + 1}</th>
                                     <td>{test.time}</td>
                                     <td>{test.msg}</td>
                                     <td><p className="text-lines">{test.out}</p></td>
@@ -65,12 +69,12 @@ const SeeSendPage = () => {
                             )
                         })
                     }
-                    <tr>
-                        <th scope="row">-1</th>
-                        <td>-</td>
-                        <td>Подробные тесты будут доступны позже</td>
-                        <td><p className="text-lines">-</p></td>
-                    </tr>
+                    {/*<tr>*/}
+                    {/*    <th scope="row">-1</th>*/}
+                    {/*    <td>-</td>*/}
+                    {/*    <td>Подробные тесты будут доступны позже</td>*/}
+                    {/*    <td><p className="text-lines">-</p></td>*/}
+                    {/*</tr>*/}
                     </tbody>
                 </ResponsiveTable>
             </Card>
