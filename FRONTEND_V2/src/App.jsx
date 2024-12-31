@@ -26,12 +26,12 @@ function App() {
                     <Routes>
                         <Route path="/problems" element={<ProblemsListPage/>}/>
                         <Route path="/" element={<LoginPage/>}/>
-                        <Route path="/champs/:id/problems" element={<ProblemsListPage/>}/>
+                        <Route path="/champs/:compId/problems" element={<ProblemsListPage/>}/>
                         <Route path="/champs/:compId/problems/:id" element={<SeeProblemPage/>}/>
                         <Route path="/problems/:letter/quizz" element={<SeeQuizzProblemPage/>}/>
                         <Route path="/stats" element={<StatsPage/>}/>
                         <Route path="/champs/:compId/sends" element={<SendsListPage/>}/>
-                        <Route path="/sends/:id" element={<SeeSendPage/>}/>
+                        <Route path="/champs/:compId/sends/:id" element={<SeeSendPage/>}/>
                         <Route path="/statuses" element={<StatusesPage/>}/>
                         <Route path="/champs" element={<ChampsPage/>}/>
                     </Routes>

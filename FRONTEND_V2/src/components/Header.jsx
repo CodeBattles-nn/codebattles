@@ -1,6 +1,7 @@
 import "./css/Header.css"
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import constants from "../utils/consts.js";
+import {useState} from "react";
 
 const Header = () => {
 
@@ -8,10 +9,15 @@ const Header = () => {
 
     let isAuthed = localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true"
 
+    const params = useLocation()
+    const compId = params.pathname.split("/")[2]
+
     const onLogoutButtonClick = () => {
         localStorage.clear()
         navigate("/")
     }
+
+    // console.log("HEADER", params, needPath)
 
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
@@ -28,22 +34,17 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        {/*{*/}
-                        {/*    isAuthed &&*/}
+                        {
+                            compId && <>
+                                <li className="nav-item active">
+                                    <Link className="nav-link" to={`/champs/${compId}/problems`}>Задачи</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to={`/champs/${compId}/sends`}>Посылки</Link>
+                                </li>
+                            </>
+                        }
 
-                        {/*    <>*/}
-                        {/*        <li className="nav-item active">*/}
-                        {/*            <Link className="nav-link" to="/problems">Задачи</Link>*/}
-                        {/*        </li>*/}
-                        {/*        <li className="nav-item">*/}
-                        {/*            <Link className="nav-link" to="/stats">Рейтинг</Link>*/}
-                        {/*        </li>*/}
-                        {/*        <li className="nav-item">*/}
-                        {/*            <Link className="nav-link" to="/sends">Посылки</Link>*/}
-                        {/*        </li>*/}
-                        {/*    </>*/}
-
-                        {/*}*/}
                         <a className="nav-link mx-5" target="_blank" href="/teacher">Учителю</a>
                     </ul>
                     <Link className="nav-link mx-2" to="/statuses">Помощь</Link>

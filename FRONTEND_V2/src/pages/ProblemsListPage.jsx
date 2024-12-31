@@ -4,12 +4,14 @@ import {Link, useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
+import BreadcrumbsRoot from "../components/BreadcrumpsRoot.jsx";
+import BreadcrumbsElement from "../components/BreadcrumbsElement.jsx";
 
 const ProblemsListPage = () => {
 
-    let { id } = useParams();
+    let { compId } = useParams();
 
-    const [data, update] = useCachedGetAPI(`/api/competitions/${id}/problems`, () => {}, []);
+    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/problems`, () => {}, []);
 
     useEffect(() => {
         update();
@@ -18,6 +20,12 @@ const ProblemsListPage = () => {
     return (
         <>
             <UserLoginRequired/>
+
+            <BreadcrumbsRoot>
+                <BreadcrumbsElement name="Соревнования" url="/champs"/>
+                <BreadcrumbsElement name="Задачи"/>
+            </BreadcrumbsRoot>
+
             <Card>
                 <h2 className="mb-3">Задачи</h2>
                 <div className="border rounded-2 p-1">
@@ -39,7 +47,7 @@ const ProblemsListPage = () => {
                                 return (
                                     <tr key={data.id} className="">
                                     <th scope="row" className="">
-                                        A {data.id}
+                                        {data.slug}
                                     </th>
                                     <td><Link to={`${data.id}`}>
                                         <i className={"bi me-2 "+ link_icon_css_class}></i>

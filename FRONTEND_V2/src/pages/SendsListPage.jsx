@@ -4,6 +4,8 @@ import {Link, useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
+import BreadcrumbsRoot from "../components/BreadcrumpsRoot.jsx";
+import BreadcrumbsElement from "../components/BreadcrumbsElement.jsx";
 
 const SendsListPage = () => {
 
@@ -18,6 +20,12 @@ const SendsListPage = () => {
     return (
         <>
             <UserLoginRequired />
+
+            <BreadcrumbsRoot>
+                <BreadcrumbsElement name="Соревнования" url="/champs"/>
+                <BreadcrumbsElement name="Посылки"/>
+            </BreadcrumbsRoot>
+
             <Card>
                 <h2 className="mb-3">Посылки</h2>
                 <div className="border rounded-2 p-1">
@@ -43,7 +51,7 @@ const SendsListPage = () => {
                                     <td><Link to={`/problems/${send.letter}`}>{send.letter}. {send.name}</Link></td>
                                     <td className="text-center text-success">{send.score}</td>
                                     <td>{send.status}</td>
-                                    <td><Link to={`/sends/${send.id}`}>Вердикт</Link></td>
+                                    <td><Link to={`champ/${compId}/sends/${send.id}`}>Вердикт</Link></td>
 
                                 </tr>)
                         })}

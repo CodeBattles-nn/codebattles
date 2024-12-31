@@ -9,6 +9,8 @@ import LazyCodeEditor from "../components/lazy/LazyCodeEditor.jsx";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import Markdown from "../components/wraps/Markdown.jsx";
 import constants from "../utils/consts.js";
+import BreadcrumbsElement from "../components/BreadcrumbsElement.jsx";
+import BreadcrumbsRoot from "../components/BreadcrumpsRoot.jsx";
 
 const SeeProblemPage = () => {
 
@@ -64,10 +66,22 @@ const SeeProblemPage = () => {
     return (
         <>
             <UserLoginRequired/>
+
+
+            <div className="row">
+                <div className="col">
+                    <BreadcrumbsRoot>
+                        <BreadcrumbsElement name="Соревнования" url="/champs"/>
+                        <BreadcrumbsElement name="Задачи" url={`/champs/${compId}/problems`} active={true}/>
+                        <BreadcrumbsElement name={data.slug} active={true}/>
+                    </BreadcrumbsRoot>
+                </div>
+            </div>
+
             <div className="row">
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
-                        <h2>Задача {'A'}</h2>
+                        <h2>{data.slug} </h2>
                         <h3>{data.problem?.name}</h3>
                     </Card>
                 </div>

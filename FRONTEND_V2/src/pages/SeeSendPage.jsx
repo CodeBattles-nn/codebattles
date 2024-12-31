@@ -5,10 +5,12 @@ import useCachedGetAPI from "../hooks/useGetAPI.js";
 import LazySyntaxHighlight from "../components/lazy/LazySyntaxHightlight.jsx";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
+import BreadcrumbsRoot from "../components/BreadcrumpsRoot.jsx";
+import BreadcrumbsElement from "../components/BreadcrumbsElement.jsx";
 
 const SeeSendPage = () => {
 
-    const {id} = useParams();
+    const {id, compId} = useParams();
     const [data, update] = useCachedGetAPI(`/api/answers/${id}`);
 
     useEffect(() => {
@@ -26,6 +28,13 @@ const SeeSendPage = () => {
 
     return (<>
             <UserLoginRequired/>
+
+            <BreadcrumbsRoot>
+                <BreadcrumbsElement name="Соревнования" url="/champs"/>
+                <BreadcrumbsElement name="Посылки" url={`/champs/${compId}/sends`}/>
+                <BreadcrumbsElement name={data.id} active={true}/>
+            </BreadcrumbsRoot>
+
             <Card>
                 <h3>Анализ посылки</h3>
                 <p><b>Язык:</b> {data?.checker?.displayName}</p>
