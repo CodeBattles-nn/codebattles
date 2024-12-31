@@ -34,6 +34,7 @@ class AnswerService(
                 checker = checker,
                 user = user,
                 code = data.src,
+                competitionsProblems = competitionProblem
             )
         )
 

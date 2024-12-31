@@ -16,7 +16,7 @@ data class Answer(
     val user: User,
     @Enumerated(EnumType.STRING)
     var status: AnswerStatus = AnswerStatus.IN_PROGRESS,
-    var score: Int = 0,
+    var score: Int? = null,
 
     val code: String,
 
@@ -24,6 +24,9 @@ data class Answer(
     val checker: Checker,
 
     var result: String? = null,
+
+    @ManyToOne
+    val competitionsProblems: CompetitionsProblems? = null
 
     ) : BaseEntity()
 
