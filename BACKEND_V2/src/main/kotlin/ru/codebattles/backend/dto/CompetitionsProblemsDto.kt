@@ -4,4 +4,5 @@ data class CompetitionsProblemsDto(
     val id: Long,
     val priority: Int,
     val problem: ProblemDto,
-)
+    val slug: String,
+    )

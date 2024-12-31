@@ -23,7 +23,6 @@ data class Answer(
     @ManyToOne
     val checker: Checker,
 
-    @Column(columnDefinition = "json")
     var result: String? = null,
 
     ) : BaseEntity()

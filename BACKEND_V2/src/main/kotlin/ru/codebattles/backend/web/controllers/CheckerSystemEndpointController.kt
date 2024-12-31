@@ -21,8 +21,16 @@ class CheckerSystemEndpointController(
 
         val answer = answerRepository.getById(data.meta)
 
+        val countOfTests = data.results.size
+        val countOfSuccessTests = data.results.count { it.success }
+
+        val score: Int = countOfSuccessTests / countOfTests * 100
+
         answer.result = objectMapper.writeValueAsString(data)
         answer.status = AnswerStatus.COMPLETED;
+        answer.score = score
+
+
 
         answerRepository.save(answer)
     }

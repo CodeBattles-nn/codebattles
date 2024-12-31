@@ -1,5 +1,7 @@
 package ru.codebattles.backend.services
 
+import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.stereotype.Service
 import ru.codebattles.backend.dto.AnswerDto
 import ru.codebattles.backend.dto.mapper.AnswerMapper
@@ -21,6 +23,7 @@ class AnswerService(
     val competitionProblemsRepository: CompetitionProblemsRepository,
     val checkerApiService: CheckerApiService,
     val answerMapper: AnswerMapper,
+    val objectMapper: ObjectMapper
 ) {
     fun createAnswer(user: User, data: SendAnswerRequest) {
         val checker = checkerRepository.findById(data.checker).orElseThrow()
@@ -37,10 +40,8 @@ class AnswerService(
         val request = CheckerTaskRequest(
             source = data.src,
             compiler = "python",
-            listOf(
-                Test(`in` = "1", out = "1"),
-                Test(`in` = "2", out = "2"),
-                Test(`in` = "3", out = "3"),
+            tests = objectMapper.readValue(competitionProblem.problem.tests,
+                object : TypeReference<List<Test>>() {}
             ),
             savedAnswer.id.toString()
         )
