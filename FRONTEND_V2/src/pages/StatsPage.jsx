@@ -1,17 +1,23 @@
 import {useEffect} from 'react';
 import Card from "../components/bootstrap/Card.jsx";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {getCookie} from "../utils/cookies.js";
 import UserLoginRequired from "../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
+import log from "eslint-plugin-react/lib/util/log.js";
+import {formatDate} from "../utils/format.js";
 
 const StatsPage = () => {
 
-    const [data, update] = useCachedGetAPI("/api/stats");
+    const {compId} = useParams()
+
+    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/leaderboard`);
+    const [problemsData, problrmsUpdate] = useCachedGetAPI(`/api/competitions/${compId}/problems`, null, []);
 
     useEffect(() => {
         update();
+        problrmsUpdate()
     }, []);
 
     const mine_user_id = getCookie("user_id")
@@ -19,7 +25,7 @@ const StatsPage = () => {
 
     return (
         <>
-            <UserLoginRequired />
+            <UserLoginRequired/>
             <Card>
                 <h2 className="mb-3">Рейтинг</h2>
                 <div className="border rounded-2 p-1">
@@ -29,41 +35,49 @@ const StatsPage = () => {
                         <tr>
                             <th scope="col">№</th>
                             <th scope="col">Пользователь</th>
-                            <th scope="col">Всего</th>
                             {
-                                data?.cols?.split('').map(letter => {
-                                    return <th key={"stats-letter-header" + letter} scope="col"><Link to={`/problems/${letter}`}>{letter}</Link>
+                                problemsData?.map(compProb => {
+                                    return <th key={"stats-letter-header" + compProb.id} scope="col"><Link
+                                        to={`/problems/${compProb.id}`}>{compProb.slug}</Link>
                                     </th>
                                 })
                             }
+                            <th scope="col">Всего</th>
                             <th scope="col">Посл. Посылка</th>
                         </tr>
                         </thead>
                         <tbody>
                         {
-                            data?.users?.map(user => {
+                            data?.score?.map((scoreRow, i) => {
+                                const groupedAnswers = Object.groupBy(
+                                    data.data[scoreRow.userId],
+                                    ({competitionproblemId}) => competitionproblemId
+                                );
+
+                                // const groupedAnswers = {}
+                                // const user = 0
+
+                                // console.log(user)
+                                console.log(data.score)
+
                                 return (
-                                    <tr key={"stats-usr" + user.position } className={user.user_id == mine_user_id ? ("table-secondary") : ('')}>
-                                        <th scope="row">{user.position}</th>
-                                        <td>{user.name}</td>
-                                        <td>{user.score}</td>
+                                    <tr key={"stats-usr" + i}
+                                        className={"-1" === mine_user_id ? ("table-secondary") : ('')}>
+                                        <th scope="row">{i + 1}</th>
+                                        <td>{scoreRow.userId}</td>
+                                        {/*<td>-1</td>*/}
                                         {
-                                            user.problems_score.map((problem_score,index) => {
-                                                return (
-                                                    <td key={"stats-usr-hex" + user.position + "--"  + index } className="p-1">
-                                                        <div className="text-center">
-                                                            <p className="text-success p-0 m-0">
-                                                                {problem_score}
-                                                            </p>
-                                                            <p className="p-0 m-0" style={{"fontSize": "small"}}>
-                                                                {/*-1*/}
-                                                            </p>
-                                                        </div>
-                                                    </td>
-                                                )
+                                            problemsData?.map(compProb => {
+
+                                                console.log(compProb)
+
+                                                return <td key={"stats-send" + compProb.id} scope="col">
+                                                    {groupedAnswers[compProb.id]?.[0]?.maxScore}
+                                                </td>
                                             })
                                         }
-                                        <td>{user.last_send}</td>
+                                        <td>{scoreRow.score}</td>
+                                        <td>{formatDate(scoreRow.time)}</td>
                                     </tr>
                                 )
                             })

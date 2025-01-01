@@ -1,7 +1,6 @@
 import "./css/Header.css"
-import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import constants from "../utils/consts.js";
-import {useState} from "react";
 
 const Header = () => {
 
@@ -38,6 +37,9 @@ const Header = () => {
                             compId && <>
                                 <li className="nav-item active">
                                     <Link className="nav-link" to={`/champs/${compId}/problems`}>Задачи</Link>
+                                </li>
+                                <li className="nav-item active">
+                                    <Link className="nav-link" to={`/champs/${compId}/stats`}>Рейтинг</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to={`/champs/${compId}/sends`}>Посылки</Link>
