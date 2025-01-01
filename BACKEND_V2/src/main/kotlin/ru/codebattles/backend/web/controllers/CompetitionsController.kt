@@ -7,10 +7,7 @@ import ru.codebattles.backend.dto.AnswerDto
 import ru.codebattles.backend.dto.CompetitionCreateDto
 import ru.codebattles.backend.dto.CompetitionDto
 import ru.codebattles.backend.dto.CompetitionsProblemsDto
-import ru.codebattles.backend.entity.Answer
-import ru.codebattles.backend.entity.Competition
-import ru.codebattles.backend.entity.CompetitionsProblems
-import ru.codebattles.backend.entity.User
+import ru.codebattles.backend.entity.*
 import ru.codebattles.backend.services.AnswerService
 import ru.codebattles.backend.services.CompetitionService
 import ru.codebattles.backend.web.entity.SendAnswerRequest
@@ -49,6 +46,10 @@ class CompetitionsController {
     @GetMapping("{id}/problems")
     fun getProblemsByCompetition(@PathVariable id: Long): Iterable<CompetitionsProblems> {
         return competitionService.getProblemsById(id)
+
+    }    @GetMapping("{id}/leaderboard")
+    fun leaderboard(@PathVariable id: Long): Leaderboard {
+        return competitionService.getLeaderboardById(id)
     }
 
     @GetMapping("{compId}/problems/{id}")
