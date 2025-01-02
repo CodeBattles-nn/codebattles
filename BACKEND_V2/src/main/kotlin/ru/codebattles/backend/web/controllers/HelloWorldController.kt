@@ -1,5 +1,7 @@
 package ru.codebattles.backend.web.controllers
 
+import io.swagger.v3.oas.annotations.Hidden
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.transaction.annotation.Transactional
@@ -16,6 +18,7 @@ import java.util.stream.Collectors
 
 
 @RestController
+@Hidden
 class HelloWorldController {
 
     @Autowired
@@ -40,8 +43,6 @@ class HelloWorldController {
     fun testCreateComp(
 
     ): String {
-
-//        User.with
 
         val user = User(mpassword = passwordEncoder.encode("admin"), musername = "alex")
 

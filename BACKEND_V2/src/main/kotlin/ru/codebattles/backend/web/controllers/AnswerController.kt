@@ -1,5 +1,6 @@
 package ru.codebattles.backend.web.controllers
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -9,6 +10,7 @@ import ru.codebattles.backend.services.AnswerService
 
 @RestController
 @RequestMapping("/api/answers")
+@SecurityRequirement(name = "JWT")
 class AnswerController(
     val answerService: AnswerService,
 ) {

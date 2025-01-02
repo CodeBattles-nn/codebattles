@@ -1,5 +1,6 @@
 package ru.codebattles.backend.web.controllers
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
@@ -15,6 +16,7 @@ import ru.codebattles.backend.web.entity.SendAnswerRequest
 
 @RestController
 @RequestMapping("/api/competitions")
+@SecurityRequirement(name = "JWT")
 class CompetitionsController {
     @Autowired
     private lateinit var competitionService: CompetitionService
@@ -44,7 +46,7 @@ class CompetitionsController {
     }
 
     @GetMapping("{id}/problems")
-    fun getProblemsByCompetition(@PathVariable id: Long): Iterable<CompetitionsProblems> {
+    fun getProblemsByCompetition(@PathVariable id: Long): List<CompetitionsProblemsDto> {
         return competitionService.getProblemsById(id)
 
     }    @GetMapping("{id}/leaderboard")

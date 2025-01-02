@@ -1,5 +1,6 @@
 package ru.codebattles.backend.web.controllers
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
@@ -10,6 +11,7 @@ import ru.codebattles.backend.services.ProblemsService
 
 @RestController
 @RequestMapping("/api/problems")
+@SecurityRequirement(name = "JWT")
 class ProblemsController {
     @Autowired
     private lateinit var problemsService: ProblemsService

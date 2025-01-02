@@ -37,8 +37,11 @@ class CompetitionService(
         throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
 
-    fun getProblemsById(id: Long): Iterable<CompetitionsProblems> {
-        return competitionProblemsRepository.getAllByCompetitionId(id)
+    fun getProblemsById(id: Long): List<CompetitionsProblemsDto> {
+        return competitionsProblemsMapper.toDtoS(
+            competitionProblemsRepository.getAllByCompetitionId(id)
+        )
+
     }
 
     fun getLeaderboardById(id: Long): Leaderboard {
