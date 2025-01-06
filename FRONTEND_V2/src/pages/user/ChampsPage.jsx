@@ -1,15 +1,15 @@
-import Card from "../components/bootstrap/Card.jsx";
-import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
-import useCachedGetAPI from "../hooks/useGetAPI.js";
+import Card from "../../components/bootstrap/Card.jsx";
+import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
+import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {useEffect} from "react";
 import {Link} from "react-router-dom";
-import BreadcrumbsElement from "../components/BreadcrumbsElement.jsx";
-import BreadcrumbsRoot from "../components/BreadcrumpsRoot.jsx";
-import UserLoginRequired from "../components/UserLoginRequired.jsx";
+import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
+import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
+import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 
 const ChampsPage = () => {
 
-    const [data, update] = useCachedGetAPI("/api/competitions",() => {}, []);
+    const [data, update] = useCachedGetAPI("/api/competitions/me",() => {}, []);
 
     useEffect(() => {
         update()

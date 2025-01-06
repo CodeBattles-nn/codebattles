@@ -1,12 +1,12 @@
 import {useEffect} from 'react';
-import Card from "../components/bootstrap/Card.jsx";
+import Card from "../../components/bootstrap/Card.jsx";
 import {Link, useParams} from "react-router-dom";
-import useCachedGetAPI from "../hooks/useGetAPI.js";
-import {getCookie} from "../utils/cookies.js";
-import UserLoginRequired from "../components/UserLoginRequired.jsx";
-import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
+import useCachedGetAPI from "../../hooks/useGetAPI.js";
+import {getCookie} from "../../utils/cookies.js";
+import UserLoginRequired from "../../components/UserLoginRequired.jsx";
+import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 import log from "eslint-plugin-react/lib/util/log.js";
-import {formatDate} from "../utils/format.js";
+import {formatDate} from "../../utils/format.js";
 
 const StatsPage = () => {
 

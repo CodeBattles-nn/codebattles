@@ -1,5 +1,5 @@
-import Card from "../components/bootstrap/Card.jsx";
-import ResponsiveTable from "../components/bootstrap/ResponsiveTable.jsx";
+import Card from "../../components/bootstrap/Card.jsx";
+import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 
 const SeeSendPage = () => {
     return (

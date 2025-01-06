@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
-import Card from "../components/bootstrap/Card.jsx";
+import Card from "../../components/bootstrap/Card.jsx";
 import {useNavigate, useParams, useSearchParams} from "react-router-dom";
-import useCachedGetAPI from "../hooks/useGetAPI.js";
+import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {useLocalStorage} from "usehooks-ts";
-import {getCookie} from "../utils/cookies.js";
+import {getCookie} from "../../utils/cookies.js";
 import axios from "axios";
-import Markdown from "../components/wraps/Markdown.jsx";
+import Markdown from "../../components/wraps/Markdown.jsx";
 
 const SeeQuizzProblemPage = () => {
 

@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
-import Card from "../components/bootstrap/Card.jsx";
+import Card from "../../components/bootstrap/Card.jsx";
 import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import constants from "../utils/consts.js";
+import constants from "../../utils/consts.js";
 
 const LoginPage = () => {
 

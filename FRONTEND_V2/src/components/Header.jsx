@@ -34,7 +34,10 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         {
-                            compId && <>
+                            compId && compId !== "champs" && <>
+                                <li className="nav-item active">
+                                    <Link className="nav-link" to={`/champs/`}>Соревнования</Link>
+                                </li>
                                 <li className="nav-item active">
                                     <Link className="nav-link" to={`/champs/${compId}/problems`}>Задачи</Link>
                                 </li>
@@ -46,8 +49,12 @@ const Header = () => {
                                 </li>
                             </>
                         }
+                        {
+                            compId && compId === "champs" && <>
+                            </>
+                        }
 
-                        <a className="nav-link mx-5" target="_blank" href="/teacher">Учителю</a>
+                        {/*<a className="nav-link mx-5" target="_blank" href="/teacher">Учителю</a>*/}
                     </ul>
                     <Link className="nav-link mx-2" to="/statuses">Помощь</Link>
 

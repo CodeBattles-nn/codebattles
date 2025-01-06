@@ -1,16 +1,16 @@
 import {useEffect, useState} from 'react';
-import Card from "../components/bootstrap/Card.jsx";
-import ProblemExample from "../components/ProblemExample.jsx";
+import Card from "../../components/bootstrap/Card.jsx";
+import ProblemExample from "../../components/ProblemExample.jsx";
 import {useNavigate, useParams} from "react-router-dom";
-import useCachedGetAPI from "../hooks/useGetAPI.js";
+import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import LazyCodeEditor from "../components/lazy/LazyCodeEditor.jsx";
-import UserLoginRequired from "../components/UserLoginRequired.jsx";
-import Markdown from "../components/wraps/Markdown.jsx";
-import constants from "../utils/consts.js";
-import BreadcrumbsElement from "../components/BreadcrumbsElement.jsx";
-import BreadcrumbsRoot from "../components/BreadcrumpsRoot.jsx";
+import LazyCodeEditor from "../../components/lazy/LazyCodeEditor.jsx";
+import UserLoginRequired from "../../components/UserLoginRequired.jsx";
+import Markdown from "../../components/wraps/Markdown.jsx";
+import constants from "../../utils/consts.js";
+import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
+import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 
 const SeeProblemPage = () => {
 
