@@ -35,7 +35,11 @@ class CompetitionsController {
     }
 
     @PostMapping("{id}/send")
-    fun send(@PathVariable id: Long, @AuthenticationPrincipal user: User, @RequestBody data: SendAnswerRequest): String {
+    fun send(
+        @PathVariable id: Long,
+        @AuthenticationPrincipal user: User,
+        @RequestBody data: SendAnswerRequest
+    ): String {
         answerService.createAnswer(user, data)
         return "aboba"
     }
@@ -49,7 +53,9 @@ class CompetitionsController {
     fun getProblemsByCompetition(@PathVariable id: Long): List<CompetitionsProblemsDto> {
         return competitionService.getProblemsById(id)
 
-    }    @GetMapping("{id}/leaderboard")
+    }
+
+    @GetMapping("{id}/leaderboard")
     fun leaderboard(@PathVariable id: Long): Leaderboard {
         return competitionService.getLeaderboardById(id)
     }
@@ -59,8 +65,13 @@ class CompetitionsController {
         return competitionService.getProblemById(compId, id)
     }
 
-    @GetMapping
+    @GetMapping("/me")
     fun getAllAvaliableForUser(@AuthenticationPrincipal user: User): List<CompetitionDto> {
         return competitionService.getAllByUser(user)
+    }
+
+    @GetMapping
+    fun getAll(): List<CompetitionDto> {
+        return competitionService.getAll()
     }
 }

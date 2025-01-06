@@ -27,6 +27,13 @@ class CompetitionService(
     private val competitionsCreateMapper: CompetitionsCreateMapper,
     private val testRepo: TestRepo,
 ) {
+
+    fun getAll(): List<CompetitionDto> {
+        return competitionsMapper.toDtoS(
+            competitionRepository.findAll()
+        )
+    }
+
     fun getById(id: Long): CompetitionDto {
         val optionalCompetition = competitionRepository.findById(id)
         if (optionalCompetition.isPresent) {
