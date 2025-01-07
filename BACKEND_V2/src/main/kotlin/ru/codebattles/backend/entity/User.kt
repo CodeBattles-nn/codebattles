@@ -16,7 +16,10 @@ data class User(
     var mpassword: String?,
 ) : UserDetails, BaseEntity() {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf(SimpleGrantedAuthority("ROLE_USER"))
+        return mutableListOf(
+            SimpleGrantedAuthority("ROLE_USER"),
+            SimpleGrantedAuthority("ROLE_ADMIN"),
+        )
     }
 
     override fun getPassword() = mpassword
