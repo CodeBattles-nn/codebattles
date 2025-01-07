@@ -6,6 +6,7 @@ import {Link, useParams} from "react-router-dom";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
+import {AdminHeader} from "../../components/AdminHeader.jsx";
 
 export const AdminChampsDetailPage = () => {
 
@@ -27,18 +28,14 @@ export const AdminChampsDetailPage = () => {
             <BreadcrumbsRoot>
                 <BreadcrumbsElement name="Соревнования"/>
             </BreadcrumbsRoot>
-            <Card>
-                <button className="btn">соревнования</button>
-                <button className="btn">задачи</button>
-                <button className="btn">чекеры</button>
-                <button className="btn">интерфейс ученика</button>
-            </Card>
+
+            <AdminHeader />
 
             <Card key={data.id}>
                 <h2>Управление</h2>
 
-                <Link to="users" className="btn btn-info me-2"> Пользователи</Link>
-                <Link to="tasks" className="btn btn-info me-2"> Задания</Link>
+                <Link to="users" className="btn btn-info me-2 disabled"> Пользователи</Link>
+                <Link to="tasks" className="btn btn-info me-2 disabled"> Задания</Link>
 
 
                 <Card>
@@ -71,7 +68,7 @@ export const AdminChampsDetailPage = () => {
                         <input type="datetime-local" defaultValue={data.name} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                         <small id="emailHelp" className="form-text text-muted">Время конца соревнования</small>
                     </div>
-                    <button type="submit" className="btn btn-success">Сохранить</button>
+                    <button type="submit" className="btn btn-success disabled">Сохранить</button>
                 </form>
                 <hr className="my-5"/>
                 <h3>Чекеры</h3>

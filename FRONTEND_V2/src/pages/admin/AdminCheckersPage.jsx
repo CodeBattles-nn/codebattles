@@ -8,9 +8,9 @@ import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../components/AdminHeader.jsx";
 
-export const AdminChampsPage = () => {
+export const AdminCheckersPage = () => {
 
-    const [data, update] = useCachedGetAPI("/api/competitions",() => {}, []);
+    const [data, update] = useCachedGetAPI("/api/checkers",() => {}, []);
 
     useEffect(() => {
         update()
@@ -23,7 +23,7 @@ export const AdminChampsPage = () => {
             <UserLoginRequired />
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Соревнования"/>
+                <BreadcrumbsElement name="Чекеры"/>
             </BreadcrumbsRoot>
 
             <AdminHeader />
@@ -31,10 +31,8 @@ export const AdminChampsPage = () => {
             {
                 data?.map(elem => {
                     return <Card key={elem.id}>
-                        <h5><span className="badge text-bg-primary">Идет</span></h5>
-                        <h2>{elem.name}</h2>
-                        <h3>{elem.description}</h3>
-                        <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-warning me-2">Управлять</Link>
+                        <h2>{elem.displayName} | <small>{elem.languageHighlightName}</small></h2>
+                        <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-danger me-2 disabled">Удалить</Link>
                     </Card>
                 })
             }

@@ -17,6 +17,8 @@ import ChampsPage from "./pages/user/ChampsPage.jsx";
 import {AdminChampsPage} from "./pages/admin/AdminChampsPage.jsx";
 import {AdminChampsDetailPage} from "./pages/admin/AdminChampsDetailPage.jsx";
 import {AdminChampsDetailCheckerPage} from "./pages/admin/AdminChampsDetailCheckersPage.jsx";
+import {AdminProblemsPage} from "./pages/admin/AdminProblemsPage.jsx";
+import {AdminCheckersPage} from "./pages/admin/AdminCheckersPage.jsx";
 
 function App() {
 
@@ -38,7 +40,9 @@ function App() {
                         <Route path="/statuses" element={<StatusesPage/>}/>
                         <Route path="/champs" element={<ChampsPage/>}/>
 
+                        <Route path="/admin/problems" element={<AdminProblemsPage/>}/>
                         <Route path="/admin/champs" element={<AdminChampsPage/>}/>
+                        <Route path="/admin/checkers" element={<AdminCheckersPage/>}/>
                         <Route path="/admin/champs/:compId/edit" element={<AdminChampsDetailPage/>}/>
                         <Route path="/admin/champs/:compId/edit/checkers" element={<AdminChampsDetailCheckerPage/>}/>
                     </Routes>
