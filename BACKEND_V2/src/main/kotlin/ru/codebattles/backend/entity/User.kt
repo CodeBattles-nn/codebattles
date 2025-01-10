@@ -18,12 +18,17 @@ data class User(
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(
             SimpleGrantedAuthority("ROLE_USER"),
-            SimpleGrantedAuthority("ROLE_ADMIN"),
+//            SimpleGrantedAuthority("ROLE_ADMIN"),
         )
     }
 
     override fun getPassword() = mpassword
     override fun getUsername() = musername
+
+
+    fun isAdmin(): Boolean {
+        return authorities.contains(SimpleGrantedAuthority("ROLE_ADMIN"))
+    }
 
 
 }

@@ -4,11 +4,13 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
+import ru.codebattles.backend.annotations.CompetitionAccessRequired
 import ru.codebattles.backend.dto.AnswerDto
 import ru.codebattles.backend.dto.CompetitionCreateDto
 import ru.codebattles.backend.dto.CompetitionDto
 import ru.codebattles.backend.dto.CompetitionsProblemsDto
-import ru.codebattles.backend.entity.*
+import ru.codebattles.backend.entity.Leaderboard
+import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.services.AnswerService
 import ru.codebattles.backend.services.CompetitionService
 import ru.codebattles.backend.web.entity.SendAnswerRequest
@@ -29,14 +31,16 @@ class CompetitionsController {
         return competitionService.create(instance, user)
     }
 
-    @GetMapping("{id}")
-    fun getById(@PathVariable id: Long): CompetitionDto {
-        return competitionService.getById(id)
+    @CompetitionAccessRequired
+    @GetMapping("{compId}")
+    fun getById(@PathVariable compId: Long): CompetitionDto {
+        return competitionService.getById(compId)
     }
 
-    @PostMapping("{id}/send")
+    @CompetitionAccessRequired
+    @PostMapping("{compId}/send")
     fun send(
-        @PathVariable id: Long,
+        @PathVariable compId: Long,
         @AuthenticationPrincipal user: User,
         @RequestBody data: SendAnswerRequest
     ): String {
@@ -44,27 +48,35 @@ class CompetitionsController {
         return "aboba"
     }
 
-    @GetMapping("{id}/sends")
-    fun getAnswers(@PathVariable id: Long, @AuthenticationPrincipal user: User): List<AnswerDto> {
-        return answerService.getAllAnswersByCompetitionsAndUser(id, user);
+    @CompetitionAccessRequired
+    @GetMapping("{compId}/sends")
+    fun getAnswers(
+        @PathVariable compId: Long,
+        @AuthenticationPrincipal user: User,
+    ): List<AnswerDto> {
+        return answerService.getAllAnswersByCompetitionsAndUserId(compId, user.id!!);
     }
 
-    @GetMapping("{id}/problems")
-    fun getProblemsByCompetition(@PathVariable id: Long): List<CompetitionsProblemsDto> {
-        return competitionService.getProblemsById(id)
+    @CompetitionAccessRequired
+    @GetMapping("{compId}/problems")
+    fun getProblemsByCompetition(@PathVariable compId: Long): List<CompetitionsProblemsDto> {
+        return competitionService.getProblemsById(compId)
 
     }
 
-    @GetMapping("{id}/leaderboard")
-    fun leaderboard(@PathVariable id: Long): Leaderboard {
-        return competitionService.getLeaderboardById(id)
+    @CompetitionAccessRequired
+    @GetMapping("{compId}/leaderboard")
+    fun leaderboard(@PathVariable compId: Long): Leaderboard {
+        return competitionService.getLeaderboardById(compId)
     }
 
+    @CompetitionAccessRequired
     @GetMapping("{compId}/problems/{id}")
     fun getProblemsByIdByCompetition(@PathVariable compId: Long, @PathVariable id: Long): CompetitionsProblemsDto {
         return competitionService.getProblemById(compId, id)
     }
 
+    @CompetitionAccessRequired
     @GetMapping("/me")
     fun getAllAvaliableForUser(@AuthenticationPrincipal user: User): List<CompetitionDto> {
         return competitionService.getAllByUser(user)
