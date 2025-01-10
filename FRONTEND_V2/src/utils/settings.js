@@ -1,10 +1,6 @@
 import axios from "axios";
 
-// axios.defaults.withCredentials = true
-
-const isProd = import.meta.env.VITE_ENV === "production";
-if (!isProd) {
-    // axios.defaults.baseURL =`${document.location.protocol}//${document.location.hostname}:2500`
+const productionBuild = import.meta.env.VITE_ENV === "production";
+if (!productionBuild) {
+    axios.defaults.baseURL = `${document.location.protocol}//${document.location.hostname}:${8080}`
 }
-
-axios.defaults.baseURL =`${document.location.protocol}//${document.location.hostname}:${8080}`
