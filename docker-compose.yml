@@ -123,6 +123,16 @@ services:
       - with-internet
       - no-internet
 
+#  checker-kumir:
+#    build:
+#      dockerfile: z_checkers_dockerfiles/Kumir.Dockerfile
+#    image: ghcr.io/codebattles-nn/checker-kumir
+#    restart: unless-stopped
+#    networks:
+#      - with-internet
+#      - no-internet
+
+
 #  checker-cpp:
 #    build:
 #      dockerfile: ./CPP.Dockerfile

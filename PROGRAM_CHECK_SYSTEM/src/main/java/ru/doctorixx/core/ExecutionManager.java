@@ -1,11 +1,17 @@
 package ru.doctorixx.core;
 
+import ru.doctorixx.Env;
 import ru.doctorixx.core.executors.CommandExecutor;
 import ru.doctorixx.core.structures.ProgramResult;
 import ru.doctorixx.core.utils.FileUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
+
+import static ru.doctorixx.Env.EnvVars.ENV_EXECUTOR_WITH_BOM;
 
 public class ExecutionManager {
 
@@ -57,7 +63,14 @@ public class ExecutionManager {
 
                 fileData = executor.mutateProgramBeforeRun(fileData);
 
-                try (FileWriter writer = new FileWriter(new File(tempdir, executor.getFilename()))) {
+                try (OutputStreamWriter writer = new OutputStreamWriter(
+                        new FileOutputStream(new File(tempdir, executor.getFilename())), StandardCharsets.UTF_8)) {
+
+                    boolean useBOM = Env.get(ENV_EXECUTOR_WITH_BOM).equals("true");
+                    if (useBOM) {
+                        writer.write('\ufeff'); // Записываем BOM (0xEF, 0xBB, 0xBF)
+                    }
+
                     writer.write(fileData);
                     writer.flush();
                 }
