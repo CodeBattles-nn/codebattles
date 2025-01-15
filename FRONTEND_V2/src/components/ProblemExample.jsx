@@ -11,11 +11,15 @@ const ProblemExample = ({in_data, out_data}) => {
                 <button className="btn example__btn btn-sm btn-outline-secondary">Копировать</button>
             </div>
             <Card>
-                {in_data}
+                <div style={{whiteSpace: "break-spaces"}}>
+                    {in_data}
+                </div>
             </Card>
             <h6>Выходные данные</h6>
             <Card>
-                {out_data}
+                <div style={{whiteSpace: "break-spaces"}}>
+                    {out_data}
+                </div>
             </Card>
         </div>
     );
