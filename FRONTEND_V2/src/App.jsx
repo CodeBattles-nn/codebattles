@@ -21,6 +21,7 @@ import {AdminProblemsPage} from "./pages/admin/AdminProblemsPage.jsx";
 import {AdminCheckersPage} from "./pages/admin/AdminCheckersPage.jsx";
 import {AdminChampsDetailRatingPage} from "./pages/admin/AdminChampsDetailRatingPage.jsx";
 import {AdminSeeSendPage} from "./pages/admin/AdminSeeSendPage.jsx";
+import {NotFound} from "./pages/NotFound.jsx";
 
 function App() {
 
@@ -49,6 +50,8 @@ function App() {
                         <Route path="/admin/champs/:compId/edit/checkers" element={<AdminChampsDetailCheckerPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating" element={<AdminChampsDetailRatingPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating/answer" element={<AdminSeeSendPage/>}/>
+
+                        <Route path="*" element={<NotFound/>}/>
                     </Routes>
 
 
