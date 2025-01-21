@@ -55,9 +55,16 @@ class AnswerService(
             answerRepository.getAllByUserAndCompetitionId(user, competition)
         )
     }
+
     fun getAllAnswersByCompetitionsAndUserId(competition: Long, userId: Long): List<AnswerDto> {
         return answerMapper.toDtoS(
             answerRepository.getAllByUserIdAndCompetitionId(userId, competition)
+        )
+    }
+
+    fun getLastByUserIdAndCompetitionsAnswerId(userId: Long, competitionProblemId: Long): AnswerDto {
+        return answerMapper.toDto(
+            answerRepository.getFirstByUserIdAndCompetitionsProblemsIdOrderByCreatedAtDesc(userId, competitionProblemId)
         )
     }
 

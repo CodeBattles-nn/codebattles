@@ -1,10 +1,7 @@
 package ru.codebattles.backend.web.controllers
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.dto.AnswerDto
 import ru.codebattles.backend.services.AnswerService
 
@@ -17,5 +14,13 @@ class AnswerController(
     @GetMapping("{id}")
     fun getById(@PathVariable id: Long): AnswerDto {
         return answerService.getById(id)
+    }
+
+    @GetMapping("/last")
+    fun getLastSendByProblemAnswerAndUserId(
+        @RequestParam compProblemId: Long,
+        @RequestParam userId: Long,
+        ): AnswerDto {
+        return answerService.getLastByUserIdAndCompetitionsAnswerId(userId, compProblemId)
     }
 }
