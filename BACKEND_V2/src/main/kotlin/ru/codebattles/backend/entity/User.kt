@@ -18,7 +18,7 @@ data class User(
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(
             SimpleGrantedAuthority("ROLE_USER"),
-//            SimpleGrantedAuthority("ROLE_ADMIN"),
+            SimpleGrantedAuthority("ROLE_ADMIN"),
         )
     }
 
