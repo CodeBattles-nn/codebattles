@@ -7,7 +7,7 @@ import java.util.*
 @Table(name = "competitions")
 data class Competition(
     @ManyToMany
-    val members: MutableSet<User>? = mutableSetOf(),
+    var members: MutableSet<User>? = mutableSetOf(),
 
     @ManyToMany
     val checkers: MutableSet<Checker>? = mutableSetOf(),

@@ -2,17 +2,16 @@ package ru.codebattles.backend.web.controllers
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.annotations.CompetitionAccessRequired
-import ru.codebattles.backend.dto.AnswerDto
-import ru.codebattles.backend.dto.CompetitionCreateDto
-import ru.codebattles.backend.dto.CompetitionDto
-import ru.codebattles.backend.dto.CompetitionsProblemsDto
+import ru.codebattles.backend.dto.*
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.services.AnswerService
 import ru.codebattles.backend.services.CompetitionService
+import ru.codebattles.backend.web.entity.EditUsersRequest
 import ru.codebattles.backend.web.entity.SendAnswerRequest
 
 
@@ -68,6 +67,18 @@ class CompetitionsController {
     @GetMapping("{compId}/leaderboard")
     fun leaderboard(@PathVariable compId: Long): Leaderboard {
         return competitionService.getLeaderboardById(compId)
+    }
+
+
+    @PutMapping("{compId}/users")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun editUsers(@PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
+        competitionService.patchUsers(compId, data.usersIds)
+    }
+
+    @GetMapping("{compId}/users")
+    fun getUsers(@PathVariable compId: Long): List<UserDto> {
+        return competitionService.getUsers(compId)
     }
 
     @CompetitionAccessRequired
