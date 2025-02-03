@@ -22,7 +22,7 @@ class CompetitionAccessAspect(
 
         val user: User = authentication.principal as User
 
-//        if (user.isAdmin()) return
+        if (user.isAdmin()) return
         if (competitionRepository.existsByIdAndMembersId(compId, user.id!!)) return
 
         throw AccessDeniedException("User does not have access to this competition")
