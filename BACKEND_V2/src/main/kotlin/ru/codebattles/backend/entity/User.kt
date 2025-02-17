@@ -1,8 +1,7 @@
 package ru.codebattles.backend.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+
+import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -14,12 +13,13 @@ data class User(
     var musername: String?,
     @Column(name = "password")
     var mpassword: String?,
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    var roles: MutableSet<Role> = mutableSetOf(),
+
 ) : UserDetails, BaseEntity() {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf(
-            SimpleGrantedAuthority("ROLE_USER"),
-            SimpleGrantedAuthority("ROLE_ADMIN"),
-        )
+        return roles.map { SimpleGrantedAuthority(it.name) }.toMutableList()
     }
 
     override fun getPassword() = mpassword

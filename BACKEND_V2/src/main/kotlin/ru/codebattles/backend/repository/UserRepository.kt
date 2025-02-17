@@ -9,4 +9,5 @@ import ru.codebattles.backend.entity.User
 interface UserRepository : JpaRepository<User, Long> {
     fun findByMusername(username: String): User
     fun findByIdIn(ids: Set<Long>): MutableSet<User>
+    fun existsByMusername(username: String): Boolean
 }
