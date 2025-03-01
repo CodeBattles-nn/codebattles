@@ -1,4 +1,3 @@
-import Card from "./bootstrap/Card.jsx";
 import {Link} from "react-router-dom";
 
 const BreadcrumbsElement = ({name, url, active}) => {

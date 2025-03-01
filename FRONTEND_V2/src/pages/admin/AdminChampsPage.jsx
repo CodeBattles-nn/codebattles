@@ -1,5 +1,4 @@
 import Card from "../../components/bootstrap/Card.jsx";
-import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {useEffect} from "react";
 import {Link} from "react-router-dom";

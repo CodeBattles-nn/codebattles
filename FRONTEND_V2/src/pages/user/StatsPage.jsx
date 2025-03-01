@@ -5,7 +5,6 @@ import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {getCookie} from "../../utils/cookies.js";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
-import log from "eslint-plugin-react/lib/util/log.js";
 import {formatDate} from "../../utils/format.js";
 
 const StatsPage = () => {

@@ -1,7 +1,7 @@
 import Card from "../../components/bootstrap/Card.jsx";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {useEffect, useState} from "react";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
@@ -104,8 +104,8 @@ export const AdminUsersDetailPage = () => {
                                 )
                             })
                         }
-                            {/*<Option value="lucy">lucy</Option>*/}
-                            {/*<Option value="yiminghe">yiminghe</Option>*/}
+                        {/*<Option value="lucy">lucy</Option>*/}
+                        {/*<Option value="yiminghe">yiminghe</Option>*/}
                     </Select>
                     <br/>
                     <button className="btn btn-primary" disabled={loading}>изменить</button>
