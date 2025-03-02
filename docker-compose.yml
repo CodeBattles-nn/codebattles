@@ -1,39 +1,26 @@
 version: "3.9"
 services:
-  frontend:
-    build: FRONTEND/.
-    image: ghcr.io/codebattles-nn/frontend
-    ports:
-      - "8001:80"
-    restart: unless-stopped
-    networks:
-      - with-internet
-      - no-internet
-
   frontend-v2:
     build: FRONTEND_V2/.
     image: ghcr.io/codebattles-nn/frontend-v2
     ports:
       - "8002:80"
     restart: unless-stopped
+    environment:
+      VITE_ENV: "production"
+
     networks:
       - with-internet
       - no-internet
 
   backend:
-    build: BACKEND/.
-    image: ghcr.io/codebattles-nn/backend
+    build: BACKEND_V2/.
+    image: ghcr.io/codebattles-nn/backend-v2
     environment:
-      CHECKER_PORT: 7070
-      DB_HOST: postgres
-      DB_USERNAME: "postgres"
-      DB_PASSWORD: "admin"
-      DB_NAME: "cb"
-      HASH_SALT: 4a5ecb2c236d1c4c3e670fcc76b8d1566c94d096bcf5f700511bb039507ad518
-      REDIS_HOST: redis
-      ADMIN_LOGIN: adminnn23
-      ADMIN_PASSWORD: goodprog
-      PYTHONUNBUFFERED: TRUE
+      SERVER_PORT: 8000
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
     ports:
       - "8000:8000"
     depends_on:
@@ -45,17 +32,6 @@ services:
     networks:
       - with-internet
       - no-internet
-
-
-  redis:
-    image: redis:alpine3.18
-    ports:
-      - 6379:6379
-    restart: unless-stopped
-    networks:
-      - with-internet
-      - no-internet
-
   postgres:
     image: postgres:13.3-alpine
     environment:
@@ -82,24 +58,7 @@ services:
     ports:
       - "2500:80"
     depends_on:
-      - frontend
       - backend
-    restart: unless-stopped
-    networks:
-      - with-internet
-      - no-internet
-
-  init_configurer:
-    build: INIT_CONFIGURER/.
-    image: ghcr.io/codebattles-nn/init-configurer
-    environment:
-      DB_HOST: postgres
-      DB_USERNAME: "postgres"
-      DB_PASSWORD: "admin"
-      DB_NAME: "cb"
-    links:
-      - backend
-      - postgres
     restart: unless-stopped
     networks:
       - with-internet
