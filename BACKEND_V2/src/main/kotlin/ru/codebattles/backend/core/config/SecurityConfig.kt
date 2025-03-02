@@ -54,8 +54,16 @@ class SecurityConfig(
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http.csrf().disable()
-            .cors()
-            .and()
+            .cors { cors ->
+                cors.configurationSource { request ->
+                    CorsConfiguration().applyPermitDefaultValues().also {
+                        it.allowedOriginPatterns = listOf("*")
+                        it.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        it.allowedHeaders = listOf("*")
+                        it.allowCredentials = true
+                    }
+                }
+            }
             .authorizeRequests()
             .requestMatchers("/api/auth/**").permitAll()
             .requestMatchers(
