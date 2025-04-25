@@ -14,6 +14,8 @@ data class User(
     @Column(name = "password")
     var mpassword: String?,
 
+    var name: String? = "",
+
     @ManyToMany(fetch = FetchType.EAGER)
     var roles: MutableSet<Role> = mutableSetOf(),
 

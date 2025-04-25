@@ -13,7 +13,7 @@ data class Competition(
     val checkers: MutableSet<Checker>? = mutableSetOf(),
 
     @ManyToOne
-    val organizer: User,
+    val organizer: User?,
 
     @Column(nullable = false)
     val name: String,

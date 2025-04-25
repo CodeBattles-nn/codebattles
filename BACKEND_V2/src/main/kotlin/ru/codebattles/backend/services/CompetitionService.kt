@@ -7,7 +7,6 @@ import ru.codebattles.backend.dto.CompetitionCreateDto
 import ru.codebattles.backend.dto.CompetitionDto
 import ru.codebattles.backend.dto.CompetitionsProblemsDto
 import ru.codebattles.backend.dto.UserDto
-import ru.codebattles.backend.dto.mapper.CompetitionsCreateMapper
 import ru.codebattles.backend.dto.mapper.CompetitionsMapper
 import ru.codebattles.backend.dto.mapper.CompetitionsProblemsMapper
 import ru.codebattles.backend.dto.mapper.UserMapper
@@ -28,7 +27,6 @@ class CompetitionService(
     private val competitionProblemsRepository: CompetitionProblemsRepository,
     private val competitionsProblemsMapper: CompetitionsProblemsMapper,
     private val competitionsMapper: CompetitionsMapper,
-    private val competitionsCreateMapper: CompetitionsCreateMapper,
     private val testRepo: TestRepo,
 ) {
 
@@ -96,11 +94,6 @@ class CompetitionService(
     }
 
     fun create(competitionDto: CompetitionCreateDto, user: User): CompetitionDto {
-        val convertedFromDto = competitionsCreateMapper.fromDto(competitionDto, user)
-        val competition = competitionRepository.save(convertedFromDto)
-
-        println()
-
-        return competitionsMapper.toDto(competition)
+            throw IllegalStateException("Not implemented")
     }
 }
