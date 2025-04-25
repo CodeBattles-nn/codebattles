@@ -27,6 +27,7 @@ export const AdminUsersDetailPage = () => {
 
     useEffect(() => {
         update()
+        updateUsers()
     }, []);
 
     // console.log(data)
