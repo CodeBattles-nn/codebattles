@@ -75,7 +75,13 @@ class CompetitionService(
     fun patchUsers(compId: Long, usersIds: Set<Long>){
         val competition = competitionRepository.findById(compId).orElseThrow()
         competition.members = userRepository.findByIdIn(usersIds)
+        competitionRepository.save(competition)
+    }
 
+    fun joinUser(compId: Long, userId: Long){
+        val competition = competitionRepository.findById(compId).orElseThrow()
+        val user = userRepository.getById(userId)
+        competition.members?.add(user)
         competitionRepository.save(competition)
     }
 

@@ -32,5 +32,14 @@ data class User(
         return authorities.contains(SimpleGrantedAuthority("ROLE_ADMIN"))
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is User) return false
+        return this.id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
 
 }
