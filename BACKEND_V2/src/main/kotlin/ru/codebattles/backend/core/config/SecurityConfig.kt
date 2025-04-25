@@ -17,7 +17,8 @@ import ru.codebattles.backend.core.filter.JwtAuthenticationFilter
 
 @Configuration
 class SecurityConfig(
-    private val jwtAuthenticationFilter: JwtAuthenticationFilter
+    private val jwtAuthenticationFilter: JwtAuthenticationFilter,
+    private val passwordEncoder: PasswordEncoder,
 ) {
 
     @Bean
@@ -80,11 +81,6 @@ class SecurityConfig(
             .and()
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
-    }
-
-    @Bean
-    fun encoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
     }
 
     @Bean
