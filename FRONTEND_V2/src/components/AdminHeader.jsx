@@ -5,7 +5,7 @@ export const AdminHeader = () => {
     return (
         <Card>
             <Link to="/admin/champs" className="btn">соревнования</Link>
-            <Link to="/admin/problems" className="btn">задачи</Link>
+            <a className="btn disabled border-0" aria-disabled={true}>задачи</a>
             <Link to="/admin/checkers" className="btn">чекеры</Link>
             <Link to="/champs" className="btn">интерфейс ученика</Link>
         </Card>
