@@ -69,7 +69,7 @@ class CompetitionService(
 
     fun getProblemById(id: Long, problemId: Long): CompetitionsProblemsDto {
         return competitionsProblemsMapper.toDto(
-            competitionProblemsRepository.getFirstByCompetitionIdAndProblemId(id, problemId)
+            competitionProblemsRepository.getFirstByCompetitionIdAndId(id, problemId)
         )
     }
 
