@@ -10,6 +10,7 @@ import ru.codebattles.backend.dto.UserDto
 import ru.codebattles.backend.dto.mapper.CompetitionsMapper
 import ru.codebattles.backend.dto.mapper.CompetitionsProblemsMapper
 import ru.codebattles.backend.dto.mapper.UserMapper
+import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.LeaderBoardAllTasksQuery
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
@@ -72,13 +73,13 @@ class CompetitionService(
         )
     }
 
-    fun patchUsers(compId: Long, usersIds: Set<Long>){
+    fun patchUsers(compId: Long, usersIds: Set<Long>) {
         val competition = competitionRepository.findById(compId).orElseThrow()
         competition.members = userRepository.findByIdIn(usersIds)
         competitionRepository.save(competition)
     }
 
-    fun joinUser(compId: Long, userId: Long){
+    fun joinUser(compId: Long, userId: Long) {
         val competition = competitionRepository.findById(compId).orElseThrow()
         val user = userRepository.getById(userId)
         competition.members?.add(user)
@@ -92,7 +93,6 @@ class CompetitionService(
     }
 
 
-
     fun getAllByUser(user: User): List<CompetitionDto> {
         return competitionsMapper.toDtoS(
             competitionRepository.getByMembersContaining(user)
@@ -100,6 +100,18 @@ class CompetitionService(
     }
 
     fun create(competitionDto: CompetitionCreateDto, user: User): CompetitionDto {
-            throw IllegalStateException("Not implemented")
+        val competition = Competition(
+            organizer = user,
+            name = competitionDto.name,
+            description = competitionDto.description,
+        )
+
+        competitionRepository.save(
+            competition
+        )
+
+        return competitionsMapper.toDto(
+            competition
+        )
     }
 }
