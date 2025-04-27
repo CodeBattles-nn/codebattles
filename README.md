@@ -103,4 +103,4 @@ If you liked the project or want to support the author, you can donate here
 
 
 ___
-CodeBattles, 2024
+CodeBattles, 2024-2025
