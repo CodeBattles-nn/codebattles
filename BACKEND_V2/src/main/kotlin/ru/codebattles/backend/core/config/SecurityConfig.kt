@@ -66,18 +66,20 @@ class SecurityConfig(
                 }
             }
             .authorizeRequests()
-            .requestMatchers("/api/auth/**").permitAll()
+//            .requestMatchers("/api/auth/**").permitAll()
             .requestMatchers(
                 "/api/auth/login",
                 "/api/auth/register",
-                "/api/**",
                 "/swagger-ui/**",
                 "/v3/api-docs/**",
                 "/swagger-ui.html",
                 "/favicon.ico",
                 "/webjars/**"
             ).permitAll()
-            .anyRequest().authenticated()
+            .requestMatchers(
+                "/api/**"
+            ).authenticated()
+//            .anyRequest().permitAll()
             .and()
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
