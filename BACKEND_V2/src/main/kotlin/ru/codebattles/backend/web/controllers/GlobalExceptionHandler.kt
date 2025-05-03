@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import ru.codebattles.backend.web.entity.RenderedError
 
-@ControllerAdvice
+//@ControllerAdvice
 class GlobalExceptionHandler {
     @ExceptionHandler(NoSuchElementException::class)
     fun handleNoSuchElementException(ex: NoSuchElementException?): ResponseEntity<RenderedError> {
