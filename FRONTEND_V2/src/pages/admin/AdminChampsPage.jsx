@@ -37,6 +37,10 @@ export const AdminChampsPage = () => {
                     </Card>
                 })
             }
+
+            <Card>
+                <Link to="/admin/champs/create" className="btn btn-primary">Создать</Link>
+            </Card>
         </>
     );
 };

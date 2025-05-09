@@ -23,6 +23,10 @@ import {AdminChampsDetailRatingPage} from "./pages/admin/AdminChampsDetailRating
 import {AdminSeeSendPage} from "./pages/admin/AdminSeeSendPage.jsx";
 import {NotFound} from "./pages/NotFound.jsx";
 import {AdminUsersDetailPage} from "./pages/admin/AdminUsersDetailPage.jsx";
+import {AdminChampsCreate} from "./pages/admin/AdminChampsCreate.jsx";
+import {AdminChampsDetailProblemsPage} from "./pages/admin/AdminChampsDetailProblemsPage.jsx";
+import {AdminChampsDetailProblemsLinkPage} from "./pages/admin/AdminChampsDetailProblemsLinkPage.jsx";
+import {AdminChampsDetailProblemsEditPage} from "./pages/admin/AdminChampsDetailProblemsEditPage.jsx";
 
 function App() {
 
@@ -48,7 +52,11 @@ function App() {
                         <Route path="/admin/champs" element={<AdminChampsPage/>}/>
                         <Route path="/admin/checkers" element={<AdminCheckersPage/>}/>
                         <Route path="/admin/champs/:compId/edit" element={<AdminChampsDetailPage/>}/>
+                        <Route path="/admin/champs/create" element={<AdminChampsCreate/>}/>
                         <Route path="/admin/champs/:compId/edit/users" element={<AdminUsersDetailPage/>}/>
+                        <Route path="/admin/champs/:compId/edit/problems" element={<AdminChampsDetailProblemsPage/>}/>
+                        <Route path="/admin/champs/:compId/edit/problems/:probcompId/edit" element={<AdminChampsDetailProblemsEditPage/>}/>
+                        <Route path="/admin/champs/:compId/edit/problems/link" element={<AdminChampsDetailProblemsLinkPage/>}/>
                         <Route path="/admin/champs/:compId/edit/checkers" element={<AdminChampsDetailCheckerPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating" element={<AdminChampsDetailRatingPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating/answer" element={<AdminSeeSendPage/>}/>

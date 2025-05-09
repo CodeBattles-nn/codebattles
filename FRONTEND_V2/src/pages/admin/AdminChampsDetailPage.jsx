@@ -35,7 +35,7 @@ export const AdminChampsDetailPage = () => {
                 <h2>Управление</h2>
 
                 <Link to="users" className="btn btn-info me-2"> Пользователи</Link>
-                <Link to="tasks" className="btn btn-info me-2 disabled"> Задания</Link>
+                <Link to="problems" className="btn btn-info me-2"> Задания</Link>
                 <Link to="rating" className="btn btn-info me-2"> Рейтинг</Link>
 
 
