@@ -10,7 +10,7 @@ data class Competition(
     var members: MutableSet<User>? = mutableSetOf(),
 
     @ManyToMany
-    val checkers: MutableSet<Checker>? = mutableSetOf(),
+    var checkers: MutableSet<Checker>? = mutableSetOf(),
 
     @ManyToOne
     val organizer: User?,

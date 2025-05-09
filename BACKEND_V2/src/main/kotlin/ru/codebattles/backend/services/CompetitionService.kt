@@ -14,10 +14,7 @@ import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.LeaderBoardAllTasksQuery
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
-import ru.codebattles.backend.repository.CompetitionProblemsRepository
-import ru.codebattles.backend.repository.CompetitionRepository
-import ru.codebattles.backend.repository.TestRepo
-import ru.codebattles.backend.repository.UserRepository
+import ru.codebattles.backend.repository.*
 import java.util.stream.Collectors
 
 @Service
@@ -29,6 +26,7 @@ class CompetitionService(
     private val competitionsProblemsMapper: CompetitionsProblemsMapper,
     private val competitionsMapper: CompetitionsMapper,
     private val testRepo: TestRepo,
+    private val checkerRepository: CheckerRepository,
 ) {
 
     fun getAll(): List<CompetitionDto> {
@@ -86,6 +84,12 @@ class CompetitionService(
     fun patchUsers(compId: Long, usersIds: Set<Long>) {
         val competition = competitionRepository.findById(compId).orElseThrow()
         competition.members = userRepository.findByIdIn(usersIds)
+        competitionRepository.save(competition)
+    }
+
+    fun patchCheckers(compId: Long, checkersIds: Set<Long>) {
+        val competition = competitionRepository.findById(compId).orElseThrow()
+        competition.checkers = checkerRepository.findByIdIn(checkersIds)
         competitionRepository.save(competition)
     }
 

@@ -76,6 +76,12 @@ class CompetitionsController {
         competitionService.patchUsers(compId, data.usersIds)
     }
 
+    @PutMapping("{compId}/checkers")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    fun editCheckers(@PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
+        competitionService.patchCheckers(compId, data.usersIds)
+    }
+
     @GetMapping("{compId}/users")
     fun getUsers(@PathVariable compId: Long): List<UserDto> {
         return competitionService.getUsers(compId)
