@@ -73,12 +73,14 @@ export const AdminChampsDetailPage = () => {
                 </form>
                 <hr className="my-5"/>
                 <h3>Чекеры</h3>
-                {
-                    data?.checkers?.map(checker => {
-                        return <h4><span className="badge text-bg-secondary">{checker.displayName}</span></h4>
+                <div className="d-flex gap-2">
+                    {
+                        data?.checkers?.map(checker => {
+                            return <h4><span className="badge text-bg-secondary">{checker.displayName}</span></h4>
 
-                    })
-                }
+                        })
+                    }
+                </div>
                 <br />
                 <Link to="checkers" className="btn btn-info my-2"> Редактировать чекеры</Link>
 

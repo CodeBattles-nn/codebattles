@@ -31,7 +31,8 @@ export const AdminCheckersPage = () => {
                 data?.map(elem => {
                     return <Card key={elem.id}>
                         <h2>{elem.displayName} | <small>{elem.languageHighlightName}</small></h2>
-                        <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-danger me-2 disabled">Удалить</Link>
+                        <Link to={`/admin/champs/${elem.id}/delete`} className="btn btn-danger me-2 disabled">Удалить</Link>
+                        <Link to={`/admin/checkers/${elem.id}/edit`} className="btn btn-secondary me-2">Редактировать</Link>
                     </Card>
                 })
             }

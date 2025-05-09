@@ -14,6 +14,8 @@ import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 
 const SeeProblemPage = () => {
 
+    const lastChecker = localStorage.getItem("lastChecker") || "";
+
     const {compId, id} = useParams();
     const navigate = useNavigate();
     const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/problems/${id}`);
@@ -28,7 +30,13 @@ const SeeProblemPage = () => {
     }, []);
 
 
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit, setValue} = useForm(
+        {
+            defaultValues: {
+                checker: lastChecker
+            }
+        }
+    )
 
     const onSubmit = (formData) => {
         formData.src = document.getElementsByClassName("ace_content")[0].innerText
@@ -61,7 +69,15 @@ const SeeProblemPage = () => {
 
         setIsLoading(true)
 
+        localStorage.setItem("lastChecker", formData.checker);
     }
+
+    useEffect(() => {
+        const savedChecker = localStorage.getItem("lastChecker");
+        if (savedChecker) {
+            setValue("checker", savedChecker);
+        }
+    }, [champData]);
 
     return (
         <>

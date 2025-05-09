@@ -1,8 +1,4 @@
 import SeeQuizzProblemPage from "./pages/user/SeeQuizzProblemPage.jsx";
-
-import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
-
-
 import Header from "./components/Header.jsx";
 import ProblemsListPage from "./pages/user/ProblemsListPage.jsx";
 import SendsListPage from "./pages/user/SendsListPage.jsx";
@@ -16,7 +12,6 @@ import LoginPage from "./pages/user/LoginPage.jsx";
 import ChampsPage from "./pages/user/ChampsPage.jsx";
 import {AdminChampsPage} from "./pages/admin/AdminChampsPage.jsx";
 import {AdminChampsDetailPage} from "./pages/admin/AdminChampsDetailPage.jsx";
-import {AdminChampsDetailCheckerPage} from "./pages/admin/AdminChampsDetailCheckersPage.jsx";
 import {AdminProblemsPage} from "./pages/admin/AdminProblemsPage.jsx";
 import {AdminCheckersPage} from "./pages/admin/AdminCheckersPage.jsx";
 import {AdminChampsDetailRatingPage} from "./pages/admin/AdminChampsDetailRatingPage.jsx";
@@ -27,6 +22,12 @@ import {AdminChampsCreate} from "./pages/admin/AdminChampsCreate.jsx";
 import {AdminChampsDetailProblemsPage} from "./pages/admin/AdminChampsDetailProblemsPage.jsx";
 import {AdminChampsDetailProblemsLinkPage} from "./pages/admin/AdminChampsDetailProblemsLinkPage.jsx";
 import {AdminChampsDetailProblemsEditPage} from "./pages/admin/AdminChampsDetailProblemsEditPage.jsx";
+import {AdminUsersDetailCheckersPage} from "./pages/admin/AdminUsersDetailCheckersPage.jsx";
+import {AdminProblemsEdit} from "./pages/admin/AdminProblemsEdit.jsx";
+import {AdminCheckersEditPage} from "./pages/admin/AdminCheckersEditPage.jsx";
+
+import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
+
 
 function App() {
 
@@ -51,13 +52,20 @@ function App() {
                         <Route path="/admin/problems" element={<AdminProblemsPage/>}/>
                         <Route path="/admin/champs" element={<AdminChampsPage/>}/>
                         <Route path="/admin/checkers" element={<AdminCheckersPage/>}/>
+                        <Route path="/admin/checkers/:checkId/edit" element={<AdminCheckersEditPage/>}/>
                         <Route path="/admin/champs/:compId/edit" element={<AdminChampsDetailPage/>}/>
                         <Route path="/admin/champs/create" element={<AdminChampsCreate/>}/>
                         <Route path="/admin/champs/:compId/edit/users" element={<AdminUsersDetailPage/>}/>
                         <Route path="/admin/champs/:compId/edit/problems" element={<AdminChampsDetailProblemsPage/>}/>
-                        <Route path="/admin/champs/:compId/edit/problems/:probcompId/edit" element={<AdminChampsDetailProblemsEditPage/>}/>
-                        <Route path="/admin/champs/:compId/edit/problems/link" element={<AdminChampsDetailProblemsLinkPage/>}/>
-                        <Route path="/admin/champs/:compId/edit/checkers" element={<AdminChampsDetailCheckerPage/>}/>
+                        <Route
+                            path="/admin/champs/:compId/edit/problems/:probcompId/edit"
+                            element={<AdminChampsDetailProblemsEditPage/>}
+                        />
+                        <Route
+                            path="/admin/champs/:compId/edit/problems/link"
+                            element={<AdminChampsDetailProblemsLinkPage/>}
+                        />
+                        <Route path="/admin/champs/:compId/edit/checkers" element={<AdminUsersDetailCheckersPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating" element={<AdminChampsDetailRatingPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating/answer" element={<AdminSeeSendPage/>}/>
 
