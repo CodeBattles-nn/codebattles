@@ -26,6 +26,16 @@ class ProblemsService(
         throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
 
+    fun getByIdNotDto(id: Long): Problem {
+        val optionalProblem = problemsRepository.findById(id)
+        if (optionalProblem.isPresent) {
+            return optionalProblem.get()
+        }
+
+
+        throw ResponseStatusException(HttpStatus.NOT_FOUND)
+    }
+
 
     fun create(problemDto: CreateProblemDto): ProblemDto {
         val problem = Problem(

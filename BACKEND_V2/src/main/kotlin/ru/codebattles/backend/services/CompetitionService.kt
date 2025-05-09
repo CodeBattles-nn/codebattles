@@ -47,6 +47,16 @@ class CompetitionService(
         throw ResponseStatusException(HttpStatus.NOT_FOUND)
     }
 
+    fun getByIdNotDto(id: Long): Competition {
+        val optionalCompetition = competitionRepository.findById(id)
+        if (optionalCompetition.isPresent) {
+            return optionalCompetition.get()
+        }
+
+
+        throw ResponseStatusException(HttpStatus.NOT_FOUND)
+    }
+
     fun getProblemsById(id: Long): List<CompetitionsProblemsDto> {
         return competitionsProblemsMapper.toDtoS(
             competitionProblemsRepository.getAllByCompetitionId(id)

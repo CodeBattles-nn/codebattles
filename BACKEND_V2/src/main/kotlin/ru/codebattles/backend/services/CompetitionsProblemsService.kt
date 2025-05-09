@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 import ru.codebattles.backend.entity.CompetitionsProblems
 import ru.codebattles.backend.repository.CompetitionProblemsRepository
+import ru.codebattles.backend.web.entity.CreateCompetitionProblem
 import java.io.IOException
 import java.util.*
 
@@ -16,6 +17,8 @@ import java.util.*
 class CompetitionsProblemsService(
     private val competitionProblemsRepository: CompetitionProblemsRepository,
     private val objectMapper: ObjectMapper,
+    private val competitionService: CompetitionService,
+    private val problemsService: ProblemsService,
 ) {
 
 
@@ -34,7 +37,15 @@ class CompetitionsProblemsService(
         return competitionProblemsRepository.findAllById(ids)
     }
 
-    fun create(competitionsProblems: CompetitionsProblems): CompetitionsProblems {
+    fun create(data: CreateCompetitionProblem): CompetitionsProblems {
+
+        val competitionsProblems = CompetitionsProblems(
+            priority = data.priority.toInt(),
+            slug = data.slug,
+            competition = competitionService.getByIdNotDto(data.competition_id),
+            problem = problemsService.getByIdNotDto(data.problem_id),
+        )
+
         return competitionProblemsRepository.save(competitionsProblems)
     }
 

@@ -1,6 +1,7 @@
 package ru.codebattles.backend.web.controllers
 
 import com.fasterxml.jackson.databind.JsonNode
+import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import org.springdoc.core.annotations.ParameterObject
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -10,10 +11,12 @@ import ru.codebattles.backend.dto.CompetitionsProblemsDto
 import ru.codebattles.backend.dto.mapper.CompetitionsProblemsMapper
 import ru.codebattles.backend.entity.CompetitionsProblems
 import ru.codebattles.backend.services.CompetitionsProblemsService
+import ru.codebattles.backend.web.entity.CreateCompetitionProblem
 import java.io.IOException
 
 @RestController
 @RequestMapping("/api/competitionsProblems")
+@SecurityRequirement(name = "JWT")
 class CompetitionsProblemsController(
     private val competitionsProblemsService: CompetitionsProblemsService,
     private val competitionsProblemsMapper: CompetitionsProblemsMapper,
@@ -41,8 +44,10 @@ class CompetitionsProblemsController(
     }
 
     @PostMapping
-    fun create(@RequestBody competitionsProblems: CompetitionsProblems): CompetitionsProblems {
-        return competitionsProblemsService.create(competitionsProblems)
+    fun create(@RequestBody data: CreateCompetitionProblem): CompetitionsProblemsDto {
+        return competitionsProblemsMapper.toDto(
+            competitionsProblemsService.create(data)
+        )
     }
 
     @PatchMapping("/{id}")
