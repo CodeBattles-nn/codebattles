@@ -1,8 +1,12 @@
 package ru.codebattles.backend.web.controllers
 
-import io.swagger.v3.oas.annotations.Hidden
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import jakarta.annotation.security.RolesAllowed
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.access.annotation.Secured
+import org.springframework.security.access.prepost.PreAuthorize
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.LeaderBoardAllTasksQuery
 import ru.codebattles.backend.entity.User
+import ru.codebattles.backend.entity.UserRole
 import ru.codebattles.backend.repository.CompetitionRepository
 import ru.codebattles.backend.repository.TestRepo
 import ru.codebattles.backend.repository.UserRepository
@@ -18,7 +23,8 @@ import java.util.stream.Collectors
 
 
 @RestController
-@Hidden
+@SecurityRequirement(name = "JWT")
+//@Hidden
 class HelloWorldController {
 
     @Autowired
@@ -33,8 +39,17 @@ class HelloWorldController {
     @Autowired
     private lateinit var testRepo: TestRepo
 
+    @Autowired
+    private lateinit var objectMapper: ObjectMapper
+
     @GetMapping
     fun helloWorld(): String {
+        return "Hello, world!"
+    }
+
+    @RolesAllowed("USER")
+    @GetMapping("/mumu")
+    fun helloWorlвывфсd(@AuthenticationPrincipal user: User): String {
         return "Hello, world!"
     }
 

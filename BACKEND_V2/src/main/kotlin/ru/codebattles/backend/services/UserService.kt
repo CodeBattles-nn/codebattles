@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import ru.codebattles.backend.dto.CreateUserDto
 import ru.codebattles.backend.entity.User
+import ru.codebattles.backend.entity.UserRole
 import ru.codebattles.backend.repository.UserRepository
 
 @Service
@@ -22,6 +23,7 @@ class UserService(
             musername = userDto.musername,
             name = userDto.name
         )
+        user.roles = mutableSetOf(UserRole.USER)
 
         userRepository.save(user)
 

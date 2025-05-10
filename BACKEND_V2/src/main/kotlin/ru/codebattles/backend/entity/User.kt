@@ -16,10 +16,10 @@ data class User(
 
     var name: String? = "",
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    var roles: MutableSet<Role> = mutableSetOf(),
+    @Enumerated(EnumType.STRING)
+    var roles: MutableSet<UserRole> = mutableSetOf(),
 
-) : UserDetails, BaseEntity() {
+    ) : UserDetails, BaseEntity() {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return roles.map { SimpleGrantedAuthority(it.name) }.toMutableList()
     }
