@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import jakarta.annotation.security.RolesAllowed
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.access.annotation.Secured
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.transaction.annotation.Transactional
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController
 import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.LeaderBoardAllTasksQuery
 import ru.codebattles.backend.entity.User
-import ru.codebattles.backend.entity.UserRole
 import ru.codebattles.backend.repository.CompetitionRepository
 import ru.codebattles.backend.repository.TestRepo
 import ru.codebattles.backend.repository.UserRepository

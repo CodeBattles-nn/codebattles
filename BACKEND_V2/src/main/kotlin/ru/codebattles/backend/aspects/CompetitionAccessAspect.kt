@@ -2,11 +2,8 @@ package ru.codebattles.backend.aspects
 
 import org.aspectj.lang.annotation.Aspect
 import org.aspectj.lang.annotation.Before
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
-import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.repository.CompetitionRepository
-import java.nio.file.AccessDeniedException
 
 @Aspect
 @Component
