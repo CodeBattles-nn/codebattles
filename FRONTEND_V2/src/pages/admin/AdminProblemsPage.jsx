@@ -34,10 +34,14 @@ export const AdminProblemsPage = () => {
                         {/*<h5><span className="badge text-bg-primary">Идет</span></h5>*/}
                         <h2>{elem.name}</h2>
                         <h3>{elem.description}</h3>
-                        <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-warning me-2 disabled">Управлять</Link>
+                        <Link to={`/admin/problems/${elem.id}/edit`} className="btn btn-warning me-2">Управлять</Link>
                     </Card>
                 })
             }
+
+            <Card>
+                <Link to="/admin/problems/create" className="btn btn-success" >создать</Link>
+            </Card>
         </>
     );
 };

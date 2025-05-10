@@ -25,6 +25,8 @@ import {AdminChampsDetailProblemsEditPage} from "./pages/admin/AdminChampsDetail
 import {AdminUsersDetailCheckersPage} from "./pages/admin/AdminUsersDetailCheckersPage.jsx";
 import {AdminProblemsEdit} from "./pages/admin/AdminProblemsEdit.jsx";
 import {AdminCheckersEditPage} from "./pages/admin/AdminCheckersEditPage.jsx";
+import {AdminProblemsPageCreate} from "./pages/admin/AdminProblemsPageCreate.jsx";
+import {AdminProblemsPageEdit} from "./pages/admin/AdminProblemsPageEdit.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -50,6 +52,8 @@ function App() {
                         <Route path="/champs" element={<ChampsPage/>}/>
 
                         <Route path="/admin/problems" element={<AdminProblemsPage/>}/>
+                        <Route path="/admin/problems/create" element={<AdminProblemsPageCreate/>}/>
+                        <Route path="/admin/problems/:probId/edit" element={<AdminProblemsPageEdit/>}/>
                         <Route path="/admin/champs" element={<AdminChampsPage/>}/>
                         <Route path="/admin/checkers" element={<AdminCheckersPage/>}/>
                         <Route path="/admin/checkers/:checkId/edit" element={<AdminCheckersEditPage/>}/>

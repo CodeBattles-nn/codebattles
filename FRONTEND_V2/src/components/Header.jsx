@@ -6,7 +6,7 @@ import {useEffect} from "react";
 
 
 function is_admin(user) {
-    return user?.authorities?.some(auth => auth.authority === "ROLE_ADMIN")
+    return user?.authorities?.some(auth => auth.authority === "ADMIN")
 }
 
 const Header = () => {
