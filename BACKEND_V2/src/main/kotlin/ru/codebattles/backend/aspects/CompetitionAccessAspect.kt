@@ -15,16 +15,16 @@ class CompetitionAccessAspect(
 ) {
     @Before("@annotation(ru.codebattles.backend.annotations.CompetitionAccessRequired) && args(compId, ..)")
     fun checkAccess(compId: Long) {
-        val authentication = SecurityContextHolder.getContext().authentication
-        if (authentication == null || !authentication.isAuthenticated) {
-            throw IllegalStateException("User is not authenticated!")
-        }
-
-        val user: User = authentication.principal as User
-
-        if (user.isAdmin()) return
-        if (competitionRepository.existsByIdAndMembersId(compId, user.id!!)) return
-
-        throw AccessDeniedException("User does not have access to this competition")
+//        val authentication = SecurityContextHolder.getContext().authentication
+//        if (authentication == null || !authentication.isAuthenticated) {
+//            throw IllegalStateException("User is not authenticated!")
+//        }
+//
+//        val user: User = authentication.principal as User
+//
+//        if (user.isAdmin()) return
+//        if (competitionRepository.existsByIdAndMembersId(compId, user.id!!)) return
+//
+//        throw AccessDeniedException("User does not have access to this competition")
     }
 }
