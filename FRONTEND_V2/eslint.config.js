@@ -13,7 +13,8 @@ export default [
   {
     files: ["src/**/*.{js,mjs,cjs,jsx}"],
     rules: {
-      "react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off",
+      "no-irregular-whitespace": "warn",
     }
   }
 ];

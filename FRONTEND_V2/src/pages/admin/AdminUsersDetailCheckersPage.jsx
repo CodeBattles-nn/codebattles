@@ -40,12 +40,7 @@ export const AdminUsersDetailCheckersPage = () => {
         setSelectesUsers(value); // Update the state with selected values
     };
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: {errors},
-    } = useForm()
+    const {handleSubmit} = useForm()
 
     const navigate = useNavigate()
 
@@ -100,7 +95,7 @@ export const AdminUsersDetailCheckersPage = () => {
                         {
                             users.map(elem => {
                                 return (
-                                    <Option disabled={false} className="bg-dark"
+                                    <Option key={elem.displayName} disabled={false} className="bg-dark"
                                             value={elem.id}>{elem.displayName} ({elem.languageHighlightName})</Option>
                                 )
                             })

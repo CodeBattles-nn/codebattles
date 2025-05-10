@@ -40,12 +40,7 @@ export const AdminUsersDetailPage = () => {
         setSelectesUsers(value); // Update the state with selected values
     };
 
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: {errors},
-    } = useForm()
+    const {handleSubmit,} = useForm()
 
     const navigate = useNavigate()
 
@@ -100,13 +95,11 @@ export const AdminUsersDetailPage = () => {
                         {
                             users.map(elem => {
                                 return (
-                                    <Option disabled={false} className="bg-dark"
+                                    <Option key={`${elem.id} ${elem.username}`} disabled={false} className="bg-dark"
                                             value={elem.id}>{elem.username}</Option>
                                 )
                             })
                         }
-                        {/*<Option value="lucy">lucy</Option>*/}
-                        {/*<Option value="yiminghe">yiminghe</Option>*/}
                     </Select>
                     <br/>
                     <button className="btn btn-primary" disabled={loading}>изменить</button>

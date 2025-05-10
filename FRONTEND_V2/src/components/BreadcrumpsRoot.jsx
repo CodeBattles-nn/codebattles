@@ -1,4 +1,5 @@
 import Card from "./bootstrap/Card.jsx";
+import PropTypes from "prop-types";
 
 const BreadcrumbsRoot = ({children}) => {
     return (
@@ -10,6 +11,10 @@ const BreadcrumbsRoot = ({children}) => {
             </nav>
         </Card>
     );
+};
+
+BreadcrumbsRoot.propTypes = {
+    children: PropTypes.node.isRequired
 };
 
 export default BreadcrumbsRoot;

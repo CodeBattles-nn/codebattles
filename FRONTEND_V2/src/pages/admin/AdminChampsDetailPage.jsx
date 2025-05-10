@@ -1,5 +1,4 @@
 import Card from "../../components/bootstrap/Card.jsx";
-import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
@@ -76,7 +75,9 @@ export const AdminChampsDetailPage = () => {
                 <div className="d-flex gap-2">
                     {
                         data?.checkers?.map(checker => {
-                            return <h4><span className="badge text-bg-secondary">{checker.displayName}</span></h4>
+                            return (<h4 key={checker.displayName}>
+                                <span className="badge text-bg-secondary">{checker.displayName}</span>
+                            </h4>)
 
                         })
                     }

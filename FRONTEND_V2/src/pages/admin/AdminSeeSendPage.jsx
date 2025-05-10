@@ -1,14 +1,12 @@
 import {useEffect} from 'react';
 import Card from "../../components/bootstrap/Card.jsx";
-import {useParams, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import LazySyntaxHighlight from "../../components/lazy/LazySyntaxHightlight.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 
 export const AdminSeeSendPage = () => {
-
-    const {compId} = useParams();
 
     const [searchParams] = useSearchParams();
 

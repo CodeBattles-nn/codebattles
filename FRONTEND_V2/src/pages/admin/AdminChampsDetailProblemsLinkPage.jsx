@@ -1,5 +1,4 @@
 import Card from "../../components/bootstrap/Card.jsx";
-import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
@@ -10,8 +9,6 @@ import constants from "../../utils/consts.js";
 import axios from "axios";
 
 export const AdminChampsDetailProblemsLinkPage = () => {
-
-    const [submittedData, setSubmittedData] = useState(null);
 
     const navigate = useNavigate();
 

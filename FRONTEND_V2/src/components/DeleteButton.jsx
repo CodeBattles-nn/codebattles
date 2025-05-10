@@ -2,11 +2,10 @@ import React, {useState} from 'react';
 import constants from "../utils/consts.js";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import PropTypes from "prop-types";
 
 export const DeleteButton = ({
                                  url,
-                                 callback = () => {
-                                 }
                              }) => {
 
     const [disabled, setDisabled] = useState(false)
@@ -49,3 +48,6 @@ export const DeleteButton = ({
     );
 };
 
+DeleteButton.propTypes = {
+    url: PropTypes.string.isRequired
+};

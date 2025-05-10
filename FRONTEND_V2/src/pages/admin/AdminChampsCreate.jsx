@@ -1,5 +1,4 @@
 import Card from "../../components/bootstrap/Card.jsx";
-import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
@@ -19,7 +18,6 @@ export const AdminChampsCreate = () => {
             endedAt: new Date().toISOString().slice(0, 16)
         }
     });
-    const [submittedData, setSubmittedData] = useState(null);
 
     const navigate = useNavigate();
 
@@ -32,7 +30,6 @@ export const AdminChampsCreate = () => {
         };
 
         console.log(formattedData);
-        setSubmittedData(formattedData);
 
         const conf = {
             headers: {

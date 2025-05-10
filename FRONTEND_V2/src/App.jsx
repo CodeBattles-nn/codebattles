@@ -23,7 +23,6 @@ import {AdminChampsDetailProblemsPage} from "./pages/admin/AdminChampsDetailProb
 import {AdminChampsDetailProblemsLinkPage} from "./pages/admin/AdminChampsDetailProblemsLinkPage.jsx";
 import {AdminChampsDetailProblemsEditPage} from "./pages/admin/AdminChampsDetailProblemsEditPage.jsx";
 import {AdminUsersDetailCheckersPage} from "./pages/admin/AdminUsersDetailCheckersPage.jsx";
-import {AdminProblemsEdit} from "./pages/admin/AdminProblemsEdit.jsx";
 import {AdminCheckersEditPage} from "./pages/admin/AdminCheckersEditPage.jsx";
 import {AdminProblemsPageCreate} from "./pages/admin/AdminProblemsPageCreate.jsx";
 import {AdminProblemsPageEdit} from "./pages/admin/AdminProblemsPageEdit.jsx";

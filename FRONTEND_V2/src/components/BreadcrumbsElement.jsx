@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 
 const BreadcrumbsElement = ({name, url, active}) => {
 
@@ -17,6 +18,17 @@ const BreadcrumbsElement = ({name, url, active}) => {
         )
 
     );
+};
+
+BreadcrumbsElement.propTypes = {
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string,
+    active: PropTypes.bool
+};
+
+BreadcrumbsElement.defaultProps = {
+    url: null,
+    active: false
 };
 
 export default BreadcrumbsElement;
