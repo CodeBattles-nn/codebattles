@@ -83,7 +83,7 @@ export const AdminChampsDetailRatingPage = () => {
                                     <tr key={"stats-usr" + i}
                                         className={"-1" === mine_user_id ? ("table-secondary") : ('')}>
                                         <th scope="row">{i + 1}</th>
-                                        <td>{scoreRow.userId}</td>
+                                        <td>{scoreRow.userX} (id={scoreRow.userId})</td>
                                         {/*<td>-1</td>*/}
                                         {
                                             problemsData?.map(compProb => {
