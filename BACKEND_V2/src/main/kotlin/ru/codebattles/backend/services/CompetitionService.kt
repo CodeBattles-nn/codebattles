@@ -25,7 +25,7 @@ class CompetitionService(
     private val competitionProblemsRepository: CompetitionProblemsRepository,
     private val competitionsProblemsMapper: CompetitionsProblemsMapper,
     private val competitionsMapper: CompetitionsMapper,
-    private val testRepo: TestRepo,
+    private val leaderboardRepository: LeaderboardRepository,
     private val checkerRepository: CheckerRepository,
 ) {
 
@@ -63,8 +63,8 @@ class CompetitionService(
     }
 
     fun getLeaderboardById(id: Long): Leaderboard {
-        val leaderboard = testRepo.getLeaderboard()
-        val leaderboardScores = testRepo.getLeaderboardStats()
+        val leaderboard = leaderboardRepository.getLeaderboard(id)
+        val leaderboardScores = leaderboardRepository.getLeaderboardStats(id)
 
         val answersByScore: Map<Long, List<LeaderBoardAllTasksQuery>> = leaderboard.stream()
             .collect(Collectors.groupingBy(LeaderBoardAllTasksQuery::userId))

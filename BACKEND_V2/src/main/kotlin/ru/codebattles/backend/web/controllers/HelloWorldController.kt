@@ -14,7 +14,7 @@ import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.LeaderBoardAllTasksQuery
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.repository.CompetitionRepository
-import ru.codebattles.backend.repository.TestRepo
+import ru.codebattles.backend.repository.LeaderboardRepository
 import ru.codebattles.backend.repository.UserRepository
 import java.util.stream.Collectors
 
@@ -34,7 +34,7 @@ class HelloWorldController {
     private lateinit var passwordEncoder: PasswordEncoder
 
     @Autowired
-    private lateinit var testRepo: TestRepo
+    private lateinit var leaderboardRepository: LeaderboardRepository
 
     @Autowired
     private lateinit var objectMapper: ObjectMapper
@@ -70,7 +70,7 @@ class HelloWorldController {
     fun testLeader(
 
     ): String {
-        val leaderboard = testRepo.getLeaderboard()
+        val leaderboard = leaderboardRepository.getLeaderboard(1)
 
         val employeesByDepartment: Map<Long, List<LeaderBoardAllTasksQuery>> = leaderboard.stream()
             .collect(Collectors.groupingBy(LeaderBoardAllTasksQuery::userId))

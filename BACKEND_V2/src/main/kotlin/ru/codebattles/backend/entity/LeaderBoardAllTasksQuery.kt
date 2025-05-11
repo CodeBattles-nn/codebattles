@@ -11,6 +11,7 @@ data class LeaderBoardAllTasksQuery(
 
 data class LeaderBoardScoreOrderQuery(
     val userId: Long,
+    val userX: String,
     val score: Long,
     val time: Date
 
