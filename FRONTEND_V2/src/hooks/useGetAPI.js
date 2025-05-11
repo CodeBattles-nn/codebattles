@@ -12,7 +12,7 @@ const LOCALSTORAGE_PREFIX = "__api_cache="
 function useCachedGetAPI(
     url = defaultUrl,
     onError = defaultEmptyFunction,
-    defaultState={}
+    defaultState = {}
 ) {
     const [data, setData] = useState(defaultState);
     const navigate = useNavigate()
@@ -30,11 +30,14 @@ function useCachedGetAPI(
                 setData(data)
                 localStorage.setItem(LOCALSTORAGE_PREFIX + url, JSON.stringify(data))
             })
-            .catch(() => {
-                localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
-                navigate("/")
+            .catch((error) => {
+                if (error.response && error.response.status === 403) {
+                    localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
+                    navigate("/")
+                } else {
+                    onError(error)
+                }
             })
-            .catch(onError)
     }
 
     const getData = () => {
