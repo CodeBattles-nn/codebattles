@@ -25,4 +25,16 @@ class CheckerService(
         return checkerRepository.save(checker)
     }
 
+    fun create(checker: Checker): Checker {
+        return checkerRepository.save(checker)
+    }
+
+
+    fun delete(id: Long): Checker? {
+        val checker: Checker? = checkerRepository.findById(id).orElse(null)
+        if (checker != null) {
+            checkerRepository.delete(checker)
+        }
+        return checker
+    }
 }

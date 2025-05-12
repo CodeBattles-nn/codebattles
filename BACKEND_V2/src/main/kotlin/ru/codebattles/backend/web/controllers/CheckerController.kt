@@ -10,6 +10,7 @@ import ru.codebattles.backend.dto.mapper.CheckerMapper
 import ru.codebattles.backend.entity.Checker
 import ru.codebattles.backend.repository.CheckerRepository
 import ru.codebattles.backend.services.CheckerService
+import ru.codebattles.backend.web.entity.CheckerCreate
 import java.io.IOException
 
 @Tag(name = "Checkers", description = "Endpoints for managing checkers")
@@ -62,4 +63,31 @@ class CheckerController(
     fun patch(@PathVariable id: Long, @RequestBody patchNode: JsonNode): Checker {
         return checkerService.patch(id, patchNode)
     }
+
+    @Operation(
+        summary = "Create a checker",
+        description = "Creates a new checker."
+    )
+    @PostMapping
+    fun create(@RequestBody checkerCreateDto: CheckerCreate): Checker {
+
+        val checker = Checker(
+            checkerCreateDto.displayName,
+            checkerCreateDto.languageHighlightName,
+            checkerCreateDto.address,
+        )
+
+        return checkerService.create(checker)
+    }
+
+    @Operation(
+        summary = "Delete a checker",
+        description = "Deletes a specific checker by its ID."
+    )
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: Long): Checker? {
+        return checkerService.delete(id)
+    }
+
+
 }
