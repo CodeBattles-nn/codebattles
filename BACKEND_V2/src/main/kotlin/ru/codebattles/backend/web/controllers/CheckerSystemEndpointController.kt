@@ -1,6 +1,8 @@
 package ru.codebattles.backend.web.controllers
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -8,13 +10,16 @@ import ru.codebattles.backend.entity.AnswerStatus
 import ru.codebattles.backend.repository.AnswerRepository
 import ru.codebattles.backend.repository.CompetitionProblemsRepository
 import ru.codebattles.backend.web.entity.checker.CheckerCallback
-
+@Tag(name = "Checker system API", description = "Endpoints for checker system")
 @RestController
 class CheckerSystemEndpointController(
     val answerRepository: AnswerRepository,
-    val competitionProblemsRepository: CompetitionProblemsRepository,
     val objectMapper: ObjectMapper
 ) {
+    @Operation(
+        summary = "Handle checker system callback",
+        description = "Processes the callback from the checker system, updates the answer status, and calculates the score."
+    )
     @PostMapping("/api/check_system_callback")
     fun checkerCallBack(@RequestBody data: CheckerCallback) {
         println()
