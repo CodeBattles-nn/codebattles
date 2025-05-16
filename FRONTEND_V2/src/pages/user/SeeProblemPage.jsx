@@ -137,9 +137,11 @@ const SeeProblemPage = () => {
                         <Card>
                             <h3>Примеры</h3>
                             {
-                                data?.examples?.map(example => {
-                                    const in_data = example[0]
-                                    const out_data = example[1]
+                                JSON.parse(data?.problem?.examples || "[]").map(example => {
+                                    console.log("example")
+
+                                    const in_data = example.in
+                                    const out_data = example.out
 
                                     return <ProblemExample
                                         key={`example-${in_data}--${out_data}`}
