@@ -2,7 +2,7 @@ package ru.codebattles.backend.entity
 
 enum class UserRole {
     USER,
-    ADMIN,
+    ROLE_ADMIN,
     TESTTTSTCBEUYBEYUBYUCYUBYUBUBY,
     SYSADMIN
 }

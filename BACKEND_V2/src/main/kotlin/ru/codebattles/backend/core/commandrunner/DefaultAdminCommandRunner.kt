@@ -29,7 +29,7 @@ class DefaultAdminCommandRunner(
 
         if (!userWithUsernameAdminExists) {
             val user = User(mpassword = passwordEncoder.encode("admin"), musername = "admin")
-            user.roles = mutableSetOf(UserRole.ADMIN, UserRole.USER)
+            user.roles = mutableSetOf(UserRole.ROLE_ADMIN, UserRole.USER)
 
             userRepository.save(user)
         }

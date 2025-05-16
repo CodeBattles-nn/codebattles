@@ -29,7 +29,7 @@ class AnswerController(
     fun getById(@PathVariable id: Long, @AuthenticationPrincipal user: User): AnswerDto {
         val answer = answerService.getById(id)
 
-        if (user.roles.contains(UserRole.ADMIN) || answer.user.id == user.id) {
+        if (user.roles.contains(UserRole.ROLE_ADMIN) || answer.user.id == user.id) {
             return answer
         }
 
