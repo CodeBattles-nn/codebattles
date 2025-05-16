@@ -135,7 +135,7 @@ class CompetitionsController {
     )
     @CompetitionAccessRequired
     @GetMapping("{compId}/problems/{id}")
-    fun getProblemsByIdByCompetition(@PathVariable compId: Long, @PathVariable id: Long): CompetitionsProblemsDto {
+    fun getProblemsByIdByCompetition(@CompetitionId @PathVariable compId: Long, @PathVariable id: Long): CompetitionsProblemsDto {
         return competitionService.getProblemById(compId, id)
     }
 
