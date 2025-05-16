@@ -16,7 +16,13 @@ data class User(
 
     var name: String? = "",
 
+    @ElementCollection(targetClass = UserRole::class, fetch = FetchType.EAGER)
+    @CollectionTable(
+        name = "users_roles",
+        joinColumns = [JoinColumn(name = "user_id")]
+    )
     @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     var roles: MutableSet<UserRole> = mutableSetOf(),
 
     ) : UserDetails, BaseEntity() {
