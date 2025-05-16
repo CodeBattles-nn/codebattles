@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import jakarta.annotation.security.RolesAllowed
 import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.dto.CheckerDto
 import ru.codebattles.backend.dto.mapper.CheckerMapper
@@ -23,9 +24,10 @@ class CheckerController(
     private val checkerService: CheckerService,
 ) {
     @Operation(
-        summary = "Get all checkers",
-        description = "Retrieves a list of all checkers."
+        summary = "[ADMIN] Get all checkers",
+        description = "Retrieves a list of all checkers. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @GetMapping
     fun getAll(): List<CheckerDto> {
         return checkerMapper.toDtoS(
@@ -34,9 +36,10 @@ class CheckerController(
     }
 
     @Operation(
-        summary = "Get checker by ID",
-        description = "Retrieves a checker by its ID."
+        summary = "[ADMIN] Get checker by ID",
+        description = "Retrieves a checker by its ID. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): CheckerDto {
         return checkerMapper.toDto(
@@ -45,9 +48,10 @@ class CheckerController(
     }
 
     @Operation(
-        summary = "Get checker by ID (Admin)",
-        description = "Retrieves a checker by its ID with admin-level access."
+        summary = "[ADMIN] Get checker by ID (extra fields)",
+        description = "Retrieves a checker by its ID with admin-level access. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @GetMapping("/{id}/admin")
     fun getByIdADMIN(@PathVariable id: Long): Checker {
         val checkerOptional = checkerRepository.findById(id)
@@ -55,9 +59,10 @@ class CheckerController(
     }
 
     @Operation(
-        summary = "Update a checker",
-        description = "Applies partial updates to a checker by its ID."
+        summary = "[ADMIN] Update a checker",
+        description = "Applies partial updates to a checker by its ID. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @PatchMapping("/{id}")
     @Throws(IOException::class)
     fun patch(@PathVariable id: Long, @RequestBody patchNode: JsonNode): Checker {
@@ -65,9 +70,10 @@ class CheckerController(
     }
 
     @Operation(
-        summary = "Create a checker",
-        description = "Creates a new checker."
+        summary = "[ADMIN] Create a checker",
+        description = "Creates a new checker. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @PostMapping
     fun create(@RequestBody checkerCreateDto: CheckerCreate): Checker {
 
@@ -81,9 +87,10 @@ class CheckerController(
     }
 
     @Operation(
-        summary = "Delete a checker",
-        description = "Deletes a specific checker by its ID."
+        summary = "[ADMIN] Delete a checker",
+        description = "Deletes a specific checker by its ID. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): Checker? {
         return checkerService.delete(id)

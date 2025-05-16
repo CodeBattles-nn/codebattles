@@ -3,11 +3,13 @@ package ru.codebattles.backend.web.controllers
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.annotation.security.RolesAllowed
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.annotations.CompetitionAccessRequired
+import ru.codebattles.backend.annotations.CompetitionId
 import ru.codebattles.backend.dto.*
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
@@ -28,9 +30,10 @@ class CompetitionsController {
     private lateinit var answerService: AnswerService
 
     @Operation(
-        summary = "Create a new competition",
-        description = "Creates a new competition instance for the authenticated user."
+        summary = "[ADMIN] Create a new competition",
+        description = "Creates a new competition object. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @PostMapping
     fun create(@RequestBody instance: CompetitionCreateDto, @AuthenticationPrincipal user: User): CompetitionDto {
         return competitionService.create(instance, user)
@@ -42,7 +45,7 @@ class CompetitionsController {
     )
     @CompetitionAccessRequired
     @GetMapping("{compId}")
-    fun getById(@PathVariable compId: Long): CompetitionDto {
+    fun getById(@CompetitionId @PathVariable compId: Long): CompetitionDto {
         return competitionService.getById(compId)
     }
 
@@ -53,7 +56,7 @@ class CompetitionsController {
     @CompetitionAccessRequired
     @PostMapping("{compId}/send")
     fun send(
-        @PathVariable compId: Long,
+        @CompetitionId @PathVariable compId: Long,
         @AuthenticationPrincipal user: User,
         @RequestBody data: SendAnswerRequest
     ): String {
@@ -68,7 +71,7 @@ class CompetitionsController {
     @CompetitionAccessRequired
     @GetMapping("{compId}/sends")
     fun getAnswers(
-        @PathVariable compId: Long,
+        @CompetitionId @PathVariable compId: Long,
         @AuthenticationPrincipal user: User,
     ): List<AnswerDto> {
         return answerService.getAllAnswersByCompetitionsAndUserId(compId, user.id!!)
@@ -80,7 +83,7 @@ class CompetitionsController {
     )
     @CompetitionAccessRequired
     @GetMapping("{compId}/problems")
-    fun getProblemsByCompetition(@PathVariable compId: Long): List<CompetitionsProblemsDto> {
+    fun getProblemsByCompetition(@CompetitionId @PathVariable compId: Long): List<CompetitionsProblemsDto> {
         return competitionService.getProblemsById(compId)
     }
 
@@ -90,24 +93,26 @@ class CompetitionsController {
     )
     @CompetitionAccessRequired
     @GetMapping("{compId}/leaderboard")
-    fun leaderboard(@PathVariable compId: Long): Leaderboard {
+    fun leaderboard(@CompetitionId @PathVariable compId: Long): Leaderboard {
         return competitionService.getLeaderboardById(compId)
     }
 
     @Operation(
-        summary = "Edit competition users",
-        description = "Updates the list of users participating in a specific competition."
+        summary = "[ADMIN] Edit competition users",
+        description = "Updates the list of users participating in a specific competition. Required admin role."
     )
     @PutMapping("{compId}/users")
+    @RolesAllowed("ADMIN")
     @ResponseStatus(HttpStatus.ACCEPTED)
     fun editUsers(@PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
         competitionService.patchUsers(compId, data.usersIds)
     }
 
     @Operation(
-        summary = "Edit competition checkers",
-        description = "Updates the list of checkers for a specific competition."
+        summary = "[ADMIN] Edit competition checkers",
+        description = "Updates the list of checkers for a specific competition. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @PutMapping("{compId}/checkers")
     @ResponseStatus(HttpStatus.ACCEPTED)
     fun editCheckers(@PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
@@ -115,9 +120,10 @@ class CompetitionsController {
     }
 
     @Operation(
-        summary = "Get competition users",
-        description = "Retrieves the list of users participating in a specific competition."
+        summary = "[ADMIN] Get competition users",
+        description = "Retrieves the list of users participating in a specific competition. Required admin role."
     )
+    @RolesAllowed("ADMIN")
     @GetMapping("{compId}/users")
     fun getUsers(@PathVariable compId: Long): List<UserDto> {
         return competitionService.getUsers(compId)
@@ -137,13 +143,16 @@ class CompetitionsController {
         summary = "Get competitions available for user",
         description = "Retrieves all competitions accessible to the authenticated user."
     )
-    @CompetitionAccessRequired
     @GetMapping("/me")
     fun getAllAvaliableForUser(@AuthenticationPrincipal user: User): List<CompetitionDto> {
         return competitionService.getAllByUser(user)
     }
 
-    @Operation(summary = "Get all competitions", description = "Retrieves a list of all competitions.")
+    @Operation(
+        summary = "[ADMIN] Get all competitions",
+        description = "Retrieves a list of all competitions. Required admin role."
+    )
+    @RolesAllowed("ADMIN")
     @GetMapping
     fun getAll(): List<CompetitionDto> {
         return competitionService.getAll()

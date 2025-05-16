@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import ru.codebattles.backend.entity.AnswerStatus
 import ru.codebattles.backend.repository.AnswerRepository
-import ru.codebattles.backend.repository.CompetitionProblemsRepository
 import ru.codebattles.backend.web.entity.checker.CheckerCallback
+
 @Tag(name = "Checker system API", description = "Endpoints for checker system")
 @RestController
 class CheckerSystemEndpointController(
@@ -17,8 +17,8 @@ class CheckerSystemEndpointController(
     val objectMapper: ObjectMapper
 ) {
     @Operation(
-        summary = "Handle checker system callback",
-        description = "Processes the callback from the checker system, updates the answer status, and calculates the score."
+        summary = "(Internal method) Handle checker system callback",
+        description = "Processes the callback from the checker system, updates the answer status, and calculates the score. Used only for checkers. Access disabled if used via gateway"
     )
     @PostMapping("/api/check_system_callback")
     fun checkerCallBack(@RequestBody data: CheckerCallback) {

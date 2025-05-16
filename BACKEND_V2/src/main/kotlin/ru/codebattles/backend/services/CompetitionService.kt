@@ -128,4 +128,11 @@ class CompetitionService(
             competition
         )
     }
+
+    fun checkAccessForCompetitionByUser(user: User, competitionId: Long): Boolean {
+        return (
+                user.isAdmin() ||
+                        competitionRepository.existsByIdAndMembersId(competitionId, user.id!!)
+                )
+    }
 }

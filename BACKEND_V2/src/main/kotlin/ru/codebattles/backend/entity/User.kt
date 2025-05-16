@@ -35,7 +35,7 @@ data class User(
 
 
     fun isAdmin(): Boolean {
-        return authorities.contains(SimpleGrantedAuthority("ROLE_ADMIN"))
+        return authorities.contains(SimpleGrantedAuthority("ROLE_ADMIN")) || authorities.contains(SimpleGrantedAuthority("ADMIN"))
     }
 
     override fun equals(other: Any?): Boolean {
