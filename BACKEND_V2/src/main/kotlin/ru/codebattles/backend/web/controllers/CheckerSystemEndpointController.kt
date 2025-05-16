@@ -18,7 +18,8 @@ class CheckerSystemEndpointController(
 ) {
     @Operation(
         summary = "(Internal method) Handle checker system callback",
-        description = "Processes the callback from the checker system, updates the answer status, and calculates the score. Used only for checkers. Access disabled if used via gateway"
+        description = "Processes the callback from the checker system, updates the answer status, and calculates the score. " +
+                "Used only for checkers. Access disabled if used via gateway"
     )
     @PostMapping("/api/check_system_callback")
     fun checkerCallBack(@RequestBody data: CheckerCallback) {
@@ -29,7 +30,10 @@ class CheckerSystemEndpointController(
         val countOfTests = data.results.size
         val countOfSuccessTests = data.results.count { it.success }
 
-        val score: Int = countOfSuccessTests / countOfTests * 100
+        var score: Int = 0
+        if (countOfTests > 0) {
+            score = countOfSuccessTests / countOfTests * 100
+        }
 
         answer.result = objectMapper.writeValueAsString(data)
         answer.status = AnswerStatus.COMPLETED;
