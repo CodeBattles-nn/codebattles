@@ -5,9 +5,6 @@ import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useEffect} from "react";
 
 
-function is_admin(user) {
-    return user?.authorities?.some(auth => auth.authority === "ADMIN")
-}
 
 const Header = () => {
 
@@ -73,7 +70,7 @@ const Header = () => {
                     </ul>
 
                     {
-                        is_admin(profile) &&
+                        profile.isAdmin &&
                         <Link className="nav-link mx-2" to="/admin/champs">Панель админа</Link>
                     }
 
