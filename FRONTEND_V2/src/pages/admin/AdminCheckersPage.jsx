@@ -36,6 +36,10 @@ export const AdminCheckersPage = () => {
                     </Card>
                 })
             }
+
+            <Card>
+                <Link to="/admin/checkers/create" className="btn btn-success">Создать</Link>
+            </Card>
         </>
     );
 };
