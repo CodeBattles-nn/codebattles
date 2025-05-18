@@ -11,3 +11,15 @@ export const formatDate = (dateString) => {
         // timeZone: 'UTC'
     })
 }
+
+
+
+export const getCssClassBySendScore = (score) => {
+    console.log(score)
+
+    if (score === 100) return "table-success"
+    if (score === 0) return "table-danger"
+    if (score > 0) return "table-warning"
+
+    return ""
+}
