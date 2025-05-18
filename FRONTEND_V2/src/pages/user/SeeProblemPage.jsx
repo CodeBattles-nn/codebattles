@@ -131,7 +131,7 @@ const SeeProblemPage = () => {
                 </div>
             </div>
             {
-                (data?.examples === undefined || data?.examples?.length > 0) &&
+                (JSON.parse(data?.problem?.examples || "[]").length > 0) &&
                 <div className="row">
                     <div className="col">
                         <Card>
