@@ -43,7 +43,7 @@ export const AdminProblemsPageEdit = () => {
             reset(data);
             // Принудительно сбросим поля для useFieldArray
             if (data.tests) {
-                replaceTests(JSON.parse(data.examples));
+                replaceTests(JSON.parse(data.tests));
             }
             if (data.examples) {
                 replaceExamples(JSON.parse(data.examples));
