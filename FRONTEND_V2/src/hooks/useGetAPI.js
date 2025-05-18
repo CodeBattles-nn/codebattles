@@ -31,7 +31,7 @@ function useCachedGetAPI(
                 localStorage.setItem(LOCALSTORAGE_PREFIX + url, JSON.stringify(data))
             })
             .catch((error) => {
-                if (error.response && error.response.status === 403) {
+                if (error.response && error.response.status === 401) {
                     localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
                     navigate("/")
                 } else {
