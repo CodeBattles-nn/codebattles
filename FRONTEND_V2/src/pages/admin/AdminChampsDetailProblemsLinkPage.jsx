@@ -1,5 +1,5 @@
 import Card from "../../components/bootstrap/Card.jsx";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
@@ -11,6 +11,8 @@ import axios from "axios";
 export const AdminChampsDetailProblemsLinkPage = () => {
 
     const navigate = useNavigate();
+
+    const {compId} = useParams()
 
     const {
         register,
@@ -30,7 +32,6 @@ export const AdminChampsDetailProblemsLinkPage = () => {
 
         axios.post('/api/competitionsProblems', data, conf)
             .then(() => navigate("/admin/champs"))
-
 
 
     };
@@ -68,20 +69,19 @@ export const AdminChampsDetailProblemsLinkPage = () => {
                         {errors.priority && <div className="invalid-feedback">{errors.priority.message}</div>}
                     </div>
 
-                    <div className="mb-3">
-                        <label htmlFor="competition_id" className="form-label">Competition ID</label>
-                        <input
-                            type="number"
-                            id="competition_id"
-                            className={`form-control ${errors.competition_id ? 'is-invalid' : ''}`}
-                            {...register("competition_id", {
-                                valueAsNumber: true,
-                                required: "Competition ID is required"
-                            })}
-                        />
-                        {errors.competition_id &&
-                            <div className="invalid-feedback">{errors.competition_id.message}</div>}
-                    </div>
+                    <input
+                        type="number"
+                        id="competition_id"
+                        className={`form-control ${errors.competition_id ? 'is-invalid' : ''}`}
+                        {...register("competition_id", {
+                            valueAsNumber: true,
+                            value: compId,
+                            required: "Competition ID is required"
+                        })}
+                        hidden
+                    />
+                    {errors.competition_id &&
+                        <div className="invalid-feedback">{errors.competition_id.message}</div>}
 
                     <div className="mb-3">
                         <label htmlFor="problem_id" className="form-label">Problem ID</label>
