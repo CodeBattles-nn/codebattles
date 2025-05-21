@@ -5,13 +5,11 @@ import org.mapstruct.Mapper
 import org.mapstruct.MappingTarget
 import org.mapstruct.NullValuePropertyMappingStrategy
 import ru.codebattles.backend.dto.UserDto
+import ru.codebattles.backend.dto.UserProfileDto
 import ru.codebattles.backend.dto.UserProfileEditDto
 import ru.codebattles.backend.dto.mapper.core.AbstractMapper
 import ru.codebattles.backend.entity.User
 
 
 @Mapper(componentModel = "spring")
-interface UserMapper : AbstractMapper<User, UserDto> {
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    fun updateUserProfile(dto: UserProfileEditDto?, @MappingTarget entity: User?)
-}
+interface UserProfileMapper : AbstractMapper<User, UserProfileDto>
