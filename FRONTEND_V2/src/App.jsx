@@ -27,6 +27,7 @@ import {AdminCheckersEditPage} from "./pages/admin/AdminCheckersEditPage.jsx";
 import {AdminProblemsPageCreate} from "./pages/admin/AdminProblemsPageCreate.jsx";
 import {AdminProblemsPageEdit} from "./pages/admin/AdminProblemsPageEdit.jsx";
 import {AdminCheckersCreatePage} from "./pages/admin/AdminCheckersCreatePage.jsx";
+import {Profile} from "./pages/user/Profile.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -50,6 +51,7 @@ function App() {
                         <Route path="/champs/:compId/sends/:id" element={<SeeSendPage/>}/>
                         <Route path="/statuses" element={<StatusesPage/>}/>
                         <Route path="/champs" element={<ChampsPage/>}/>
+                        <Route path="/profile" element={<Profile/>}/>
 
                         <Route path="/admin/problems" element={<AdminProblemsPage/>}/>
                         <Route path="/admin/problems/create" element={<AdminProblemsPageCreate/>}/>

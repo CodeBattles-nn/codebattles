@@ -5,14 +5,14 @@ import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useEffect} from "react";
 
 
-
 const Header = () => {
 
     let navigate = useNavigate();
 
     let isAuthed = localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true"
 
-    const [profile, update] = useCachedGetAPI("/api/users/me",() => {}, {});
+    const [profile, update] = useCachedGetAPI("/api/users/me", () => {
+    }, {});
 
     console.log(profile)
 
@@ -62,12 +62,24 @@ const Header = () => {
                             </>
                         }
                         {
+                            params.pathname === "/profile" && <>
+                                <li className="nav-item active">
+                                    <Link className="nav-link" to={`/champs/`}>Соревнования</Link>
+                                </li>
+                            </>
+                        }
+                        {
                             compId && compId === "champs" && <>
                             </>
                         }
 
                         {/*<a className="nav-link mx-5" target="_blank" href="/teacher">Учителю</a>*/}
                     </ul>
+
+                    {
+                        isAuthed &&
+                        <Link className="nav-link mx-2" to="/profile">Профиль</Link>
+                    }
 
                     {
                         profile.isAdmin &&
