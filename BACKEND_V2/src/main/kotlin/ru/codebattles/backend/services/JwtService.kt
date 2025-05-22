@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.stereotype.Service
 import ru.codebattles.backend.core.properties.JwtTokenProperties
+import ru.codebattles.tools.generateSecureRandomString
 import java.security.Key
 import java.util.*
 import javax.crypto.SecretKey
@@ -19,7 +20,9 @@ class JwtService(
 
 
     private final fun getSecretKey(): SecretKey {
-        val secretKey = properties.secretKey
+        var secretKey = properties.secretKey
+        if (secretKey == null) secretKey = generateSecureRandomString(128)
+
         val decodedKey = Base64.getDecoder().decode(secretKey)
         return Keys.hmacShaKeyFor(decodedKey)
     }
