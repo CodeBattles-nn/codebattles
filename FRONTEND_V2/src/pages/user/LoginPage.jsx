@@ -42,32 +42,40 @@ const LoginPage = () => {
     }, [navigate]);
 
     return (
-        <div style={{minHeight: "80dvh"}}>
+        <div style={{minHeight: "80dvh"}} className="d-flex justify-content-center align-content-center flex-wrap">
 
-            <Card className="p-5">
-                <h3 className="mb-4">Войти в соревнование</h3>
-                {apiError &&
-                    <div className="alert alert-danger" role="alert">
-                        {apiError}
-                    </div>
-                }
-                <MasterForm form={form} onSubmit={onSubmit}>
-                    <InputFormElement
-                        displayName="Логин"
-                        name='username'
-                        args={{required: "Введите логин"}}
-                    />
-                    <InputFormElement
-                        displayName="Пароль"
-                        name='password'
-                        args={{required: "Введите пароль"}}
-                    />
+           <div className='container'>
+              <div className="row">
+                  <div className="col-1 col-lg-2"/>
+                  <div className="col">
+                      <Card className="p-5">
+                          <h3 className="mb-4">Вход в аккаунт</h3>
+                          {apiError &&
+                              <div className="alert alert-danger" role="alert">
+                                  {apiError}
+                              </div>
+                          }
+                          <MasterForm form={form} onSubmit={onSubmit}>
+                              <InputFormElement
+                                  displayName="Логин"
+                                  name='username'
+                                  args={{required: "Введите логин"}}
+                              />
+                              <InputFormElement
+                                  displayName="Пароль"
+                                  name='password'
+                                  args={{required: "Введите пароль"}}
+                              />
 
-                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                        {isSubmitting ? "Входим..." : "Войти"}
-                    </button>
-                </MasterForm>
-            </Card>
+                              <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                                  {isSubmitting ? "Входим..." : "Войти"}
+                              </button>
+                          </MasterForm>
+                      </Card>
+                  </div>
+                  <div className="col-1 col-lg-2"/>
+              </div>
+           </div>
         </div>
     );
 };
