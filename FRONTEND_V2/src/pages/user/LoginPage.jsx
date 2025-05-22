@@ -64,6 +64,7 @@ const LoginPage = () => {
                               <InputFormElement
                                   displayName="Пароль"
                                   name='password'
+                                  type="password"
                                   args={{required: "Введите пароль"}}
                               />
 
