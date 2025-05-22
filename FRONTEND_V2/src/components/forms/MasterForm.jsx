@@ -20,7 +20,7 @@ export const MasterForm = (
 
     return (
         <FormContext.Provider value={form}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 {children}
             </form>
         </FormContext.Provider>
@@ -28,7 +28,7 @@ export const MasterForm = (
 };
 
 MasterForm.propTypes = {
-    form: PropTypes.any,
+    form: PropTypes.any.isRequired,
     onSubmit: PropTypes.func,
     children: PropTypes.node
 };

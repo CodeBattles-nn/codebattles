@@ -1,34 +1,63 @@
 import Card from "../../components/bootstrap/Card.jsx";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../components/AdminHeader.jsx";
+import {MasterForm} from "../../components/forms/MasterForm.jsx";
+import {useForm} from "react-hook-form";
+import constants from "../../utils/consts.js";
+import axios from "axios";
+import {CompetitionCard} from "../../components/CompetitionCard.jsx";
+import {CompetitionFormElements} from "../../components/form_impl/CompetitionForm.jsx";
 
 export const AdminChampsDetailPage = () => {
 
     const {compId} = useParams()
 
-    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}`,() => {}, []);
+    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}`, () => {
+    }, []);
 
 
     useEffect(() => {
         update()
     }, []);
 
+    const [done, setDone] = useState(false);
+
     console.log(data)
+
+    let form = useForm();
+
+    useEffect(() => {
+        form.reset(data)
+    }, [data]);
+
+    const onSubmit = (data) => {
+        const conf = {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
+            }
+        }
+
+        setDone(false)
+        axios.put(`/api/competitions/${compId}`, data, conf)
+            .then(() => setDone(true))
+            .then(() => update())
+    }
 
     return (
         <>
-            <UserLoginRequired />
+            <UserLoginRequired/>
 
             <BreadcrumbsRoot>
                 <BreadcrumbsElement name="Соревнования"/>
             </BreadcrumbsRoot>
 
-            <AdminHeader />
+            <AdminHeader/>
 
             <Card key={data.id}>
                 <h2>Управление</h2>
@@ -38,38 +67,24 @@ export const AdminChampsDetailPage = () => {
                 <Link to="rating" className="btn btn-info me-2"> Рейтинг</Link>
 
 
-                <Card>
-                    <h5><span className="badge text-bg-primary">Идет</span></h5>
-                    <h2>{data.name}</h2>
-                    <h3>{data.description}</h3>
-                </Card>
+                <CompetitionCard
+                    name={data.name}
+                    description={data.description}
+                />
 
                 <hr className="my-5"/>
+                {
+                    done &&
+                    <div className="alert alert-success" role="alert">
+                        Данные успешно сохранены
+                    </div>
+                }
 
-                <form>
-                    <div className="form-group mb-3">
-                        <label htmlFor="exampleInputEmail1">Название</label>
-                        <input defaultValue={data.name} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                            <small id="emailHelp" className="form-text text-muted">Название, которое показывается пользователю</small>
-                    </div>
+                <MasterForm form={form} onSubmit={onSubmit}>
+                    <CompetitionFormElements />
 
-                    <div className="form-group mb-3">
-                        <label htmlFor="exampleFormControlTextarea1">Описание</label>
-                        <textarea defaultValue={data.description} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        <small id="emailHelp" className="form-text text-muted">Описание. Поддерживается Markdown</small>
-                    </div>
-                    <div className="form-group mb-3">
-                        <label htmlFor="exampleFormControlTextarea1">Начало</label>
-                        <input type="datetime-local" defaultValue={data.name} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                        <small id="emailHelp" className="form-text text-muted">Время начала соревнования</small>
-                    </div>
-                    <div className="form-group mb-3">
-                        <label htmlFor="exampleFormControlTextarea1">Конец</label>
-                        <input type="datetime-local" defaultValue={data.name} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                        <small id="emailHelp" className="form-text text-muted">Время конца соревнования</small>
-                    </div>
-                    <button type="submit" className="btn btn-success disabled">Сохранить</button>
-                </form>
+                    <button type="submit" className="btn btn-success ">Сохранить</button>
+                </MasterForm>
                 <hr className="my-5"/>
                 <h3>Чекеры</h3>
                 <div className="d-flex gap-2">
@@ -82,7 +97,7 @@ export const AdminChampsDetailPage = () => {
                         })
                     }
                 </div>
-                <br />
+                <br/>
                 <Link to="checkers" className="btn btn-info my-2"> Редактировать чекеры</Link>
 
 

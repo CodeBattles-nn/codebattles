@@ -5,7 +5,7 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import constants from "../../utils/consts.js";
 import {MasterForm} from "../../components/forms/MasterForm.jsx";
-import {TextFormElement} from "../../components/forms/TextFormElement.jsx";
+import {InputFormElement} from "../../components/forms/InputFormElement.jsx";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -52,12 +52,12 @@ const LoginPage = () => {
                     </div>
                 }
                 <MasterForm form={form} onSubmit={onSubmit}>
-                    <TextFormElement
+                    <InputFormElement
                         displayName="Логин"
                         name='username'
                         args={{required: "Введите логин"}}
                     />
-                    <TextFormElement
+                    <InputFormElement
                         displayName="Пароль"
                         name='password'
                         args={{required: "Введите пароль"}}
