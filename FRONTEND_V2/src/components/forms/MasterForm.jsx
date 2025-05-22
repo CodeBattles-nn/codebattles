@@ -9,17 +9,12 @@ export const MasterForm = (
     {form, onSubmit = emptyFunction, children}
 ) => {
 
-    // const form = useForm();
-
     const {
-        register,
         handleSubmit,
-        formState: {errors, isSubmitting}
     } = form
 
-
     return (
-        <FormContext.Provider value={form}>
+        <FormContext.Provider value={handleSubmit}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {children}
             </form>
