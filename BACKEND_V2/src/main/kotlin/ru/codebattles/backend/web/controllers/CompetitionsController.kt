@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.annotations.CompetitionAccessRequired
 import ru.codebattles.backend.annotations.CompetitionId
 import ru.codebattles.backend.dto.*
+import ru.codebattles.backend.dto.mapper.CompetitionsMapper
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
+import ru.codebattles.backend.repository.CompetitionRepository
 import ru.codebattles.backend.services.AnswerService
 import ru.codebattles.backend.services.CompetitionService
+import ru.codebattles.backend.web.entity.CompetitionEditDto
 import ru.codebattles.backend.web.entity.EditUsersRequest
 import ru.codebattles.backend.web.entity.SendAnswerRequest
 
@@ -22,7 +25,12 @@ import ru.codebattles.backend.web.entity.SendAnswerRequest
 @RestController
 @RequestMapping("/api/competitions")
 @SecurityRequirement(name = "JWT")
-class CompetitionsController {
+class CompetitionsController (
+    private val competitionMapper: CompetitionsMapper
+) {
+    @Autowired
+    private lateinit var competitionRepository: CompetitionRepository
+
     @Autowired
     private lateinit var competitionService: CompetitionService
 
@@ -107,6 +115,18 @@ class CompetitionsController {
     fun editUsers(@PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
         competitionService.patchUsers(compId, data.usersIds)
     }
+
+    @RolesAllowed("ADMIN")
+    @PutMapping("{compId}")
+    fun update(@PathVariable compId: Long, @RequestBody profileData: CompetitionEditDto): CompetitionDto {
+        val competition = competitionRepository.getById(compId)
+
+        competitionMapper.update(profileData, competition)
+        competitionRepository.save(competition)
+
+        return competitionMapper.toDto(competition)
+    }
+
 
     @Operation(
         summary = "[ADMIN] Edit competition checkers",

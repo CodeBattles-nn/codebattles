@@ -13,27 +13,27 @@ data class Competition(
     var checkers: MutableSet<Checker>? = mutableSetOf(),
 
     @ManyToOne
-    val organizer: User?,
+    var organizer: User?,
 
     @Column(nullable = false)
-    val name: String,
+    var name: String,
 
     @Column(nullable = false, length = 1000)
-    val description: String,
+    var description: String,
 
     @Column(name = "started_at")
-    val startedAt: Date? = null,
+    var startedAt: Date? = null,
 
     @Column(name = "ended_at")
-    val endedAt: Date? = null,
+    var endedAt: Date? = null,
 
     @Column(name = "show_rating", nullable = false)
-    val showRating: Boolean = true,
+    var showRating: Boolean = true,
 
     @Column(name = "show_output", nullable = false)
-    val showOutput: Boolean = true,
+    var showOutput: Boolean = true,
 
     @Column(name = "show_input", nullable = false)
-    val showInput: Boolean = true,
+    var showInput: Boolean = true,
 
     ) : BaseEntity()
