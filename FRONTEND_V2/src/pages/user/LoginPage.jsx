@@ -4,54 +4,69 @@ import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import constants from "../../utils/consts.js";
+import {MasterForm} from "../../components/forms/MasterForm.jsx";
+import {TextFormElement} from "../../components/forms/TextFormElement.jsx";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
 
-    let navigate = useNavigate();
-    const {register, handleSubmit} = useForm()
+    const form = useForm();
 
-    const [hasErrorInData, setHasErrorInData] = useState(false);
+    const {
+        formState: {isSubmitting}
+    } = form
 
-    const onSubmit = (data) => {
-        // console.log(data)
-        axios.post('/api/auth/login', data)
-            .then((req) => localStorage.setItem(constants.LOCALSTORAGE_JWT, req.data.token))
-            .then((dta) => console.log(dta))
-            .then(() => localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "true"))
-            .then(() => navigate("/champs"))
-            .catch(() => setHasErrorInData(true))
-    }
+    const [apiError, setApiError] = useState("");
+
+    const onSubmit = async (data) => {
+        setApiError(""); // сбрасываем ошибку перед новым запросом
+        try {
+            const response = await axios.post('/api/auth/login', data);
+            const {token} = response.data;
+            localStorage.setItem(constants.LOCALSTORAGE_JWT, token);
+            localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "true");
+            navigate("/champs");
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                setApiError("Неправильный логин или пароль.");
+            } else {
+                setApiError("Произошла ошибка. Попробуйте снова позже.");
+            }
+        }
+    };
 
     useEffect(() => {
-        if (localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true") navigate("/champs")
-    }, []);
+        if (localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true") {
+            navigate("/champs");
+        }
+    }, [navigate]);
 
     return (
         <div style={{minHeight: "80dvh"}}>
-            <Card className="p-5">
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <h3 className="mb-4">Войти в соревнование</h3>
-                    {
-                        hasErrorInData && (<p className="text-danger">Неправильные данные</p>)
-                    }
-                    {/*<div className="mb-3">*/}
-                    {/*    <label htmlFor="exampleInputEmail1" className="form-label">ID соревнования</label>*/}
-                    {/*    <input className="form-control" id="exampleInputEmail1" {...register("id")}*/}
-                    {/*           aria-describedby="emailHelp"/>*/}
-                    {/*</div>*/}
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">Логин</label>
-                        <input className="form-control" id="exampleInputEmail1" {...register("username")}
-                               aria-describedby="emailHelp"/>
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="exampleInputPassword1" className="form-label">Пароль</label>
-                        <input type="password" className="form-control"
-                               id="exampleInputPassword1" {...register("password")}/>
-                    </div>
 
-                    <button type="submit" className="btn btn-primary">Войти</button>
-                </form>
+            <Card className="p-5">
+                <h3 className="mb-4">Войти в соревнование</h3>
+                {apiError &&
+                    <div className="alert alert-danger" role="alert">
+                        {apiError}
+                    </div>
+                }
+                <MasterForm form={form} onSubmit={onSubmit}>
+                    <TextFormElement
+                        displayName="Логин"
+                        name='username'
+                        args={{required: "Введите логин"}}
+                    />
+                    <TextFormElement
+                        displayName="Пароль"
+                        name='password'
+                        args={{required: "Введите пароль"}}
+                    />
+
+                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                        {isSubmitting ? "Входим..." : "Войти"}
+                    </button>
+                </MasterForm>
             </Card>
         </div>
     );
