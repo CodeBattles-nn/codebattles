@@ -33,6 +33,7 @@ export const AdminChampsPage = () => {
                 data?.map(elem => {
                     return <CompetitionCard
                         key={elem.id}
+                        id={elem.id}
                         name={elem.name}
                         description={elem.description}>
                         <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-warning me-2">Управлять</Link>

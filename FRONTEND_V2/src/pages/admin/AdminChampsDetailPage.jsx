@@ -70,6 +70,7 @@ export const AdminChampsDetailPage = () => {
                 <CompetitionCard
                     name={data.name}
                     description={data.description}
+                    id={data.id}
                 />
 
                 <hr className="my-5"/>

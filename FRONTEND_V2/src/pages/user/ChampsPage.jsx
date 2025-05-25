@@ -28,6 +28,7 @@ const ChampsPage = () => {
                 data?.map(elem => {
                     return <CompetitionCard
                         key={elem.id}
+                        id={elem.id}
                         name={elem.name}
                         description={elem.description}>
                         <Link to={`/champs/${elem.id}/problems`} className="btn btn-success">Войти</Link>

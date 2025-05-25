@@ -31,7 +31,10 @@ export const AdminProblemsPage = () => {
                 data?.map(elem => {
                     return <Card key={elem.id}>
                         {/*<h5><span className="badge text-bg-primary">Идет</span></h5>*/}
-                        <h2>{elem.name}</h2>
+                        <div className="d-flex gap-2">
+                            <h2>{elem.name}</h2><small className=""> id=<x className="text-danger">{elem.id}</x></small>
+                        </div>
+
                         <h3>{elem.description}</h3>
                         <Link to={`/admin/problems/${elem.id}/edit`} className="btn btn-warning me-2">Управлять</Link>
                     </Card>
