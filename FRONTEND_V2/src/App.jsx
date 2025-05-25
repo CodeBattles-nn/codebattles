@@ -28,6 +28,8 @@ import {AdminProblemsPageCreate} from "./pages/admin/AdminProblemsPageCreate.jsx
 import {AdminProblemsPageEdit} from "./pages/admin/AdminProblemsPageEdit.jsx";
 import {AdminCheckersCreatePage} from "./pages/admin/AdminCheckersCreatePage.jsx";
 import {Profile} from "./pages/user/Profile.jsx";
+import {AdminUserCreatePage} from "./pages/admin/users/AdminUserCreatePage.jsx";
+import {AdminUsersPage} from "./pages/admin/users/AdminUsersPage.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -75,6 +77,9 @@ function App() {
                         <Route path="/admin/champs/:compId/edit/checkers" element={<AdminUsersDetailCheckersPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating" element={<AdminChampsDetailRatingPage/>}/>
                         <Route path="/admin/champs/:compId/edit/rating/answer" element={<AdminSeeSendPage/>}/>
+
+                        <Route path="/admin/users/create" element={<AdminUserCreatePage/>}/>
+                        <Route path="/admin/users" element={<AdminUsersPage/>}/>
 
                         <Route path="*" element={<NotFound/>}/>
                     </Routes>
