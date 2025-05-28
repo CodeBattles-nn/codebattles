@@ -1,10 +1,13 @@
 import axios from "axios";
 
-axios.defaults.withCredentials = true
-
-const isProd = import.meta.env.VITE_ENV === "production";
-if (!isProd) {
-    // axios.defaults.baseURL =`${document.location.protocol}//${document.location.hostname}:2500`
-}
-
-axios.defaults.baseURL =`${document.location.protocol}//${document.location.hostname}:${document.location.port}`
+// const productionBuild = import.meta.env.VITE_ENV === "production";
+// if (!productionBuild) {
+//     axios.defaults.baseURL = `${document.location.protocol}//${document.location.hostname}:${8080}`
+// }
+// const baseUrl = import.meta.env.VITE_API_ENDPOINT
+//
+// console.log("BASEURL: "+ baseUrl)
+//
+// if (baseUrl && baseUrl !== ""){
+//     axios.defaults.baseURL = baseUrl
+// }

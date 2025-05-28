@@ -11,24 +11,33 @@ const LOCALSTORAGE_PREFIX = "__api_cache="
 
 function useCachedGetAPI(
     url = defaultUrl,
-    onError = defaultEmptyFunction
+    onError = defaultEmptyFunction,
+    defaultState = {}
 ) {
-    const [data, setData] = useState({});
+    const [data, setData] = useState(defaultState);
     const navigate = useNavigate()
 
     const apiGetData = () => {
         axios
             .get(url,
-                {headers: {'Content-Type': 'application/json'}})
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
+                    }
+                })
             .then(({data}) => {
                 setData(data)
                 localStorage.setItem(LOCALSTORAGE_PREFIX + url, JSON.stringify(data))
             })
-            .catch(() => {
-                localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
-                navigate("/")
+            .catch((error) => {
+                if (error.response && error.response.status === 401) {
+                    localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "false")
+                    navigate("/")
+                } else {
+                    onError(error)
+                }
             })
-            .catch(onError)
     }
 
     const getData = () => {
@@ -46,7 +55,7 @@ function useCachedGetAPI(
 
     useEffect(() => {
         getData();
-    },[]);
+    }, []);
 
     return [data, updateCallback];
 }

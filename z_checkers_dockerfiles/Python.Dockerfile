@@ -11,7 +11,7 @@ RUN mvn -f /home/app/pom.xml clean package
 #
 FROM alpine:20240329
 
-RUN apk add openjdk17-jre
+RUN apk add openjdk17-jre bubblewrap
 
 WORKDIR /app
 
