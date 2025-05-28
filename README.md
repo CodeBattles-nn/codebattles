@@ -2,7 +2,6 @@
 
 Programming competition system
 
-[![deploy](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/doctorixx/CodeBattles/actions/workflows/deploy.yml)
 [![Licence](https://img.shields.io/github/license/CodeBattles-nn/CodeBattles?style=flat)](./LICENSE)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/codebattles-nn/codebattles)
 ![Lines of code](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/codebattles-nn/codebattles/badge)
@@ -10,11 +9,10 @@ Programming competition system
 
 ![Main image](images/image1.png)
 
-[Documentation RU](https://doctorixx.gitbook.io/codebattles/)
+[Documentation RU v3](https://doctorixx.gitbook.io/codebattles/ru_v3)
 
-[Documentation EN](https://doctorixx.gitbook.io/codebattles/v/en)
+[Documentation EN OLD!!!!!!](https://doctorixx.gitbook.io/codebattles/v/en)
 
-[Service monitoring](https://doctorixx.gitbook.io/codebattles/v/en)
 
 [Buy me a cofee/Donation](https://www.donationalerts.com/r/doctorixx)
 
@@ -69,17 +67,11 @@ ___
 ### Open container ports
 
 - Gateway on port 2500
-- Server part on port 8001
-- Frontend on port 8000
 - Database on port 25565
-- Redis on port 6379
 
 ### Generate tasks for compeptition
 
-For this create your custom tasks or use public repository
-
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=codebattles-nn&repo=task-generator)](https://github.com/codebattles-nn/task-generator)
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=codebattles-nn&repo=problems-repo)](https://github.com/codebattles-nn/problems-repo)
+At v3.x.x versions tasks can be created wia UI
 
 ## Main contributors
 
