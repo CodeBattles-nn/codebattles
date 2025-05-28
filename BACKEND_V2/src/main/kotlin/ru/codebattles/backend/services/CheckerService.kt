@@ -1,4 +1,4 @@
-package ru.codebattles.backend.services;
+package ru.codebattles.backend.services
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper

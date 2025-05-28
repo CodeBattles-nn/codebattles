@@ -21,40 +21,12 @@ import ru.codebattles.backend.core.filter.JwtAuthenticationFilter
 @EnableMethodSecurity(jsr250Enabled = true)
 class SecurityConfig(
     private val jwtAuthenticationFilter: JwtAuthenticationFilter,
-    private val passwordEncoder: PasswordEncoder,
 ) {
 
     @Bean
     fun authenticationManager(authConfig: AuthenticationConfiguration): AuthenticationManager {
         return authConfig.authenticationManager
     }
-//
-//    @Bean
-//    fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
-//        http
-//            .csrf { it.disable() } // Отключить CSRF при необходимости
-//            .authorizeHttpRequests {
-//                it
-//                    .requestMatchers("/test/**").permitAll()
-//                    .requestMatchers("/api/auth/login").permitAll()
-////                    .requestMatchers(
-////                        "/api/auth/login",
-////                        "/api/auth/register",
-////                        "/api/**",
-////                        "/swagger-ui/**",
-////                        "/v3/api-docs/**",
-////                        "/swagger-ui.html",
-////                        "/favicon.ico",
-////                        "/webjars/**"
-////                    ).permitAll()// Разрешить доступ без авторизации
-//                    .anyRequest().authenticated() // Все остальные запросы требуют авторизации
-//                    .and()
-//                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
-//            }
-//            .formLogin { it } // Включить стандартный логин через форму
-//        return http.build()
-//    }
-
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -89,7 +61,7 @@ class SecurityConfig(
             .and()
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
             .exceptionHandling()
-            .authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+            .authenticationEntryPoint(HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
         return http.build()
     }
 

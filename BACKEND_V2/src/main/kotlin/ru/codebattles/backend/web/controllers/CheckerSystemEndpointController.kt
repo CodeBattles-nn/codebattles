@@ -30,13 +30,13 @@ class CheckerSystemEndpointController(
         val countOfTests = data.results.size
         val countOfSuccessTests = data.results.count { it.success }
 
-        var score: Int = 0
+        var score = 0
         if (countOfTests > 0) {
             score = countOfSuccessTests / countOfTests * 100
         }
 
         answer.result = objectMapper.writeValueAsString(data)
-        answer.status = AnswerStatus.COMPLETED;
+        answer.status = AnswerStatus.COMPLETED
         answer.score = score
 
 

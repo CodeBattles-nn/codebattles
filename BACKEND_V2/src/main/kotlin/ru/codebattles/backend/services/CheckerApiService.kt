@@ -15,13 +15,13 @@ class CheckerApiService(
 ) {
 
     fun sendCheckerTask(payload: CheckerTaskRequest, url: String) {
-        val restTemplate: RestTemplate = RestTemplate()
+        val restTemplate = RestTemplate()
 
-        val headers: HttpHeaders = HttpHeaders()
+        val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         val json = objectMapper.writeValueAsString(payload)
         val entity = HttpEntity(json, headers)
-        val response = restTemplate.postForEntity(
+        restTemplate.postForEntity(
             url, entity,
             String::class.java
         )
