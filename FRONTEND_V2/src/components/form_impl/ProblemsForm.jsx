@@ -1,5 +1,6 @@
 import React from 'react';
 import {InputFormElement} from "../forms/InputFormElement.jsx";
+import PropTypes from "prop-types";
 
 export const ProblemsForm = ({form, testsArray, examplesArray}) => {
     const {
@@ -95,4 +96,12 @@ export const ProblemsForm = ({form, testsArray, examplesArray}) => {
         </>
     );
 };
+
+
+ProblemsForm.propTypes = {
+    form: PropTypes.object,
+    testsArray: PropTypes.object,
+    examplesArray: PropTypes.object,
+}
+
 

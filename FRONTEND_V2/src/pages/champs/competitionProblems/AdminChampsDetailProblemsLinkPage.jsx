@@ -19,11 +19,7 @@ export const AdminChampsDetailProblemsLinkPage = () => {
 
     const form = useForm();
 
-    const {
-        register,
-        handleSubmit,
-        formState: {errors}
-    } = form
+    const {register,} = form
 
     const onSubmit = (data) => {
         console.log(data);

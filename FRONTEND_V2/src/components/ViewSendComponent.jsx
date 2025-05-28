@@ -2,6 +2,7 @@ import React from 'react';
 import LazySyntaxHighlight from "./lazy/LazySyntaxHightlight.jsx";
 import ResponsiveTable from "./bootstrap/ResponsiveTable.jsx";
 import Card from "./bootstrap/Card.jsx";
+import PropTypes from "prop-types";
 
 export const ViewSendComponent = ({data}) => {
     const colorsByResult = {
@@ -57,4 +58,8 @@ export const ViewSendComponent = ({data}) => {
         </Card>
     );
 };
+
+ViewSendComponent.propTypes = {
+    data: PropTypes.object,
+}
 
