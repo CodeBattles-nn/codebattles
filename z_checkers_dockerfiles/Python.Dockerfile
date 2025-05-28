@@ -28,7 +28,7 @@ RUN adduser \
 
 ENV SERVER_ENDPOINT  http://backend:8000/api/check_system_callback
 ENV ENV_EXECUTOR_ENABLE true
-ENV ENV_EXECUTOR_RUN_COMMAND bwrap --unshare-net --tmpfs /tmp --tmpfs /home --proc /proc --dev /dev --ro-bind /usr /usr --ro-bind /bin /bin --ro-bind /sbin /sbin --ro-bind /lib /lib --ro-bind /etc/passwd /etc/passwd --ro-bind /etc/group /etc/group --clearenv --bind . /work --chdir /work python3
+ENV ENV_EXECUTOR_RUN_COMMAND python3
 ENV ENV_EXECUTOR_FILENAME main.py
 
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
