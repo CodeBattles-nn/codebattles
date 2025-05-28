@@ -1,32 +1,29 @@
-import useCachedGetAPI from "../../hooks/useGetAPI.js";
+import useCachedGetAPI from "../../../hooks/useGetAPI.js";
 import {useEffect} from "react";
-import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
-import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
-import UserLoginRequired from "../../components/UserLoginRequired.jsx";
-import {AdminHeader} from "../../components/AdminHeader.jsx";
+import BreadcrumbsElement from "../../../components/BreadcrumbsElement.jsx";
+import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
+import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
+import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {useFieldArray, useForm} from "react-hook-form";
-import Card from "../../components/bootstrap/Card.jsx";
-import {useNavigate, useParams} from "react-router-dom";
+import Card from "../../../components/bootstrap/Card.jsx";
+import constants from "../../../utils/consts.js";
 import axios from "axios";
-import constants from "../../utils/consts.js";
+import {useNavigate} from "react-router-dom";
 
-export const AdminProblemsPageEdit = () => {
+export const AdminProblemsPageCreate = () => {
 
     const navigate = useNavigate()
 
-    const {probId} = useParams()
-
-    const [data, update] = useCachedGetAPI(`/api/problems/${probId}/admin`, () => {
+    const [data, update] = useCachedGetAPI("/api/problems", () => {
     }, []);
 
     useEffect(() => {
         update()
     }, []);
 
-
     console.log(data)
 
-    const {register, control, reset, handleSubmit, formState: {errors}} = useForm({
+    const {register, control, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
             name: "",
             description: "",
@@ -37,27 +34,12 @@ export const AdminProblemsPageEdit = () => {
         }
     });
 
-
-    useEffect(() => {
-        if (data) {
-            reset(data);
-            // Принудительно сбросим поля для useFieldArray
-            if (data.tests) {
-                replaceTests(JSON.parse(data.tests));
-            }
-            if (data.examples) {
-                replaceExamples(JSON.parse(data.examples));
-            }
-        }
-    }, [data]);
-
-
-    const {fields: testFields, append: appendTest, remove: removeTest, replace: replaceTests} = useFieldArray({
+    const {fields: testFields, append: appendTest, remove: removeTest} = useFieldArray({
         control,
         name: "tests"
     });
 
-    const {fields: exampleFields, append: appendExample, remove: removeExample,replace: replaceExamples} = useFieldArray({
+    const {fields: exampleFields, append: appendExample, remove: removeExample} = useFieldArray({
         control,
         name: "examples"
     });
@@ -75,8 +57,8 @@ export const AdminProblemsPageEdit = () => {
         sendData.tests = JSON.stringify(data.tests)
 
 
-        axios.patch(`/api/problems/${probId}`, sendData, conf)
-            .then(() => navigate("/admin/problems"))
+        axios.post('/api/problems', sendData, conf)
+            .then(() => navigate("/admin/champs"))
     };
 
     return (
@@ -91,7 +73,7 @@ export const AdminProblemsPageEdit = () => {
 
             <Card>
                 <div className="container mt-4">
-                    <h3>Редактировать задачу</h3>
+                    <h3>Создать задачу</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         {/* Basic Fields */}
