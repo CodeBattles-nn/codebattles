@@ -40,7 +40,7 @@ export const DeleteButton = ({
             }
             {
                 !disabled && <>
-                    <span role="status"> Удалить</span>
+                    <span role="status">{" "}Удалить</span>
                 </>
             }
 

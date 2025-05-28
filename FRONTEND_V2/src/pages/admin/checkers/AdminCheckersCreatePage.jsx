@@ -15,12 +15,6 @@ export const AdminCheckersCreatePage = () => {
 
     const form = useForm()
 
-    const {
-        register,
-        handleSubmit,
-        formState: {errors}
-    } = form
-
     const onSubmit = (data) => {
         const conf = {
             headers: {

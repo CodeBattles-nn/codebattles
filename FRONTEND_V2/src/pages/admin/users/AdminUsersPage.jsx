@@ -32,7 +32,7 @@ export function AdminUsersPage() {
                     <tbody>
                     {
                         users.map(elem => {
-                            return <tr id={elem.id}>
+                            return <tr id={elem.id} key={elem.id}>
                                 <th scope="row">{elem.id}</th>
                                 <td>ИМЯНЕДОСТУПНО</td>
                                 <td>{elem.username}</td>

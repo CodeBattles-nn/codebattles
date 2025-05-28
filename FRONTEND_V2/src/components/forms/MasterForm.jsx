@@ -8,13 +8,8 @@ const emptyFunction = () => {
 export const MasterForm = (
     {form, onSubmit = emptyFunction, children}
 ) => {
-
-    // const form = useForm();
-
     const {
-        register,
         handleSubmit,
-        formState: {errors, isSubmitting}
     } = form
 
 

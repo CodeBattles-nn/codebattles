@@ -13,8 +13,6 @@ import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {CheckerForm} from "../../../components/form_impl/CheckerForm.jsx";
 
 export const AdminCheckersEditPage = () => {
-
-
     const {checkId} = useParams()
 
     const navigate = useNavigate();
@@ -23,20 +21,12 @@ export const AdminCheckersEditPage = () => {
     }, []);
 
     const form = useForm();
-
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: {errors}
-    } = form
-
     useEffect(() => {
         updateData()
     }, []);
 
     useEffect(() => {
-        reset({
+        form.reset({
             displayName: competitionsProblem.displayName,
             address: competitionsProblem.address,
             languageHighlightName: competitionsProblem.languageHighlightName

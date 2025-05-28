@@ -60,7 +60,7 @@ export const AdminChampsDetailProblemsPage = () => {
                                         </Link></td>
                                         <td>
                                             <DeleteButton url={`/api/competitionsProblems/${data.id}`} />
-                                             
+                                            {" "}
                                             <Link to={`${data.id}/edit`} className="btn btn-secondary mx-2" >Изменить</Link>
                                         </td>
 

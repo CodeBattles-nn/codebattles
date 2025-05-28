@@ -27,6 +27,7 @@ export function AdminUserCreatePage() {
     const applyPassword = () => {
         const newPass = generatePassword();
         setValue('mpassword', newPass);
+        // eslint-disable-next-line
         const modal = bootstrap.Modal.getInstance(modalRef.current);
         modal.hide();
     };
