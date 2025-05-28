@@ -30,7 +30,6 @@ export const AdminProblemsPage = () => {
             {
                 data?.map(elem => {
                     return <Card key={elem.id}>
-                        {/*<h5><span className="badge text-bg-primary">Идет</span></h5>*/}
                         <div className="d-flex gap-2">
                             <h2>{elem.name}</h2><small className=""> id=<x className="text-danger">{elem.id}</x></small>
                         </div>
