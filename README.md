@@ -16,6 +16,8 @@ Programming competition system
 
 [Service monitoring](https://doctorixx.gitbook.io/codebattles/v/en)
 
+[Buy me a cofee/Donation](https://www.donationalerts.com/r/doctorixx)
+
 ## Get started
 
 > You must install Docker Compose to run:
@@ -88,5 +90,17 @@ Thank you for your huge contribution to the project:
 
 Thanks to [school30nn](https://school30nn.ru) for use of the system and provision of server resources
 
+## Donation
+If you liked the project or want to support the author, you can donate here
+
+[DonationAlerts](https://www.donationalerts.com/r/doctorixx)
+
+[Yoomoney](https://yoomoney.ru/fundraise/13V1T7RVQBE.240713)
+
+## SAST Tools
+
+[PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
+
+
 ___
-CodeBattles, 2024
+CodeBattles, 2024-2025
