@@ -16,6 +16,14 @@ export const competitionStatusesCssColor = {
     ENDED: "bg-danger",
 }
 
+export const competitionStatusesCssColorText = {
+    NOT_STARTED: "text-dark",
+    IN_PROGRESS: "",
+    ENDED: "",
+}
+
+
+
 
 
 export const getCompetitionStatusByDates = (start_time_str, end_time_str) => {

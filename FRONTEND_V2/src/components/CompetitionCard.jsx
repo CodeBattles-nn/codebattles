@@ -2,7 +2,7 @@ import React from 'react';
 import Card from "./bootstrap/Card.jsx";
 import PropTypes from "prop-types";
 import {
-    competitionStatusesCssColor,
+    competitionStatusesCssColor, competitionStatusesCssColorText,
     competitionStatusesTranslate,
     getCompetitionStatusByDates
 } from "../utils/competitionStatuses.js";
@@ -15,13 +15,14 @@ export const CompetitionCard = ({name, description, children, id, startedAt, end
     }
 
 
-    const statusCss = competitionStatusesCssColor[status]
+    const statusCssBg = competitionStatusesCssColor[status]
+    const statusCssText = competitionStatusesCssColorText[status]
     const statusText = competitionStatusesTranslate[status]
 
 
     return (
         <Card>
-            <h5><span className={`badge ${statusCss}`}>{statusText}</span></h5>
+            <h5><span className={`badge ${statusCssBg} ${statusCssText}`}>{statusText}</span></h5>
             <div className="d-flex align-items-start gap-2">
                 <h2 className="text">{name}</h2><small className="text-muted">id={id || "0000"}</small>
             </div>
