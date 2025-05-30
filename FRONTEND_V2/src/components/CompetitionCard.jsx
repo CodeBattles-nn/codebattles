@@ -6,6 +6,7 @@ import {
     competitionStatusesTranslate,
     getCompetitionStatusByDates
 } from "../utils/competitionStatuses.js";
+import {formatDate} from "../utils/format.js";
 
 export const CompetitionCard = ({name, description, children, id, startedAt, endedAt}) => {
     let status = getCompetitionStatusByDates(startedAt,endedAt)
@@ -28,9 +29,9 @@ export const CompetitionCard = ({name, description, children, id, startedAt, end
             </div>
             <p className="text-muted">{description}</p>
 
-            <small className="text-muted"><i className="bi bi-clock me-1"></i>Начало: {startedAt}</small>
+            <small className="text-muted"><i className="bi bi-clock me-1"></i>Начало: {formatDate(startedAt)}</small>
             <br />
-            <small className="text-muted"><i className="bi bi-clock me-1"></i>Конец: {endedAt} </small>
+            <small className="text-muted"><i className="bi bi-clock me-1"></i>Конец: {formatDate(endedAt)} </small>
             <p className="mb-2"/>
             {children}
         </Card>
