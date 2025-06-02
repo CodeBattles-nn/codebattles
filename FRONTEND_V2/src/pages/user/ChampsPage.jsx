@@ -26,24 +26,31 @@ const ChampsPage = () => {
                 <BreadcrumbsElement name="Соревнования"/>
             </BreadcrumbsRoot>
 
-            {
-                data?.map(elem => {
-                    const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
+            <div className='row g-0 gap-3'>
+                {
+                    data?.map(elem => {
+                        const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
 
-                    return <CompetitionCard
-                        key={elem.id}
-                        id={elem.id}
-                        name={elem.name}
-                        startedAt={elem.startedAt}
-                        endedAt={elem.endedAt}
-                        description={elem.description}>
-                        {status === competitionStatuses.IN_PROGRESS &&
-                            <>
-                                <Link to={`/champs/${elem.id}/problems`} className="btn btn-success">Войти</Link>
-                            </>}
-                    </CompetitionCard>
-                })
-            }
+                        return <>
+                            <div className='col d-flex align-items-stretch'>
+                                <CompetitionCard
+                                    key={elem.id}
+                                    id={elem.id}
+                                    name={elem.name}
+                                    startedAt={elem.startedAt}
+                                    endedAt={elem.endedAt}
+                                    description={elem.description}>
+                                    {status === competitionStatuses.IN_PROGRESS &&
+                                        <>
+                                            <Link to={`/champs/${elem.id}/problems`} className="btn btn-success">Войти</Link>
+                                        </>}
+                                </CompetitionCard>
+                            </div>
+                        </>
+                    })
+                }
+            </div>
+
         </>
     );
 };
