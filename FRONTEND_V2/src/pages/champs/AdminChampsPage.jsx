@@ -35,6 +35,8 @@ export const AdminChampsPage = () => {
                         key={elem.id}
                         id={elem.id}
                         name={elem.name}
+                        startedAt={elem.startedAt}
+                        endedAt={elem.endedAt}
                         description={elem.description}>
                         <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-warning me-2">Управлять</Link>
                     </CompetitionCard>

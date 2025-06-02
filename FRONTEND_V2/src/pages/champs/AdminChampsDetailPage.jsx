@@ -71,6 +71,8 @@ export const AdminChampsDetailPage = () => {
                     name={data.name}
                     description={data.description}
                     id={data.id}
+                    startedAt={data.startedAt}
+                    endedAt={data.endedAt}
                 />
 
                 <hr className="my-5"/>

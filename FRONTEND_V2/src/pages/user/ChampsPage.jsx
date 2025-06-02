@@ -5,10 +5,12 @@ import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import {CompetitionCard} from "../../components/CompetitionCard.jsx";
+import {competitionStatuses, getCompetitionStatusByDates} from "../../utils/competitionStatuses.js";
 
 const ChampsPage = () => {
 
-    const [data, update] = useCachedGetAPI("/api/competitions/me",() => {}, []);
+    const [data, update] = useCachedGetAPI("/api/competitions/me", () => {
+    }, []);
 
     useEffect(() => {
         update()
@@ -18,7 +20,7 @@ const ChampsPage = () => {
 
     return (
         <>
-            <UserLoginRequired />
+            <UserLoginRequired/>
 
             <BreadcrumbsRoot>
                 <BreadcrumbsElement name="Соревнования"/>
@@ -26,12 +28,19 @@ const ChampsPage = () => {
 
             {
                 data?.map(elem => {
+                    const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
+
                     return <CompetitionCard
                         key={elem.id}
                         id={elem.id}
                         name={elem.name}
+                        startedAt={elem.startedAt}
+                        endedAt={elem.endedAt}
                         description={elem.description}>
-                        <Link to={`/champs/${elem.id}/problems`} className="btn btn-success">Войти</Link>
+                        {status === competitionStatuses.IN_PROGRESS &&
+                            <>
+                                <Link to={`/champs/${elem.id}/problems`} className="btn btn-success">Войти</Link>
+                            </>}
                     </CompetitionCard>
                 })
             }
