@@ -32,6 +32,7 @@ services:
     networks:
       - with-internet
       - no-internet
+      - checkers-net
   postgres:
     image: postgres:13.3-alpine
     environment:
@@ -70,8 +71,7 @@ services:
     image: ghcr.io/codebattles-nn/checker-java
     restart: unless-stopped
     networks:
-      - with-internet
-      - no-internet
+      - checkers-net
 
   checker-python:
     build:
@@ -79,8 +79,7 @@ services:
     image: ghcr.io/codebattles-nn/checker-python
     restart: unless-stopped
     networks:
-      - with-internet
-      - no-internet
+      - checkers-net
 
 #  checker-kumir:
 #    build:
@@ -105,6 +104,9 @@ services:
 
 networks:
   no-internet:
+    driver: bridge
+    internal: true
+  checkers-net:
     driver: bridge
     internal: true
   with-internet:
