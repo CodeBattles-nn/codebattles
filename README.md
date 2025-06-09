@@ -1,98 +1,128 @@
-# [Codebattles](https://codebattles.ru)
+# CodeBattles 🏆
 
-Programming competition system
+[![License](https://img.shields.io/github/license/CodeBattles-nn/CodeBattles?style=flat-square)](./LICENSE)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/w/codebattles-nn/codebattles?style=flat-square)](https://github.com/CodeBattles-nn/CodeBattles/commits)
+[![Lines of code](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/codebattles-nn/codebattles/badge&style=flat-square)](https://github.com/CodeBattles-nn/CodeBattles)
+[![GitHub language count](https://img.shields.io/github/languages/count/codebattles-nn/codebattles?style=flat-square)](https://github.com/CodeBattles-nn/CodeBattles)
 
-[![Licence](https://img.shields.io/github/license/CodeBattles-nn/CodeBattles?style=flat)](./LICENSE)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/w/codebattles-nn/codebattles)
-![Lines of code](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/codebattles-nn/codebattles/badge)
-![GitHub language count](https://img.shields.io/github/languages/count/codebattles-nn/codebattles)
+A comprehensive programming competition system designed for educational institutions, coding competitions, and skill assessment.
 
-![Main image](images/image1.png)
+![Main interface](images/image1.png)
 
-[Documentation RU v3](https://doctorixx.gitbook.io/codebattles/ru_v3)
-
-[Documentation EN OLD!!!!!!](https://doctorixx.gitbook.io/codebattles/v/en)
+## 🔗 Quick Links
 
 
-[Buy me a cofee/Donation](https://www.donationalerts.com/r/doctorixx)
+- 📚 [Documentation (RU v3)](https://docs.codebattles.ru/ru_v3)
+- 🌐 [Official Website](https://codebattles.ru)
+- ☕ [Support the Project](https://www.donationalerts.com/r/doctorixx)
 
-## Get started
+## ✨ Features
 
-> You must install Docker Compose to run:
+- **Competition Management**: Create and manage programming contests with ease
+- **Real-time Judging**: Automated code evaluation and scoring
+- **Multi-language Support**: Support for various programming languages
+- **User Management**: Role-based access control for participants and administrators
+- **Live Leaderboards**: Real-time ranking and progress tracking
+- **Task Generation**: Built-in UI for creating competition tasks (v3.x.x+)
 
-```shell
-docker compose up
-```
+## 🚀 Quick Start
 
-> [!TIP]
-> For run app in background mode add flag -d
-> Example:
-> ```bash
-> docker compose up -d
-> ```
+### Prerequisites
 
-### Tested at
+- Docker
+- Docker Compose
 
-| Architecture |           Status           |
-|--------------|:--------------------------:|
-| x64          |      ✅  (In registry)      |
-| aarch64      | ✅  (Required manual build) |
-| x32          |             ❓              |
+### Installation
 
-## Update
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/CodeBattles-nn/CodeBattles.git
+   cd CodeBattles
+   ```
 
-- Pull new version of code from repository
+2. **Start the application**
+   ```bash
+   docker compose up
+   ```
 
-```shell
+   > 💡 **Tip**: Run in background mode with the `-d` flag:
+   > ```bash
+   > docker compose up -d
+   > ```
+
+3. **Access the application**
+   
+   Open your browser and navigate to [http://localhost:2500](http://localhost:2500)
+
+## 🔄 Updating
+
+To update to the latest version:
+
+```bash
+# Pull the latest changes
 git pull
-```
 
-- Pull docker images
-
-```shell
-docker compose pull
-```
-
-- And finally run application
-
-```shell
+# Restart the application
 docker compose up
 ```
 
-## Usage
+## ⚙️ Configuration
 
-Go to [http://localhost:2500](http://localhost:2500)
-___
+### Default Ports
 
-### Open container ports
+| Service  | Port  | Description |
+|----------|-------|-------------|
+| Gateway  | 2500  | Main application interface |
+| Database | 25565 | Database connection |
 
-- Gateway on port 2500
-- Database on port 25565
+### Task Management
 
-### Generate tasks for compeptition
+Starting from version 3.x.x, competition tasks can be created and managed through the web interface, making it easier for administrators to set up contests without technical knowledge.
 
-At v3.x.x versions tasks can be created wia UI
+## 🖥️ Platform Compatibility
 
-## Main contributors
+| Architecture | Status | Notes |
+|--------------|:------:|-------|
+| x64          | ✅     | Requires manual build |
+| aarch64      | ✅     | Requires manual build |
+| x32          | ❓     | Not tested |
 
-Thank you for your huge contribution to the project:
+## 🤝 Contributors
 
-- **user3050** - security audit and vulnerability search
-- **[Zeevss](https://github.com/Zeevss)** - testing and suggestions
+We're grateful to these amazing contributors who have helped make CodeBattles better:
 
-Thanks to [school30nn](https://school30nn.ru) for use of the system and provision of server resources
+### Core Contributors
+- **[Doctorixx](https://github.com/doctorixx)** - Project maintainer and lead developer
+- **user3050** - Security audit and vulnerability assessment
+- **[Zeevss](https://github.com/Zeevss)** - Testing, quality assurance, and feature suggestions
 
-## Donation
-If you liked the project or want to support the author, you can donate here
+### Special Thanks
+- **[school30nn](https://school30nn.ru)** - For adopting the system and providing valuable server resources
 
-[DonationAlerts](https://www.donationalerts.com/r/doctorixx)
+## 🛠️ Development
 
-[Yoomoney](https://yoomoney.ru/fundraise/13V1T7RVQBE.240713)
+### Security Analysis
+This project uses [PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) for static code analysis, ensuring high code quality and security standards.
 
-## SAST Tools
+## 💖 Support the Project
 
-[PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
+If you find CodeBattles useful and want to support its development:
 
+- ☕ [DonationAlerts](https://www.donationalerts.com/r/doctorixx)
+- 💳 [YooMoney](https://yoomoney.ru/fundraise/13V1T7RVQBE.240713)
 
-___
-CodeBattles, 2024-2025
+## 📄 License
+
+This project is licensed under the terms specified in the [LICENSE](./LICENSE) file.
+
+## 🐛 Issues & Support
+
+Found a bug or need help? Please check our [documentation](https://docs.codebattles.ru/ru_v3) first, then feel free to:
+
+- 🐛 [Report issues](https://github.com/CodeBattles-nn/CodeBattles/issues)
+- 💬 [Join discussions](https://github.com/CodeBattles-nn/CodeBattles/discussions)
+- 📧 Contact the maintainers
+
+---
+
+**CodeBattles** © 2024-2025 | Built with ❤️ for the programming community
