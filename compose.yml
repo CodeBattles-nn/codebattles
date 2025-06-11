@@ -1,0 +1,96 @@
+version: "3.9"
+services:
+  frontend-v2:
+    build: FRONTEND_V2/.
+    image: codebattles-frontend-v2
+    restart: unless-stopped
+    environment:
+      VITE_ENV: "production"
+
+    networks:
+      - no-internet
+
+  backend:
+    build: BACKEND_V2/.
+    image: codebattles-backend-v2
+    environment:
+      SERVER_PORT: 8000
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${DB_USER}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    links:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - no-internet
+  postgres:
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      PGUSER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      REQUIRE_CAPTCHA: false
+    ports:
+      - "25565:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-U", "${DB_USER}", "-d", "${DB_NAME}" ]
+      interval: 2s
+      timeout: 2s
+    restart: unless-stopped
+    networks:
+      - with-internet
+      - no-internet
+
+  gateway:
+    build: GATEWAY/.
+    image: codebattles-gateway
+    ports:
+      - "2500:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    networks:
+      - with-internet
+      - no-internet
+  
+  #  checker-java:
+  #    build:
+  #      dockerfile: z_checkers_dockerfiles/Java.Dockerfile
+  #    image: codebattles-checker-java
+  #    restart: unless-stopped
+  #    networks:
+  #      - no-internet
+
+  checker-python:
+    build:
+      dockerfile: z_checkers_dockerfiles/Python.Dockerfile
+    image: codebattles-checker-python
+    restart: unless-stopped
+    networks:
+      - no-internet
+
+#  checker-cpp:
+#    build:
+#      dockerfile: z_checkers_dockerfiles/CPP.Dockerfile
+#    image: codebattles-checker-cpp
+#    restart: unless-stopped
+#  checker-pascal:
+#    build:
+#      dockerfile: z_checkers_dockerfiles/Pascal.Dockerfile
+#    image: codebattles-checker-pascal
+#    restart: unless-stopped
+
+networks:
+  no-internet:
+    driver: bridge
+    internal: true
+  with-internet:
+    driver: bridge
+
+
