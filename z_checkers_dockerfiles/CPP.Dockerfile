@@ -29,4 +29,6 @@ ENV ENV_EXECUTOR_FILENAME main.cpp
 ENV ENV_EXECUTOR_WITH_FILENAME false
 ENV ENV_EXECUTOR_RUN_COMMAND "mv a.out hello && ./hello"
 
+RUN chmod -R 555 /app && mkdir /app/adir && chattr +i /app/adir && chmod -R 557 /app/adir
+
 ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]

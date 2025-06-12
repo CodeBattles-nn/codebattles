@@ -24,5 +24,7 @@ ENV ENV_EXECUTOR_WITH_FILENAME false
 ENV ENV_EXECUTOR_RUN_COMMAND "kumir2-xrun prog.kod"
 ENV ENV_EXECUTOR_WITH_BOM true
 
+RUN chmod -R 555 /app && mkdir /app/adir && chattr +i /app/adir && chmod -R 557 /app/adir
+
 EXPOSE 7070
 ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]

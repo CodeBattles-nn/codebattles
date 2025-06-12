@@ -33,7 +33,7 @@ ENV ENV_EXECUTOR_FILENAME main.txt
 ENV ENV_EXECUTOR_WITH_FILENAME false
 
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-RUN chmod -R 777 /app
+RUN chmod -R 555 /app && mkdir /app/adir && chattr +i /app/adir && chmod -R 557 /app/adir
 
 USER appuser
 
