@@ -29,6 +29,4 @@ ENV ENV_EXECUTOR_FILENAME main.pas
 ENV ENV_EXECUTOR_WITH_FILENAME false
 ENV ENV_EXECUTOR_RUN_COMMAND "./main"
 
-RUN chmod -R 555 /app && mkdir /app/adir && chattr +i /app/adir && chmod -R 557 /app/adir
-
 ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
