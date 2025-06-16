@@ -30,6 +30,7 @@ import {AdminCheckersCreatePage} from "./pages/admin/checkers/AdminCheckersCreat
 import {Profile} from "./pages/user/Profile.jsx";
 import {AdminUserCreatePage} from "./pages/admin/users/AdminUserCreatePage.jsx";
 import {AdminUsersPage} from "./pages/admin/users/AdminUsersPage.jsx";
+import {ChangePassword} from "./pages/user/ChangePassword.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -54,6 +55,7 @@ function App() {
                         <Route path="/statuses" element={<StatusesPage/>}/>
                         <Route path="/champs" element={<ChampsPage/>}/>
                         <Route path="/profile" element={<Profile/>}/>
+                        <Route path="/profile/change-password" element={<ChangePassword/>}/>
 
                         <Route path="/admin/problems" element={<AdminProblemsPage/>}/>
                         <Route path="/admin/problems/create" element={<AdminProblemsPageCreate/>}/>

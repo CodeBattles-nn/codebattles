@@ -2,7 +2,7 @@ version: "3.9"
 services:
   frontend-v2:
     build: FRONTEND_V2/.
-    image: codebattles-frontend-v2
+    image: codebattles.cr.cloud.ru/frontend-v2
     ports:
       - "8002:80"
     restart: unless-stopped
@@ -15,7 +15,7 @@ services:
 
   backend:
     build: BACKEND_V2/.
-    image: codebattles-backend-v2
+    image: codebattles.cr.cloud.ru/backend-v2
     environment:
       SERVER_PORT: 8000
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cb
@@ -55,7 +55,7 @@ services:
 
   gateway:
     build: GATEWAY/.
-    image: codebattles-gateway
+    image: codebattles.cr.cloud.ru/gateway
     ports:
       - "2500:80"
     depends_on:
@@ -68,7 +68,7 @@ services:
   checker-java:
     build:
       dockerfile: z_checkers_dockerfiles/Java.Dockerfile
-    image: codebattles-checker-java
+    image: codebattles.cr.cloud.ru/checker-java
     restart: unless-stopped
     networks:
       - checkers-net
@@ -76,7 +76,7 @@ services:
   checker-python:
     build:
       dockerfile: z_checkers_dockerfiles/Python.Dockerfile
-    image: codebattles-checker-python
+    image: codebattles.cr.cloud.ru/checker-python
     restart: unless-stopped
     networks:
       - checkers-net
@@ -84,23 +84,26 @@ services:
 #  checker-kumir:
 #    build:
 #      dockerfile: z_checkers_dockerfiles/Kumir.Dockerfile
-#    image: codebattles-checker-kumir
+#    image: codebattles.cr.cloud.ru/checker-kumir
 #    restart: unless-stopped
 #    networks:
-#      - with-internet
-#      - no-internet
-
-
+#      - checkers-net
+#
+#
 #  checker-cpp:
 #    build:
-#      dockerfile: ./CPP.Dockerfile
-#    image: codebattles-checker-cpp
+#      dockerfile: z_checkers_dockerfiles/CPP.Dockerfile
+#    image: codebattles.cr.cloud.ru/checker-cpp
 #    restart: unless-stopped
+#    networks:
+#      - checkers-net
 #  checker-pascal:
 #    build:
-#      dockerfile: ./Pascal.Dockerfile
-#    image: codebattles-checker-pascal
+#      dockerfile: z_checkers_dockerfiles/Pascal.Dockerfile
+#    image: codebattles.cr.cloud.ru/checker-pascal
 #    restart: unless-stopped
+#    networks:
+#      - checkers-net
 
 networks:
   no-internet:
