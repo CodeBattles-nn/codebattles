@@ -4,8 +4,10 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.annotation.security.RolesAllowed
+import org.springframework.http.ResponseEntity
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
+import ru.codebattles.backend.dto.ChangePasswordDto
 import ru.codebattles.backend.dto.CreateUserDto
 import ru.codebattles.backend.dto.UserDto
 import ru.codebattles.backend.dto.mapper.UserMapper
@@ -78,4 +80,25 @@ class UsersController(
         return OkResponse()
     }
 
+    @Operation(
+        summary = "Change password",
+        description = "Changes the password for the current user. Requires current password verification."
+    )
+    @PostMapping("/change-password")
+    fun changePassword(
+        @AuthenticationPrincipal user: User,
+        @RequestBody changePasswordDto: ChangePasswordDto
+    ): ResponseEntity<OkResponse> {
+        val success = userService.changePassword(
+            user,
+            changePasswordDto.currentPassword,
+            changePasswordDto.newPassword
+        )
+        
+        return if (success) {
+            ResponseEntity.ok(OkResponse())
+        } else {
+            ResponseEntity.badRequest().body(OkResponse())
+        }
+    }
 }
