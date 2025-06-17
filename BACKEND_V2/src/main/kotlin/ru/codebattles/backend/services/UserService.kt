@@ -29,4 +29,14 @@ class UserService(
 
         return user
     }
+
+    fun changePassword(user: User, currentPassword: String, newPassword: String): Boolean {
+        if (!passwordEncoder.matches(currentPassword, user.mpassword)) {
+            return false
+        }
+        
+        user.mpassword = passwordEncoder.encode(newPassword)
+        userRepository.save(user)
+        return true
+    }
 }

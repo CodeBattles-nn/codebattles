@@ -7,6 +7,8 @@ import {useForm} from "react-hook-form";
 import constants from "../../utils/consts.js";
 import axios from "axios";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
+import Button from "bootstrap/js/src/button.js";
+import {Link} from "react-router-dom";
 
 export const Profile = () => {
     const [userProfile, updateData] = useCachedGetAPI(`/api/profile`, () => {
@@ -64,6 +66,7 @@ export const Profile = () => {
 
             <Card>
                 <h2>Профиль</h2>
+                <Link className="btn btn-sm btn-info my-2" to="/profile/change-password">Сменить пароль</Link>
                 {
                     showSuccess &&
                     <div className="alert alert-success" role="alert">
