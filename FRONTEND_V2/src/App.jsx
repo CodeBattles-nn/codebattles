@@ -31,6 +31,7 @@ import {Profile} from "./pages/user/Profile.jsx";
 import {AdminUserCreatePage} from "./pages/admin/users/AdminUserCreatePage.jsx";
 import {AdminUsersPage} from "./pages/admin/users/AdminUsersPage.jsx";
 import {ChangePassword} from "./pages/user/ChangePassword.jsx";
+import {AdminProblemsPageImportFromPolygon} from "./pages/admin/problems/AdminProblemsPageImportFromPolygon.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -59,6 +60,7 @@ function App() {
 
                         <Route path="/admin/problems" element={<AdminProblemsPage/>}/>
                         <Route path="/admin/problems/create" element={<AdminProblemsPageCreate/>}/>
+                        <Route path="/admin/problems/import/polygon" element={<AdminProblemsPageImportFromPolygon/>}/>
                         <Route path="/admin/problems/:probId/edit" element={<AdminProblemsPageEdit/>}/>
                         <Route path="/admin/champs" element={<AdminChampsPage/>}/>
                         <Route path="/admin/checkers" element={<AdminCheckersPage/>}/>
