@@ -41,7 +41,10 @@ export const AdminProblemsPage = () => {
             }
 
             <Card>
-                <Link to="/admin/problems/create" className="btn btn-success" >создать</Link>
+                <div className='d-flex gap-2'>
+                    <Link to="/admin/problems/create" className="btn btn-success">создать</Link>
+                    <Link to="/admin/problems/import/polygon" className="btn btn-info">импортировать из Polygon</Link>
+                </div>
             </Card>
         </>
     );
