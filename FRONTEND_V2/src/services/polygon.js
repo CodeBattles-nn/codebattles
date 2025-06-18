@@ -21,15 +21,13 @@ const _processPolygonFile = async (file) => {
 
                 // Test answer (output)
                 else if (filename.endsWith('.a')) {
-                    const test_id = /tests\/([0-9]+)\.a/.exec(filename)
-                    // console.log(filename, test_id)
+                    const test_id = /tests\/(\d+)\.a/.exec(filename)
                     outputData[test_id[1]] = content;
                 }
 
                 // Test input
                 else {
-                    const test_id = /tests\/([0-9]+)/.exec(filename)
-                    // console.log(filename, test_id)
+                    const test_id = /tests\/(\d+)/.exec(filename)
                     inputData[test_id[1]] = content;
                 }
             }
