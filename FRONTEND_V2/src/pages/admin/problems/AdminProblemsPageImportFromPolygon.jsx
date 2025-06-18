@@ -6,7 +6,6 @@ import Card from "../../../components/bootstrap/Card.jsx";
 import constants from "../../../utils/consts.js";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
-import JSZip from 'jszip';
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {polygonProcessStatuses, processPolygonFile} from "../../../services/polygon.js";
@@ -21,7 +20,7 @@ export const AdminProblemsPageImportFromPolygon = () => {
 
     const [problemJSON, setProblemJSON] = useState({})
 
-    const onAddOnPlatform = (data) => {
+    const onAddOnPlatform = () => {
         const conf = {
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +63,8 @@ export const AdminProblemsPageImportFromPolygon = () => {
             <AdminHeader />
 
             <Card>
-                <h2 className="mb-3">Импорт задачи из <a href="https://polygon.codeforces.com/" target="_blank">Polygon</a></h2>
+                <h2 className="mb-3">Импорт задачи из 
+                    <a href="https://polygon.codeforces.com/" target="_blank" rel="noreferrer">Polygon</a></h2>
                 <Card>
                     <p>Загрузите zip файл из Polygon.</p>
                     <p>Problems → (выберите нужную ) → Packages → Create package (Full)</p>

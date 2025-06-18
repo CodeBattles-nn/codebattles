@@ -7,7 +7,6 @@ import {useForm} from "react-hook-form";
 import constants from "../../utils/consts.js";
 import axios from "axios";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
-import Button from "bootstrap/js/src/button.js";
 import {Link} from "react-router-dom";
 
 export const Profile = () => {

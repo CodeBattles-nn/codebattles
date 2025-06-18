@@ -74,7 +74,6 @@ const _processPolygonFile = async (file) => {
 
     cblike.examples = JSON.stringify(examples);
 
-    const final = {config, tests}
     return [polygonProcessStatuses.DONE, cblike]
 }
 
