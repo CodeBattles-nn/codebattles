@@ -40,8 +40,8 @@ const _processPolygonFile = async (file) => {
     tests_array.forEach(key => {
         tests.push(
             {
-                "in": inputData[key],
-                "out": outputData[key],
+                "in": inputData[key].trim(),
+                "out": outputData[key].trim(),
             }
         )
     })
