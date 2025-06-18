@@ -4,8 +4,9 @@ import rehypeRaw from "rehype-raw";
 import remarkGemoji from 'remark-gemoji'
 import dompurify from "dompurify";
 import LazySyntaxHighlight from "../lazy/LazySyntaxHightlight.jsx";
-
-
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
+import 'katex/dist/katex.min.css';
 // eslint-disable-next-line react/prop-types
 const Markdown = ({text = ""}) => {
 
@@ -30,13 +31,14 @@ const Markdown = ({text = ""}) => {
     };
 
     return (
-        <ReactMarkdown
-            remarkPlugins={[gfm, remarkGemoji]}
-            rehypePlugins={[rehypeRaw]}
-            components={components}
-        >
-            {dompurify.sanitize(text)}
-        </ReactMarkdown>
+            <ReactMarkdown
+                remarkPlugins={[gfm, remarkGemoji, remarkMath]}
+                rehypePlugins={[rehypeRaw, rehypeKatex]}
+                components={components}
+            >
+                {dompurify.sanitize(text)}
+            </ReactMarkdown>
+
 
     )
 };
