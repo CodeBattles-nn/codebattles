@@ -26,10 +26,7 @@ jobs:
         run: docker compose pull
         
       - name: Build and push images
-        run: |
-          docker compose build
-          for service in $(docker compose config --services); do
-            image_name=$(docker compose config | yq ".services.${service}.image" | cut -d: -f1)
-            docker tag "${image_name}" "${image_name}:${{ env.RELEASE_TAG }}"
-            docker push "${image_name}:${{ env.RELEASE_TAG }}"
-          done
+        run: docker compose build
+      
+      - name: Build and push images
+        run: docker compose push
