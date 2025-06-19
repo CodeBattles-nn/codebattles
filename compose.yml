@@ -2,7 +2,7 @@ version: "3.9"
 services:
   frontend-v2:
     build: FRONTEND_V2/.
-    image: codebattles.cr.cloud.ru/frontend-v2
+    image: codebattles.cr.cloud.ru/frontend-v2:${RELEASE_TAG:-latest}
     ports:
       - "8002:80"
     restart: unless-stopped
@@ -15,7 +15,7 @@ services:
 
   backend:
     build: BACKEND_V2/.
-    image: codebattles.cr.cloud.ru/backend-v2
+    image: codebattles.cr.cloud.ru/backend-v2:${RELEASE_TAG:-latest}
     environment:
       SERVER_PORT: 8000
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cb
@@ -55,7 +55,7 @@ services:
 
   gateway:
     build: GATEWAY/.
-    image: codebattles.cr.cloud.ru/gateway
+    image: codebattles.cr.cloud.ru/gateway:${RELEASE_TAG:-latest}
     ports:
       - "2500:80"
     depends_on:
@@ -68,7 +68,7 @@ services:
   checker-java:
     build:
       dockerfile: z_checkers_dockerfiles/Java.Dockerfile
-    image: codebattles.cr.cloud.ru/checker-java
+    image: codebattles.cr.cloud.ru/checker-java:${RELEASE_TAG:-latest}
     restart: unless-stopped
     networks:
       - checkers-net
@@ -76,7 +76,7 @@ services:
   checker-python:
     build:
       dockerfile: z_checkers_dockerfiles/Python.Dockerfile
-    image: codebattles.cr.cloud.ru/checker-python
+    image: codebattles.cr.cloud.ru/checker-python:${RELEASE_TAG:-latest}
     restart: unless-stopped
     networks:
       - checkers-net
