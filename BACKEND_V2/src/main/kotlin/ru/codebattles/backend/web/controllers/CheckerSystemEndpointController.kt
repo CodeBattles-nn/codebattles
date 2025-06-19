@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 import ru.codebattles.backend.entity.AnswerStatus
 import ru.codebattles.backend.repository.AnswerRepository
 import ru.codebattles.backend.web.entity.checker.CheckerCallback
+import kotlin.math.roundToInt
 
 @Tag(name = "Checker system API", description = "Endpoints for checker system")
 @RestController
@@ -32,7 +33,7 @@ class CheckerSystemEndpointController(
 
         var score = 0
         if (countOfTests > 0) {
-            score = countOfSuccessTests / countOfTests * 100
+            score = (countOfSuccessTests.toFloat() / countOfTests.toFloat() * 100).roundToInt()
         }
 
         answer.result = objectMapper.writeValueAsString(data)
