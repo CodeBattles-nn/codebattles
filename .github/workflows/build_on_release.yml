@@ -17,14 +17,14 @@ jobs:
           registry: codebattles.cr.cloud.ru
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
+        
+      - name: Pull images
+        run: docker compose pull
 
       - name: Extract release tag
         id: extract_tag
         run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-        
-      - name: Pull images
-        run: docker compose pull
-        
+      
       - name: Build and push images
         run: docker compose build
       
