@@ -6,32 +6,33 @@ import StatsPage from "./pages/user/StatsPage.jsx";
 import SeeProblemPage from "./pages/user/SeeProblemPage.jsx";
 
 import SeeSendPage from "./pages/user/SeeSendPage.jsx";
-import StatusesPage from "./pages/user/StatusesPage.jsx";
+import StatusesPage from "./pages/shared/StatusesPage.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import LoginPage from "./pages/user/LoginPage.jsx";
+import LoginPage from "./pages/shared/LoginPage.jsx";
 import ChampsPage from "./pages/user/ChampsPage.jsx";
-import {AdminChampsPage} from "./pages/champs/AdminChampsPage.jsx";
-import {AdminChampsDetailPage} from "./pages/champs/AdminChampsDetailPage.jsx";
+import {AdminChampsPage} from "./pages/admin/champs/AdminChampsPage.jsx";
+import {AdminChampsDetailPage} from "./pages/admin/champs/AdminChampsDetailPage.jsx";
 import {AdminProblemsPage} from "./pages/admin/problems/AdminProblemsPage.jsx";
 import {AdminCheckersPage} from "./pages/admin/checkers/AdminCheckersPage.jsx";
-import {AdminChampsDetailRatingPage} from "./pages/champs/AdminChampsDetailRatingPage.jsx";
+import {AdminChampsDetailRatingPage} from "./pages/admin/champs/AdminChampsDetailRatingPage.jsx";
 import {AdminSeeSendPage} from "./pages/admin/AdminSeeSendPage.jsx";
 import {NotFound} from "./pages/NotFound.jsx";
 import {AdminUsersDetailPage} from "./pages/admin/AdminUsersDetailPage.jsx";
-import {AdminChampsCreate} from "./pages/champs/AdminChampsCreate.jsx";
-import {AdminChampsDetailProblemsPage} from "./pages/champs/competitionProblems/AdminChampsDetailProblemsPage.jsx";
-import {AdminChampsDetailProblemsLinkPage} from "./pages/champs/competitionProblems/AdminChampsDetailProblemsLinkPage.jsx";
-import {AdminChampsDetailProblemsEditPage} from "./pages/champs/competitionProblems/AdminChampsDetailProblemsEditPage.jsx";
+import {AdminChampsCreate} from "./pages/admin/champs/AdminChampsCreate.jsx";
+import {AdminChampsDetailProblemsPage} from "./pages/admin/champs/competitionProblems/AdminChampsDetailProblemsPage.jsx";
+import {AdminChampsDetailProblemsLinkPage} from "./pages/admin/champs/competitionProblems/AdminChampsDetailProblemsLinkPage.jsx";
+import {AdminChampsDetailProblemsEditPage} from "./pages/admin/champs/competitionProblems/AdminChampsDetailProblemsEditPage.jsx";
 import {AdminUsersDetailCheckersPage} from "./pages/admin/AdminUsersDetailCheckersPage.jsx";
 import {AdminCheckersEditPage} from "./pages/admin/checkers/AdminCheckersEditPage.jsx";
 import {AdminProblemsPageCreate} from "./pages/admin/problems/AdminProblemsPageCreate.jsx";
 import {AdminProblemsPageEdit} from "./pages/admin/problems/AdminProblemsPageEdit.jsx";
 import {AdminCheckersCreatePage} from "./pages/admin/checkers/AdminCheckersCreatePage.jsx";
-import {Profile} from "./pages/user/Profile.jsx";
+import {Profile} from "./pages/shared/Profile.jsx";
 import {AdminUserCreatePage} from "./pages/admin/users/AdminUserCreatePage.jsx";
 import {AdminUsersPage} from "./pages/admin/users/AdminUsersPage.jsx";
-import {ChangePassword} from "./pages/user/ChangePassword.jsx";
+import {ChangePassword} from "./pages/shared/ChangePassword.jsx";
 import {AdminProblemsPageImportFromPolygon} from "./pages/admin/problems/AdminProblemsPageImportFromPolygon.jsx";
+import {RegisterPage} from "./pages/shared/RegisterPage.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -45,8 +46,10 @@ function App() {
                 <div className="row my-4"></div>
                 <div className="row">
                     <Routes>
-                        <Route path="/problems" element={<ProblemsListPage/>}/>
                         <Route path="/" element={<LoginPage/>}/>
+                        <Route path="/register" element={<RegisterPage/>}/>
+
+                        <Route path="/problems" element={<ProblemsListPage/>}/>
                         <Route path="/champs/:compId/problems" element={<ProblemsListPage/>}/>
                         <Route path="/champs/:compId/problems/:id" element={<SeeProblemPage/>}/>
                         <Route path="/problems/:letter/quizz" element={<SeeQuizzProblemPage/>}/>

@@ -9,7 +9,8 @@ import {AdminHeader} from "../../../components/AdminHeader.jsx";
 
 export const AdminProblemsPage = () => {
 
-    const [data, update] = useCachedGetAPI("/api/problems",() => {}, []);
+    const [data, update] = useCachedGetAPI("/api/problems", () => {
+    }, []);
 
     useEffect(() => {
         update()
@@ -19,33 +20,53 @@ export const AdminProblemsPage = () => {
 
     return (
         <>
-            <UserLoginRequired />
+            <UserLoginRequired/>
 
             <BreadcrumbsRoot>
                 <BreadcrumbsElement name="Задачи"/>
             </BreadcrumbsRoot>
 
-            <AdminHeader />
-
-            {
-                data?.map(elem => {
-                    return <Card key={elem.id}>
-                        <div className="d-flex gap-2">
-                            <h2>{elem.name}</h2><small className=""> id=<x className="text-danger">{elem.id}</x></small>
-                        </div>
-
-                        <h3>{elem.description}</h3>
-                        <Link to={`/admin/problems/${elem.id}/edit`} className="btn btn-warning me-2">Управлять</Link>
-                    </Card>
-                })
-            }
+            <AdminHeader/>
 
             <Card>
+                <table className="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Desc</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        data?.map(elem => {
+                            return (
+                                <tr key={elem.id}>
+                                    <th scope="row">{elem.id}</th>
+                                    <td>
+                                        <Link to={`/admin/problems/${elem.id}/edit`}>
+                                            {elem.name}
+                                        </Link>
+                                    </td>
+                                    <td>
+                                        <div style={{maxWidth: "50ch"}} className=" text-truncate">
+                                            {elem.description}
+                                        </div>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+
+                    </tbody>
+                </table>
+
                 <div className='d-flex gap-2'>
                     <Link to="/admin/problems/create" className="btn btn-success">создать</Link>
                     <Link to="/admin/problems/import/polygon" className="btn btn-info">импортировать из Polygon</Link>
                 </div>
             </Card>
+
         </>
     );
 };

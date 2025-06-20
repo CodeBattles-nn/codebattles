@@ -6,6 +6,7 @@ import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import {CompetitionCard} from "../../components/CompetitionCard.jsx";
 import {competitionStatuses, getCompetitionStatusByDates} from "../../utils/competitionStatuses.js";
+import CompetitionsListContainer from "../../components/CompetitionsListContainer.jsx";
 
 const ChampsPage = () => {
 
@@ -26,7 +27,7 @@ const ChampsPage = () => {
                 <BreadcrumbsElement name="Соревнования"/>
             </BreadcrumbsRoot>
 
-            <div className='row g-0 gap-3'>
+            <CompetitionsListContainer>
                 {
                     data?.map(elem => {
                         const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
@@ -36,7 +37,7 @@ const ChampsPage = () => {
                                 <CompetitionCard
                                     key={elem.id}
                                     id={elem.id}
-                                    name={elem.name}
+                                    name="11111"
                                     startedAt={elem.startedAt}
                                     endedAt={elem.endedAt}
                                     description={elem.description}>
@@ -49,7 +50,7 @@ const ChampsPage = () => {
                         </>
                     })
                 }
-            </div>
+            </CompetitionsListContainer>
 
         </>
     );

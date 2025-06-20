@@ -37,7 +37,7 @@ const StatsPage = () => {
                             {
                                 problemsData?.map(compProb => {
                                     return <th key={"stats-letter-header" + compProb.id} scope="col"><Link
-                                        to={`/problems/${compProb.id}`}>{compProb.slug}</Link>
+                                        to={`/champs/${compId}/problems/${compProb.id}`}>{compProb.slug}</Link>
                                     </th>
                                 })
                             }
