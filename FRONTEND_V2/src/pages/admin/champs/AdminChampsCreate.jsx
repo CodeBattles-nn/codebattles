@@ -1,14 +1,14 @@
-import Card from "../../components/bootstrap/Card.jsx";
+import Card from "../../../components/bootstrap/Card.jsx";
 import {useNavigate} from "react-router-dom";
-import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
-import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
-import UserLoginRequired from "../../components/UserLoginRequired.jsx";
-import {AdminHeader} from "../../components/AdminHeader.jsx";
+import BreadcrumbsElement from "../../../components/BreadcrumbsElement.jsx";
+import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
+import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
+import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {useForm} from "react-hook-form";
 import axios from "axios";
-import constants from "../../utils/consts.js";
-import {CompetitionFormElements} from "../../components/form_impl/CompetitionForm.jsx";
-import {MasterForm} from "../../components/forms/MasterForm.jsx";
+import constants from "../../../utils/consts.js";
+import {CompetitionFormElements} from "../../../components/form_impl/CompetitionForm.jsx";
+import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 
 export const AdminChampsCreate = () => {
 

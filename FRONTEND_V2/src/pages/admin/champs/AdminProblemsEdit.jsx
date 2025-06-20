@@ -9,10 +9,8 @@ import {useForm} from "react-hook-form";
 import constants from "../../../utils/consts.js";
 import axios from "axios";
 import useCachedGetAPI from "../../../hooks/useGetAPI.js";
-import {MasterForm} from "../../../components/forms/MasterForm.jsx";
-import {CompetitionProblemsFormEdit} from "../../../components/form_impl/CompetitionProblemsFormEdit.jsx";
 
-export const AdminChampsDetailProblemsEditPage = () => {
+export const AdminProblemsEdit = () => {
     const {probcompId} = useParams()
 
     const navigate = useNavigate();
@@ -20,14 +18,19 @@ export const AdminChampsDetailProblemsEditPage = () => {
     const [competitionsProblem, updateData] = useCachedGetAPI(`/api/competitionsProblems/${probcompId}`, () => {
     }, []);
 
-    const form = useForm();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: {errors}
+    } = useForm();
 
     useEffect(() => {
         updateData()
     }, []);
 
     useEffect(() => {
-        form.reset({
+        reset({
             priority: competitionsProblem.priority,
             slug: competitionsProblem.slug
         })
@@ -60,12 +63,35 @@ export const AdminChampsDetailProblemsEditPage = () => {
             <AdminHeader/>
 
             <Card>
-                <MasterForm form={form} onSubmit={onSubmit}>
-                    <CompetitionProblemsFormEdit/>
+                <form onSubmit={handleSubmit(onSubmit)} className="container mt-4">
+                    <div className="mb-3">
+                        <label className="form-label">Slug</label>
+                        <input
+                            type="text"
+                            className={`form-control ${errors.slug ? "is-invalid" : ""}`}
+                            {...register("slug", {required: "Slug обязателен"})}
+                        />
+                        {errors.slug && <div className="invalid-feedback">{errors.slug.message}</div>}
+                    </div>
+
+                    <div className="mb-3">
+                        <label className="form-label">Priority</label>
+                        <input
+                            type="number"
+                            className={`form-control ${errors.priority ? "is-invalid" : ""}`}
+                            {...register("priority", {
+                                required: "Приоритет обязателен",
+                                valueAsNumber: true,
+                                min: {value: 0, message: "Минимум 0"}
+                            })}
+                        />
+                        {errors.priority && <div className="invalid-feedback">{errors.priority.message}</div>}
+                    </div>
+
                     <button type="submit" className="btn btn-primary">
                         Сохранить
                     </button>
-                </MasterForm>
+                </form>
             </Card>
         </>
     );
