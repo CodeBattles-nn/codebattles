@@ -51,14 +51,14 @@ const SendsListPage = () => {
                                     <th scope="row" className="">{send.id}</th>
                                     <td>{formatDate(send.createdAt)}</td>
                                     <td>
-                                        <Link to={`/src/pages/admin/champs/${compId}/problems/${send?.competitionsProblems?.id}`}>
+                                        <Link to={`/champs/${compId}/problems/${send?.competitionsProblems?.id}`}>
                                             {send?.competitionsProblems?.slug}. {send?.competitionsProblems?.problem.name}
                                         </Link>
                                     </td>
                                     <td className="text-center text-success">{send.score}</td>
                                     <td>{send.status}</td>
                                     <td>
-                                        <Link to={`/src/pages/admin/champs/${compId}/sends/${send.id}`}>Вердикт</Link>
+                                        <Link to={`/champs/${compId}/sends/${send.id}`}>Вердикт</Link>
                                     </td>
 
                                 </tr>)
