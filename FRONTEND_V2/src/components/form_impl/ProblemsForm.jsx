@@ -1,8 +1,10 @@
 import React from 'react';
 import {InputFormElement} from "../forms/InputFormElement.jsx";
 import PropTypes from "prop-types";
+import { useTranslation } from 'react-i18next';
 
 export const ProblemsForm = ({form, testsArray, examplesArray}) => {
+    const { t } = useTranslation();
     const {
         register,
     } = form
@@ -14,85 +16,85 @@ export const ProblemsForm = ({form, testsArray, examplesArray}) => {
         <>
 
             <InputFormElement
-                displayName={"Имя"}
+                displayName={t('adminProblems.name')}
                 name={"name"}
-                args={{required: "Имя обязательно"}}
+                args={{required: t('adminProblems.nameRequired')}}
             />
             <InputFormElement
-                displayName={"Описание"}
+                displayName={t('adminProblems.description')}
                 name={"description"}
-                args={{required: "Описание обязательно"}}
+                args={{required: t('adminProblems.descriptionRequired')}}
             />
-            <InputFormElement displayName={"Входные данные"} name={"inData"}/>
-            <InputFormElement displayName={"Выходные данные"} name={"outData"}/>
+            <InputFormElement displayName={t('adminProblems.inData')} name={"inData"}/>
+            <InputFormElement displayName={t('adminProblems.outData')} name={"outData"}/>
 
 
             {/* Tests Section */}
             <div className="mb-3">
-                <label className="form-label">Tests</label>
+                <label className="form-label">{t('adminProblems.tests')}</label>
                 {testFields.map((item, index) => (
                     <div key={item.id} className="row mb-2">
                         <div className="col">
                             <input
                                 className="form-control"
-                                placeholder="in"
+                                placeholder={t('adminProblems.testIn')}
                                 {...register(`tests.${index}.in`)}
                             />
                         </div>
                         <div className="col">
                             <input
                                 className="form-control"
-                                placeholder="out"
+                                placeholder={t('adminProblems.testOut')}
                                 {...register(`tests.${index}.out`)}
                             />
                         </div>
                         <div className="col-auto">
                             <button type="button" className="btn btn-danger"
-                                    onClick={() => removeTest(index)}>✕
+                                    onClick={() => removeTest(index)}>{t('adminProblems.removeTest')}
                             </button>
                         </div>
                     </div>
                 ))}
                 <button type="button" className="btn btn-secondary"
                         onClick={() => appendTest({in: "", out: ""})}>
-                    + Add Test
+                    {t('adminProblems.addTest')}
                 </button>
             </div>
 
             {/* Examples Section */}
             <div className="mb-3">
-                <label className="form-label">Examples</label>
+                <label className="form-label">{t('adminProblems.examples')}</label>
                 {exampleFields.map((item, index) => (
                     <div key={item.id} className="row mb-2">
                         <div className="col">
                             <input
                                 className="form-control"
-                                placeholder="in"
+                                placeholder={t('adminProblems.exampleIn')}
                                 {...register(`examples.${index}.in`)}
                             />
                         </div>
                         <div className="col">
                             <input
                                 className="form-control"
-                                placeholder="out"
+                                placeholder={t('adminProblems.exampleOut')}
                                 {...register(`examples.${index}.out`)}
                             />
                         </div>
                         <div className="col-auto">
                             <button type="button" className="btn btn-danger"
-                                    onClick={() => removeExample(index)}>✕
+                                    onClick={() => removeExample(index)}>{t('adminProblems.removeExample')}
                             </button>
                         </div>
                     </div>
                 ))}
                 <button type="button" className="btn btn-secondary"
                         onClick={() => appendExample({in: "", out: ""})}>
-                    + Add Example
+                    {t('adminProblems.addExample')}
                 </button>
             </div>
 
             {/* Submit */}
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">{t('adminProblems.submit')}</button>
         </>
     );
 };

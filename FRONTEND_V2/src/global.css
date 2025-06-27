@@ -28,3 +28,10 @@
     font-weight: 400 !important;
     letter-spacing: 0 !important;
 }
+
+.text-trim{
+    max-width: 50ch;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+}

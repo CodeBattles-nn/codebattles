@@ -8,13 +8,13 @@ import constants from "../../utils/consts.js";
 import axios from "axios";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 export const Profile = () => {
-    const [userProfile, updateData] = useCachedGetAPI(`/api/profile`, () => {
-    }, []);
-
-    const [loading, setLoading] = useState(false)
-    const [showSuccess, setShowSuccess] = useState(false)
+    const { t } = useTranslation();
+    const [userProfile, updateData] = useCachedGetAPI(`/api/profile`, () => {}, []);
+    const [loading, setLoading] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const {
         register,
@@ -46,12 +46,12 @@ export const Profile = () => {
             }
         };
 
-        setLoading(true)
-        setShowSuccess(false)
+        setLoading(true);
+        setShowSuccess(false);
 
         axios.put(`/api/profile`, {name: data.name}, conf)
             .then(() => setShowSuccess(true))
-            .finally(() => setLoading(false))
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -59,24 +59,24 @@ export const Profile = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Профиль"/>
+                <BreadcrumbsElement name={t('profile.breadcrumbs.profile')}/>
             </BreadcrumbsRoot>
 
-
             <Card>
-                <h2>Профиль</h2>
-                <Link className="btn btn-sm btn-info my-2" to="/profile/change-password">Сменить пароль</Link>
+                <h2>{t('profile.title')}</h2>
+                <Link className="btn btn-sm btn-info my-2" to="/profile/change-password">
+                    {t('profile.changePasswordButton')}
+                </Link>
                 {
                     showSuccess &&
                     <div className="alert alert-success" role="alert">
-                        Изменения сохранены
+                        {t('profile.successMessage')}
                     </div>
                 }
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-
                     <div className="mb-3">
-                        <label className="form-label">ID</label>
+                        <label className="form-label">{t('profile.formFields.id.label')}</label>
                         <input
                             type="text"
                             className="form-control"
@@ -87,7 +87,7 @@ export const Profile = () => {
                     </div>
 
                     <div className="mb-3">
-                        <label className="form-label">Логин</label>
+                        <label className="form-label">{t('profile.formFields.username.label')}</label>
                         <input
                             type="text"
                             className="form-control"
@@ -98,17 +98,17 @@ export const Profile = () => {
                     </div>
 
                     <div className="mb-3">
-                        <label className="form-label">Имя</label>
+                        <label className="form-label">{t('profile.formFields.name.label')}</label>
                         <input
                             type="text"
                             className={`form-control ${errors.name ? "is-invalid" : ""}`}
-                            {...register("name", {required: "Имя обязательно"})}
+                            {...register("name", {required: t('profile.formFields.name.required')})}
                         />
                         {errors.name && <div className="invalid-feedback">{errors.name.message}</div>}
                     </div>
 
                     <div className="mb-3">
-                        <label className="form-label">Роли</label>
+                        <label className="form-label">{t('profile.formFields.roles.label')}</label>
                         <input
                             type="text"
                             className="form-control"
@@ -119,7 +119,7 @@ export const Profile = () => {
                     </div>
 
                     <button type="submit" className="btn btn-primary" disabled={loading}>
-                        Сохранить
+                        {loading ? t('profile.buttons.saving') : t('profile.buttons.save')}
                     </button>
                 </form>
             </Card>

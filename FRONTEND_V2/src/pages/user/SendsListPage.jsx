@@ -7,13 +7,12 @@ import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import {formatDate} from "../../utils/format.js";
+import {useTranslation} from 'react-i18next';
 
 const SendsListPage = () => {
-
-    const {compId} = useParams()
-
-    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/sends`, () => {
-    }, []);
+    const {t} = useTranslation();
+    const {compId} = useParams();
+    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/sends`, () => {}, []);
 
     useEffect(() => {
         update();
@@ -24,27 +23,25 @@ const SendsListPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Соревнования" url="/champs"/>
-                <BreadcrumbsElement name="Посылки"/>
+                <BreadcrumbsElement name={t('sends.competitions')} url="/champs"/>
+                <BreadcrumbsElement name={t('sends.submissions')}/>
             </BreadcrumbsRoot>
 
             <Card>
-                <h2 className="mb-3">Посылки</h2>
+                <h2 className="mb-3">{t('sends.submissions')}</h2>
                 <div className="border rounded-2 p-1">
                     <ResponsiveTable>
                         <thead>
                         <tr>
-                            <th scope="col">№</th>
-                            <th scope="col">Время посылки</th>
-                            <th scope="col">Задача</th>
-                            <th scope="col" className="text-center">Баллы</th>
-                            <th scope="col">Статус</th>
-                            <th scope="col">Баллы</th>
-
+                            <th scope="col">{t('sends.submissionNumber')}</th>
+                            <th scope="col">{t('sends.submissionTime')}</th>
+                            <th scope="col">{t('sends.problem')}</th>
+                            <th scope="col" className="text-center">{t('sends.points')}</th>
+                            <th scope="col">{t('sends.status')}</th>
+                            <th scope="col">{t('sends.verdict')}</th>
                         </tr>
                         </thead>
                         <tbody>
-
                         {data?.map(send => {
                             return (
                                 <tr key={"send-id-" + send.id}>
@@ -58,15 +55,16 @@ const SendsListPage = () => {
                                     <td className="text-center text-success">{send.score}</td>
                                     <td>{send.status}</td>
                                     <td>
-                                        <Link to={`/champs/${compId}/sends/${send.id}`}>Вердикт</Link>
+                                        <Link to={`/champs/${compId}/sends/${send.id}`}>
+                                            {t('sends.viewVerdict')}
+                                        </Link>
                                     </td>
-
-                                </tr>)
+                                </tr>
+                            )
                         })}
                         </tbody>
                     </ResponsiveTable>
                 </div>
-
             </Card>
         </>
     );

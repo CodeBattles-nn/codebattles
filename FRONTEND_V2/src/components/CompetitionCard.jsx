@@ -3,12 +3,13 @@ import Card from "./bootstrap/Card.jsx";
 import PropTypes from "prop-types";
 import {
     competitionStatusesCssColor, competitionStatusesCssColorText,
-    competitionStatusesTranslate,
     getCompetitionStatusByDates
 } from "../utils/competitionStatuses.js";
 import {formatDate} from "../utils/format.js";
+import {useTranslation} from "react-i18next";
 
 export const CompetitionCard = ({name, description, children, id, startedAt, endedAt}) => {
+    const {t} = useTranslation()
     let status = getCompetitionStatusByDates(startedAt,endedAt)
 
     if (startedAt === undefined || endedAt === undefined) {
@@ -18,7 +19,7 @@ export const CompetitionCard = ({name, description, children, id, startedAt, end
 
     const statusCssBg = competitionStatusesCssColor[status]
     const statusCssText = competitionStatusesCssColorText[status]
-    const statusText = competitionStatusesTranslate[status]
+    const statusText = t(`competitionStatuses.${status}`)
 
 
     return (
@@ -29,9 +30,9 @@ export const CompetitionCard = ({name, description, children, id, startedAt, end
             </div>
             <p className="text-muted">{description}</p>
 
-            <small className="text-muted"><i className="bi bi-clock me-1"></i>Начало: {formatDate(startedAt)}</small>
+            <small className="text-muted"><i className="bi bi-clock me-1"></i>{t("competitionCardComponent.startTime")} {formatDate(startedAt)}</small>
             <br />
-            <small className="text-muted"><i className="bi bi-clock me-1"></i>Конец: {formatDate(endedAt)} </small>
+            <small className="text-muted"><i className="bi bi-clock me-1"></i>{t("competitionCardComponent.endTime")} {formatDate(endedAt)} </small>
             <p className="mb-2"/>
             {children}
         </Card>

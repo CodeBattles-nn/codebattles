@@ -13,9 +13,10 @@ import 'rc-select/assets/index.css';
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import constants from "../../utils/consts.js";
+import {useTranslation} from "react-i18next";
 
 export const AdminUsersDetailCheckersPage = () => {
-
+    const {t} = useTranslation()
     const {compId} = useParams()
 
     const [data, update] = useCachedGetAPI(`/api/competitions/${compId}`, () => {
@@ -80,7 +81,7 @@ export const AdminUsersDetailCheckersPage = () => {
             <AdminHeader/>
 
             <Card key={data.id}>
-                <h2>Управление чекерами</h2>
+                <h2>{t("adminCheckers.editChecker")}</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Select
@@ -104,7 +105,9 @@ export const AdminUsersDetailCheckersPage = () => {
                         {/*<Option value="yiminghe">yiminghe</Option>*/}
                     </Select>
                     <br/>
-                    <button className="btn btn-primary" disabled={loading}>изменить</button>
+                    <button className="btn btn-primary" disabled={loading}>
+                        {t("adminCheckers.edit")}
+                    </button>
                 </form>
             </Card>
         </>

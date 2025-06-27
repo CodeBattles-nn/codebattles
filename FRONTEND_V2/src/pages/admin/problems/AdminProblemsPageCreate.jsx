@@ -11,10 +11,12 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {ProblemsForm} from "../../../components/form_impl/ProblemsForm.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminProblemsPageCreate = () => {
 
     const navigate = useNavigate()
+    const { t } = useTranslation();
 
     const [data, update] = useCachedGetAPI("/api/problems", () => {
     }, []);
@@ -69,14 +71,14 @@ export const AdminProblemsPageCreate = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Задачи"/>
+                <BreadcrumbsElement name={t('adminProblems.problems')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
 
             <Card>
                 <div className="container mt-4">
-                    <h3>Создать задачу</h3>
+                    <h3>{t('adminProblems.createProblem')}</h3>
                     <MasterForm form={form} onSubmit={onSubmit}>
                         <ProblemsForm form={form} testsArray={testsArray} examplesArray={examplesArray}/>
                     </MasterForm>

@@ -9,9 +9,11 @@ import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {CheckerForm} from "../../../components/form_impl/CheckerForm.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminCheckersCreatePage = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const form = useForm()
 
@@ -33,7 +35,7 @@ export const AdminCheckersCreatePage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Чекеры"/>
+                <BreadcrumbsElement name={t('adminCheckers.checkers')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
@@ -41,7 +43,7 @@ export const AdminCheckersCreatePage = () => {
             <Card>
                 <MasterForm form={form} onSubmit={onSubmit}>
                     <CheckerForm/>
-                    <button type="submit" className="btn btn-primary">Создать</button>
+                    <button type="submit" className="btn btn-primary">{t('adminCheckers.create')}</button>
                 </MasterForm>
             </Card>
         </>

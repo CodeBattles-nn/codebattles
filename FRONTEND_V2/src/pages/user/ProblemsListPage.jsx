@@ -7,8 +7,10 @@ import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import {getCssClassBySendScore} from "../../utils/format.js";
+import {useTranslation} from "react-i18next";
 
 const ProblemsListPage = () => {
+    const {t} = useTranslation()
 
     let {compId} = useParams();
 
@@ -48,18 +50,18 @@ const ProblemsListPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Соревнования" url="/champs"/>
-                <BreadcrumbsElement name="Задачи"/>
+                <BreadcrumbsElement name={t("problemsList.champs")} url="/champs"/>
+                <BreadcrumbsElement name={t("problemsList.title")}/>
             </BreadcrumbsRoot>
 
             <Card>
-                <h2 className="mb-3">Задачи</h2>
+                <h2 className="mb-3">{t("problemsList.title")}</h2>
                 <div className="border rounded-2 p-1">
                     <ResponsiveTable>
                         <thead>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col">Название</th>
+                            <th scope="col">{t("problemsList.name")}</th>
 
                         </tr>
                         </thead>

@@ -3,8 +3,11 @@ import LazySyntaxHighlight from "./lazy/LazySyntaxHightlight.jsx";
 import ResponsiveTable from "./bootstrap/ResponsiveTable.jsx";
 import Card from "./bootstrap/Card.jsx";
 import PropTypes from "prop-types";
+import { useTranslation } from 'react-i18next';
 
 export const ViewSendComponent = ({data}) => {
+    const { t } = useTranslation();
+
     const colorsByResult = {
         "WRONG_ANSWER": "table-danger",
         "SUCCESS": "table-success",
@@ -18,9 +21,9 @@ export const ViewSendComponent = ({data}) => {
 
     return (
         <Card>
-            <h3>Анализ посылки</h3>
-            <p><b>Язык:</b> {data?.checker?.displayName}</p>
-            <b>Исходный код:</b>
+            <h3>{t('viewSend.analysis')}</h3>
+            <p><b>{t('viewSend.language')}:</b> {data?.checker?.displayName}</p>
+            <b>{t('viewSend.sourceCode')}:</b>
             <LazySyntaxHighlight lang={data?.checker?.languageHighlightName}>
                 {data.code}
             </LazySyntaxHighlight>
@@ -28,10 +31,10 @@ export const ViewSendComponent = ({data}) => {
             <ResponsiveTable>
                 <thead>
                 <tr>
-                    <th scope="col">№ Теста</th>
-                    <th scope="col">Время (ms)</th>
-                    <th scope="col">Вердикт</th>
-                    <th scope="col">Вывод</th>
+                    <th scope="col">{t('viewSend.testNumber')}</th>
+                    <th scope="col">{t('viewSend.timeMs')}</th>
+                    <th scope="col">{t('viewSend.verdict')}</th>
+                    <th scope="col">{t('viewSend.output')}</th>
                 </tr>
                 </thead>
                 <tbody className="theme-text-dark">
@@ -41,18 +44,12 @@ export const ViewSendComponent = ({data}) => {
                             <tr className={colorsByResult[test.msg]} key={"see-send-test-id-" + test.id}>
                                 <th scope="row">{i + 1}</th>
                                 <td>{test.time}</td>
-                                <td>{test.msg}</td>
+                                <td>{t(`viewSend.verdictTypes.${test.msg}`)}</td>
                                 <td><p className="text-lines">{test.out}</p></td>
                             </tr>
                         )
                     })
                 }
-                {/*<tr>*/}
-                {/*    <th scope="row">-1</th>*/}
-                {/*    <td>-</td>*/}
-                {/*    <td>Подробные тесты будут доступны позже</td>*/}
-                {/*    <td><p className="text-lines">-</p></td>*/}
-                {/*</tr>*/}
                 </tbody>
             </ResponsiveTable>
         </Card>
@@ -62,4 +59,3 @@ export const ViewSendComponent = ({data}) => {
 ViewSendComponent.propTypes = {
     data: PropTypes.object,
 }
-

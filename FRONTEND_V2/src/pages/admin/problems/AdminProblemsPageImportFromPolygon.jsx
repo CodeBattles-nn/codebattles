@@ -9,6 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {polygonProcessStatuses, processPolygonFile} from "../../../services/polygon.js";
+import { useTranslation } from 'react-i18next';
 
 export const AdminProblemsPageImportFromPolygon = () => {
     const navigate = useNavigate()
@@ -19,6 +20,8 @@ export const AdminProblemsPageImportFromPolygon = () => {
     const [done, setDone] = useState(false);
 
     const [problemJSON, setProblemJSON] = useState({})
+
+    const { t } = useTranslation();
 
     const onAddOnPlatform = () => {
         const conf = {
@@ -56,19 +59,19 @@ export const AdminProblemsPageImportFromPolygon = () => {
             <UserLoginRequired />
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Задачи" url="/admin/problems"/>
-                <BreadcrumbsElement name="Импорт из Polygon"/>
+                <BreadcrumbsElement name={t('adminProblems.problems')} url="/admin/problems"/>
+                <BreadcrumbsElement name={t('adminProblems.importFromPolygon')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader />
 
             <Card>
-                <h2 className="mb-3">Импорт задачи из 
+                <h2 className="mb-3">{t('adminProblems.importFromPolygon')} 
                     <a href="https://polygon.codeforces.com/" target="_blank" rel="noreferrer">Polygon</a></h2>
                 <Card>
-                    <p>Загрузите zip файл из Polygon.</p>
-                    <p>Problems → (выберите нужную ) → Packages → Create package (Full)</p>
-                    <p>Скачайте архив после создания</p>
+                    <p>{t('adminProblems.uploadAndPreview')}</p>
+                    <p>Problems → ({t("adminProblems.select")}) → Packages → Create package (Linux)</p>
+                    <p>{t("adminProblems.downloadArhive")}</p>
                 </Card>
                 <form onSubmit={handleSubmit(onSubmit)} className="mb-5">
                     <div className="mb-3">
@@ -84,7 +87,7 @@ export const AdminProblemsPageImportFromPolygon = () => {
                             type="submit"
                             className="btn btn-primary"
                         >
-                            Загрузить и просмотреть
+                            {t('adminProblems.uploadAndPreview')}
                         </button>
                         <button
                             type="button"
@@ -95,21 +98,21 @@ export const AdminProblemsPageImportFromPolygon = () => {
                             }}
                             className="btn btn-outline-secondary"
                         >
-                            Очистить
+                            {t('adminProblems.clear')}
                         </button>
                     </div>
                 </form>
                 {
                     error && <div className="alert alert-danger">
-                        Ошибка обработки архива
+                        {t('adminProblems.errorProcessingArchive')}
                     </div>
                 }
                 {
                     done && <>
                         <div className="alert alert-success">
-                            Архив успешно обработан. (Найдена задача &ldquo;{problemJSON.name}&ldquo;)
+                            {t('adminProblems.archiveProcessed', { name: problemJSON.name })}
                         </div>
-                        <button className="btn btn-success" onClick={onAddOnPlatform}>Добавить задачу на платформу</button>
+                        <button className="btn btn-success" onClick={onAddOnPlatform}>{t('adminProblems.addProblemToPlatform')}</button>
                     </>
                 }
 

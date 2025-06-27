@@ -1,15 +1,17 @@
-import Card from "../../../components/bootstrap/Card.jsx";
-import ResponsiveTable from "../../../components/bootstrap/ResponsiveTable.jsx";
-import useCachedGetAPI from "../../../hooks/useGetAPI.js";
+import Card from "../../../../components/bootstrap/Card.jsx";
+import ResponsiveTable from "../../../../components/bootstrap/ResponsiveTable.jsx";
+import useCachedGetAPI from "../../../../hooks/useGetAPI.js";
 import {useEffect} from "react";
 import {Link, useParams} from "react-router-dom";
-import BreadcrumbsElement from "../../../components/BreadcrumbsElement.jsx";
-import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
-import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
-import {AdminHeader} from "../../../components/AdminHeader.jsx";
-import {DeleteButton} from "../../../components/DeleteButton.jsx";
+import BreadcrumbsElement from "../../../../components/BreadcrumbsElement.jsx";
+import BreadcrumbsRoot from "../../../../components/BreadcrumpsRoot.jsx";
+import UserLoginRequired from "../../../../components/UserLoginRequired.jsx";
+import {AdminHeader} from "../../../../components/AdminHeader.jsx";
+import {DeleteButton} from "../../../../components/DeleteButton.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminChampsDetailProblemsPage = () => {
+    const { t } = useTranslation();
 
     let {compId} = useParams();
 
@@ -25,19 +27,19 @@ export const AdminChampsDetailProblemsPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Соревнования"/>
+                <BreadcrumbsElement name={t('adminChamps.competitions')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader />
 
             <Card>
-                <h2 className="mb-3">Задачи</h2>
+                <h2 className="mb-3">{t('adminProblems.problems')}</h2>
                 <div className="border rounded-2 p-1">
                     <ResponsiveTable>
                         <thead>
                         <tr>
                             <th scope="col"></th>
-                            <th scope="col">Название</th>
+                            <th scope="col">{t('adminProblems.name')}</th>
                             <th scope="col">***</th>
 
                         </tr>
@@ -61,7 +63,7 @@ export const AdminChampsDetailProblemsPage = () => {
                                         <td>
                                             <DeleteButton url={`/api/competitionsProblems/${data.id}`} />
                                             {" "}
-                                            <Link to={`${data.id}/edit`} className="btn btn-secondary mx-2" >Изменить</Link>
+                                            <Link to={`${data.id}/edit`} className="btn btn-secondary mx-2" >{t('adminProblems.edit')}</Link>
                                         </td>
 
                                     </tr>)
@@ -75,7 +77,7 @@ export const AdminChampsDetailProblemsPage = () => {
             </Card>
 
             <Card>
-                <Link to="link"> создать</Link>
+                <Link to="link"> {t('adminProblems.createProblem')}</Link>
             </Card>
         </>
     );

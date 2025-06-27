@@ -3,10 +3,13 @@ import constants from "../utils/consts.js";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import PropTypes from "prop-types";
+import {useTranslation} from "react-i18next";
 
 export const DeleteButton = ({
                                  url,
                              }) => {
+
+    const {t} = useTranslation()
 
     const [disabled, setDisabled] = useState(false)
 
@@ -40,7 +43,7 @@ export const DeleteButton = ({
             }
             {
                 !disabled && <>
-                    <span role="status">{" "}Удалить</span>
+                    <span role="status">{" "}{t("deleteButton.text")}</span>
                 </>
             }
 

@@ -35,8 +35,6 @@ const _processPolygonFile = async (file) => {
     }
 
     const tests_array = Object.keys(inputData).sort()
-    // console.log(tests_array);
-
     tests_array.forEach(key => {
         tests.push(
             {
@@ -47,7 +45,8 @@ const _processPolygonFile = async (file) => {
     })
 
 
-    // Make codebattles-like object
+
+    console.log(tests)
 
     const cblike = {}
 

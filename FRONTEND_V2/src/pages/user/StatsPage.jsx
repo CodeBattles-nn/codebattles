@@ -6,43 +6,45 @@ import {getCookie} from "../../utils/cookies.js";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 import {formatDate} from "../../utils/format.js";
+import {useTranslation} from 'react-i18next';
 
 const StatsPage = () => {
-
-    const {compId} = useParams()
-
+    const {t} = useTranslation();
+    const {compId} = useParams();
     const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/leaderboard`);
     const [problemsData, problrmsUpdate] = useCachedGetAPI(`/api/competitions/${compId}/problems`, null, []);
 
     useEffect(() => {
         update();
-        problrmsUpdate()
+        problrmsUpdate();
     }, []);
 
-    const mine_user_id = getCookie("user_id")
-    // console.log(mine_user_id)
+    const mine_user_id = getCookie("user_id");
 
     return (
         <>
             <UserLoginRequired/>
             <Card>
-                <h2 className="mb-3">Рейтинг</h2>
+                <h2 className="mb-3">{t('stats.leaderboard')}</h2>
                 <div className="border rounded-2 p-1">
                     <ResponsiveTable>
                         <thead>
-
                         <tr>
-                            <th scope="col">№</th>
-                            <th scope="col">Пользователь</th>
+                            <th scope="col">{t('stats.position')}</th>
+                            <th scope="col">{t('stats.user')}</th>
                             {
                                 problemsData?.map(compProb => {
-                                    return <th key={"stats-letter-header" + compProb.id} scope="col"><Link
-                                        to={`/problems/${compProb.id}`}>{compProb.slug}</Link>
-                                    </th>
+                                    return (
+                                        <th key={"stats-letter-header" + compProb.id} scope="col">
+                                            <Link to={`/champs/${compId}/problems/${compProb.id}`}>
+                                                {compProb.slug}
+                                            </Link>
+                                        </th>
+                                    )
                                 })
                             }
-                            <th scope="col">Всего</th>
-                            <th scope="col">Посл. Посылка</th>
+                            <th scope="col">{t('stats.total')}</th>
+                            <th scope="col">{t('stats.lastSubmission')}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,26 +55,20 @@ const StatsPage = () => {
                                     ({competitionproblemId}) => competitionproblemId
                                 );
 
-                                // const groupedAnswers = {}
-                                // const user = 0
-
-                                // console.log(user)
-                                console.log(data.score)
-
                                 return (
-                                    <tr key={"stats-usr" + i}
-                                        className={"-1" === mine_user_id ? ("table-secondary") : ('')}>
+                                    <tr
+                                        key={"stats-usr" + i}
+                                        className={mine_user_id === "-1" ? "table-secondary" : ''}
+                                    >
                                         <th scope="row">{i + 1}</th>
                                         <td>{scoreRow.userX}</td>
-                                        {/*<td>-1</td>*/}
                                         {
                                             problemsData?.map(compProb => {
-
-                                                console.log(compProb)
-
-                                                return <td key={"stats-send" + compProb.id} scope="col">
-                                                    {groupedAnswers[compProb.id]?.[0]?.maxScore}
-                                                </td>
+                                                return (
+                                                    <td key={"stats-send" + compProb.id} scope="col">
+                                                        {groupedAnswers[compProb.id]?.[0]?.maxScore}
+                                                    </td>
+                                                )
                                             })
                                         }
                                         <td>{scoreRow.score}</td>
@@ -84,7 +80,6 @@ const StatsPage = () => {
                         </tbody>
                     </ResponsiveTable>
                 </div>
-
             </Card>
         </>
     );

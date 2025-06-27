@@ -5,6 +5,8 @@ import App from './App.jsx'
 import "./global.css"
 import "./utils/settings.js"
 
+import './i18n';
+
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js"
 
 import("../node_modules/bootstrap-icons/font/bootstrap-icons.min.css")

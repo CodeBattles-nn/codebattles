@@ -1,27 +1,29 @@
 import React from 'react';
 import {InputFormElement} from "../forms/InputFormElement.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const CheckerForm = () => {
+    const { t } = useTranslation();
     return (
         <>
             <InputFormElement
                 name="displayName"
-                displayName="Название"
-                helpText="Название, которое показывается пользователю"
-                args={{required: "Введите имя"}}
+                displayName={t('adminCheckers.name')}
+                helpText={t('adminCheckers.nameHelp')}
+                args={{required: t('adminCheckers.nameRequired')}}
             />
 
             <InputFormElement
                 name="languageHighlightName"
-                displayName="Имя языка программирования"
-                helpText="Имя языка для подсветки синтаксиса"
-                args={{required: "Введите имя для подсветки синтаксиса"}}
+                displayName={t('adminCheckers.languageHighlightName')}
+                helpText={t('adminCheckers.languageHighlightNameHelp')}
+                args={{required: t('adminCheckers.languageHighlightNameRequired')}}
             />
 
             <InputFormElement
                 name="address"
-                displayName="Адрес чекера"
-                args={{required: "Адрес чекера обязателен"}}
+                displayName={t('adminCheckers.address')}
+                args={{required: t('adminCheckers.addressRequired')}}
             />
 
         </>
