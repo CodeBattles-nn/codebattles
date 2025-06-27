@@ -1,0 +1,187 @@
+{
+  "translation": {
+    "Welcome to React": "Welcome to React and react-i18next",
+    "Login to account": "Login to account",
+    "Login": "Login",
+    "Password": "Password",
+    "Enter": "Enter",
+    "Enter...": "Enter...",
+    "Enter password": "Enter password",
+    "Enter login": "Enter login",
+    "Wrong login or password": "Wrong login or password",
+    "Error. Try later": "Error. Try later",
+    "header": {
+      "toggle_navigation": "Toggle navigation",
+      "competitions": "Competitions",
+      "problems": "Problems",
+      "rating": "Rating",
+      "submissions": "Submissions",
+      "profile": "Profile",
+      "admin_panel": "Admin Panel",
+      "help": "Help",
+      "logout": "Logout",
+      "lang": "Language"
+    },
+    "statusCodes": {
+      "title": "Program execution statuses",
+      "tableHeaders": {
+        "name": "Name",
+        "reason": "Reason"
+      },
+      "statusCodes": {
+        "WRONG_ANSWER": {
+          "name": "WRONG_ANSWER",
+          "description": "The program produces an incorrect answer (Most likely, your program is not working correctly)"
+        },
+        "SUCCESS": {
+          "name": "SUCCESS",
+          "description": "Correct answer"
+        },
+        "RUNTIME_ERROR": {
+          "name": "RUNTIME_ERROR",
+          "description": "Error during program execution (You may have submitted the wrong program. Try running it on your PC. If that doesn't help, you have an error in your program)"
+        },
+        "COMPILATION_ERROR": {
+          "name": "COMPILATION_ERROR",
+          "description": "Compilation error"
+        },
+        "TIME_LIMIT": {
+          "name": "TIME_LIMIT",
+          "description": "Your program exceeded the execution time limit (Most likely, your program is not optimized and therefore runs slowly)"
+        },
+        "NOT_EXECUTED": {
+          "name": "NOT_EXECUTED",
+          "description": "The program was not executed because TIME_LIMIT or MEMORY_LIMIT occurred in previous tests"
+        }
+      }
+    },
+    "changePassword": {
+      "title": "Change Password",
+      "breadcrumbs": {
+        "profile": "Profile"
+      },
+      "errorMessage": "Incorrect current password",
+      "form": {
+        "currentPassword": {
+          "label": "Current Password",
+          "required": "Current password is required"
+        },
+        "newPassword": {
+          "label": "New Password",
+          "required": "New password is required"
+        }
+      },
+      "buttons": {
+        "change": "Change",
+        "changing": "Changing...",
+        "cancel": "Cancel"
+      }
+    },
+    "profile": {
+      "title": "Profile",
+      "breadcrumbs": {
+        "profile": "Profile"
+      },
+      "changePasswordButton": "Change Password",
+      "successMessage": "Changes saved successfully",
+      "formFields": {
+        "id": {
+          "label": "ID"
+        },
+        "username": {
+          "label": "Username"
+        },
+        "name": {
+          "label": "Name",
+          "required": "Name is required"
+        },
+        "roles": {
+          "label": "Roles"
+        }
+      },
+      "buttons": {
+        "save": "Save",
+        "saving": "Saving..."
+      }
+    },
+    "userChamps": {
+      "title": "Competitions"
+    },
+    "competitionCardComponent": {
+      "startTime": "Start:",
+      "endTime": "End:",
+      "Enter": "Enter"
+    },
+    "competitionStatuses": {
+      "NOT_STARTED": "Not started",
+      "IN_PROGRESS": "Open",
+      "ENDED": "Ended"
+    },
+    "problemsList": {
+      "champs": "Champs",
+      "title": "Problems",
+      "name": "Name"
+    },
+    "seeProblem": {
+      "competitions": "Competitions",
+      "problems": "Problems",
+      "problem": "Problem",
+      "constraints": "Constraints",
+      "executionTime": "Execution time",
+      "memory": "Memory",
+      "inputData": "Input data",
+      "outputData": "Output data",
+      "examples": "Examples",
+      "submitSolution": "Submit solution",
+      "pasteCode": "Paste your code here",
+      "submit": "Submit",
+      "ms": "ms",
+      "mb": "MB"
+    },
+    "stats": {
+      "leaderboard": "Leaderboard",
+      "user": "User",
+      "total": "Total",
+      "lastSubmission": "Last Submission",
+      "position": "Position"
+    },
+    "sends": {
+      "submissions": "Submissions",
+      "competitions": "Competitions",
+      "submissionNumber": "#",
+      "submissionTime": "Submission Time",
+      "problem": "Problem",
+      "points": "Points",
+      "status": "Status",
+      "verdict": "Verdict",
+      "viewVerdict": "View Verdict"
+    },
+    "send": {
+      "competitions": "Competitions",
+      "submissions": "Submissions",
+      "submissionDetails": "Submission Details"
+    },
+    "viewSend": {
+      "analysis": "Submission Analysis",
+      "language": "Language",
+      "sourceCode": "Source Code",
+      "testNumber": "Test #",
+      "timeMs": "Time (ms)",
+      "verdict": "Verdict",
+      "output": "Output",
+      "verdictTypes": {
+        "WRONG_ANSWER": "Wrong Answer",
+        "SUCCESS": "Success",
+        "RUNTIME_ERROR": "Runtime Error",
+        "COMPILATION_ERROR": "Compilation Error",
+        "TIME_LIMIT": "Time Limit Exceeded",
+        "NOT_EXECUTED": "Not Executed"
+      }
+    },
+    "languageSelection": {
+      "title": "Select Language",
+      "selected": "Selected",
+      "toMain": "To Homepage"
+    }
+  }
+}

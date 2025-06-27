@@ -1,0 +1,187 @@
+{
+  "translation": {
+    "Welcome to React": "Добро пожаловать в React и react-i18next",
+    "Login to account": "Вход в аккаунт",
+    "Login": "Логин",
+    "Password": "Пароль",
+    "Enter": "Войти",
+    "Enter...": "Введите...",
+    "Enter password": "Введите пароль",
+    "Enter login": "Введите логин",
+    "Wrong login or password": "Неверный логин или пароль",
+    "Error. Try later": "Ошибка. Попробуйте позже",
+    "header": {
+      "toggle_navigation": "Переключить навигацию",
+      "competitions": "Соревнования",
+      "problems": "Задачи",
+      "rating": "Рейтинг",
+      "submissions": "Посылки",
+      "profile": "Профиль",
+      "admin_panel": "Панель админа",
+      "help": "Помощь",
+      "logout": "Выход",
+      "lang": "Язык"
+    },
+    "statusCodes": {
+      "title": "Статусы выполнения программ",
+      "tableHeaders": {
+        "name": "Название",
+        "reason": "Причина"
+      },
+      "statusCodes": {
+        "WRONG_ANSWER": {
+          "name": "WRONG_ANSWER",
+          "description": "Программа выдает неверный ответ (Скорее всего, ваша программа работает неправильно)"
+        },
+        "SUCCESS": {
+          "name": "SUCCESS",
+          "description": "Верный ответ"
+        },
+        "RUNTIME_ERROR": {
+          "name": "RUNTIME_ERROR",
+          "description": "Ошибка во время работы программы (Возможно, вы отправили не ту программу. Попробуйте запустить ее на своем пк. Если это не помогает, у вас ошибка в программе)"
+        },
+        "COMPILATION_ERROR": {
+          "name": "COMPILATION_ERROR",
+          "description": "Ошибка компиляции"
+        },
+        "TIME_LIMIT": {
+          "name": "TIME_LIMIT",
+          "description": "Ваша программа привысила время на выполнение (Скорее всего, ваша программа написана неоптимально, из-за чего работает медленно)"
+        },
+        "NOT_EXECUTED": {
+          "name": "NOT_EXECUTED",
+          "description": "Программа не была запущена, т.к. в предыдущих тестах возникла TIME_LIMIT или MEMORY_LIMIT"
+        }
+      }
+    },
+    "changePassword": {
+      "title": "Смена пароля",
+      "breadcrumbs": {
+        "profile": "Профиль"
+      },
+      "errorMessage": "Неправильный текущий пароль",
+      "form": {
+        "currentPassword": {
+          "label": "Текущий пароль",
+          "required": "Текущий пароль обязательный"
+        },
+        "newPassword": {
+          "label": "Новый пароль",
+          "required": "Новый пароль обязательный"
+        }
+      },
+      "buttons": {
+        "change": "Сменить",
+        "changing": "Меняем...",
+        "cancel": "Отмена"
+      }
+    },
+    "profile": {
+      "title": "Профиль",
+      "breadcrumbs": {
+        "profile": "Профиль"
+      },
+      "changePasswordButton": "Сменить пароль",
+      "successMessage": "Изменения сохранены",
+      "formFields": {
+        "id": {
+          "label": "ID"
+        },
+        "username": {
+          "label": "Логин"
+        },
+        "name": {
+          "label": "Имя",
+          "required": "Имя обязательно"
+        },
+        "roles": {
+          "label": "Роли"
+        }
+      },
+      "buttons": {
+        "save": "Сохранить",
+        "saving": "Сохраняем..."
+      }
+    },
+    "userChamps": {
+      "title": "Соревнования"
+    },
+    "competitionCardComponent": {
+      "startTime": "Начало:",
+      "endTime": "Конец:",
+      "Enter": "Войти"
+    },
+    "competitionStatuses": {
+      "NOT_STARTED": "Не началось",
+      "IN_PROGRESS": "Идет",
+      "ENDED": "Завершено"
+    },
+    "problemsList": {
+      "champs": "Соревнования",
+      "title": "Задачи",
+      "name": "Название"
+    },
+    "seeProblem": {
+      "competitions": "Соревнования",
+      "problems": "Задачи",
+      "problem": "Задача",
+      "constraints": "Ограничения",
+      "executionTime": "Время выполнения",
+      "memory": "Память",
+      "inputData": "Входные данные",
+      "outputData": "Выходные данные",
+      "examples": "Примеры",
+      "submitSolution": "Отправить решение",
+      "pasteCode": "Вставьте код здесь",
+      "submit": "Отправить",
+      "ms": "мс",
+      "mb": "мб"
+    },
+    "stats": {
+      "leaderboard": "Рейтинг",
+      "user": "Пользователь",
+      "total": "Всего",
+      "lastSubmission": "Посл. Посылка",
+      "position": "№"
+    },
+    "sends": {
+      "submissions": "Посылки",
+      "competitions": "Соревнования",
+      "submissionNumber": "№",
+      "submissionTime": "Время посылки",
+      "problem": "Задача",
+      "points": "Баллы",
+      "status": "Статус",
+      "verdict": "Вердикт",
+      "viewVerdict": "Вердикт"
+    },
+    "send": {
+      "competitions": "Соревнования",
+      "submissions": "Посылки",
+      "submissionDetails": "Детали посылки"
+    },
+    "viewSend": {
+      "analysis": "Анализ посылки",
+      "language": "Язык",
+      "sourceCode": "Исходный код",
+      "testNumber": "№ Теста",
+      "timeMs": "Время (мс)",
+      "verdict": "Вердикт",
+      "output": "Вывод",
+      "verdictTypes": {
+        "WRONG_ANSWER": "Неверный ответ",
+        "SUCCESS": "Успех",
+        "RUNTIME_ERROR": "Ошибка выполнения",
+        "COMPILATION_ERROR": "Ошибка компиляции",
+        "TIME_LIMIT": "Превышено время",
+        "NOT_EXECUTED": "Не выполнено"
+      }
+    },
+    "languageSelection": {
+      "title": "Выберите язык",
+      "selected": "Выбрано",
+      "toMain": "На главную"
+    }
+  }
+}
