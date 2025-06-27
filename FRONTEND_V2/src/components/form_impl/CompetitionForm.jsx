@@ -1,38 +1,40 @@
 import React from 'react';
 import {InputFormElement} from "../forms/InputFormElement.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const CompetitionFormElements = () => {
+    const { t } = useTranslation();
     return (
         <>
             <InputFormElement
                 name="name"
-                displayName="Название"
-                helpText="Название, которое показывается пользователю"
-                args={{required: "Введите имя"}}
+                displayName={t('adminChamps.name')}
+                helpText={t('adminChamps.nameHelp')}
+                args={{required: t('adminChamps.nameRequired')}}
             />
 
             <InputFormElement
                 name="description"
-                displayName="Описание"
-                helpText="Описание. Поддерживается Markdown"
+                displayName={t('adminChamps.description')}
+                helpText={t('adminChamps.descriptionHelp')}
                 type="textarea"
-                args={{required: "Введите описание"}}
+                args={{required: t('adminChamps.descriptionRequired')}}
             />
 
             <InputFormElement
                 name="startedAt"
-                displayName="Начало"
-                helpText="Время начала соревнования"
+                displayName={t('adminChamps.startedAt')}
+                helpText={t('adminChamps.startedAtHelp')}
                 type="datetime-local"
-                args={{required: "Введите время начала"}}
+                args={{required: t('adminChamps.startedAtRequired')}}
             />
 
             <InputFormElement
                 name="endedAt"
-                displayName="Конец"
-                helpText="Время конца соревнования"
+                displayName={t('adminChamps.endedAt')}
+                helpText={t('adminChamps.endedAtHelp')}
                 type="datetime-local"
-                args={{required: "Введите время окончания"}}
+                args={{required: t('adminChamps.endedAtRequired')}}
             />
         </>
     );

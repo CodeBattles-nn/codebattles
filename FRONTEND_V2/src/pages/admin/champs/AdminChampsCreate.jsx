@@ -9,8 +9,10 @@ import axios from "axios";
 import constants from "../../../utils/consts.js";
 import {CompetitionFormElements} from "../../../components/form_impl/CompetitionForm.jsx";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminChampsCreate = () => {
+    const { t } = useTranslation();
 
     const form = useForm({
         defaultValues: {
@@ -49,7 +51,7 @@ export const AdminChampsCreate = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Создание соревнования"/>
+                <BreadcrumbsElement name={t('adminChamps.createCompetition')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
@@ -57,7 +59,7 @@ export const AdminChampsCreate = () => {
             <Card>
                 <MasterForm form={form} onSubmit={onSubmit}>
                     <CompetitionFormElements/>
-                    <button type="submit" className="btn btn-success ">Добавить</button>
+                    <button type="submit" className="btn btn-success ">{t('adminChamps.add')}</button>
                 </MasterForm>
             </Card>
         </>

@@ -6,11 +6,14 @@ import BreadcrumbsElement from "../../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminProblemsPage = () => {
 
     const [data, update] = useCachedGetAPI("/api/problems", () => {
     }, []);
+
+    const { t } = useTranslation();
 
     useEffect(() => {
         update()
@@ -23,7 +26,7 @@ export const AdminProblemsPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Задачи"/>
+                <BreadcrumbsElement name={t('adminProblems.problems')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
@@ -32,9 +35,9 @@ export const AdminProblemsPage = () => {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Desc</th>
+                        <th scope="col">{t('adminProblems.id')}</th>
+                        <th scope="col">{t('adminProblems.name')}</th>
+                        <th scope="col">{t('adminProblems.desc')}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -62,8 +65,8 @@ export const AdminProblemsPage = () => {
                 </table>
 
                 <div className='d-flex gap-2'>
-                    <Link to="/admin/problems/create" className="btn btn-success">создать</Link>
-                    <Link to="/admin/problems/import/polygon" className="btn btn-info">импортировать из Polygon</Link>
+                    <Link to="/admin/problems/create" className="btn btn-success">{t('adminProblems.createProblem')}</Link>
+                    <Link to="/admin/problems/import/polygon" className="btn btn-info">{t('adminProblems.importFromPolygon')}</Link>
                 </div>
             </Card>
 

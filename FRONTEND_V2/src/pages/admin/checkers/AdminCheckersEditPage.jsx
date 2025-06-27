@@ -11,6 +11,7 @@ import axios from "axios";
 import useCachedGetAPI from "../../../hooks/useGetAPI.js";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {CheckerForm} from "../../../components/form_impl/CheckerForm.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminCheckersEditPage = () => {
     const {checkId} = useParams()
@@ -21,6 +22,8 @@ export const AdminCheckersEditPage = () => {
     }, []);
 
     const form = useForm();
+    const { t } = useTranslation();
+
     useEffect(() => {
         updateData()
     }, []);
@@ -55,7 +58,7 @@ export const AdminCheckersEditPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Создание соревнования"/>
+                <BreadcrumbsElement name={t('adminCheckers.editChecker')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
@@ -63,7 +66,7 @@ export const AdminCheckersEditPage = () => {
             <Card>
                 <MasterForm form={form} onSubmit={onSubmit}>
                     <CheckerForm />
-                    <button type="submit" className="btn btn-primary">Изменить</button>
+                    <button type="submit" className="btn btn-primary">{t('adminCheckers.edit')}</button>
                 </MasterForm>
             </Card>
         </>

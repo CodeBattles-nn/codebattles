@@ -11,9 +11,11 @@ import axios from "axios";
 import useCachedGetAPI from "../../../../hooks/useGetAPI.js";
 import {MasterForm} from "../../../../components/forms/MasterForm.jsx";
 import {CompetitionProblemsFormEdit} from "../../../../components/form_impl/CompetitionProblemsFormEdit.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminChampsDetailProblemsEditPage = () => {
     const {probcompId} = useParams()
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
 
@@ -54,7 +56,7 @@ export const AdminChampsDetailProblemsEditPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Создание соревнования"/>
+                <BreadcrumbsElement name={t('adminChamps.createCompetition')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
@@ -63,7 +65,7 @@ export const AdminChampsDetailProblemsEditPage = () => {
                 <MasterForm form={form} onSubmit={onSubmit}>
                     <CompetitionProblemsFormEdit/>
                     <button type="submit" className="btn btn-primary">
-                        Сохранить
+                        {t('adminChamps.save')}
                     </button>
                 </MasterForm>
             </Card>

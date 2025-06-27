@@ -13,8 +13,10 @@ import 'rc-select/assets/index.css';
 import {useForm} from "react-hook-form";
 import axios from "axios";
 import constants from "../../utils/consts.js";
+import { useTranslation } from 'react-i18next';
 
 export const AdminUsersDetailPage = () => {
+    const { t } = useTranslation();
 
     const {compId} = useParams()
 
@@ -74,13 +76,13 @@ export const AdminUsersDetailPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Соревнования"/>
+                <BreadcrumbsElement name={t('adminChamps.competitions')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
 
             <Card key={data.id}>
-                <h2>Управление участниками</h2>
+                <h2>{t('adminUsers.manageUsers')}</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Select
@@ -102,7 +104,7 @@ export const AdminUsersDetailPage = () => {
                         }
                     </Select>
                     <br/>
-                    <button className="btn btn-primary" disabled={loading}>изменить</button>
+                    <button className="btn btn-primary" disabled={loading}>{t('adminUsers.change')}</button>
                 </form>
             </Card>
         </>

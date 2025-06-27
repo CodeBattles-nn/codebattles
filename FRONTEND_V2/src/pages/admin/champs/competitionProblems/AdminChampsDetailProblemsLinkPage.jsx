@@ -10,10 +10,12 @@ import axios from "axios";
 import {MasterForm} from "../../../../components/forms/MasterForm.jsx";
 import {InputFormElement} from "../../../../components/forms/InputFormElement.jsx";
 import {CompetitionProblemsFormEdit} from "../../../../components/form_impl/CompetitionProblemsFormEdit.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminChampsDetailProblemsLinkPage = () => {
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const {compId} = useParams()
 
@@ -42,7 +44,7 @@ export const AdminChampsDetailProblemsLinkPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Создание соревнования"/>
+                <BreadcrumbsElement name={t('adminChamps.createCompetition')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
@@ -51,8 +53,8 @@ export const AdminChampsDetailProblemsLinkPage = () => {
                 <MasterForm form={form} onSubmit={onSubmit}>
                     <input type="number" {...register("competition_id", {value: compId})} hidden />
                     <CompetitionProblemsFormEdit />
-                    <InputFormElement name={"problem_id"} displayName={"ID задачи"} args={{required: "ID задачи обязателен"}} />
-                    <button type="submit" className="btn btn-primary">Добавить</button>
+                    <InputFormElement name={"problem_id"} displayName={t('adminProblems.id')} args={{required: t('adminProblems.idRequired')}} />
+                    <button type="submit" className="btn btn-primary">{t('adminChamps.add')}</button>
                 </MasterForm>
             </Card>
         </>

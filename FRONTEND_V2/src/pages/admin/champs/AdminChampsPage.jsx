@@ -8,8 +8,10 @@ import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {CompetitionCard} from "../../../components/CompetitionCard.jsx";
 import CompetitionsListContainer from "../../../components/CompetitionsListContainer.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminChampsPage = () => {
+    const { t } = useTranslation();
 
     const [data, update] = useCachedGetAPI("/api/competitions", () => {
     }, []);
@@ -25,7 +27,7 @@ export const AdminChampsPage = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Соревнования"/>
+                <BreadcrumbsElement name={t('adminChamps.competitions')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
@@ -40,8 +42,7 @@ export const AdminChampsPage = () => {
                                 startedAt={elem.startedAt}
                                 endedAt={elem.endedAt}
                                 description={elem.description}>
-                                    <Link to={`/admin/champs/${elem.id}/edit`}
-                                      className="btn btn-warning me-2">Управлять</Link>
+                                    <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-warning me-2">{t('adminChamps.manage')}</Link>
                             </CompetitionCard>
                         </div>
                     })
@@ -50,7 +51,7 @@ export const AdminChampsPage = () => {
             </CompetitionsListContainer>
 
             <Card>
-                <Link to="/admin/champs/create" className="btn btn-primary">Создать</Link>
+                <Link to="/admin/champs/create" className="btn btn-primary">{t('adminChamps.createCompetition')}</Link>
             </Card>
         </>
     )

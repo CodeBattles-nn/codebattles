@@ -11,6 +11,7 @@ import axios from "axios";
 import constants from "../../../utils/consts.js";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {ProblemsForm} from "../../../components/form_impl/ProblemsForm.jsx";
+import { useTranslation } from 'react-i18next';
 
 export const AdminProblemsPageEdit = () => {
 
@@ -66,7 +67,7 @@ export const AdminProblemsPageEdit = () => {
         }
     }, [data]);
 
-
+    const { t } = useTranslation();
 
     const onSubmit = (data) => {
         const conf = {
@@ -90,14 +91,14 @@ export const AdminProblemsPageEdit = () => {
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Задачи"/>
+                <BreadcrumbsElement name={t('adminProblems.problems')}/>
             </BreadcrumbsRoot>
 
             <AdminHeader/>
 
             <Card>
                 <div className="container mt-4">
-                    <h3>Создать задачу</h3>
+                    <h3>{t('adminProblems.createProblem')}</h3>
                     <MasterForm form={form} onSubmit={onSubmit}>
                         <ProblemsForm form={form} testsArray={testsArray} examplesArray={examplesArray}/>
                     </MasterForm>

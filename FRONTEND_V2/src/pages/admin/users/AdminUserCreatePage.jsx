@@ -4,6 +4,7 @@ import Card from "../../../components/bootstrap/Card.jsx";
 import axios from "axios";
 import constants from "../../../utils/consts.js";
 import {useNavigate} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 
 export function AdminUserCreatePage() {
@@ -11,6 +12,7 @@ export function AdminUserCreatePage() {
     const [passLength, setPassLength] = useState(12);
     const [useSpecials, setUseSpecials] = useState(true);
     const modalRef = useRef(null);
+    const { t } = useTranslation();
 
     let navigate = useNavigate();
 
@@ -60,13 +62,13 @@ export function AdminUserCreatePage() {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="passwordModalLabel">Настройки генерации пароля</h5>
+                            <h5 className="modal-title" id="passwordModalLabel">{t('adminUsers.passwordGenerationSettings')}</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Закрыть"></button>
+                                    aria-label={t('adminUsers.cancel')}></button>
                         </div>
                         <div className="modal-body">
                             <div className="mb-3">
-                                <label className="form-label">Длина пароля</label>
+                                <label className="form-label">{t('adminUsers.passwordLength')}</label>
                                 <input
                                     type="number"
                                     className="form-control"
@@ -85,14 +87,14 @@ export function AdminUserCreatePage() {
                                     id="useSpecialsCheck"
                                 />
                                 <label className="form-check-label" htmlFor="useSpecialsCheck">
-                                    Включать специальные символы
+                                    {t('adminUsers.includeSpecialCharacters')}
                                 </label>
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">{t('adminUsers.cancel')}</button>
                             <button type="button" className="btn btn-primary" onClick={applyPassword}>
-                                Сгенерировать и применить
+                                {t('adminUsers.generateAndApply')}
                             </button>
                         </div>
                     </div>
@@ -100,16 +102,16 @@ export function AdminUserCreatePage() {
             </div>
 
             <Card>
-                <h3>Форма пользователя</h3>
+                <h3>{t('adminUsers.userForm')}</h3>
                 <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
 
                     <div className="mb-3">
-                        <label className="form-label">Логин</label>
+                        <label className="form-label">{t('adminUsers.login')}</label>
                         <input className="form-control" {...register('musername')} required/>
                     </div>
 
                     <div className="mb-3">
-                        <label className="form-label">Пароль</label>
+                        <label className="form-label">{t('adminUsers.password')}</label>
                         <div className="input-group">
                             <input type="text" className="form-control" {...register('mpassword')} required/>
                             <button
@@ -118,17 +120,17 @@ export function AdminUserCreatePage() {
                                 data-bs-toggle="modal"
                                 data-bs-target="#passwordModal"
                             >
-                                Генерировать
+                                {t('adminUsers.generate')}
                             </button>
                         </div>
                     </div>
 
                     <div className="mb-3">
-                        <label className="form-label">Имя</label>
+                        <label className="form-label">{t('adminUsers.name')}</label>
                         <input className="form-control" {...register('name')} required/>
                     </div>
 
-                    <button type="submit" className="btn btn-success">Отправить</button>
+                    <button type="submit" className="btn btn-success">{t('adminUsers.submit')}</button>
                 </form>
             </Card>
         </>
