@@ -32,6 +32,7 @@ import {AdminUserCreatePage} from "./pages/admin/users/AdminUserCreatePage.jsx";
 import {AdminUsersPage} from "./pages/admin/users/AdminUsersPage.jsx";
 import {ChangePassword} from "./pages/shared/ChangePassword.jsx";
 import {AdminProblemsPageImportFromPolygon} from "./pages/admin/problems/AdminProblemsPageImportFromPolygon.jsx";
+import ChangeLanguagePage from "./pages/shared/ChangeLanguagePage.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -55,6 +56,7 @@ function App() {
                         <Route path="/champs/:compId/sends" element={<SendsListPage/>}/>
                         <Route path="/champs/:compId/sends/:id" element={<SeeSendPage/>}/>
                         <Route path="/statuses" element={<StatusesPage/>}/>
+                        <Route path="/lang" element={<ChangeLanguagePage/>}/>
                         <Route path="/champs" element={<ChampsPage/>}/>
                         <Route path="/profile" element={<Profile/>}/>
                         <Route path="/profile/change-password" element={<ChangePassword/>}/>

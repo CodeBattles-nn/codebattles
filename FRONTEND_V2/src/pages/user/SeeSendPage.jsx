@@ -5,24 +5,28 @@ import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import {ViewSendComponent} from "../../components/ViewSendComponent.jsx";
+import {useTranslation} from 'react-i18next';
 
 const SeeSendPage = () => {
-
+    const {t} = useTranslation();
     const {id, compId} = useParams();
     const [data, update] = useCachedGetAPI(`/api/answers/${id}`);
 
     useEffect(() => {
-        update()
+        update();
     }, []);
 
-
-    return (<>
+    return (
+        <>
             <UserLoginRequired/>
 
             <BreadcrumbsRoot>
-                <BreadcrumbsElement name="Соревнования" url="/champs"/>
-                <BreadcrumbsElement name="Посылки" url={`/champs/${compId}/sends`}/>
-                <BreadcrumbsElement name={data.id} active={true}/>
+                <BreadcrumbsElement name={t('send.competitions')} url="/champs"/>
+                <BreadcrumbsElement name={t('send.submissions')} url={`/champs/${compId}/sends`}/>
+                <BreadcrumbsElement
+                    name={data.id ? `${t('send.submissionDetails')} #${data.id}` : t('send.submissionDetails')}
+                    active={true}
+                />
             </BreadcrumbsRoot>
 
             <ViewSendComponent data={data}/>

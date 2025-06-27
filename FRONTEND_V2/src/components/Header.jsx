@@ -79,6 +79,7 @@ const Header = () => {
                     }
 
                     <Link className="nav-link mx-2" to="/statuses">{t('header.help')}</Link>
+                    <Link className="mx-2 btn btn-outline-secondary text-white" to="/lang">{t('header.lang')}</Link>
 
                     {
                         isAuthed &&

@@ -27,7 +27,8 @@ const resources = {
                 "profile": "Profile",
                 "admin_panel": "Admin Panel",
                 "help": "Help",
-                "logout": "Logout"
+                "logout": "Logout",
+                "lang":"Language"
             },
             "statusCodes": {
                 "title": "Program execution statuses",
@@ -110,6 +111,85 @@ const resources = {
                     "save": "Save",
                     "saving": "Saving..."
                 }
+            },
+            "userChamps": {
+                "title": "Competitions"
+            },
+            "competitionCardComponent": {
+                "startTime": "Start:",
+                "endTime": "End:",
+                "Enter": "Enter"
+            },
+            "competitionStatuses": {
+                NOT_STARTED: "Not started",
+                IN_PROGRESS: "Open",
+                ENDED: "Ended",
+            },
+            "problemsList": {
+                "champs":"Champs",
+                "title": "Problems",
+                "name":"Name"
+            },
+            "seeProblem": {
+                "competitions": "Competitions",
+                "problems": "Problems",
+                "problem": "Problem",
+                "constraints": "Constraints",
+                "executionTime": "Execution time",
+                "memory": "Memory",
+                "inputData": "Input data",
+                "outputData": "Output data",
+                "examples": "Examples",
+                "submitSolution": "Submit solution",
+                "pasteCode": "Paste your code here",
+                "submit": "Submit",
+                "ms": "ms",
+                "mb": "MB"
+            },
+            "stats": {
+                "leaderboard": "Leaderboard",
+                "user": "User",
+                "total": "Total",
+                "lastSubmission": "Last Submission",
+                "position": "Position"
+            },
+            "sends": {
+                "submissions": "Submissions",
+                "competitions": "Competitions",
+                "submissionNumber": "#",
+                "submissionTime": "Submission Time",
+                "problem": "Problem",
+                "points": "Points",
+                "status": "Status",
+                "verdict": "Verdict",
+                "viewVerdict": "View Verdict"
+            },
+            "send": {
+                "competitions": "Competitions",
+                "submissions": "Submissions",
+                "submissionDetails": "Submission Details"
+            },
+            "viewSend": {
+                "analysis": "Submission Analysis",
+                "language": "Language",
+                "sourceCode": "Source Code",
+                "testNumber": "Test #",
+                "timeMs": "Time (ms)",
+                "verdict": "Verdict",
+                "output": "Output",
+                "verdictTypes": {
+                    "WRONG_ANSWER": "Wrong Answer",
+                    "SUCCESS": "Success",
+                    "RUNTIME_ERROR": "Runtime Error",
+                    "COMPILATION_ERROR": "Compilation Error",
+                    "TIME_LIMIT": "Time Limit Exceeded",
+                    "NOT_EXECUTED": "Not Executed"
+                }
+            },
+            "languageSelection": {
+                "title": "Select Language",
+                "selected": "Selected",
+                "toMain":"To Homepage"
             }
         }
     },
@@ -134,7 +214,8 @@ const resources = {
                 "profile": "Профиль",
                 "admin_panel": "Панель админа",
                 "help": "Помощь",
-                "logout": "Выход"
+                "logout": "Выход",
+                "lang":"Язык"
             },
             "statusCodes": {
                 "title": "Статусы выполнения программ",
@@ -217,6 +298,86 @@ const resources = {
                     "save": "Сохранить",
                     "saving": "Сохраняем..."
                 }
+            },
+            "userChamps": {
+                "title": "Соревнования"
+            },
+            "competitionCardComponent": {
+                "startTime": "Начало:",
+                "endTime": "Конец:",
+                "Enter": "Войти"
+            },
+            "competitionStatuses": {
+                NOT_STARTED: "Не началось",
+                IN_PROGRESS: "Идет",
+                ENDED: "Завершено",
+            },
+            "problemsList": {
+                "champs":"Соревнования",
+                "title": "Задачи",
+                "name":"Название"
+            },
+            "seeProblem": {
+                "competitions": "Соревнования",
+                "problems": "Задачи",
+                "problem": "Задача",
+                "constraints": "Ограничения",
+                "executionTime": "Время выполнения",
+                "memory": "Память",
+                "inputData": "Входные данные",
+                "outputData": "Выходные данные",
+                "examples": "Примеры",
+                "submitSolution": "Отправить решение",
+                "pasteCode": "Вставьте код здесь",
+                "submit": "Отправить",
+                "ms": "мс",
+                "mb": "мб"
+            },
+            "stats": {
+                "leaderboard": "Рейтинг",
+                "user": "Пользователь",
+                "total": "Всего",
+                "lastSubmission": "Посл. Посылка",
+                "position": "№"
+            },
+            "sends": {
+                "submissions": "Посылки",
+                "competitions": "Соревнования",
+                "submissionNumber": "№",
+                "submissionTime": "Время посылки",
+                "problem": "Задача",
+                "points": "Баллы",
+                "status": "Статус",
+                "verdict": "Вердикт",
+                "viewVerdict": "Вердикт"
+            },
+            "send": {
+                "competitions": "Соревнования",
+                "submissions": "Посылки",
+                "submissionDetails": "Детали посылки"
+            },
+            "viewSend": {
+                "analysis": "Анализ посылки",
+                "language": "Язык",
+                "sourceCode": "Исходный код",
+                "testNumber": "№ Теста",
+                "timeMs": "Время (мс)",
+                "verdict": "Вердикт",
+                "output": "Вывод",
+                "verdictTypes": {
+                    "WRONG_ANSWER": "Неверный ответ",
+                    "SUCCESS": "Успех",
+                    "RUNTIME_ERROR": "Ошибка выполнения",
+                    "COMPILATION_ERROR": "Ошибка компиляции",
+                    "TIME_LIMIT": "Превышено время",
+                    "NOT_EXECUTED": "Не выполнено"
+                }
+            },
+            "languageSelection": {
+                "title": "Выберите язык",
+                "selected": "Выбрано",
+                "toMain":"На главную"
+
             }
         }
     }
