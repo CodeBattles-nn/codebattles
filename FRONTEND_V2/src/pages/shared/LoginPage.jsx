@@ -6,6 +6,7 @@ import axios from "axios";
 import constants from "../../utils/consts.js";
 import {MasterForm} from "../../components/forms/MasterForm.jsx";
 import {InputFormElement} from "../../components/forms/InputFormElement.jsx";
+import {useTranslation} from "react-i18next";
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -28,9 +29,9 @@ const LoginPage = () => {
             navigate("/champs");
         } catch (error) {
             if (error.response && error.response.status === 401) {
-                setApiError("Неправильный логин или пароль.");
+                setApiError(t("Wrong login or password"));
             } else {
-                setApiError("Произошла ошибка. Попробуйте снова позже.");
+                setApiError(t( "Error. Try later"));
             }
         }
     };
@@ -41,6 +42,8 @@ const LoginPage = () => {
         }
     }, [navigate]);
 
+    const {t} = useTranslation()
+
     return (
         <div style={{minHeight: "80dvh"}} className="d-flex justify-content-center align-content-center flex-wrap">
 
@@ -49,7 +52,7 @@ const LoginPage = () => {
                   <div className="col-1 col-lg-2"/>
                   <div className="col">
                       <Card className="p-5">
-                          <h3 className="mb-4">Вход в аккаунт</h3>
+                          <h3 className="mb-4">{t("Login to account")}</h3>
                           {apiError &&
                               <div className="alert alert-danger" role="alert">
                                   {apiError}
@@ -57,19 +60,19 @@ const LoginPage = () => {
                           }
                           <MasterForm form={form} onSubmit={onSubmit}>
                               <InputFormElement
-                                  displayName="Логин"
+                                  displayName={t("Login")}
                                   name='username'
-                                  args={{required: "Введите логин"}}
+                                  args={{required: t( "Enter login")}}
                               />
                               <InputFormElement
-                                  displayName="Пароль"
+                                  displayName={t("Password")}
                                   name='password'
                                   type="password"
-                                  args={{required: "Введите пароль"}}
+                                  args={{required: t("Enter password")}}
                               />
 
                               <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                                  {isSubmitting ? "Входим..." : "Войти"}
+                                  {isSubmitting ? t( "Enter..."): t("Enter")}
                               </button>
                           </MasterForm>
                       </Card>

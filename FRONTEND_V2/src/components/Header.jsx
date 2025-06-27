@@ -3,10 +3,10 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import constants from "../utils/consts.js";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useEffect} from "react";
-
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
-
+    const { t } = useTranslation();
     let navigate = useNavigate();
 
     let isAuthed = localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true"
@@ -28,8 +28,6 @@ const Header = () => {
         navigate("/")
     }
 
-    // console.log("HEADER", params, needPath)
-
     return (
         <nav className="navbar navbar-expand-lg custom-navbar">
             <div className="container">
@@ -40,7 +38,7 @@ const Header = () => {
                 </div>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                        aria-expanded="false" aria-label={t('header.toggle_navigation')}>
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -48,52 +46,44 @@ const Header = () => {
                         {
                             compId && compId !== "champs" && <>
                                 <li className="nav-item active">
-                                    <Link className="nav-link" to={`/champs/`}>Соревнования</Link>
+                                    <Link className="nav-link" to={`/champs/`}>{t('header.competitions')}</Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <Link className="nav-link" to={`/champs/${compId}/problems`}>Задачи</Link>
+                                    <Link className="nav-link" to={`/champs/${compId}/problems`}>{t('header.problems')}</Link>
                                 </li>
                                 <li className="nav-item active">
-                                    <Link className="nav-link" to={`/champs/${compId}/stats`}>Рейтинг</Link>
+                                    <Link className="nav-link" to={`/champs/${compId}/stats`}>{t('header.rating')}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to={`/champs/${compId}/sends`}>Посылки</Link>
+                                    <Link className="nav-link" to={`/champs/${compId}/sends`}>{t('header.submissions')}</Link>
                                 </li>
                             </>
                         }
                         {
                             params.pathname === "/profile" && <>
                                 <li className="nav-item active">
-                                    <Link className="nav-link" to={`/champs/`}>Соревнования</Link>
+                                    <Link className="nav-link" to={`/champs/`}>{t('header.competitions')}</Link>
                                 </li>
                             </>
                         }
-                        {
-                            compId && compId === "champs" && <>
-                            </>
-                        }
-
-                        {/*<a className="nav-link mx-5" target="_blank" href="/teacher">Учителю</a>*/}
                     </ul>
 
                     {
                         isAuthed &&
-                        <Link className="nav-link mx-2" to="/profile">Профиль</Link>
+                        <Link className="nav-link mx-2" to="/profile">{t('header.profile')}</Link>
                     }
 
                     {
                         profile.isAdmin &&
-                        <Link className="nav-link mx-2" to="/admin/champs">Панель админа</Link>
+                        <Link className="nav-link mx-2" to="/admin/champs">{t('header.admin_panel')}</Link>
                     }
 
-                    <Link className="nav-link mx-2" to="/statuses">Помощь</Link>
+                    <Link className="nav-link mx-2" to="/statuses">{t('header.help')}</Link>
 
                     {
                         isAuthed &&
-                        <button className="btn btn-danger" onClick={onLogoutButtonClick}>Выход</button>
+                        <button className="btn btn-danger" onClick={onLogoutButtonClick}>{t('header.logout')}</button>
                     }
-
-
                 </div>
             </div>
         </nav>
