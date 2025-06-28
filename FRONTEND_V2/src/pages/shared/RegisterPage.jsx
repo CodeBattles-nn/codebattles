@@ -101,7 +101,7 @@ const RegisterPage = () => {
                               </button>
                           </MasterForm>
                           <div className="mt-2">
-                              <Link  to="/">Вход</Link>
+                              <Link  to="/">{t("Login")}</Link>
                           </div>
                       </Card>
                   </div>

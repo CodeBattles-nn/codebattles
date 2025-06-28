@@ -76,7 +76,7 @@ const LoginPage = () => {
                               </button>
                           </MasterForm>
                           <div className="mt-2">
-                            <Link  to="/register">Регистрация</Link>
+                            <Link  to="/register">{t("Register")}</Link>
                           </div>
                       </Card>
                   </div>
