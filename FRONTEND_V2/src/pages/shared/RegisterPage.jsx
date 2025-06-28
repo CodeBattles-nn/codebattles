@@ -8,7 +8,7 @@ import {MasterForm} from "../../components/forms/MasterForm.jsx";
 import {InputFormElement} from "../../components/forms/InputFormElement.jsx";
 import {useTranslation} from "react-i18next";
 
-const LoginPage = () => {
+const RegisterPage = () => {
     const navigate = useNavigate();
 
     const form = useForm();
@@ -22,7 +22,7 @@ const LoginPage = () => {
     const onSubmit = async (data) => {
         setApiError(""); // сбрасываем ошибку перед новым запросом
         try {
-            const response = await axios.post('/api/auth/login', data);
+            const response = await axios.post('/api/auth/register', data);
             const {token} = response.data;
             localStorage.setItem(constants.LOCALSTORAGE_JWT, token);
             localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "true");
@@ -30,19 +30,17 @@ const LoginPage = () => {
         } catch (error) {
             if (error.response && error.response.status === 401) {
                 setApiError(t("Wrong login or password"));
+            }if (error.response && error.response.status === 409) {
+                setApiError(t("Username is already taken"));
             } else {
                 setApiError(t( "Error. Try later"));
             }
         }
     };
 
-    useEffect(() => {
-        if (localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true") {
-            navigate("/champs");
-        }
-    }, [navigate]);
-
     const {t} = useTranslation()
+
+    const password = form.watch('password', '');
 
     return (
         <div style={{minHeight: "80dvh"}} className="d-flex justify-content-center align-content-center flex-wrap">
@@ -52,7 +50,7 @@ const LoginPage = () => {
                   <div className="col-1 col-lg-2"/>
                   <div className="col">
                       <Card className="p-5">
-                          <h3 className="mb-4">{t("Login to account")}</h3>
+                          <h3 className="mb-4">{t("Register")}</h3>
                           {apiError &&
                               <div className="alert alert-danger" role="alert">
                                   {apiError}
@@ -64,19 +62,46 @@ const LoginPage = () => {
                                   name='username'
                                   args={{required: t( "Enter login")}}
                               />
+
+                              <InputFormElement
+                                  displayName={t("Name")}
+                                  name='name'
+                                  type="name"
+                                  args={{required: t("Enter Name")}}
+                              />
+
                               <InputFormElement
                                   displayName={t("Password")}
                                   name='password'
                                   type="password"
-                                  args={{required: t("Enter password")}}
+                                  args={{
+                                      required: t( "Enter password"),
+                                      minLength: {
+                                          value: 6,
+                                          message: t("Min6"),
+                                      },
+                                  }}
                               />
 
+                              <InputFormElement
+                                  displayName={t("Repeat Password")}
+                                  name='newpassword'
+                                  type="newpassword"
+                                  args={{
+                                      required: t("Repeat Password"),
+                                      validate: (value) =>
+                                          value === password || t("Passwords doesnt equals"),
+                                  }}
+                              />
+
+
+
                               <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                                  {isSubmitting ? t( "Enter..."): t("Enter")}
+                                  {isSubmitting ? t( "Register..."): t("Register")}
                               </button>
                           </MasterForm>
                           <div className="mt-2">
-                            <Link  to="/register">Регистрация</Link>
+                              <Link  to="/">Вход</Link>
                           </div>
                       </Card>
                   </div>
@@ -87,4 +112,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default RegisterPage;
