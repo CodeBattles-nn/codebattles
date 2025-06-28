@@ -1,6 +1,7 @@
 package ru.codebattles.backend.entity
 
 import jakarta.persistence.*
+import org.hibernate.annotations.ColumnDefault
 import java.util.*
 
 @Entity
@@ -35,5 +36,9 @@ data class Competition(
 
     @Column(name = "show_input", nullable = false)
     var showInput: Boolean = true,
+
+    @Column(name = "public", nullable = false)
+    @ColumnDefault("false")
+    var public: Boolean = false,
 
     ) : BaseEntity()

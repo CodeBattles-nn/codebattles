@@ -15,5 +15,13 @@ data class CompetitionEditDto(
     val startedAt: LocalDateTime? = null,
 
     @Schema(description = "End time of the competition", example = "2023-01-01T18:00:00")
-    val endedAt: LocalDateTime? = null
+    val endedAt: LocalDateTime? = null,
+
+    @Schema(description = "If public everyone can join into competition", example = "true")
+    var public: Boolean = false,
+
+    var showInput: Boolean = true,
+    var showOutput: Boolean = true,
+    var showRating: Boolean = true,
+
 )

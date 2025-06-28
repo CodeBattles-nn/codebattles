@@ -25,7 +25,7 @@ import ru.codebattles.backend.web.entity.SendAnswerRequest
 @RestController
 @RequestMapping("/api/competitions")
 @SecurityRequirement(name = "JWT")
-class CompetitionsController (
+class CompetitionsController(
     private val competitionMapper: CompetitionsMapper
 ) {
     @Autowired
@@ -102,7 +102,15 @@ class CompetitionsController (
     @CompetitionAccessRequired
     @GetMapping("{compId}/leaderboard")
     fun leaderboard(@CompetitionId @PathVariable compId: Long): Leaderboard {
-        return competitionService.getLeaderboardById(compId)
+        val competition = competitionService.getById(compId)
+
+        if (competition.showRating) {
+            return competitionService.getLeaderboardById(compId)
+        }
+
+        val emptyLeaderboard = Leaderboard(emptyList(), emptyMap())
+
+        return emptyLeaderboard
     }
 
     @Operation(
@@ -155,7 +163,10 @@ class CompetitionsController (
     )
     @CompetitionAccessRequired
     @GetMapping("{compId}/problems/{id}")
-    fun getProblemsByIdByCompetition(@CompetitionId @PathVariable compId: Long, @PathVariable id: Long): CompetitionsProblemsDto {
+    fun getProblemsByIdByCompetition(
+        @CompetitionId @PathVariable compId: Long,
+        @PathVariable id: Long
+    ): CompetitionsProblemsDto {
         return competitionService.getProblemById(compId, id)
     }
 
