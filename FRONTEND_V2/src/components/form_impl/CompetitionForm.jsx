@@ -1,6 +1,7 @@
 import React from 'react';
 import {InputFormElement} from "../forms/InputFormElement.jsx";
 import { useTranslation } from 'react-i18next';
+import {CheckboxFormElement} from "../forms/CheckboxFormElement.jsx";
 
 export const CompetitionFormElements = () => {
     const { t } = useTranslation();
@@ -35,6 +36,31 @@ export const CompetitionFormElements = () => {
                 helpText={t('adminChamps.endedAtHelp')}
                 type="datetime-local"
                 args={{required: t('adminChamps.endedAtRequired')}}
+            />
+
+            <CheckboxFormElement
+                name="public"
+                displayName={t('adminChamps.public')}
+                helpText={t('adminChamps.publicHelp')}
+                type="checkbox"
+            />
+            <CheckboxFormElement
+                name="showInput"
+                displayName={t('adminChamps.showInput')}
+                helpText={t('adminChamps.showInputHelp')}
+                type="checkbox"
+            />
+            <CheckboxFormElement
+                name="showOutput"
+                displayName={t('adminChamps.showOutput')}
+                helpText={t('adminChamps.showOutputHelp')}
+                type="checkbox"
+            />
+            <CheckboxFormElement
+                name="showRating"
+                displayName={t('adminChamps.showRating')}
+                helpText={t('adminChamps.showRatingHelp')}
+                type="checkbox"
             />
         </>
     );
