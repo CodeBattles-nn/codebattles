@@ -135,4 +135,19 @@ class CompetitionService(
                         competitionRepository.existsByIdAndMembersId(competitionId, user.id!!)
                 )
     }
+
+    fun getAllByPublic(public: Boolean): List<Competition> {
+        return competitionRepository.getAllByPublic(public)
+    }
+
+    fun joinToPublicCompetition(compId: Long, userId: Long) {
+        val competition = competitionRepository.findById(compId).orElseThrow()
+        if (!competition.public) return
+
+        val user = userRepository.findById(userId).orElseThrow()
+
+        competition.members?.add(user)
+
+        competitionRepository.save(competition)
+    }
 }
