@@ -256,12 +256,12 @@
       "addressRequired": "Checker address is required"
     },
     "adminChamps": {
-      "name": "Имя",
-      "nameHelp": "Имя соревнования",
-      "nameRequired": "Имя обязательно",
-      "description": "Описание",
-      "descriptionHelp": "Описание. Markdown поддерживается",
-      "descriptionRequired": "Описание обязательно",
+      "name": "Name",
+      "nameHelp": "Name of competition",
+      "nameRequired": "Name is required",
+      "description": "Description",
+      "descriptionHelp": "Description. Markdown is supported",
+      "descriptionRequired": "Description is required",
       "startedAt": "Start at",
       "endedAt": "End at",
       "startedAtHelp": "Competition start time",
