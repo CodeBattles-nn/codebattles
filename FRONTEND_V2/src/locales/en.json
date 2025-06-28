@@ -1,5 +1,6 @@
 {
   "translation": {
+    "join": "Join",
     "Welcome to React": "Welcome to React and react-i18next",
     "Login to account": "Login to account",
     "Login": "Login",
