@@ -256,6 +256,14 @@
       "addressRequired": "Checker address is required"
     },
     "adminChamps": {
+      "public": "Public",
+      "publicHelp": "Any user can join public competitions",
+      "showInput": "Show input data",
+      "showInputHelp": "Show participants' submission code (Does not apply to the admin panel)",
+      "showOutput": "Show output data",
+      "showOutputHelp": "Show test output when viewing participants' submissions (Does not apply to the admin panel)",
+      "showRating": "Show participant rating",
+      "showRatingHelp": "Display overall rating to participants (Does not apply to the admin panel)",
       "name": "Name",
       "nameHelp": "Name of competition",
       "nameRequired": "Name is required",

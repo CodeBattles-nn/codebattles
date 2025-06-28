@@ -20,4 +20,5 @@ data class LeaderBoardScoreOrderQuery(
 data class Leaderboard(
     val score: List<LeaderBoardScoreOrderQuery>,
     val data: Map<Long, List<LeaderBoardAllTasksQuery>>
+
 )

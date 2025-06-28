@@ -18,7 +18,7 @@ data class Answer(
     var status: AnswerStatus = AnswerStatus.IN_PROGRESS,
     var score: Int? = null,
 
-    val code: String,
+    var code: String,
 
     @ManyToOne
     val checker: Checker,
