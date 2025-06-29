@@ -12,7 +12,6 @@ import ru.codebattles.backend.annotations.CompetitionAccessRequired
 import ru.codebattles.backend.annotations.CompetitionId
 import ru.codebattles.backend.dto.*
 import ru.codebattles.backend.dto.mapper.CompetitionsMapper
-import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.repository.CompetitionRepository

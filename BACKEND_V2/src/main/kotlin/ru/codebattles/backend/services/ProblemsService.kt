@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 import ru.codebattles.backend.dto.CreateProblemDto
 import ru.codebattles.backend.dto.ProblemDto
-import ru.codebattles.backend.dto.mapper.CreateProblemsMapper
 import ru.codebattles.backend.dto.mapper.ProblemsMapper
 import ru.codebattles.backend.entity.Problem
 import ru.codebattles.backend.repository.ProblemsRepository
@@ -17,7 +16,7 @@ import java.io.IOException
 class ProblemsService(
     val problemsRepository: ProblemsRepository,
     val problemsMapper: ProblemsMapper,
-    val createProblemsMapper: CreateProblemsMapper, private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper
 ) {
     fun getById(id: Long): ProblemDto {
         val optionalProblem = problemsRepository.findById(id)

@@ -2,7 +2,6 @@ package ru.codebattles.backend.services
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import org.springframework.stereotype.Service
 import ru.codebattles.backend.dto.AnswerDto
 import ru.codebattles.backend.dto.mapper.AnswerMapper
@@ -13,7 +12,6 @@ import ru.codebattles.backend.repository.CheckerRepository
 import ru.codebattles.backend.repository.CompetitionProblemsRepository
 import ru.codebattles.backend.repository.CompetitionRepository
 import ru.codebattles.backend.web.entity.SendAnswerRequest
-import ru.codebattles.backend.web.entity.checker.CheckerCallback
 import ru.codebattles.backend.web.entity.checker.CheckerTaskRequest
 import ru.codebattles.backend.web.entity.checker.Test
 
