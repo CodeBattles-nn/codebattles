@@ -9,4 +9,5 @@ import ru.codebattles.backend.entity.User
 interface CompetitionRepository : JpaRepository<Competition, Long> {
     fun getByMembersContaining(user: User): List<Competition>
     fun existsByIdAndMembersId(id: Long, memberId: Long): Boolean
+    fun getAllByPublic(public: Boolean): List<Competition>
 }

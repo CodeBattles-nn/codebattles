@@ -12,6 +12,7 @@ import ru.codebattles.backend.annotations.CompetitionAccessRequired
 import ru.codebattles.backend.annotations.CompetitionId
 import ru.codebattles.backend.dto.*
 import ru.codebattles.backend.dto.mapper.CompetitionsMapper
+import ru.codebattles.backend.entity.Competition
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.repository.CompetitionRepository
@@ -171,6 +172,18 @@ class CompetitionsController(
     }
 
     @Operation(
+        summary = "Join to public competition problem by ID",
+        description = "Every user can join to public competition."
+    )
+    @PostMapping("{compId}/publicJoin")
+    fun joinToPublicCompetition(
+        @CompetitionId @PathVariable compId: Long,
+        @AuthenticationPrincipal user: User
+    ) {
+        return competitionService.joinToPublicCompetition(compId,user.id!!)
+    }
+
+    @Operation(
         summary = "Get competitions available for user",
         description = "Retrieves all competitions accessible to the authenticated user."
     )
@@ -187,5 +200,16 @@ class CompetitionsController(
     @GetMapping
     fun getAll(): List<CompetitionDto> {
         return competitionService.getAll()
+    }
+
+    @Operation(
+        summary = "Get all public competitions",
+        description = "Retrieves a list of public competitions."
+    )
+    @GetMapping("/public")
+    fun getPublic(): List<CompetitionDto> {
+        return competitionMapper.toDtoS(
+            competitionService.getAllByPublic(true)
+        )
     }
 }

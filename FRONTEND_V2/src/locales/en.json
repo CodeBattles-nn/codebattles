@@ -1,8 +1,17 @@
 {
   "translation": {
+    "join": "Join",
     "Welcome to React": "Welcome to React and react-i18next",
     "Login to account": "Login to account",
     "Login": "Login",
+    "Name": "Name",
+    "Repeat Password": "Repeat Password",
+    "Passwords doesnt equals": "Passwords doesnt equals",
+    "Enter Name": "Enter Name",
+    "Min6": "Minimal length is 6",
+    "Username is already taken": "Username is already taken",
+    "Register": "Register",
+    "Register...": "Register...",
     "Password": "Password",
     "Enter": "Enter",
     "Enter...": "Enter...",
