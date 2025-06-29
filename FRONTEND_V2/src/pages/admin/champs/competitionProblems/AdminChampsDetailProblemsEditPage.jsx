@@ -12,6 +12,7 @@ import useCachedGetAPI from "../../../../hooks/useGetAPI.js";
 import {MasterForm} from "../../../../components/forms/MasterForm.jsx";
 import {CompetitionProblemsFormEdit} from "../../../../components/form_impl/CompetitionProblemsFormEdit.jsx";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../../utils/settings.js";
 
 export const AdminChampsDetailProblemsEditPage = () => {
     const {probcompId} = useParams()
@@ -38,14 +39,7 @@ export const AdminChampsDetailProblemsEditPage = () => {
     const onSubmit = (data) => {
         console.log(data);
 
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.patch(`/api/competitionsProblems/${probcompId}`, data, conf)
+        axiosInstance.patch(`/api/competitionsProblems/${probcompId}`, data)
             .then(() => navigate("/admin/champs"))
 
 

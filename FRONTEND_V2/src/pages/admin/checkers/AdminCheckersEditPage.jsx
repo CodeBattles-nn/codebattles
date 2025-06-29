@@ -12,6 +12,7 @@ import useCachedGetAPI from "../../../hooks/useGetAPI.js";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {CheckerForm} from "../../../components/form_impl/CheckerForm.jsx";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminCheckersEditPage = () => {
     const {checkId} = useParams()
@@ -38,15 +39,7 @@ export const AdminCheckersEditPage = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.patch(`/api/checkers/${checkId}`, data, conf)
+        axiosInstance.patch(`/api/checkers/${checkId}`, data)
             .then(() => navigate("/admin/champs"))
 
 

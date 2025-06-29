@@ -11,6 +11,7 @@ import {MasterForm} from "../../../../components/forms/MasterForm.jsx";
 import {InputFormElement} from "../../../../components/forms/InputFormElement.jsx";
 import {CompetitionProblemsFormEdit} from "../../../../components/form_impl/CompetitionProblemsFormEdit.jsx";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../../utils/settings.js";
 
 export const AdminChampsDetailProblemsLinkPage = () => {
 
@@ -25,15 +26,7 @@ export const AdminChampsDetailProblemsLinkPage = () => {
 
     const onSubmit = (data) => {
         console.log(data);
-
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.post('/api/competitionsProblems', data, conf)
+        axiosInstance.post('/api/competitionsProblems', data)
             .then(() => navigate("/admin/champs"))
 
 

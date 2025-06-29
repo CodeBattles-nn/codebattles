@@ -13,6 +13,7 @@ import axios from "axios";
 import {CompetitionCard} from "../../../components/CompetitionCard.jsx";
 import {CompetitionFormElements} from "../../../components/form_impl/CompetitionForm.jsx";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminChampsDetailPage = () => {
     const { t } = useTranslation();
@@ -38,15 +39,8 @@ export const AdminChampsDetailPage = () => {
     }, [data]);
 
     const onSubmit = (data) => {
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
         setDone(false)
-        axios.put(`/api/competitions/${compId}`, data, conf)
+        axiosInstance.put(`/api/competitions/${compId}`, data)
             .then(() => setDone(true))
             .then(() => update())
     }

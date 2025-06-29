@@ -5,6 +5,7 @@ import axios from "axios";
 import constants from "../../../utils/consts.js";
 import {useNavigate} from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 
 export function AdminUserCreatePage() {
@@ -35,15 +36,8 @@ export function AdminUserCreatePage() {
     };
 
     const onSubmit = (data) => {
-        axios
-            .post(`/api/users`,
-                data,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-                    }
-                })
+        axiosInstance
+            .post(`/api/users`, data)
             .then(() => {
                 navigate(`/admin/users`)
             })

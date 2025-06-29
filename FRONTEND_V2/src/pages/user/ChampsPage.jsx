@@ -11,6 +11,7 @@ import {useTranslation} from "react-i18next";
 import Card from "../../components/bootstrap/Card.jsx";
 import axios from "axios";
 import constants from "../../utils/consts.js";
+import {axiosInstance} from "../../utils/settings.js";
 
 const ChampsPage = () => {
     const {t} = useTranslation()
@@ -75,21 +76,12 @@ const ChampsPage = () => {
                         const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
 
                         const onClick = () => {
-                            const conf = {
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-                                }
-                            }
-
-                            axios.post(`/api/competitions/${elem.id}/publicJoin`, {}, conf).then(
+                            axiosInstance.post(`/api/competitions/${elem.id}/publicJoin`).then(
                                 () => {
                                     update()
                                     navigate(`/champs/${elem.id}/problems`);
                                 }
                             )
-
-
                         }
 
                         if (data.some(item => item.id === elem.id)) return

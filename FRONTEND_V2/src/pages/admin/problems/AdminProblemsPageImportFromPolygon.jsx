@@ -10,6 +10,7 @@ import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {polygonProcessStatuses, processPolygonFile} from "../../../services/polygon.js";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminProblemsPageImportFromPolygon = () => {
     const navigate = useNavigate()
@@ -24,14 +25,7 @@ export const AdminProblemsPageImportFromPolygon = () => {
     const { t } = useTranslation();
 
     const onAddOnPlatform = () => {
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.post('/api/problems', problemJSON, conf)
+        axiosInstance.post('/api/problems', problemJSON)
             .then(() => navigate("/admin/champs"))
     };
 

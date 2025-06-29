@@ -12,6 +12,7 @@ import constants from "../../utils/consts.js";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import {useTranslation} from 'react-i18next';
+import {axiosInstance} from "../../utils/settings.js";
 
 const SeeProblemPage = () => {
     const {t} = useTranslation();
@@ -49,15 +50,7 @@ const SeeProblemPage = () => {
         }
 
         console.log(defaultLang)
-
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.post(`/api/competitions/${compId}/send`, formData, config)
+        axiosInstance.post(`/api/competitions/${compId}/send`, formData)
             .then(() => {
                 setTimeout(() => {
                     navigate(`/champs/${compId}/sends`)

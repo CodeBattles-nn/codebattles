@@ -14,6 +14,7 @@ import {useForm} from "react-hook-form";
 import axios from "axios";
 import constants from "../../utils/consts.js";
 import {useTranslation} from "react-i18next";
+import {axiosInstance} from "../../utils/settings.js";
 
 export const AdminUsersDetailCheckersPage = () => {
     const {t} = useTranslation()
@@ -49,15 +50,9 @@ export const AdminUsersDetailCheckersPage = () => {
 
     const onSubmit = () => {
         setLoading(true)
-        axios
+        axiosInstance
             .put(`/api/competitions/${compId}/checkers`,
-                {usersIds: selectesUsers},
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-                    }
-                })
+                {usersIds: selectesUsers})
             .then(() => {
                 navigate(`/admin/champs/${compId}/edit`)
             })

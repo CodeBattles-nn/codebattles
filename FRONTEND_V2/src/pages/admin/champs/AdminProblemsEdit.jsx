@@ -10,6 +10,7 @@ import constants from "../../../utils/consts.js";
 import axios from "axios";
 import useCachedGetAPI from "../../../hooks/useGetAPI.js";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminProblemsEdit = () => {
     const {probcompId} = useParams()
@@ -41,14 +42,7 @@ export const AdminProblemsEdit = () => {
     const onSubmit = (data) => {
         console.log(data);
 
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.patch(`/api/competitionsProblems/${probcompId}`, data, conf)
+        axiosInstance.patch(`/api/competitionsProblems/${probcompId}`, data)
             .then(() => navigate("/admin/champs"))
 
 

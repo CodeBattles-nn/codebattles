@@ -12,6 +12,7 @@ import {useNavigate} from "react-router-dom";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {ProblemsForm} from "../../../components/form_impl/ProblemsForm.jsx";
 import { useTranslation } from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminProblemsPageCreate = () => {
 
@@ -50,19 +51,12 @@ export const AdminProblemsPageCreate = () => {
 
 
     const onSubmit = (data) => {
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
         const sendData = {...data}
         sendData.examples = JSON.stringify(data.examples)
         sendData.tests = JSON.stringify(data.tests)
 
 
-        axios.post('/api/problems', sendData, conf)
+        axiosInstance.post('/api/problems', sendData)
             .then(() => navigate("/admin/champs"))
     };
 
