@@ -9,7 +9,7 @@ import axios from "axios";
 import constants from "../../../utils/consts.js";
 import {CompetitionFormElements} from "../../../components/form_impl/CompetitionForm.jsx";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 export const AdminChampsCreate = () => {
     const { t } = useTranslation();

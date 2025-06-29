@@ -11,9 +11,7 @@ import Select, {Option} from 'rc-select';
 import 'rc-select/assets/index.css';
 
 import {useForm} from "react-hook-form";
-import axios from "axios";
-import constants from "../../utils/consts.js";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../utils/settings.js";
 
 export const AdminUsersDetailPage = () => {

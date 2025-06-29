@@ -8,7 +8,7 @@ import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {CompetitionCard} from "../../../components/CompetitionCard.jsx";
 import CompetitionsListContainer from "../../../components/CompetitionsListContainer.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 export const AdminChampsPage = () => {
     const { t } = useTranslation();

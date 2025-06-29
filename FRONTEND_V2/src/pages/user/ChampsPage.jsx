@@ -9,8 +9,6 @@ import {competitionStatuses, getCompetitionStatusByDates} from "../../utils/comp
 import CompetitionsListContainer from "../../components/CompetitionsListContainer.jsx";
 import {useTranslation} from "react-i18next";
 import Card from "../../components/bootstrap/Card.jsx";
-import axios from "axios";
-import constants from "../../utils/consts.js";
 import {axiosInstance} from "../../utils/settings.js";
 
 const ChampsPage = () => {

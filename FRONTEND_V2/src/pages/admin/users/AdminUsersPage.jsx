@@ -3,7 +3,7 @@ import Card from "../../../components/bootstrap/Card.jsx";
 import useGetAPI from "../../../hooks/useGetAPI.js";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {Link} from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 
 export function AdminUsersPage() {

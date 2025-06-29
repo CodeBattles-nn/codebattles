@@ -3,13 +3,11 @@ import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import Card from "../../../components/bootstrap/Card.jsx";
-import constants from "../../../utils/consts.js";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {useState} from "react";
 import {polygonProcessStatuses, processPolygonFile} from "../../../services/polygon.js";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminProblemsPageImportFromPolygon = () => {

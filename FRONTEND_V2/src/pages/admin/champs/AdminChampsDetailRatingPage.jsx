@@ -9,7 +9,7 @@ import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {formatDate} from "../../../utils/format.js";
 import {getCookie} from "../../../utils/cookies.js";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 export const AdminChampsDetailRatingPage = () => {
     const { t } = useTranslation();

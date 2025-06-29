@@ -1,6 +1,4 @@
 import {useForm} from "react-hook-form";
-import axios from "axios";
-import constants from "../../../utils/consts.js";
 import {useNavigate} from "react-router-dom";
 import Card from "../../../components/bootstrap/Card.jsx";
 import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
@@ -9,7 +7,7 @@ import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {CheckerForm} from "../../../components/form_impl/CheckerForm.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminCheckersCreatePage = () => {

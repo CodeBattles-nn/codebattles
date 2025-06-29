@@ -1,10 +1,8 @@
 import React, {useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Card from "../../../components/bootstrap/Card.jsx";
-import axios from "axios";
-import constants from "../../../utils/consts.js";
 import {useNavigate} from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../../utils/settings.js";
 
 

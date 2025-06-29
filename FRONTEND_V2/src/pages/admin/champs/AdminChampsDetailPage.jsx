@@ -8,11 +8,9 @@ import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {useForm} from "react-hook-form";
-import constants from "../../../utils/consts.js";
-import axios from "axios";
 import {CompetitionCard} from "../../../components/CompetitionCard.jsx";
 import {CompetitionFormElements} from "../../../components/form_impl/CompetitionForm.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminChampsDetailPage = () => {

@@ -11,7 +11,7 @@ import axios from "axios";
 import constants from "../../../utils/consts.js";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {ProblemsForm} from "../../../components/form_impl/ProblemsForm.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 export const AdminProblemsPageEdit = () => {
 

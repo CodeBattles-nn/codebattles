@@ -6,10 +6,8 @@ import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {useForm} from "react-hook-form";
-import constants from "../../../utils/consts.js";
-import axios from "axios";
 import useCachedGetAPI from "../../../hooks/useGetAPI.js";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminProblemsEdit = () => {
