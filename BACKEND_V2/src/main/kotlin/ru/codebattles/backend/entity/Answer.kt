@@ -18,11 +18,13 @@ data class Answer(
     var status: AnswerStatus = AnswerStatus.IN_PROGRESS,
     var score: Int? = null,
 
+    @Column(columnDefinition = "TEXT")
     var code: String,
 
     @ManyToOne
     val checker: Checker,
 
+    @Column(columnDefinition = "TEXT")
     var result: String? = null,
 
     @ManyToOne

@@ -20,33 +20,54 @@ repositories {
 	mavenCentral()
 }
 
-dependencies {
+// Version properties
+val kotlinVersion = "1.9.25"
+val springBootVersion = "3.4.1"
+val springDependencyManagementVersion = "1.1.7"
+val springDocOpenApiVersion = "2.8.8"
+val flywayVersion = "11.8.2"
+val mapstructVersion = "1.5.5.Final"
+val jjwtVersion = "0.11.5"
+val lombokVersion = "1.18.30"
+val postgresqlVersion = "42.6.0"
 
+dependencies {
+	// Spring Boot starters
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+	// Kotlin
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.springdoc:springdoc-openapi-starter-common:2.8.8")
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.8")
-	implementation("org.flywaydb:flyway-core:11.8.2")
+
+	// Documentation
+	implementation("org.springdoc:springdoc-openapi-starter-common:$springDocOpenApiVersion")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocOpenApiVersion")
+
+	// Database
+	implementation("org.flywaydb:flyway-core:$flywayVersion")
+	runtimeOnly("org.postgresql:postgresql:$postgresqlVersion")
+	runtimeOnly("org.flywaydb:flyway-database-postgresql:$flywayVersion")
+
+	// Security
+	implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
+	implementation("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
+	implementation("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
+
+	// Mapping
+	implementation("org.mapstruct:mapstruct:$mapstructVersion")
+	kapt("org.mapstruct:mapstruct-processor:$mapstructVersion")
+
+	// Lombok
+	compileOnly("org.projectlombok:lombok:$lombokVersion")
+	annotationProcessor("org.projectlombok:lombok:$lombokVersion")
+
+	// Testing
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-	compileOnly("org.projectlombok:lombok")
-	runtimeOnly("org.postgresql:postgresql")
-	// https://mvnrepository.com/artifact/org.flywaydb/flyway-database-postgresql
-	runtimeOnly("org.flywaydb:flyway-database-postgresql:11.8.1")
-	annotationProcessor("org.projectlombok:lombok")
-
-	implementation("org.springframework.boot:spring-boot-starter-actuator")
-
-	implementation("org.mapstruct:mapstruct:1.5.5.Final")
-	kapt("org.mapstruct:mapstruct-processor:1.5.5.Final")
-
-	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
-	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 }
 
 kotlin {

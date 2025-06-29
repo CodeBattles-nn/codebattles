@@ -2,8 +2,8 @@ package ru.codebattles.backend.web.controllers
 
 import com.fasterxml.jackson.databind.JsonNode
 import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.tags.Tag
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.annotation.security.RolesAllowed
 import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.dto.CheckerDto
