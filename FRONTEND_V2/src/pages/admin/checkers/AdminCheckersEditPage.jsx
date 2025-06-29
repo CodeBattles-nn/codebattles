@@ -38,7 +38,7 @@ export const AdminCheckersEditPage = () => {
     }, [competitionsProblem]);
 
     const onSubmit = (data) => {
-        console.log(data);
+        console.debug(data);
         axiosInstance.patch(`/api/checkers/${checkId}`, data)
             .then(() => navigate("/admin/champs"))
 

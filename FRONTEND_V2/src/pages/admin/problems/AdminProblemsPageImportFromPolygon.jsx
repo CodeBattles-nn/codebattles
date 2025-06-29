@@ -45,7 +45,7 @@ export const AdminProblemsPageImportFromPolygon = () => {
             setProblemJSON(config)
         }
 
-        console.log(config)
+        console.debug(config)
     };
 
     return (

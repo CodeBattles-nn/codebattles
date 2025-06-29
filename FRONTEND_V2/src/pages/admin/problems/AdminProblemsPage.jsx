@@ -19,7 +19,7 @@ export const AdminProblemsPage = () => {
         update()
     }, []);
 
-    console.log(data)
+    console.debug(data)
 
     return (
         <>

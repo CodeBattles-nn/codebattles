@@ -41,7 +41,7 @@ const ProblemsListPage = () => {
         });
 
         setSendsMap(localSendMap)
-        console.log(localSendMap)
+        console.debug(localSendMap)
 
     }, [sends]);
 

@@ -40,7 +40,7 @@ export const AdminProblemsEdit = () => {
     }, [competitionsProblem]);
 
     const onSubmit = (data) => {
-        console.log(data);
+        console.debug(data);
 
         axiosInstance.patch(`/api/competitionsProblems/${probcompId}`, data)
             .then(() => navigate("/admin/champs"))

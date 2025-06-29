@@ -25,6 +25,6 @@ i18n
         }
     });
 
-console.log(i18n.language)
+console.debug(i18n.language)
 
 export default i18n;

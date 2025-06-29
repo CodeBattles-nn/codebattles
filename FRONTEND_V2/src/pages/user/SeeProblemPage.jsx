@@ -40,7 +40,7 @@ const SeeProblemPage = () => {
 
     const onSubmit = (formData) => {
         formData.src = document.getElementsByClassName("ace_content")[0].innerText
-        console.log(formData)
+        console.debug(formData)
 
         setEditorText(formData.src)
 
@@ -49,7 +49,7 @@ const SeeProblemPage = () => {
             formData.checker = defaultLang
         }
 
-        console.log(defaultLang)
+        console.debug(defaultLang)
         axiosInstance.post(`/api/competitions/${compId}/send`, formData)
             .then(() => {
                 setTimeout(() => {

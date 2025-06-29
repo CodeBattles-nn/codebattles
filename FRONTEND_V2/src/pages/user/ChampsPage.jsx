@@ -28,7 +28,7 @@ const ChampsPage = () => {
 
     const navigate = useNavigate()
 
-    console.log(data)
+    console.debug(data)
 
     return (
         <>

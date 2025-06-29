@@ -25,7 +25,7 @@ export const AdminChampsDetailProblemsLinkPage = () => {
     const {register,} = form
 
     const onSubmit = (data) => {
-        console.log(data);
+        console.debug(data);
         axiosInstance.post('/api/competitionsProblems', data)
             .then(() => navigate("/admin/champs"))
 

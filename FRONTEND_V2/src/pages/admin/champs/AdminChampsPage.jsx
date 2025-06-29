@@ -20,7 +20,7 @@ export const AdminChampsPage = () => {
         update()
     }, []);
 
-    console.log(data)
+    console.debug(data)
 
     return (
         <>

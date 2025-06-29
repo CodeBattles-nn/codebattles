@@ -30,7 +30,7 @@ export const AdminChampsDetailPage = () => {
 
     const [done, setDone] = useState(false);
 
-    console.log(data)
+    console.debug(data)
 
     let form = useForm();
 

@@ -33,7 +33,7 @@ export const AdminUsersDetailPage = () => {
         updateUsers()
     }, []);
 
-    // console.log(data)
+    // console.debug(data)
 
     useEffect(() => {
         setSelectesUsers(data.map(elem => elem.id))

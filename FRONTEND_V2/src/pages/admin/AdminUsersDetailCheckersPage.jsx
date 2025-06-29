@@ -32,7 +32,7 @@ export const AdminUsersDetailCheckersPage = () => {
         updateUsers()
     }, []);
 
-    // console.log(data)
+    // console.debug(data)
 
     useEffect(() => {
         setSelectesUsers(data?.checkers?.map(elem => elem.id))

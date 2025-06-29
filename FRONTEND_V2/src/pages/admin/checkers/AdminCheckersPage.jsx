@@ -17,7 +17,7 @@ export const AdminCheckersPage = () => {
         update()
     }, []);
 
-    console.log(data)
+    console.debug(data)
 
     return (
         <>

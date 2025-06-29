@@ -32,7 +32,7 @@ export const AdminChampsCreate = () => {
             endedAt: new Date(data.endedAt).toISOString()
         };
 
-        console.log(formattedData);
+        console.debug(formattedData);
 
         const conf = {
             headers: {

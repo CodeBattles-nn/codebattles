@@ -27,7 +27,7 @@ export const AdminProblemsPageEdit = () => {
     }, []);
 
 
-    console.log(data)
+    console.debug(data)
 
     const form = useForm({
         defaultValues: {
