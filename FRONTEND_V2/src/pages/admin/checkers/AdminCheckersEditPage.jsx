@@ -6,12 +6,11 @@ import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {useForm} from "react-hook-form";
-import constants from "../../../utils/consts.js";
-import axios from "axios";
 import useCachedGetAPI from "../../../hooks/useGetAPI.js";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {CheckerForm} from "../../../components/form_impl/CheckerForm.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminCheckersEditPage = () => {
     const {checkId} = useParams()
@@ -37,16 +36,8 @@ export const AdminCheckersEditPage = () => {
     }, [competitionsProblem]);
 
     const onSubmit = (data) => {
-        console.log(data);
-
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.patch(`/api/checkers/${checkId}`, data, conf)
+        console.debug(data);
+        axiosInstance.patch(`/api/checkers/${checkId}`, data)
             .then(() => navigate("/admin/champs"))
 
 

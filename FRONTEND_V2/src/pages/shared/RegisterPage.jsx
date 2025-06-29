@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import Card from "../../components/bootstrap/Card.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";

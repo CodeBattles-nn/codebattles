@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import constants from "../utils/consts.js";
+import {axiosInstance} from "../utils/settings.js";
 
 const defaultEmptyFunction = () => {
 };
@@ -18,14 +18,8 @@ function useCachedGetAPI(
     const navigate = useNavigate()
 
     const apiGetData = () => {
-        axios
-            .get(url,
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-                    }
-                })
+        axiosInstance
+            .get(url)
             .then(({data}) => {
                 setData(data)
                 localStorage.setItem(LOCALSTORAGE_PREFIX + url, JSON.stringify(data))

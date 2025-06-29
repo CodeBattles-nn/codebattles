@@ -8,11 +8,10 @@ import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {useForm} from "react-hook-form";
-import constants from "../../../utils/consts.js";
-import axios from "axios";
 import {CompetitionCard} from "../../../components/CompetitionCard.jsx";
 import {CompetitionFormElements} from "../../../components/form_impl/CompetitionForm.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminChampsDetailPage = () => {
     const { t } = useTranslation();
@@ -29,7 +28,7 @@ export const AdminChampsDetailPage = () => {
 
     const [done, setDone] = useState(false);
 
-    console.log(data)
+    console.debug(data)
 
     let form = useForm();
 
@@ -38,15 +37,8 @@ export const AdminChampsDetailPage = () => {
     }, [data]);
 
     const onSubmit = (data) => {
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
         setDone(false)
-        axios.put(`/api/competitions/${compId}`, data, conf)
+        axiosInstance.put(`/api/competitions/${compId}`, data)
             .then(() => setDone(true))
             .then(() => update())
     }

@@ -5,12 +5,11 @@ import BreadcrumbsRoot from "../../../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../../components/AdminHeader.jsx";
 import {useForm} from "react-hook-form";
-import constants from "../../../../utils/consts.js";
-import axios from "axios";
 import {MasterForm} from "../../../../components/forms/MasterForm.jsx";
 import {InputFormElement} from "../../../../components/forms/InputFormElement.jsx";
 import {CompetitionProblemsFormEdit} from "../../../../components/form_impl/CompetitionProblemsFormEdit.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {axiosInstance} from "../../../../utils/settings.js";
 
 export const AdminChampsDetailProblemsLinkPage = () => {
 
@@ -24,16 +23,8 @@ export const AdminChampsDetailProblemsLinkPage = () => {
     const {register,} = form
 
     const onSubmit = (data) => {
-        console.log(data);
-
-        const conf = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.post('/api/competitionsProblems', data, conf)
+        console.debug(data);
+        axiosInstance.post('/api/competitionsProblems', data)
             .then(() => navigate("/admin/champs"))
 
 

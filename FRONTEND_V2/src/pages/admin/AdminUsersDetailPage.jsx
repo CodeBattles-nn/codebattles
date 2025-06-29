@@ -11,9 +11,8 @@ import Select, {Option} from 'rc-select';
 import 'rc-select/assets/index.css';
 
 import {useForm} from "react-hook-form";
-import axios from "axios";
-import constants from "../../utils/consts.js";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {axiosInstance} from "../../utils/settings.js";
 
 export const AdminUsersDetailPage = () => {
     const { t } = useTranslation();
@@ -32,7 +31,7 @@ export const AdminUsersDetailPage = () => {
         updateUsers()
     }, []);
 
-    // console.log(data)
+    // console.debug(data)
 
     useEffect(() => {
         setSelectesUsers(data.map(elem => elem.id))
@@ -50,15 +49,9 @@ export const AdminUsersDetailPage = () => {
 
     const onSubmit = () => {
         setLoading(true)
-        axios
+        axiosInstance
             .put(`/api/competitions/${compId}/users`,
-                {usersIds: selectesUsers},
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-                    }
-                })
+                {usersIds: selectesUsers})
             .then(() => {
                 navigate(`/admin/champs/${compId}/edit`)
             })

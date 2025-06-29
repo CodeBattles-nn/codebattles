@@ -14,7 +14,7 @@ const Header = () => {
     const [profile, update] = useCachedGetAPI("/api/users/me", () => {
     }, {});
 
-    console.log(profile)
+    console.debug(profile)
 
     const params = useLocation()
     const compId = params.pathname.split("/")[2]

@@ -6,7 +6,7 @@ const ThemeChanger = () => {
             window.matchMedia("(prefers-color-scheme: dark)").matches
         ) {
             document.documentElement.setAttribute("data-bs-theme", "dark");
-            console.log("switching to dark theme");
+            console.debug("switching to dark theme");
         }
 
         if (
@@ -14,7 +14,7 @@ const ThemeChanger = () => {
             window.matchMedia("(prefers-color-scheme: light)").matches
         ) {
             document.documentElement.setAttribute("data-bs-theme", "light");
-            console.log("switching to light theme");
+            console.debug("switching to light theme");
         }
     };
     themeWatcher();

@@ -37,7 +37,7 @@ const SeeQuizzProblemPage = () => {
     }, []);
 
 
-    console.log(data)
+    console.debug(data)
 
     useEffect(() => {
         const prevQuestion = searchParams.get("q");
@@ -55,7 +55,7 @@ const SeeQuizzProblemPage = () => {
     const questions = data.tests || [];
 
     useEffect(() => {
-        console.log(savedAnswers)
+        console.debug(savedAnswers)
     }, [savedAnswers]);
 
     const onAnswerClicked = (id, text) => {
@@ -162,7 +162,7 @@ const SeeQuizzProblemPage = () => {
                             className={"btn btn-outline-secondary justify-content-end mx-1 " + (questionNumber === questions.length - 1 && "disabled")}
                             onClick={() => {
                                 if (questionNumber === questions.length) {
-                                    // console.log(savedAnswers)
+                                    // console.debug(savedAnswers)
                                 }
 
                                 setQuestionNumber(questionNumber + 1)

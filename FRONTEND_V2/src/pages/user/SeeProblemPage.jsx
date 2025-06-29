@@ -4,14 +4,13 @@ import ProblemExample from "../../components/ProblemExample.jsx";
 import {useNavigate, useParams} from "react-router-dom";
 import useCachedGetAPI from "../../hooks/useGetAPI.js";
 import {useForm} from "react-hook-form";
-import axios from "axios";
 import LazyCodeEditor from "../../components/lazy/LazyCodeEditor.jsx";
 import UserLoginRequired from "../../components/UserLoginRequired.jsx";
 import Markdown from "../../components/wraps/Markdown.jsx";
-import constants from "../../utils/consts.js";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import {useTranslation} from 'react-i18next';
+import {axiosInstance} from "../../utils/settings.js";
 
 const SeeProblemPage = () => {
     const {t} = useTranslation();
@@ -39,7 +38,7 @@ const SeeProblemPage = () => {
 
     const onSubmit = (formData) => {
         formData.src = document.getElementsByClassName("ace_content")[0].innerText
-        console.log(formData)
+        console.debug(formData)
 
         setEditorText(formData.src)
 
@@ -48,16 +47,8 @@ const SeeProblemPage = () => {
             formData.checker = defaultLang
         }
 
-        console.log(defaultLang)
-
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem(constants.LOCALSTORAGE_JWT)}`
-            }
-        }
-
-        axios.post(`/api/competitions/${compId}/send`, formData, config)
+        console.debug(defaultLang)
+        axiosInstance.post(`/api/competitions/${compId}/send`, formData)
             .then(() => {
                 setTimeout(() => {
                     navigate(`/champs/${compId}/sends`)

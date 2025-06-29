@@ -6,7 +6,7 @@ import BreadcrumbsElement from "../../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../../components/BreadcrumpsRoot.jsx";
 import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 export const AdminProblemsPage = () => {
 
@@ -19,7 +19,7 @@ export const AdminProblemsPage = () => {
         update()
     }, []);
 
-    console.log(data)
+    console.debug(data)
 
     return (
         <>

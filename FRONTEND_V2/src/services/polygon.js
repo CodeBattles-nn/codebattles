@@ -46,7 +46,7 @@ const _processPolygonFile = async (file) => {
 
 
 
-    console.log(tests)
+    console.debug(tests)
 
     const cblike = {}
 

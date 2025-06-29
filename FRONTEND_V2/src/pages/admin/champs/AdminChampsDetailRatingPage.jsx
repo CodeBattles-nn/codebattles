@@ -9,7 +9,7 @@ import UserLoginRequired from "../../../components/UserLoginRequired.jsx";
 import {AdminHeader} from "../../../components/AdminHeader.jsx";
 import {formatDate} from "../../../utils/format.js";
 import {getCookie} from "../../../utils/cookies.js";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 export const AdminChampsDetailRatingPage = () => {
     const { t } = useTranslation();
@@ -31,7 +31,7 @@ export const AdminChampsDetailRatingPage = () => {
         update()
     }, []);
 
-    console.log(data)
+    console.debug(data)
 
     return (
         <>
@@ -78,8 +78,8 @@ export const AdminChampsDetailRatingPage = () => {
                                 // const groupedAnswers = {}
                                 // const user = 0
 
-                                // console.log(user)
-                                console.log(data.score)
+                                // console.debug(user)
+                                console.debug(data.score)
 
                                 return (
                                     <tr key={"stats-usr" + i}
@@ -90,7 +90,7 @@ export const AdminChampsDetailRatingPage = () => {
                                         {
                                             problemsData?.map(compProb => {
 
-                                                console.log(compProb)
+                                                console.debug(compProb)
 
                                                 return <td key={"stats-send" + compProb.id} scope="col">
                                                     <Link

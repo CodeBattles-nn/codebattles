@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Card from "../../components/bootstrap/Card.jsx";
 import ResponsiveTable from "../../components/bootstrap/ResponsiveTable.jsx";
 

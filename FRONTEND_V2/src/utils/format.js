@@ -17,7 +17,7 @@ export const formatDate = (dateString) => {
 
 
 export const getCssClassBySendScore = (score) => {
-    console.log(score)
+    console.debug(score)
 
     if (score === 100) return "table-success"
     if (score === 0) return "table-danger"

@@ -10,7 +10,7 @@ import 'katex/dist/katex.min.css';
 // eslint-disable-next-line react/prop-types
 const Markdown = ({text = ""}) => {
 
-    console.log("MD")
+    console.debug("MD")
 
     const components = {
         // eslint-disable-next-line no-unused-vars
