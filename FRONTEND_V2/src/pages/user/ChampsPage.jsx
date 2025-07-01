@@ -46,7 +46,7 @@ const ChampsPage = () => {
                                 <CompetitionCard
                                     key={elem.id}
                                     id={elem.id}
-                                    name="11111"
+                                    name={elem.name}
                                     startedAt={elem.startedAt}
                                     endedAt={elem.endedAt}
                                     description={elem.description}>
