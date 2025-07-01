@@ -20,7 +20,7 @@ const SeeProblemPage = () => {
     const navigate = useNavigate();
     const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/problems/${id}`);
     const [champData, champUpdate] = useCachedGetAPI(`/api/competitions/${compId}`);
-    const [editorText, setEditorText] = useState(null)
+    const [editorText, setEditorText] = useState("print('Hello, world')")
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
@@ -66,6 +66,18 @@ const SeeProblemPage = () => {
             setValue("checker", savedChecker);
         }
     }, [champData]);
+
+    const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const content = event.target.result;
+            setEditorText(content);
+        };
+        reader.readAsText(file);
+    };
 
     return (
         <>
@@ -154,8 +166,19 @@ const SeeProblemPage = () => {
                             </select>
                             <LazyCodeEditor
                                 className="my-5 rounded-2"
-                                value={editorText || "print('Hello, world')"}
+                                value={editorText}
+                                onChange={setEditorText}
                             />
+
+                            <div className="mb-3">
+                                <label htmlFor="formFile" className="form-label">{t("seeProblem.orFileUpload")}</label>
+                                <input
+                                    className="form-control"
+                                    type="file"
+                                    id="formFile"
+                                    onChange={handleFileUpload}
+                                />
+                            </div>
 
                             <button className="btn btn-success" disabled={isLoading}>
                                 {t('seeProblem.submit')}
