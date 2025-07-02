@@ -33,7 +33,7 @@ public class ExecutorsFactory {
             }
         }
 
-        System.out.println(Env.get(Env.EnvVars.ENV_EXECUTOR_ENABLE));
+//        System.out.println(Env.get(Env.EnvVars.ENV_EXECUTOR_ENABLE));
 
         throw new RuntimeException("No executors found by key: " + name);
     }
