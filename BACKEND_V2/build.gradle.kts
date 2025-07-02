@@ -30,6 +30,7 @@ val mapstructVersion = "1.5.5.Final"
 val jjwtVersion = "0.11.5"
 val lombokVersion = "1.18.30"
 val postgresqlVersion = "42.6.0"
+val logbackEncoderVersion = "7.4"
 
 dependencies {
 	// Spring Boot starters
@@ -55,6 +56,9 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
 	implementation("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
 	implementation("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
+
+	// Logging
+	implementation("net.logstash.logback:logstash-logback-encoder:${logbackEncoderVersion}")
 
 	// Mapping
 	implementation("org.mapstruct:mapstruct:$mapstructVersion")
