@@ -21,6 +21,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/cb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: admin
+      logging.config: "classpath:logback-spring-json.xml"
     ports:
       - "8000:8000"
     depends_on:

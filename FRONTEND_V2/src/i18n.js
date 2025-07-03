@@ -10,14 +10,15 @@ import EN from './locales/en.json';
 // or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
 const resources = {
     "en": EN,
-    "ru": RU
+    "ru": RU,
+    "ru-RU": RU,
 };
 
 i18n
     .use(initReactI18next)
     .use(LanguageDetector)
     .init({
-        supportedLngs: ['en', 'ru'],
+        supportedLngs: ['en', 'ru-RU', 'ru'],
         fallbackLng: 'en',
         resources,
         interpolation: {

@@ -146,7 +146,8 @@
       "pasteCode": "Paste your code here",
       "submit": "Submit",
       "ms": "ms",
-      "mb": "MB"
+      "mb": "MB",
+      "orFileUpload": "OR upload a file ( Drag&Drop enabled )"
     },
     "stats": {
       "leaderboard": "Leaderboard",

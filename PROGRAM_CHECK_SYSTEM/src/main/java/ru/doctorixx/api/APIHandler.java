@@ -8,6 +8,8 @@ import com.squareup.okhttp.RequestBody;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.doctorixx.Env;
 import ru.doctorixx.api.structures.APIRequest;
 import ru.doctorixx.api.structures.ApiResponse;
@@ -19,11 +21,10 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class APIHandler implements Handler {
 
-    private static final Logger log = Logger.getLogger(APIHandler.class.getName());
+    private static final Logger log = LoggerFactory.getLogger(APIHandler.class.getName());
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -42,14 +43,6 @@ public class APIHandler implements Handler {
                 RunManager runManager = new RunManager(executionManager);
 
                 List<ProgramResult> results = runManager.test(request.tests());
-                System.out.println();
-
-                for (ProgramResult res : results) {
-                    System.out.println(res.msg() + " " + res.time() + "ms");
-                }
-
-
-                System.out.println(runManager.getSuccessTestCount() + "/" + runManager.getTestCount());
 
                 OkHttpClient client = new OkHttpClient();
                 ObjectMapper objectMapper = new ObjectMapper();
@@ -64,7 +57,7 @@ public class APIHandler implements Handler {
 
                 client.newCall(senderRequest).execute();
             } catch (Exception e) {
-                log.log(Level.INFO, e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
         };
 

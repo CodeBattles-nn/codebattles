@@ -16,6 +16,8 @@ const CodeEditor = (props) => {
         showGutter={true}
         highlightActiveLine={true}
         value='print("Hello, world!")'
+        minLines={10}
+        maxLines={100000}
         setOptions={{
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
