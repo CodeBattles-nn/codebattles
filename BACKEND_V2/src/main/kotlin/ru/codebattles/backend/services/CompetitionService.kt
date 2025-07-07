@@ -15,6 +15,7 @@ import ru.codebattles.backend.entity.LeaderBoardAllTasksQuery
 import ru.codebattles.backend.entity.Leaderboard
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.repository.*
+import ru.codebattles.backend.web.entity.CompetitionEditDto
 import java.util.stream.Collectors
 
 @Service
@@ -113,11 +114,17 @@ class CompetitionService(
         )
     }
 
-    fun create(competitionDto: CompetitionCreateDto, user: User): CompetitionDto {
+    fun create(competitionDto: CompetitionEditDto, user: User): CompetitionDto {
         val competition = Competition(
             organizer = user,
             name = competitionDto.name,
             description = competitionDto.description,
+            startedAt = competitionDto.startedAt,
+            endedAt = competitionDto.endedAt,
+            public = competitionDto.public,
+            showInput = competitionDto.showInput,
+            showOutput = competitionDto.showOutput,
+            showRating = competitionDto.showRating,
         )
 
         competitionRepository.save(

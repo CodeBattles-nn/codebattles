@@ -2,7 +2,7 @@ package ru.codebattles.backend.entity
 
 import jakarta.persistence.*
 import org.hibernate.annotations.ColumnDefault
-import java.util.*
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "competitions")
@@ -23,10 +23,10 @@ data class Competition(
     var description: String,
 
     @Column(name = "started_at")
-    var startedAt: Date? = null,
+    var startedAt: LocalDateTime? = null,
 
     @Column(name = "ended_at")
-    var endedAt: Date? = null,
+    var endedAt: LocalDateTime? = null,
 
     @Column(name = "show_rating", nullable = false)
     var showRating: Boolean = true,

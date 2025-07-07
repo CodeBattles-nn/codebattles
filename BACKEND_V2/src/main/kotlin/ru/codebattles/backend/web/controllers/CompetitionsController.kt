@@ -44,7 +44,7 @@ class CompetitionsController(
     )
     @RolesAllowed("ADMIN")
     @PostMapping
-    fun create(@RequestBody instance: CompetitionCreateDto, @AuthenticationPrincipal user: User): CompetitionDto {
+    fun create(@RequestBody instance: CompetitionEditDto, @AuthenticationPrincipal user: User): CompetitionDto {
         return competitionService.create(instance, user)
     }
 
