@@ -39,7 +39,8 @@
     "remark-gemoji": "^8.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
-    "usehooks-ts": "^3.1.0"
+    "usehooks-ts": "^3.1.0",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

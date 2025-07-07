@@ -3,29 +3,33 @@ import {Link, useLocation, useNavigate} from "react-router-dom";
 import constants from "../utils/consts.js";
 import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useEffect} from "react";
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import {useProfileStore} from "./store/useProfileStore.js";
 
 const Header = () => {
     const { t } = useTranslation();
     let navigate = useNavigate();
 
-    let isAuthed = localStorage.getItem(constants.LOCALSTORAGE_AUTH_KEY) === "true"
+    const updateFromServer = useProfileStore((state) => state.updateFromServer)
+    const profile = useProfileStore((state) => state.profile)
+    const clearProfile = useProfileStore((state) => state.clearProfile)
 
-    const [profile, update] = useCachedGetAPI("/api/users/me", () => {
-    }, {});
+    let isAuthed = profile.id
 
+    console.debug("PROFILE")
     console.debug(profile)
 
     const params = useLocation()
     const compId = params.pathname.split("/")[2]
 
-    useEffect(() => {
-        update()
+    useEffect(()=> {
+        updateFromServer()
     }, []);
 
     const onLogoutButtonClick = () => {
         localStorage.clear()
         navigate("/")
+        clearProfile()
     }
 
     return (
