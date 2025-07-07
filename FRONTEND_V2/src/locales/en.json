@@ -266,6 +266,8 @@
       "addressRequired": "Checker address is required"
     },
     "adminChamps": {
+      "manageReadOnly": "Manage (Read-only)",
+      "champReadOnly": "This competition is readonly admin mode. You cant edit it.",
       "public": "Public",
       "publicHelp": "Any user can join public competitions",
       "showInput": "Show input data",

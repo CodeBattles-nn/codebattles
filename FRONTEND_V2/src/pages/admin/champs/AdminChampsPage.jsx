@@ -35,6 +35,8 @@ export const AdminChampsPage = () => {
             <CompetitionsListContainer>
                 {
                     data?.map(elem => {
+                        const btnClass = elem.readOnly ? ("btn-info") : ("btn-warning")
+                        const btnText = elem.readOnly ? t('adminChamps.manageReadOnly') : t('adminChamps.manage')
                         return <div className='col d-flex align-items-stretch' key={elem.id}>
                             <CompetitionCard
                                 id={elem.id}
@@ -42,7 +44,7 @@ export const AdminChampsPage = () => {
                                 startedAt={elem.startedAt}
                                 endedAt={elem.endedAt}
                                 description={elem.description}>
-                                    <Link to={`/admin/champs/${elem.id}/edit`} className="btn btn-warning me-2">{t('adminChamps.manage')}</Link>
+                                    <Link to={`/admin/champs/${elem.id}/edit`} className={`btn ${btnClass} me-2`}>{btnText}</Link>
                             </CompetitionCard>
                         </div>
                     })
