@@ -88,7 +88,7 @@ const RegisterPage = () => {
                               <InputFormElement
                                   displayName={t("Repeat Password")}
                                   name='newpassword'
-                                  type="newpassword"
+                                  type="password"
                                   args={{
                                       required: t("Repeat Password"),
                                       validate: (value) =>
