@@ -41,4 +41,8 @@ data class Competition(
     @ColumnDefault("false")
     var public: Boolean = false,
 
+    @Column(name = "read_only", nullable = false)
+    @ColumnDefault("false")
+    var readOnly: Boolean = false,
+
     ) : BaseEntity()

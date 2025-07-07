@@ -28,4 +28,5 @@ data class CompetitionDto(
     var showInput: Boolean = true,
     var showOutput: Boolean = true,
     var showRating: Boolean = true,
+    var readOnly: Boolean = false,
 )
