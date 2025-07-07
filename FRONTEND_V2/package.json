@@ -27,6 +27,7 @@
     "rc-select": "^14.16.6",
     "react": "^18.2.0",
     "react-ace": "^10.1.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.2",
     "react-i18next": "^15.5.3",
@@ -38,7 +39,8 @@
     "remark-gemoji": "^8.0.0",
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
-    "usehooks-ts": "^3.1.0"
+    "usehooks-ts": "^3.1.0",
+    "zustand": "^5.0.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

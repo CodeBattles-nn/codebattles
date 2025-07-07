@@ -14,7 +14,7 @@ import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../../utils/settings.js";
 
 export const AdminChampsDetailPage = () => {
-    const { t } = useTranslation();
+    const {t} = useTranslation();
 
     const {compId} = useParams()
 
@@ -43,6 +43,8 @@ export const AdminChampsDetailPage = () => {
             .then(() => update())
     }
 
+    const readOnlyMode = data.readOnly || false
+
     return (
         <>
             <UserLoginRequired/>
@@ -56,8 +58,17 @@ export const AdminChampsDetailPage = () => {
             <Card key={data.id}>
                 <h2>{t('adminChamps.manage')}</h2>
 
-                <Link to="users" className="btn btn-info me-2"> {t('adminChamps.users')}</Link>
-                <Link to="problems" className="btn btn-info me-2"> {t('adminChamps.problems')}</Link>
+                {
+                    readOnlyMode &&
+                    <div className="alert alert-primary" role="alert">
+                        {t("adminChamps.champReadOnly")}
+                    </div>
+                }
+
+                <Link to="users"
+                      className={"btn btn-info me-2 " + (readOnlyMode ? "disabled" : "")}> {t('adminChamps.users')}</Link>
+                <Link to="problems"
+                      className={"btn btn-info me-2 " + (readOnlyMode ? "disabled" : "")}> {t('adminChamps.problems')}</Link>
                 <Link to="rating" className="btn btn-info me-2"> {t('adminChamps.rating')}</Link>
 
 
@@ -78,9 +89,10 @@ export const AdminChampsDetailPage = () => {
                 }
 
                 <MasterForm form={form} onSubmit={onSubmit}>
-                    <CompetitionFormElements />
+                    <CompetitionFormElements/>
 
-                    <button type="submit" className="btn btn-success ">{t('adminChamps.save')}</button>
+                    <button type="submit" className="btn btn-success"
+                            disabled={readOnlyMode}>{t('adminChamps.save')}</button>
                 </MasterForm>
                 <hr className="my-5"/>
                 <h3>{t('adminChamps.checkers')}</h3>
@@ -95,7 +107,9 @@ export const AdminChampsDetailPage = () => {
                     }
                 </div>
                 <br/>
-                <Link to="checkers" className="btn btn-info my-2"> {t('adminChamps.editCheckers')}</Link>
+                <Link to="checkers" className={"btn btn-info my-2 " + (readOnlyMode ? "disabled" : "")}>
+                    {t('adminChamps.editCheckers')}
+                </Link>
 
 
             </Card>

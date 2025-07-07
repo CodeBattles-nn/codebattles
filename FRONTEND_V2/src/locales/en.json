@@ -115,7 +115,8 @@
       }
     },
     "userChamps": {
-      "title": "Competitions"
+      "title": "Competitions",
+      "publicComp": "Public competitions"
     },
     "competitionCardComponent": {
       "startTime": "Start:",
@@ -147,7 +148,8 @@
       "submit": "Submit",
       "ms": "ms",
       "mb": "MB",
-      "orFileUpload": "OR upload a file ( Drag&Drop enabled )"
+      "orFileUpload": "OR upload a file ( Drag&Drop enabled )",
+      "copy": "Copy"
     },
     "stats": {
       "leaderboard": "Leaderboard",
@@ -266,6 +268,8 @@
       "addressRequired": "Checker address is required"
     },
     "adminChamps": {
+      "manageReadOnly": "Manage (Read-only)",
+      "champReadOnly": "This competition is readonly admin mode. You cant edit it.",
       "public": "Public",
       "publicHelp": "Any user can join public competitions",
       "showInput": "Show input data",

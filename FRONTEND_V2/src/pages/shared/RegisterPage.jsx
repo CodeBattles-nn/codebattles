@@ -7,10 +7,11 @@ import constants from "../../utils/consts.js";
 import {MasterForm} from "../../components/forms/MasterForm.jsx";
 import {InputFormElement} from "../../components/forms/InputFormElement.jsx";
 import {useTranslation} from "react-i18next";
+import {useProfileStore} from "../../components/store/useProfileStore.js";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
-
+    const updateFromServer = useProfileStore((state) => state.updateFromServer)
     const form = useForm();
 
     const {
@@ -26,6 +27,7 @@ const RegisterPage = () => {
             const {token} = response.data;
             localStorage.setItem(constants.LOCALSTORAGE_JWT, token);
             localStorage.setItem(constants.LOCALSTORAGE_AUTH_KEY, "true");
+            updateFromServer()
             navigate("/champs");
         } catch (error) {
             if (error.response && error.response.status === 401) {
@@ -86,7 +88,7 @@ const RegisterPage = () => {
                               <InputFormElement
                                   displayName={t("Repeat Password")}
                                   name='newpassword'
-                                  type="newpassword"
+                                  type="password"
                                   args={{
                                       required: t("Repeat Password"),
                                       validate: (value) =>

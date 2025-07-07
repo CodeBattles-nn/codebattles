@@ -11,8 +11,8 @@ data class CompetitionCreateDto(
     val description: String,
 
     @Schema(description = "Start time of the competition", example = "2023-01-01T10:00:00")
-    val startedAt: LocalDateTime? = null,
+    var startedAt: LocalDateTime? = null,
 
     @Schema(description = "End time of the competition", example = "2023-01-01T18:00:00")
-    val endedAt: LocalDateTime? = null
+    var endedAt: LocalDateTime? = null
 )

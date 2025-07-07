@@ -14,25 +14,12 @@ import {useTranslation} from 'react-i18next';
 export const AdminChampsCreate = () => {
     const { t } = useTranslation();
 
-    const form = useForm({
-        defaultValues: {
-            startedAt: new Date().toISOString().slice(0, 16),
-            endedAt: new Date().toISOString().slice(0, 16)
-        }
-    });
-
+    const form = useForm();
 
     const navigate = useNavigate();
 
     const onSubmit = (data) => {
-        // Convert date strings to ISO format
-        const formattedData = {
-            ...data,
-            startedAt: new Date(data.startedAt).toISOString(),
-            endedAt: new Date(data.endedAt).toISOString()
-        };
-
-        console.debug(formattedData);
+        console.debug(data);
 
         const conf = {
             headers: {

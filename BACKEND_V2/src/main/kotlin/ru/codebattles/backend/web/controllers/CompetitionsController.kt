@@ -10,6 +10,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.annotations.CompetitionAccessRequired
 import ru.codebattles.backend.annotations.CompetitionId
+import ru.codebattles.backend.annotations.CompetitionReadOnlyCheck
 import ru.codebattles.backend.dto.*
 import ru.codebattles.backend.dto.mapper.CompetitionsMapper
 import ru.codebattles.backend.entity.Leaderboard
@@ -43,7 +44,7 @@ class CompetitionsController(
     )
     @RolesAllowed("ADMIN")
     @PostMapping
-    fun create(@RequestBody instance: CompetitionCreateDto, @AuthenticationPrincipal user: User): CompetitionDto {
+    fun create(@RequestBody instance: CompetitionEditDto, @AuthenticationPrincipal user: User): CompetitionDto {
         return competitionService.create(instance, user)
     }
 
@@ -119,14 +120,16 @@ class CompetitionsController(
     )
     @PutMapping("{compId}/users")
     @RolesAllowed("ADMIN")
+    @CompetitionReadOnlyCheck
     @ResponseStatus(HttpStatus.ACCEPTED)
-    fun editUsers(@PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
+    fun editUsers(@CompetitionId @PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
         competitionService.patchUsers(compId, data.usersIds)
     }
 
     @RolesAllowed("ADMIN")
     @PutMapping("{compId}")
-    fun update(@PathVariable compId: Long, @RequestBody profileData: CompetitionEditDto): CompetitionDto {
+    @CompetitionReadOnlyCheck
+    fun update(@CompetitionId @PathVariable compId: Long, @RequestBody profileData: CompetitionEditDto): CompetitionDto {
         val competition = competitionRepository.getById(compId)
 
         competitionMapper.update(profileData, competition)
@@ -142,8 +145,9 @@ class CompetitionsController(
     )
     @RolesAllowed("ADMIN")
     @PutMapping("{compId}/checkers")
+    @CompetitionReadOnlyCheck
     @ResponseStatus(HttpStatus.ACCEPTED)
-    fun editCheckers(@PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
+    fun editCheckers(@CompetitionId @PathVariable compId: Long, @RequestBody data: EditUsersRequest) {
         competitionService.patchCheckers(compId, data.usersIds)
     }
 
