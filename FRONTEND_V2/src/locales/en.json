@@ -115,7 +115,8 @@
       }
     },
     "userChamps": {
-      "title": "Competitions"
+      "title": "Competitions",
+      "publicComp": "Public competitions"
     },
     "competitionCardComponent": {
       "startTime": "Start:",
@@ -147,7 +148,8 @@
       "submit": "Submit",
       "ms": "ms",
       "mb": "MB",
-      "orFileUpload": "OR upload a file ( Drag&Drop enabled )"
+      "orFileUpload": "OR upload a file ( Drag&Drop enabled )",
+      "copy": "Copy"
     },
     "stats": {
       "leaderboard": "Leaderboard",

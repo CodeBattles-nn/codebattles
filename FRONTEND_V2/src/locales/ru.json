@@ -115,7 +115,8 @@
       }
     },
     "userChamps": {
-      "title": "Соревнования"
+      "title": "Соревнования",
+      "publicComp": "Публичные соревнования"
     },
     "competitionCardComponent": {
       "startTime": "Начало:",
@@ -147,7 +148,8 @@
       "submit": "Отправить",
       "ms": "мс",
       "mb": "мб",
-      "orFileUpload": "ИЛИ загрузите файл (можно перетащить)"
+      "orFileUpload": "ИЛИ загрузите файл (можно перетащить)",
+      "copy": "Копировать"
     },
     "stats": {
       "leaderboard": "Рейтинг",

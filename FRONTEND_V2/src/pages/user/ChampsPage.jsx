@@ -63,9 +63,9 @@ const ChampsPage = () => {
             </CompetitionsListContainer>
 
             <Card>
-                <h4>
-                    Public champs
-                </h4>
+                <p className="my-2">
+                    {t("userChamps.publicComp")}
+                </p>
             </Card>
 
             <CompetitionsListContainer>
