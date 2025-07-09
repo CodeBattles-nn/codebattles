@@ -2,6 +2,7 @@ import React from 'react';
 import { InputFormElement } from "../forms/InputFormElement.jsx";
 import PropTypes from "prop-types";
 import { useTranslation } from 'react-i18next';
+import {TextareaFormElement} from "../forms/TextareaFormElement.jsx";
 
 export const ProblemsForm = ({ form, testsArray, examplesArray }) => {
     const { t } = useTranslation();
@@ -19,13 +20,13 @@ export const ProblemsForm = ({ form, testsArray, examplesArray }) => {
                 name={"name"}
                 args={{ required: t('adminProblems.nameRequired') }}
             />
-            <InputFormElement
+            <TextareaFormElement
                 displayName={t('adminProblems.description')}
                 name={"description"}
                 args={{ required: t('adminProblems.descriptionRequired') }}
             />
-            <InputFormElement displayName={t('adminProblems.inData')} name={"inData"} />
-            <InputFormElement displayName={t('adminProblems.outData')} name={"outData"} />
+            <TextareaFormElement displayName={t('adminProblems.inData')} name={"inData"} />
+            <TextareaFormElement displayName={t('adminProblems.outData')} name={"outData"} />
 
             {/* Tests Section */}
             <div className="mb-3">

@@ -217,6 +217,7 @@
       "manageCheckers": "Manage checkers"
     },
     "adminProblems": {
+      "nameRequired": "Name is required",
       "errorProcessingArchive": "File processing error",
       "addProblemToPlatform": "Add to platform",
       "archiveProcessed": "File processed successfully",
