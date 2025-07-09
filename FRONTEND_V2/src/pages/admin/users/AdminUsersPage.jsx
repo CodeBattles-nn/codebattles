@@ -37,7 +37,7 @@ export function AdminUsersPage() {
                         users.map(elem => {
                             return <tr id={elem.id} key={elem.id}>
                                 <th scope="row">{elem.id}</th>
-                                <td>{t('adminUsers.nameUnavailable')}</td>
+                                <td>{elem.name}</td>
                                 <td>{elem.username}</td>
                                 <td>
                                     <button className="btn btn-warning" disabled>{t('adminUsers.edit')}</button>
