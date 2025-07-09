@@ -9,7 +9,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 import ru.codebattles.backend.dto.ChangePasswordDto
 import ru.codebattles.backend.dto.CreateUserDto
+import ru.codebattles.backend.dto.ExtendedUserDto
 import ru.codebattles.backend.dto.UserDto
+import ru.codebattles.backend.dto.mapper.ExtendedUserMapper
 import ru.codebattles.backend.dto.mapper.UserMapper
 import ru.codebattles.backend.entity.User
 import ru.codebattles.backend.repository.UserRepository
@@ -17,7 +19,6 @@ import ru.codebattles.backend.services.CompetitionService
 import ru.codebattles.backend.services.UserService
 import ru.codebattles.backend.web.entity.LinkUserRequest
 import ru.codebattles.backend.web.entity.OkResponse
-import java.util.*
 
 @Tag(name = "Users", description = "Endpoints for managing users")
 @RestController
@@ -28,14 +29,15 @@ class UsersController(
     val userMapper: UserMapper,
     private val userService: UserService,
     private val competitionService: CompetitionService,
+    private val extendedUserMapper: ExtendedUserMapper,
 ) {
     @Operation(
         summary = "Get current user",
         description = "Retrieves current user."
     )
     @GetMapping("me")
-    fun getProfile(@AuthenticationPrincipal user: User): Optional<User> {
-        return userRepository.findById(user.id!!)
+    fun getProfile(@AuthenticationPrincipal user: User): ExtendedUserDto {
+        return extendedUserMapper.toDto(user)
     }
 
 
