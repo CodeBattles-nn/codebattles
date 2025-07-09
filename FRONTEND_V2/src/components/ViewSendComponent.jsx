@@ -4,8 +4,9 @@ import ResponsiveTable from "./bootstrap/ResponsiveTable.jsx";
 import Card from "./bootstrap/Card.jsx";
 import PropTypes from "prop-types";
 import { useTranslation } from 'react-i18next';
+import LoadingWrapper from "./LoadingWrapper.jsx";
 
-export const ViewSendComponent = ({data}) => {
+export const ViewSendComponent = ({data, loading=false}) => {
     const { t } = useTranslation();
 
     const colorsByResult = {
@@ -22,11 +23,13 @@ export const ViewSendComponent = ({data}) => {
     return (
         <Card>
             <h3>{t('viewSend.analysis')}</h3>
-            <p><b>{t('viewSend.language')}:</b> {data?.checker?.displayName}</p>
-            <b>{t('viewSend.sourceCode')}:</b>
-            <LazySyntaxHighlight lang={data?.checker?.languageHighlightName}>
-                {data.code}
-            </LazySyntaxHighlight>
+            <LoadingWrapper loading={loading}>
+                <p><b>{t('viewSend.language')}:</b> {data?.checker?.displayName}</p>
+                <b>{t('viewSend.sourceCode')}:</b>
+                <LazySyntaxHighlight lang={data?.checker?.languageHighlightName}>
+                    {data.code}
+                </LazySyntaxHighlight>
+            </LoadingWrapper>
             <div className="my-4"></div>
             <ResponsiveTable>
                 <thead>
@@ -58,4 +61,5 @@ export const ViewSendComponent = ({data}) => {
 
 ViewSendComponent.propTypes = {
     data: PropTypes.object,
+    loading: PropTypes.bool
 }

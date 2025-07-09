@@ -10,13 +10,14 @@ import CompetitionsListContainer from "../../components/CompetitionsListContaine
 import {useTranslation} from "react-i18next";
 import Card from "../../components/bootstrap/Card.jsx";
 import {axiosInstance} from "../../utils/settings.js";
+import LoadingWrapper from "../../components/LoadingWrapper.jsx";
 
 const ChampsPage = () => {
     const {t} = useTranslation()
 
-    const [data, update] = useCachedGetAPI("/api/competitions/me", () => {
+    const [data, update, champsLoading] = useCachedGetAPI("/api/competitions/me", () => {
     }, []);
-    const [publicChamps, updatePublicChamps] = useCachedGetAPI("/api/competitions/public", () => {
+    const [publicChamps, updatePublicChamps, publicChampsLoading] = useCachedGetAPI("/api/competitions/public", () => {
     }, []);
 
     useEffect(() => {
@@ -36,9 +37,10 @@ const ChampsPage = () => {
                 <BreadcrumbsElement name={t("userChamps.title")}/>
             </BreadcrumbsRoot>
 
-            <CompetitionsListContainer>
-                {
-                    data?.map(elem => {
+            <LoadingWrapper loading={champsLoading}>
+                <CompetitionsListContainer>
+
+                    {data?.map(elem => {
                         const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
 
                         return <>
@@ -58,9 +60,9 @@ const ChampsPage = () => {
                                 </CompetitionCard>
                             </div>
                         </>
-                    })
-                }
-            </CompetitionsListContainer>
+                    })}
+                </CompetitionsListContainer>
+            </LoadingWrapper>
 
             <Card>
                 <p className="my-2">
@@ -68,43 +70,45 @@ const ChampsPage = () => {
                 </p>
             </Card>
 
-            <CompetitionsListContainer>
-                {
-                    publicChamps?.map(elem => {
-                        const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
+            <LoadingWrapper loading={publicChampsLoading}>
+                <CompetitionsListContainer>
+                    {
+                        publicChamps?.map(elem => {
+                            const status = getCompetitionStatusByDates(elem.startedAt, elem.endedAt)
 
-                        const onClick = () => {
-                            axiosInstance.post(`/api/competitions/${elem.id}/publicJoin`).then(
-                                () => {
-                                    update()
-                                    navigate(`/champs/${elem.id}/problems`);
-                                }
-                            )
-                        }
+                            const onClick = () => {
+                                axiosInstance.post(`/api/competitions/${elem.id}/publicJoin`).then(
+                                    () => {
+                                        update()
+                                        navigate(`/champs/${elem.id}/problems`);
+                                    }
+                                )
+                            }
 
-                        if (data.some(item => item.id === elem.id)) return
+                            if (data.some(item => item.id === elem.id)) return
 
-                        return <>
-                            <div className='col d-flex align-items-stretch'>
-                                <CompetitionCard
-                                    key={elem.id}
-                                    id={elem.id}
-                                    name="11111"
-                                    startedAt={elem.startedAt}
-                                    endedAt={elem.endedAt}
-                                    description={elem.description}>
-                                    {
-                                        status === competitionStatuses.IN_PROGRESS &&
-                                        <>
-                                            <button className="btn btn-outline-primary"
-                                                    onClick={onClick}>{t("join")}</button>
-                                        </>}
-                                </CompetitionCard>
-                            </div>
-                        </>
-                    })
-                }
-            </CompetitionsListContainer>
+                            return <>
+                                <div className='col d-flex align-items-stretch'>
+                                    <CompetitionCard
+                                        key={elem.id}
+                                        id={elem.id}
+                                        name="11111"
+                                        startedAt={elem.startedAt}
+                                        endedAt={elem.endedAt}
+                                        description={elem.description}>
+                                        {
+                                            status === competitionStatuses.IN_PROGRESS &&
+                                            <>
+                                                <button className="btn btn-outline-primary"
+                                                        onClick={onClick}>{t("join")}</button>
+                                            </>}
+                                    </CompetitionCard>
+                                </div>
+                            </>
+                        })
+                    }
+                </CompetitionsListContainer>
+            </LoadingWrapper>
 
         </>
     );
