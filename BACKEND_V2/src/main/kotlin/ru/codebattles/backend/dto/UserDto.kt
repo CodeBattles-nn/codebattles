@@ -9,4 +9,7 @@ data class UserDto(
 
     @Schema(description = "Username of the user", example = "john_doe")
     val username: String,
+
+    @Schema(description = "User display name", example = "John Doe")
+    val name: String,
 )
