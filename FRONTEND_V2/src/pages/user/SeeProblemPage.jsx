@@ -11,6 +11,7 @@ import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../utils/settings.js";
+import LoadingWrapper, {SingleLineBigLoader, SingleLineMediumLoader} from "../../components/LoadingWrapper.jsx";
 
 const SeeProblemPage = () => {
     const {t} = useTranslation();
@@ -18,7 +19,7 @@ const SeeProblemPage = () => {
 
     const {compId, id} = useParams();
     const navigate = useNavigate();
-    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/problems/${id}`);
+    const [data, update, loading] = useCachedGetAPI(`/api/competitions/${compId}/problems/${id}`);
     const [champData, champUpdate] = useCachedGetAPI(`/api/competitions/${compId}`);
     const [editorText, setEditorText] = useState("print('Hello, world')")
     const [isLoading, setIsLoading] = useState(false);
@@ -87,7 +88,8 @@ const SeeProblemPage = () => {
                 <div className="col">
                     <BreadcrumbsRoot>
                         <BreadcrumbsElement name={t('seeProblem.competitions')} url="/champs"/>
-                        <BreadcrumbsElement name={t('seeProblem.problems')} url={`/champs/${compId}/problems`} active={true}/>
+                        <BreadcrumbsElement name={t('seeProblem.problems')} url={`/champs/${compId}/problems`}
+                                            active={true}/>
                         <BreadcrumbsElement name={data.slug} active={true}/>
                     </BreadcrumbsRoot>
                 </div>
@@ -96,18 +98,25 @@ const SeeProblemPage = () => {
             <div className="row">
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
-                        <h2>{data.slug} </h2>
-                        <h3>{data.problem?.name}</h3>
+                        <LoadingWrapper loading={loading} loader={SingleLineBigLoader}>
+                            <h2>{data.slug} </h2>
+                        </LoadingWrapper>
+                        <LoadingWrapper loading={loading} loader={SingleLineMediumLoader}>
+                            <h3>{data.problem?.name}</h3>
+                        </LoadingWrapper>
+
                     </Card>
                 </div>
                 <div className="col-md-6 col-sm-12 d-flex align-items-stretch">
                     <Card>
-                        <h3>{t('seeProblem.constraints')}</h3>
-                        <p>
-                            {t('seeProblem.executionTime')}: 1000{t('seeProblem.ms')}
-                            <br/>
-                            {t('seeProblem.memory')}: 256{t('seeProblem.mb')}
-                        </p>
+                        <LoadingWrapper loading={loading}>
+                            <h3>{t('seeProblem.constraints')}</h3>
+                            <p>
+                                {t('seeProblem.executionTime')}: 1000{t('seeProblem.ms')}
+                                <br/>
+                                {t('seeProblem.memory')}: 256{t('seeProblem.mb')}
+                            </p>
+                        </LoadingWrapper>
                     </Card>
                 </div>
             </div>
@@ -117,13 +126,19 @@ const SeeProblemPage = () => {
                     <Card>
                         <div>
                             <h4>{t('seeProblem.problem')}</h4>
-                            <Markdown text={data.problem?.description}/>
+                            <LoadingWrapper loading={loading} loader={SingleLineMediumLoader}>
+                                <Markdown text={data.problem?.description}/>
+                            </LoadingWrapper>
 
                             <h4 className="mt-5">{t('seeProblem.inputData')}</h4>
-                            <Markdown text={data.problem?.inData}/>
+                            <LoadingWrapper loading={loading} loader={SingleLineMediumLoader}>
+                                <Markdown text={data.problem?.inData}/>
+                            </LoadingWrapper>
 
                             <h4 className="mt-5">{t('seeProblem.outputData')}</h4>
-                            <Markdown text={data.problem?.outData}/>
+                            <LoadingWrapper loading={loading} loader={SingleLineMediumLoader}>
+                                <Markdown text={data.problem?.outData}/>
+                            </LoadingWrapper>
                         </div>
                     </Card>
                 </div>
@@ -157,18 +172,22 @@ const SeeProblemPage = () => {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <input hidden value={id} {...register("id")}/>
                             <input hidden value={compId} {...register("compId")}/>
-                            <select className="form-select" {...register("checker")}>
-                                {champData?.checkers?.map(lang => (
-                                    <option key={"lang" + lang} value={lang.id}>
-                                        {lang.displayName}
-                                    </option>
-                                ))}
-                            </select>
-                            <LazyCodeEditor
-                                className="my-5 rounded-2"
-                                value={editorText}
-                                onChange={setEditorText}
-                            />
+                            <LoadingWrapper loading={loading} loader={SingleLineBigLoader}>
+                                <select className="form-select" {...register("checker")}>
+                                    {champData?.checkers?.map(lang => (
+                                        <option key={"lang" + lang} value={lang.id}>
+                                            {lang.displayName}
+                                        </option>
+                                    ))}
+                                </select>
+                            </LoadingWrapper>
+                            <LoadingWrapper loading={loading}>
+                                <LazyCodeEditor
+                                    className="my-5 rounded-2"
+                                    value={editorText}
+                                    onChange={setEditorText}
+                                />
+                            </LoadingWrapper>
 
                             <div className="mb-3">
                                 <label htmlFor="formFile" className="form-label">{t("seeProblem.orFileUpload")}</label>

@@ -8,13 +8,14 @@ import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import {getCssClassBySendScore} from "../../utils/format.js";
 import {useTranslation} from "react-i18next";
+import LoadingWrapper from "../../components/LoadingWrapper.jsx";
 
 const ProblemsListPage = () => {
     const {t} = useTranslation()
 
     let {compId} = useParams();
 
-    const [data, update] = useCachedGetAPI(`/api/competitions/${compId}/problems`, () => {
+    const [data, update, loading] = useCachedGetAPI(`/api/competitions/${compId}/problems`, () => {
     }, []);
 
     const [sends, updateSends] = useCachedGetAPI(`/api/competitions/${compId}/sends`, () => {
@@ -56,44 +57,48 @@ const ProblemsListPage = () => {
 
             <Card>
                 <h2 className="mb-3">{t("problemsList.title")}</h2>
-                <div className="border rounded-2 p-1">
-                    <ResponsiveTable>
-                        <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">{t("problemsList.name")}</th>
 
-                        </tr>
-                        </thead>
-                        <tbody>
+                <LoadingWrapper loading={loading}>
+                    <div className="border rounded-2 p-1">
+                        <ResponsiveTable>
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">{t("problemsList.name")}</th>
 
-                        {
-                            data.map(data => {
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                                const link_icon_css_class = (`bi-braces`)
-                                const table_css_class = getCssClassBySendScore(sendsMap[data.id])
+                            {
+                                data.map(data => {
 
-                                return (
-                                    <tr key={data.id} className={table_css_class}>
-                                        <th scope="row">
-                                            {data.slug}
-                                        </th>
-                                        <td><Link to={`${data.id}`}>
-                                            <i className={"bi me-2 " + link_icon_css_class}></i>
-                                            {data.problem?.name}
-                                        </Link></td>
+                                    const link_icon_css_class = (`bi-braces`)
+                                    const table_css_class = getCssClassBySendScore(sendsMap[data.id])
 
-                                    </tr>)
-                            })
-                        }
+                                    return (
+                                        <tr key={data.id} className={table_css_class}>
+                                            <th scope="row">
+                                                {data.slug}
+                                            </th>
+                                            <td><Link to={`${data.id}`}>
+                                                <i className={"bi me-2 " + link_icon_css_class}></i>
+                                                {data.problem?.name}
+                                            </Link></td>
 
-                        </tbody>
-                    </ResponsiveTable>
-                </div>
+                                        </tr>)
+                                })
+                            }
+
+                            </tbody>
+                        </ResponsiveTable>
+                    </div>
+
+                </LoadingWrapper>
 
             </Card>
-        </>
-    );
-};
+            </>
+            );
+            };
 
-export default ProblemsListPage;
+            export default ProblemsListPage;

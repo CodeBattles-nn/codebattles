@@ -10,7 +10,7 @@ import {useTranslation} from 'react-i18next';
 const SeeSendPage = () => {
     const {t} = useTranslation();
     const {id, compId} = useParams();
-    const [data, update] = useCachedGetAPI(`/api/answers/${id}`);
+    const [data, update, loading] = useCachedGetAPI(`/api/answers/${id}`);
 
     useEffect(() => {
         update();
@@ -29,7 +29,7 @@ const SeeSendPage = () => {
                 />
             </BreadcrumbsRoot>
 
-            <ViewSendComponent data={data}/>
+            <ViewSendComponent data={data} loading={loading}/>
         </>
     );
 };

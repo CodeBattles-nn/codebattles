@@ -17,6 +17,16 @@ function useCachedGetAPI(
     const [data, setData] = useState(defaultState);
     const navigate = useNavigate()
 
+
+    const [hasData, updateHasData] = useState(false)
+
+    useEffect(() => {
+        return () => {
+            updateHasData(data === defaultState)
+        };
+    }, [data, defaultState]);
+
+
     const apiGetData = () => {
         axiosInstance
             .get(url)
@@ -51,7 +61,7 @@ function useCachedGetAPI(
         getData();
     }, []);
 
-    return [data, updateCallback];
+    return [data, updateCallback, hasData];
 }
 
 export default useCachedGetAPI;
