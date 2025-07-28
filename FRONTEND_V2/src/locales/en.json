@@ -230,6 +230,7 @@
       "name": "Name",
       "edit": "Edit",
       "createProblem": "Create problem",
+      "editProblem": "Edit problem",
       "importFromPolygon": "Import from Polygon",
       "desc": "Description",
       "id": "Problem ID",

@@ -230,6 +230,7 @@
       "name": "Название",
       "edit": "Изменить",
       "createProblem": "Создать задачу",
+      "editProblem": "Изменить задачу",
       "importFromPolygon": "Импортировать из Polygon",
       "desc": "Описание",
       "id": "ID задачи",

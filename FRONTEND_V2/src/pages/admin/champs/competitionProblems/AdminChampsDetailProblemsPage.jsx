@@ -57,10 +57,12 @@ export const AdminChampsDetailProblemsPage = () => {
                                         <th scope="row" className="">
                                             {data.slug}
                                         </th>
-                                        <td><Link to={`${data.id}`}>
+                                        <td>
+                                          <a href={`/admin/problems/${data?.problem?.id}/edit`} target="_blank">
                                             <i className={"bi me-2 " + link_icon_css_class}></i>
                                             {data.problem?.name}
-                                        </Link></td>
+                                          </a>
+                                        </td>
                                         <td>
                                           {data.priority}
                                         </td>

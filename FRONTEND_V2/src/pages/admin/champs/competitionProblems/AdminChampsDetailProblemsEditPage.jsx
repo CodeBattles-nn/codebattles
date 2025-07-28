@@ -13,7 +13,7 @@ import {useTranslation} from 'react-i18next';
 import {axiosInstance} from "../../../../utils/settings.js";
 
 export const AdminChampsDetailProblemsEditPage = () => {
-    const {probcompId} = useParams()
+    const {compId,probcompId} = useParams()
     const { t } = useTranslation();
 
     const navigate = useNavigate();
@@ -38,7 +38,7 @@ export const AdminChampsDetailProblemsEditPage = () => {
         console.debug(data);
 
         axiosInstance.patch(`/api/competitionsProblems/${probcompId}`, data)
-            .then(() => navigate("/admin/champs"))
+            .then(() => navigate(`/admin/champs/${compId}/edit/problems`))
 
 
     };
