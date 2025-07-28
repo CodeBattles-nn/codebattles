@@ -217,6 +217,7 @@
       "manageCheckers": "Управление чекерами"
     },
     "adminProblems": {
+      "priority": "Приоритет",
       "nameRequired": "Имя обязательно",
       "errorProcessingArchive": "Ошибка обработки архива",
       "addProblemToPlatform": "Добавить на платформу",
@@ -229,6 +230,7 @@
       "name": "Название",
       "edit": "Изменить",
       "createProblem": "Создать задачу",
+      "editProblem": "Изменить задачу",
       "importFromPolygon": "Импортировать из Polygon",
       "desc": "Описание",
       "id": "ID задачи",

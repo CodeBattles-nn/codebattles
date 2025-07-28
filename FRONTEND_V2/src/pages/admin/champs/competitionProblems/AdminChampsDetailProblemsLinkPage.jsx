@@ -25,7 +25,7 @@ export const AdminChampsDetailProblemsLinkPage = () => {
     const onSubmit = (data) => {
         console.debug(data);
         axiosInstance.post('/api/competitionsProblems', data)
-            .then(() => navigate("/admin/champs"))
+          .then(() => navigate(`/admin/champs/${compId}/edit/problems`))
 
 
     };

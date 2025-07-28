@@ -40,4 +40,5 @@ CheckboxFormElement.propTypes = {
     helpText: PropTypes.string,
     readonly: PropTypes.bool,
     disabled: PropTypes.bool,
+    args: PropTypes.object,
 }

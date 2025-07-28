@@ -40,6 +40,7 @@ export const AdminChampsDetailProblemsPage = () => {
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">{t('adminProblems.name')}</th>
+                            <th scope="col">{t('adminProblems.priority')}</th>
                             <th scope="col">***</th>
 
                         </tr>
@@ -56,10 +57,15 @@ export const AdminChampsDetailProblemsPage = () => {
                                         <th scope="row" className="">
                                             {data.slug}
                                         </th>
-                                        <td><Link to={`${data.id}`}>
+                                        <td>
+                                          <a href={`/admin/problems/${data?.problem?.id}/edit`} target="_blank" rel="noreferrer">
                                             <i className={"bi me-2 " + link_icon_css_class}></i>
                                             {data.problem?.name}
-                                        </Link></td>
+                                          </a>
+                                        </td>
+                                        <td>
+                                          {data.priority}
+                                        </td>
                                         <td>
                                             <DeleteButton url={`/api/competitionsProblems/${data.id}`} />
                                             {" "}

@@ -1,7 +1,5 @@
 import "./css/Header.css"
 import {Link, useLocation, useNavigate} from "react-router-dom";
-import constants from "../utils/consts.js";
-import useCachedGetAPI from "../hooks/useGetAPI.js";
 import {useEffect} from "react";
 import {useTranslation} from 'react-i18next';
 import {useProfileStore} from "./store/useProfileStore.js";

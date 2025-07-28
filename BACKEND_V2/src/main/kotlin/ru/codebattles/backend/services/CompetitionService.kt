@@ -58,7 +58,7 @@ class CompetitionService(
 
     fun getProblemsById(id: Long): List<CompetitionsProblemsDto> {
         return competitionsProblemsMapper.toDtoS(
-            competitionProblemsRepository.getAllByCompetitionId(id)
+            competitionProblemsRepository.getAllByCompetitionIdOrderByPriority(id)
         )
 
     }
