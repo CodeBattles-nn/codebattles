@@ -58,7 +58,7 @@ export const AdminChampsDetailProblemsPage = () => {
                                             {data.slug}
                                         </th>
                                         <td>
-                                          <a href={`/admin/problems/${data?.problem?.id}/edit`} target="_blank">
+                                          <a href={`/admin/problems/${data?.problem?.id}/edit`} target="_blank" rel="noreferrer">
                                             <i className={"bi me-2 " + link_icon_css_class}></i>
                                             {data.problem?.name}
                                           </a>

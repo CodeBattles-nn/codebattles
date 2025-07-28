@@ -1,35 +1,40 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 export const Loader = <p className="card-text placeholder-glow">
     <span className="placeholder col-7"></span>
     <span className="placeholder col-6"></span>
     <span className="placeholder col-8"></span>
-</p>
+</p>;
 
 export const SingleLineBigLoader = <p className="card-text placeholder-glow">
     <span className="placeholder col-12"></span>
-</p>
+</p>;
 
 export const SingleLineMediumLoader = <p className="card-text placeholder-glow">
     <span className="placeholder col-7"></span>
-</p>
+</p>;
 
-export  const SingleLineSmallLoader = <p className="card-text placeholder-glow">
+export const SingleLineSmallLoader = <p className="card-text placeholder-glow">
     <span className="placeholder col-5"></span>
-</p>
+</p>;
 
-export  const SingleLineLittleLoader = <p className="card-text placeholder-glow">
+export const SingleLineLittleLoader = <p className="card-text placeholder-glow">
     <span className="placeholder col-3"></span>
-</p>
+</p>;
 
-const LoadingWrapper = ({loading, children, loader=Loader}) => {
+const LoadingWrapper = ({ loading, children, loader = Loader }) => {
     return (
-        <>
-            {/*<p>{JSON.stringify(loading)}</p>*/}
-            {loading? (loader) : (children)}
-        </>
+      <>
+          {loading ? loader : children}
+      </>
     );
+};
+
+LoadingWrapper.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    children: PropTypes.node,
+    loader: PropTypes.node
 };
 
 export default LoadingWrapper;
