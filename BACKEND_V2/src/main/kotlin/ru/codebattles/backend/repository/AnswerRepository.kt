@@ -7,6 +7,7 @@ import ru.codebattles.backend.entity.User
 interface AnswerRepository : JpaRepository<Answer, Long> {
     fun getAllByUserAndCompetitionId(user: User, compId: Long): List<Answer>
     fun getAllByUserIdAndCompetitionId(userId: Long, compId: Long): List<Answer>
+    fun getAllByUserIdAndCompetitionIdOrderByUpdatedAtDesc(userId: Long, compId: Long): List<Answer>
     fun getFirstByUserIdAndCompetitionsProblemsIdOrderByCreatedAtDesc(userId: Long, compProbId: Long): Answer
 
 }

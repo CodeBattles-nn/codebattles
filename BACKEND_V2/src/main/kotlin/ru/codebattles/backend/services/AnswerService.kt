@@ -58,7 +58,7 @@ class AnswerService(
 
     fun getAllAnswersByCompetitionsAndUserId(competition: Long, userId: Long): List<AnswerDto> {
         return answerMapper.toDtoS(
-            answerRepository.getAllByUserIdAndCompetitionId(userId, competition)
+            answerRepository.getAllByUserIdAndCompetitionIdOrderByUpdatedAtDesc(userId, competition)
         )
     }
 

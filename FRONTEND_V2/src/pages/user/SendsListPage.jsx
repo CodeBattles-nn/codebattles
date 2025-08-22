@@ -8,7 +8,7 @@ import BreadcrumbsRoot from "../../components/BreadcrumpsRoot.jsx";
 import BreadcrumbsElement from "../../components/BreadcrumbsElement.jsx";
 import {formatDate} from "../../utils/format.js";
 import {useTranslation} from 'react-i18next';
-import LoadingWrapper, {Loader} from "../../components/LoadingWrapper.jsx";
+import LoadingWrapper from "../../components/LoadingWrapper.jsx";
 
 const SendsLoader = <>
     <p className="placeholder-glow">

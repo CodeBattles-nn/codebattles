@@ -5,6 +5,7 @@ import ru.codebattles.backend.entity.CompetitionsProblems
 
 interface CompetitionProblemsRepository : JpaRepository<CompetitionsProblems, Long> {
     fun getAllByCompetitionId(id: Long): List<CompetitionsProblems>
+    fun getAllByCompetitionIdOrderByPriority(id: Long): List<CompetitionsProblems>
     fun getFirstByCompetitionIdAndProblemId(competition_id: Long, problem_id: Long): CompetitionsProblems
     fun getFirstByCompetitionIdAndId(competition_id: Long, id: Long): CompetitionsProblems
 }

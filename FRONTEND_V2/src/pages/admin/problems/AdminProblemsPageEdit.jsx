@@ -98,7 +98,7 @@ export const AdminProblemsPageEdit = () => {
 
             <Card>
                 <div className="container mt-4">
-                    <h3>{t('adminProblems.createProblem')}</h3>
+                    <h3>{t('adminProblems.editProblem')}</h3>
                     <MasterForm form={form} onSubmit={onSubmit}>
                         <ProblemsForm form={form} testsArray={testsArray} examplesArray={examplesArray}/>
                     </MasterForm>
