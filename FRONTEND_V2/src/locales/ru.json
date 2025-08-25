@@ -250,7 +250,12 @@
       "exampleOut": "Выход примера",
       "removeExample": "Удалить пример",
       "addExample": "Добавить пример",
-      "submit": "Отправить"
+      "submit": "Отправить",
+      "downloadAsFile": "Скачать файлом",
+      "importFromJSONFile": "Импорт из JSON",
+      "uploadJadSONFile": "Загрузить JSON",
+      "addTask": "Добавить задачу",
+      "openOnPlatform": "Открыть на платформе"
     },
     "adminCheckers": {
       "checkers": "Чекеры",
