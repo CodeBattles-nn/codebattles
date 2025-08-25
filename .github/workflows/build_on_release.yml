@@ -21,12 +21,19 @@ jobs:
       - name: Pull images
         run: docker compose pull
 
+      - name: (Latest) Build images
+        run: docker compose build
+      
+      - name: (Latest) Push images
+        run: docker compose push
+        
       - name: Extract release tag
         id: extract_tag
         run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-      
-      - name: Build and push images
+
+      - name: (Release Tag) Build images
         run: docker compose build
       
-      - name: Build and push images
+      - name: (Release Tag) Push images
         run: docker compose push
+              
