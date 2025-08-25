@@ -67,6 +67,7 @@ export const AdminProblemsPage = () => {
                 <div className='d-flex gap-2'>
                     <Link to="/admin/problems/create" className="btn btn-success">{t('adminProblems.createProblem')}</Link>
                     <Link to="/admin/problems/import/polygon" className="btn btn-info">{t('adminProblems.importFromPolygon')}</Link>
+                    <Link to="/admin/problems/import/json" className="btn btn-warning">{t('adminProblems.importFromJSONFile')}</Link>
                 </div>
             </Card>
 

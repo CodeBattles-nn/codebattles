@@ -34,6 +34,7 @@ import {ChangePassword} from "./pages/shared/ChangePassword.jsx";
 import {AdminProblemsPageImportFromPolygon} from "./pages/admin/problems/AdminProblemsPageImportFromPolygon.jsx";
 import ChangeLanguagePage from "./pages/shared/ChangeLanguagePage.jsx";
 import RegisterPage from "./pages/shared/RegisterPage.jsx";
+import {AdminProblemsPageImportFromJSON} from "./pages/admin/problems/AdminProblemsPageImportFromJSON.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -66,6 +67,7 @@ function App() {
                         <Route path="/admin/problems" element={<AdminProblemsPage/>}/>
                         <Route path="/admin/problems/create" element={<AdminProblemsPageCreate/>}/>
                         <Route path="/admin/problems/import/polygon" element={<AdminProblemsPageImportFromPolygon/>}/>
+                        <Route path="/admin/problems/import/json" element={<AdminProblemsPageImportFromJSON/>}/>
                         <Route path="/admin/problems/:probId/edit" element={<AdminProblemsPageEdit/>}/>
                         <Route path="/admin/champs" element={<AdminChampsPage/>}/>
                         <Route path="/admin/checkers" element={<AdminCheckersPage/>}/>

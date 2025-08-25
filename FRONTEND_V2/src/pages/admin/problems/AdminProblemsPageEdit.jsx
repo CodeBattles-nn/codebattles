@@ -12,6 +12,7 @@ import constants from "../../../utils/consts.js";
 import {MasterForm} from "../../../components/forms/MasterForm.jsx";
 import {ProblemsForm} from "../../../components/form_impl/ProblemsForm.jsx";
 import {useTranslation} from 'react-i18next';
+import {downloadFile} from "../../../utils/download.js";
 
 export const AdminProblemsPageEdit = () => {
 
@@ -86,6 +87,10 @@ export const AdminProblemsPageEdit = () => {
             .then(() => navigate("/admin/problems"))
     };
 
+    const onDownloadBtnPressed = () => {
+        downloadFile(`${data.id}-${data.name}-codebattles.json`,JSON.stringify(data))
+    }
+
     return (
         <>
             <UserLoginRequired/>
@@ -99,6 +104,7 @@ export const AdminProblemsPageEdit = () => {
             <Card>
                 <div className="container mt-4">
                     <h3>{t('adminProblems.editProblem')}</h3>
+                    <button className="btn btn-sm btn-info" onClick={onDownloadBtnPressed}>{t("adminProblems.downloadAsFile")}</button>
                     <MasterForm form={form} onSubmit={onSubmit}>
                         <ProblemsForm form={form} testsArray={testsArray} examplesArray={examplesArray}/>
                     </MasterForm>

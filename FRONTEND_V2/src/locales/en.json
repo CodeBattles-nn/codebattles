@@ -250,7 +250,12 @@
       "exampleOut": "Example output",
       "removeExample": "Remove example",
       "addExample": "Add example",
-      "submit": "Submit"
+      "submit": "Submit",
+      "downloadAsFile": "Download as file",
+      "importFromJSONFile": "Import from JSON",
+      "uploadJadSONFile": "Upload json file",
+      "addTask": "Add Task",
+      "openOnPlatform": "Open task on platform"
     },
     "adminCheckers": {
       "checkers": "Checkers",
