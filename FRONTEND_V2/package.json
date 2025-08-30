@@ -22,7 +22,7 @@
     "i18next": "^25.2.1",
     "i18next-browser-languagedetector": "^8.2.0",
     "jszip": "^3.10.1",
-    "next": "^15.3.3",
+    "next": "^15.4.7",
     "prop-types": "^15.8.1",
     "rc-select": "^14.16.6",
     "react": "^18.2.0",
