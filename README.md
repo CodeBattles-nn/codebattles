@@ -13,6 +13,7 @@ A comprehensive programming competition system designed for educational institut
 
 
 - 📚 [Documentation (RU v3)](https://docs.codebattles.ru/ru_v3)
+- 📚 [Documentation (EN v3)](https://docs.codebattles.ru/en_v3)
 - 🌐 [Official Website](https://codebattles.ru)
 - ☕ [Support the Project](https://www.donationalerts.com/r/doctorixx)
 
