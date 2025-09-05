@@ -17,11 +17,16 @@ const ChampsPage = () => {
 
     const [data, update, champsLoading] = useCachedGetAPI("/api/competitions/me", () => {
     }, []);
+
+    const [posts, updatePosts, loadingPosts] = useCachedGetAPI("/api/posts/main", () => {
+    }, []);
+
     const [publicChamps, updatePublicChamps, publicChampsLoading] = useCachedGetAPI("/api/competitions/public", () => {
     }, []);
 
     useEffect(() => {
         update()
+        updatePosts()
         updatePublicChamps()
     }, []);
 
@@ -31,7 +36,28 @@ const ChampsPage = () => {
 
     return (
         <>
+          <Card>
+            <p className="my-2">
+              {t("posts.posts")}
+            </p>
+          </Card>
+
             <UserLoginRequired/>
+
+          <LoadingWrapper loading={publicChampsLoading}>
+            <CompetitionsListContainer>
+              {
+                posts.map((post)=>{
+                  return <div key={post.id} className='col d-flex align-items-stretch'>
+                    <Card>
+                      <h5>{post.title}</h5>
+                      <Link to={`/posts/${post.id}`} className="btn btn-outline-primary">{t("posts.read")}</Link>
+                    </Card>
+                  </div>
+                })
+              }
+            </CompetitionsListContainer>
+          </LoadingWrapper>
 
             <BreadcrumbsRoot>
                 <BreadcrumbsElement name={t("userChamps.title")}/>

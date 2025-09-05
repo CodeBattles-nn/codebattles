@@ -35,6 +35,10 @@ import {AdminProblemsPageImportFromPolygon} from "./pages/admin/problems/AdminPr
 import ChangeLanguagePage from "./pages/shared/ChangeLanguagePage.jsx";
 import RegisterPage from "./pages/shared/RegisterPage.jsx";
 import {AdminProblemsPageImportFromJSON} from "./pages/admin/problems/AdminProblemsPageImportFromJSON.jsx";
+import {PostPage} from "./pages/shared/PostPage.jsx";
+import {AdminPostPage} from "./pages/admin/pages/AdminPostPage.jsx";
+import {AdminPostsPageCreate} from "./pages/admin/pages/AdminPostsPageCreate.jsx";
+import {AdminPostsPageEdit} from "./pages/admin/pages/AdminPostsPageEdit.jsx";
 
 import("../node_modules/bootstrap/dist/js/bootstrap.min.js")
 
@@ -50,6 +54,8 @@ function App() {
                     <Routes>
                         <Route path="/" element={<LoginPage/>}/>
                         <Route path="/register" element={<RegisterPage/>}/>
+
+                        <Route path="/posts/:postId" element={<PostPage/>}/>
 
                         <Route path="/problems" element={<ProblemsListPage/>}/>
                         <Route path="/champs/:compId/problems" element={<ProblemsListPage/>}/>
@@ -69,10 +75,17 @@ function App() {
                         <Route path="/admin/problems/import/polygon" element={<AdminProblemsPageImportFromPolygon/>}/>
                         <Route path="/admin/problems/import/json" element={<AdminProblemsPageImportFromJSON/>}/>
                         <Route path="/admin/problems/:probId/edit" element={<AdminProblemsPageEdit/>}/>
+
+                        <Route path="/admin/posts" element={<AdminPostPage/>}/>
+                        <Route path="/admin/posts/create" element={<AdminPostsPageCreate/>}/>
+                        <Route path="/admin/posts/:postId/edit" element={<AdminPostsPageEdit/>}/>
+
                         <Route path="/admin/champs" element={<AdminChampsPage/>}/>
+
                         <Route path="/admin/checkers" element={<AdminCheckersPage/>}/>
                         <Route path="/admin/checkers/:checkId/edit" element={<AdminCheckersEditPage/>}/>
                         <Route path="/admin/checkers/create" element={<AdminCheckersCreatePage/>}/>
+
                         <Route path="/admin/champs/:compId/edit" element={<AdminChampsDetailPage/>}/>
                         <Route path="/admin/champs/create" element={<AdminChampsCreate/>}/>
                         <Route path="/admin/champs/:compId/edit/users" element={<AdminUsersDetailPage/>}/>
