@@ -30,7 +30,8 @@
       "help": "Помощь",
       "logout": "Выход",
       "lang": "Язык",
-      "student_interface": "интерфейс ученика"
+      "student_interface": "интерфейс ученика",
+      "posts": "Посты"
     },
     "statusCodes": {
       "title": "Статусы выполнения программ",
@@ -316,6 +317,22 @@
     },
     "deleteButton": {
       "text": "Удалить"
+    },
+    "posts": {
+      "posts": "Посты",
+      "read": "Читать",
+      "param_title": "Заголовок",
+      "param_title_help": "Заголовок, отображаемый на главной странице",
+      "param_title_required": "Заголовок обязателен",
+      "param_content": "Содержимое поста",
+      "param_content_help": "Поддерживает markdown",
+      "param_content_required": "Содержимое обязательно",
+      "param_mainpage": "На главной странице",
+      "param_mainpage_help": "Если выбрано, пост будет виден на главной странице",
+      "create": "Создать пост",
+      "submit": "Отправить",
+      "edit": "Редактировать пост"
     }
+
   }
 }

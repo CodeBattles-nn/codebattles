@@ -30,7 +30,8 @@
       "help": "Help",
       "logout": "Logout",
       "lang": "Language",
-      "student_interface": "Student interface"
+      "student_interface": "Student interface",
+      "posts": "Posts"
     },
     "statusCodes": {
       "title": "Program execution statuses",
@@ -316,6 +317,21 @@
     },
     "deleteButton": {
       "text": "Delete"
+    },
+    "posts": {
+      "posts": "Posts",
+      "read": "Read",
+      "param_title": "Title",
+      "param_title_help": "Title displayed at main page",
+      "param_title_required": "Title required",
+      "param_content": "Content of post",
+      "param_content_help": "Supports markdown",
+      "param_content_required": "Content required",
+      "param_mainpage": "On main page",
+      "param_mainpage_help": "If selected post visible at main page",
+      "create": "Create post",
+      "submit": "Submit",
+      "edit": "Edit post"
     }
   }
 }

@@ -10,6 +10,7 @@ export const AdminHeader = () => {
             <Link to='/admin/problems' className="btn border-0">{t('header.problems')}</Link>
             <Link to='/admin/users' className="btn border-0">{t('adminUsers.users')}</Link>
             <Link to="/admin/checkers" className="btn">{t('adminCheckers.checkers')}</Link>
+            <Link to="/admin/posts" className="btn">{t('header.posts')}</Link>
             <Link to="/champs" className="btn">{t('header.student_interface')}</Link>
         </Card>
     );
