@@ -5,6 +5,10 @@ RUN ./gradlew build -x test
 
 FROM eclipse-temurin:17-jdk-jammy
 WORKDIR /app
+
+RUN useradd -m appuser
 COPY --from=build /app/build/libs/*.jar app.jar
+
+USER appuser
 EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
