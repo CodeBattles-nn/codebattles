@@ -9,15 +9,14 @@ A comprehensive programming competition system designed for educational institut
 
 ![Main interface](images/image1.png)
 
-## 🔗 Quick Links
+## Quick Links
 
 
-- 📚 [Documentation (RU v3)](https://docs.codebattles.ru/ru_v3)
-- 📚 [Documentation (EN v3)](https://docs.codebattles.ru/en_v3)
-- 🌐 [Official Website](https://codebattles.ru)
-- ☕ [Support the Project](https://www.donationalerts.com/r/doctorixx)
+- [Documentation (RU v3)](https://docs.codebattles.ru/ru_v3)
+- [Official Website](https://codebattles.ru)
+- [Support the Project](https://www.donationalerts.com/r/doctorixx)
 
-## ✨ Features
+## Features
 
 - **Competition Management**: Create and manage programming contests with ease
 - **Real-time Judging**: Automated code evaluation and scoring
@@ -26,7 +25,7 @@ A comprehensive programming competition system designed for educational institut
 - **Live Leaderboards**: Real-time ranking and progress tracking
 - **Task Generation**: Built-in UI for creating competition tasks (v3.x.x+)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -55,7 +54,7 @@ A comprehensive programming competition system designed for educational institut
    
    Open your browser and navigate to [http://localhost:2500](http://localhost:2500)
 
-## 🔄 Updating
+## Updating
 
 To update to the latest version:
 
@@ -67,7 +66,7 @@ git pull
 docker compose up
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Default Ports
 
@@ -88,7 +87,7 @@ Starting from version 3.x.x, competition tasks can be created and managed throug
 | aarch64      | ✅     | Requires manual build |
 | x32          | ❓     | Not tested |
 
-## 🤝 Contributors
+## Contributors
 
 We're grateful to these amazing contributors who have helped make CodeBattles better:
 
@@ -100,30 +99,30 @@ We're grateful to these amazing contributors who have helped make CodeBattles be
 ### Special Thanks
 - **[school30nn](https://school30nn.ru)** - For adopting the system and providing valuable server resources
 
-## 🛠️ Development
+## Development
 
 ### Security Analysis
 This project uses [PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) for static code analysis, ensuring high code quality and security standards.
 
-## 💖 Support the Project
+## Support the Project
 
 If you find CodeBattles useful and want to support its development:
 
-- ☕ [DonationAlerts](https://www.donationalerts.com/r/doctorixx)
-- 💳 [YooMoney](https://yoomoney.ru/fundraise/13V1T7RVQBE.240713)
+- [DonationAlerts](https://www.donationalerts.com/r/doctorixx)
+- [YooMoney](https://yoomoney.ru/fundraise/13V1T7RVQBE.240713)
 
-## 📄 License
+## License
 
 This project is licensed under the terms specified in the [LICENSE](./LICENSE) file.
 
-## 🐛 Issues & Support
+## Issues & Support
 
 Found a bug or need help? Please check our [documentation](https://docs.codebattles.ru/ru_v3) first, then feel free to:
 
-- 🐛 [Report issues](https://github.com/CodeBattles-nn/CodeBattles/issues)
-- 💬 [Join discussions](https://github.com/CodeBattles-nn/CodeBattles/discussions)
-- 📧 Contact the maintainers
+- [Report issues](https://github.com/CodeBattles-nn/CodeBattles/issues)
+- [Join discussions](https://github.com/CodeBattles-nn/CodeBattles/discussions)
+- Contact the maintainers
 
 ---
 
-**CodeBattles** © 2024-2025 | Built with ❤️ for the programming community
+**CodeBattles** © 2024-2026 | Built with ❤️ for the programming community
